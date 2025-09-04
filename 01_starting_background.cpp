@@ -12,6 +12,7 @@ const unsigned int start_title_size = 36;
 
 
 
+
 struct Start
 {
     sf::Vector2f size;
@@ -56,31 +57,35 @@ void Start::draw (sf::RenderWindow& window)
     s.setOutlineColor(sf::Color(92, 51, 23));
     window.draw (s);
 
-    title.setString("Benvenuto su"); 
+    // --- "Benvenuto su" ---
+    title.setString("Benvenuto su");
     title.setCharacterSize(40);
     title.setFillColor(sf::Color::Black);
     title.setOutlineThickness(2.f);
     title.setOutlineColor(sf::Color::White);
-     const sf::FloatRect b = title.getLocalBounds();
-    title.setOrigin({(b.position.x + b.size.x * 0.5f),
-                    b.position.y}); 
-    title.setPosition(title_pos);
+    {
+        sf::FloatRect b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition(title_pos);
+    }
     window.draw(title);
 
     title.setString("MINESWEEPER"); 
-    title.setCharacterSize(50);
-    const sf::FloatRect b2 = title.getLocalBounds();
-    title.setOrigin({(b2.position.x + b2.size.x * 0.5f),
-                    b2.position.y-(b2.size.y+5)}); 
-    title.setPosition(title_pos);
+    title.setCharacterSize(90);
+    {
+        sf::FloatRect b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title_pos.x, title_pos.y + 50.f});
+    }
     window.draw(title);
 
     title.setString("versione E.0"); 
     title.setCharacterSize(30);
-    const sf::FloatRect b3 = title.getLocalBounds();
-    title.setOrigin({(b3.position.x + b3.size.x * 0.5f),
-                    b3.position.y-(b3.size.y+5)}); 
-    title.setPosition(title_pos);
+    {
+        sf::FloatRect b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title_pos.x, title_pos.y + 140.f});
+    }
     window.draw(title);
 }
 
