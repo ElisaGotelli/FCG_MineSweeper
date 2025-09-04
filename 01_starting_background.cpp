@@ -6,14 +6,22 @@ const unsigned window_width = 800;
 const unsigned window_height = 600;
 const float max_frame_rate = 60;
 
-//start size 
+//schermata iniziale (start)
 const sf::Vector2f start_size = {600.0, 400.0};
+const unsigned int start_title_size = 36;
+
+
 
 struct Start
 {
     sf::Vector2f size;
     sf::Vector2f pos;
     sf::Texture texture;
+
+    //font 
+    sf::Font font{"Resources/EpundaSlab-VariableFont_wght.ttf"};
+    sf::Text title{font};
+    sf::Vector2f title_pos;
 
     Start ();
     void draw (sf::RenderWindow& window);
@@ -33,6 +41,9 @@ Start::Start ()
     float start_px = (window_width  / 2.f) - (start_size.x / 2.f);
     float start_py = (window_height / 2.f) - (start_size.y / 2.f);
     pos = {start_px, start_py};
+
+    title_pos = {start_px+ size.x / 2.f,start_py+ 20.f};
+
 }
 
 //--------DRAW---------------
@@ -44,6 +55,33 @@ void Start::draw (sf::RenderWindow& window)
     s.setOutlineThickness(20.f);
     s.setOutlineColor(sf::Color(92, 51, 23));
     window.draw (s);
+
+    title.setString("Benvenuto su"); 
+    title.setCharacterSize(40);
+    title.setFillColor(sf::Color::Black);
+    title.setOutlineThickness(2.f);
+    title.setOutlineColor(sf::Color::White);
+     const sf::FloatRect b = title.getLocalBounds();
+    title.setOrigin({(b.position.x + b.size.x * 0.5f),
+                    b.position.y}); 
+    title.setPosition(title_pos);
+    window.draw(title);
+
+    title.setString("MINESWEEPER"); 
+    title.setCharacterSize(50);
+    const sf::FloatRect b2 = title.getLocalBounds();
+    title.setOrigin({(b2.position.x + b2.size.x * 0.5f),
+                    b2.position.y-(b2.size.y+5)}); 
+    title.setPosition(title_pos);
+    window.draw(title);
+
+    title.setString("versione E.0"); 
+    title.setCharacterSize(30);
+    const sf::FloatRect b3 = title.getLocalBounds();
+    title.setOrigin({(b3.position.x + b3.size.x * 0.5f),
+                    b3.position.y-(b3.size.y+5)}); 
+    title.setPosition(title_pos);
+    window.draw(title);
 }
 
 void State::draw (sf::RenderWindow& window)
