@@ -79,6 +79,13 @@ int main()
     window.setFramerateLimit (max_frame_rate);
     window.setMinimumSize(window.getSize()); 
 
+    sf::RectangleShape border; 
+    border.setPosition({20.f, 20.f});
+    border.setFillColor(sf::Color::Transparent);
+    border.setOutlineThickness(20.f);
+    border.setOutlineColor(sf::Color(0, 100, 0));  
+    border.setSize({(window_width - 40.f),(window_height-40.f)});
+
     State state;
 
     while (window.isOpen())
@@ -90,8 +97,9 @@ int main()
         );
 
         // display
-        window.clear(sf::Color(144, 238, 144)); // verde chiaro di sfondo
+        window.clear(sf::Color(144, 238, 144));// verde chiaro di sfondo
         state.draw(window);
+        window.draw(border); 
         window.display();
 
     }
