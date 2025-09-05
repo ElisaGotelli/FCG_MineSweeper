@@ -2,7 +2,10 @@
 ## Possibili Tappe: 
 - Tappa 0:
   * Creazione della finestra di base (lo sfondo nero) 
-- Tappa 1:
+- Tappa 1a:
+  * Creazione della cella 9x9 visivamente parlando con bordi 
+- Tappa 1b: 
+  * Creazione del 
 - Tappa 2:
 - Tappa 3:
 - Tappa 4:

@@ -11,8 +11,7 @@ const sf::Vector2f start_size = {600.0, 400.0};
 const unsigned int start_title_size = 36;
 
 
-
-
+enum class Difficulty { None, Easy, Medium, Hard };
 struct Start
 {
     sf::Vector2f size;
@@ -23,6 +22,15 @@ struct Start
     sf::Font font{"Resources/EpundaSlab-VariableFont_wght.ttf"};
     sf::Text title{font};
     sf::Vector2f title_pos;
+    sf::Text subtitle{font};
+    sf::Text optEasy{font};
+    sf::Text optMedium{font};
+    sf::Text optHard{font};
+
+    sf::FloatRect bEasy{}, bMedium{}, bHard{};
+
+    // Scelta corrente (stub)
+    Difficulty selected = Difficulty::None;
 
     Start ();
     void draw (sf::RenderWindow& window);
@@ -87,6 +95,63 @@ void Start::draw (sf::RenderWindow& window)
         title.setPosition({title_pos.x, title_pos.y + 140.f});
     }
     window.draw(title);
+
+    subtitle.setString("Scegliere la modalita' di gioco:");
+    subtitle.setCharacterSize(40);
+    subtitle.setFillColor(sf::Color::Black);
+    subtitle.setOutlineThickness(1.5f);
+    subtitle.setOutlineColor(sf::Color::White);
+    {
+        const sf::FloatRect b = subtitle.getLocalBounds();
+        subtitle.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        subtitle.setPosition({title_pos.x, title_pos.y + 250.f});
+    }
+
+    auto setupOption = [&](sf::Text& t, const char* label, unsigned sizePx){
+        t.setString(label);
+        t.setCharacterSize(sizePx);
+        t.setFillColor(sf::Color::Black);
+        t.setOutlineThickness(1.5f);
+        t.setOutlineColor(sf::Color::White);
+    };
+    window.draw(subtitle);
+    setupOption(optEasy,   "facile",  30);
+    setupOption(optMedium, "medio",   30);
+    setupOption(optHard,   "difficile", 30);
+
+       // --- Opzioni su una riga, centrate nel pannello ---
+
+    // spaziatura orizzontale
+    float centerX = pos.x + size.x * 0.5f;
+    float rowY    = subtitle.getPosition().y + 50.f; // sotto il sottotitolo
+    float spacing = 140.f; // distanza tra le opzioni
+
+    // facile (a sinistra)
+    {
+        const sf::FloatRect b = optEasy.getLocalBounds();
+        optEasy.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        optEasy.setPosition({centerX - spacing, rowY});
+        window.draw(optEasy);
+        bEasy = optEasy.getGlobalBounds();
+    }
+
+    // medio (al centro)
+    {
+        const sf::FloatRect b = optMedium.getLocalBounds();
+        optMedium.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        optMedium.setPosition({centerX, rowY});
+        window.draw(optMedium);
+        bMedium = optMedium.getGlobalBounds();
+    }
+
+    // difficile (a destra)
+    {
+        const sf::FloatRect b = optHard.getLocalBounds();
+        optHard.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        optHard.setPosition({centerX + spacing, rowY});
+        window.draw(optHard);
+        bHard = optHard.getGlobalBounds();
+    }
 }
 
 void State::draw (sf::RenderWindow& window)
