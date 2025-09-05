@@ -1,17 +1,20 @@
 #include <SFML/Graphics.hpp>
 
-//------------FINESTRA------------------
-const char* window_title = "00 - Minesweeper";
-const unsigned window_width = 1200;
-const unsigned window_height = 900;
-const float max_frame_rate = 60;
+////////////////FINESTRA////////////////
+const char* window_title = "00 - Base Window"; //titolo della finestra 
+const unsigned window_width = 1200; //larghezza finestra 
+const unsigned window_height = 900; //altezza finestra 
+const float max_frame_rate = 60; //frame rate massimo della finestra 
 
-//--------------EVENTI-----------------
+////////////////EVENTI////////////////
 
+//chiusura della finestra 
 void handle_close (sf::RenderWindow& window)
 {
     window.close();
 }
+
+//ridimensionamento della finestra 
 void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
 {
     float aspect = static_cast<float>(window_width)/static_cast<float>(window_height);
@@ -24,24 +27,32 @@ void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
     window.setSize(ws);
 }
 
-//---------------------LOOP---------------------------
+////////////////LOOP////////////////
 
 int main()
 {
+    //creazione della finestra 
     sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title);
+
+    //impostazione del frame limit 
     window.setFramerateLimit (max_frame_rate);
+
+    //impostare la grandezza minima della finestra 
     window.setMinimumSize(window.getSize());
 
+    //dal momento in cui la finestra è aperta 
     while (window.isOpen())
     {
-        // events
+        //possibili eventi
         window.handleEvents (
                              [&window](const sf::Event::Closed&) { handle_close (window); },
                              [&window](const sf::Event::Resized& event) { handle_resize (event, window); }
         );
 
-        // display
+        //pulire la finestra e mettere come colore di sfondo il nero 
         window.clear (sf::Color::Black);
+
+        //mostrare tutto a schermo
         window.display ();
     }
 }

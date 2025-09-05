@@ -1,104 +1,109 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <string>
 
-//------------FINESTRA------------------
-const char* window_title = "01 - cell(9x9)";
+////////////////FINESTRA////////////////
+const char* window_title = "01_cell_starting_texture";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
 
-//-------------GRIGLIA---------------
-const float wall_horizontal_displacement = 100; 
-const float wall_vertical_displacement = 100; 
-sf::Vector2f block_num; 
+////////////////GRIGLIA////////////////
 
-//------------CELLA----------------
+//distanza minima dai bordi della finestra 
+const float wall_horizontal_displacement = 100; //distanza dal bordo destro 
+const float wall_vertical_displacement = 100; //distanza dall'alto e dal basso 
 
-enum class Block_type{Mine,Empty, Number}; //texture per la cella 
-enum class Block_state{ Covered, Revealed, Flag}; //stati per la cella 
 
+////////////////BLOCCO////////////////
+
+enum class Block_type{Mine,Empty, Number}; //stati nascosti possibili della cella 
+enum class Block_state{ Covered, Revealed, Flag}; //stati visibili possibili della cella 
+sf::Texture Covered_texture("risorse/pdf/cells/cellup.jpg"); //texture iniziale per ogni blocco 
+
+////////////////STRUCT////////////////
 struct Block
 {
-    sf::Vector2f pos; 
-    float size; 
-    sf::Texture texture; 
-    Block_type type = Block_type::Empty; //default 
-    int bomb_number = 0; //inidica il numero di bombe intorno alla cella
-    Block_state state = Block_state::Covered; 
+    sf::Vector2f pos; //posizione del blocco nella finestra 
+    float size; //dimensione del blocco (diversa in base al numero di blocchi)
+    sf::Texture texture;//texture del blocco (per ora sara' solo Covered)
+    Block_type type; //texture nascosta del blocco
+    int bomb_number; //numero di bombe intorno alla cella
+    Block_state state; //stato iniziale della cella (sempre covered)
 
-    Block (sf::Vector2f pos, float size); 
-
+    //creazione del blocco di default (quindi con la texture e stato Covered)
+    Block (sf::Vector2f pos, float size) : pos (pos),
+                                                  size (size),
+                                                  texture (Covered_texture),
+                                                  state(Block_state::Covered) {}
     void draw (sf::RenderWindow& window);
 };
 
 struct Grid
 {
-    std::vector<Block> blocks;
-    sf::Vector2f block_num; 
+    std::vector<Block> blocks; //vettore dei vari blocchi che comporranno la griglia 
+    sf::Vector2i block_num; //numero di blocchi in griglia 
+    sf::Vector2f Grid_size;
 
-    Grid (sf::Vector2f block_num);
+    Grid (sf::Vector2i block_num); //metodo per creazione della griglia con impostato il numero di blocchi 
     void draw (sf::RenderWindow& window);
 };
 
-struct State
+struct State //stato generale della finestra 
 {
     Grid grid; 
 
-    State () : grid({9,9}) {}
+    State () : grid({9,9}) {} //per ora vi potrà solo essere disponibile una griglia 9x9 
     void draw (sf::RenderWindow& window);
 };
 
-//-----------CREAZIONE-----------
+////////////////CREAZIONE////////////////
 
-Block::Block (sf::Vector2f p, float s){
-    pos = p; 
-    size = s; 
-    if(!texture.loadFromFile("Resources/pdf/cells/cellup.jpg")){ }
-}
+Grid::Grid (sf::Vector2i bs){
+    //imposto il numero di blocchi 
+    block_num = bs; 
 
-Grid::Grid (sf::Vector2f block_num){
-    unsigned int Grid_size_y = (window_height - (wall_vertical_displacement * 2));
+    //ho deciso di usare solo la y poichè è la parte della finestra più corta e di ridurli leggeremnet (del 15%)
+    float block_size = ((window_height - (wall_vertical_displacement * 2)) / block_num.y) * 0.85f;
 
-    unsigned int block_size = (Grid_size_y / block_num.y) * 0.85f;
+    //calcolo della grandezza della griglia 
+    Grid_size = {block_size * block_num.x, block_size * block_num.y};
 
-    // dimensione totale della griglia in pixel
-    float grid_width  = block_size * block_num.x;
-    float grid_height = block_size * block_num.y;
-
-    // calcolo offset: centrata verticalmente, allineata a destra orizzontalmente 
-    float offset_x = window_width - grid_width - wall_horizontal_displacement;
-    float offset_y = (window_height - grid_height) / 2.0f;
-
-    for (unsigned hb = 0; hb < block_num.x; hb++) {        // colonne
-        for (unsigned vb = 0; vb < block_num.y; vb++) {    // righe
+    //per ogni colonna della griglia 
+    for (unsigned hb = 0; hb < block_num.x; hb++) {
+        //per ogni blocco in detta colonna considerata (per ogni riga della griglia)
+        for (unsigned vb = 0; vb < block_num.y; vb++) {
+            //calcolo la posizione del blocco considerato 
             sf::Vector2f pos = {
-                hb * block_size + offset_x,
-                vb * block_size + offset_y
+                hb * block_size + (window_width - Grid_size.x - wall_horizontal_displacement),
+                vb * block_size + ((window_height - Grid_size.y) / 2.0f)
             };
+
+            //inserisco il blocco nel vettore rappresentante la griglia 
             blocks.push_back(Block(pos, block_size)); 
         }
     }
 }
-//-------------DRAW------------------
+////////////////DRAW////////////////
 
 void Block::draw (sf::RenderWindow& window)
 {
-    sf::RectangleShape b ({size,size}); 
-    b.setTexture(&texture);
-    b.setPosition(pos); 
-    window.draw(b);
+    sf::RectangleShape b ({size,size}); //il blocco è un quadrato (quindi in rettangolo con altezza=larghezza)
+    b.setTexture(&texture); //imposta la texture del blocco 
+    b.setPosition(pos); //metti il blocco nella posizione corretta 
+    window.draw(b); //disegna il blocco nella finestra 
 
 }
 
 void Grid::draw (sf::RenderWindow& window)
 {
-    for (auto& block : blocks)
+    for (auto& block : blocks) //disegna ogni blocco (uno alla volta)
         block.draw (window);
 }
 
 void State::draw (sf::RenderWindow& window)
 {
-    grid.draw (window);
+    grid.draw (window); //disegna la griglia
 }
 
 //--------------EVENTI-----------------
@@ -127,12 +132,12 @@ int main()
     window.setFramerateLimit (max_frame_rate);
     window.setMinimumSize(window.getSize()); 
 
-    sf::RectangleShape border; 
-    border.setPosition({20.f, 20.f});
-    border.setFillColor(sf::Color::Transparent);
-    border.setOutlineThickness(20.f);
-    border.setOutlineColor(sf::Color(0, 100, 0));  
-    border.setSize({(window_width - 40.f),(window_height-40.f)});
+    //creazione di un bordo per la finestra 
+    sf::RectangleShape border({(window_width - 40.f),(window_height-40.f)}); //vengono lasciati 40 pixel dal bordo della finestra in modo da rendere visibile il bordo 
+    border.setPosition({20.f, 20.f}); //viene messo leggermente più sotto dell'origine per lo stesso motivo spiegato precedentemente
+    border.setFillColor(sf::Color::Transparent); //deve essere solo un bordo quindi il resto deve essere trasparente in modo che si possano vedere le altre figure 
+    border.setOutlineThickness(20.f); //spessore del bordo 
+    border.setOutlineColor(sf::Color(0, 100, 0));  //il bordo è verde scuro 
 
     State state;
 
@@ -145,8 +150,8 @@ int main()
         );
 
         // display
-        window.clear(sf::Color(144, 238, 144));// verde chiaro di sfondo
-        state.draw(window);
+        window.clear(sf::Color(144, 238, 144));//lo sfondo al posto di essere nero sarà verde chiaro 
+        state.draw(window); 
         window.draw(border); 
         window.display();
 
