@@ -17,35 +17,35 @@ const float wall_vertical_displacement = 100; //distanza dall'alto e dal basso
 
 ////////////////BLOCCO////////////////
 
-enum class Block_type{Mine,Empty, Number}; //stati nascosti possibili della cella 
-enum class Block_state{ Covered, Revealed, Flag}; //stati visibili possibili della cella 
+enum class cell_type{Mine,Empty, Number}; //stati nascosti possibili della cella 
+enum class cell_state{ Covered, Revealed, Flag}; //stati visibili possibili della cella 
 sf::Texture Covered_texture("../risorse/texture/cells/cellup.jpg"); //texture iniziale per ogni blocco 
 
 ////////////////STRUCT////////////////
-struct Block
+struct cell
 {
     sf::Vector2f pos; //posizione del blocco nella finestra 
     float size; //dimensione del blocco (diversa in base al numero di blocchi)
     sf::Texture texture;//texture del blocco (per ora sara' solo Covered)
-    Block_type type; //texture nascosta del blocco
+    cell_type type; //texture nascosta del blocco
     int bomb_number; //numero di bombe intorno alla cella
-    Block_state state; //stato iniziale della cella (sempre covered)
+    cell_state state; //stato iniziale della cella (sempre covered)
 
     //creazione del blocco di default (quindi con la texture e stato Covered)
-    Block (sf::Vector2f pos, float size) : pos (pos),
+    cell (sf::Vector2f pos, float size) : pos (pos),
                                                   size (size),
                                                   texture (Covered_texture),
-                                                  state(Block_state::Covered) {}
+                                                  state(cell_state::Covered) {}
     void draw (sf::RenderWindow& window);
 };
 
 struct Grid
 {
-    std::vector<Block> blocks; //vettore dei vari blocchi che comporranno la griglia 
-    sf::Vector2i block_num; //numero di blocchi in griglia 
+    std::vector<cell> cells; //vettore dei vari blocchi che comporranno la griglia 
+    sf::Vector2i cell_num; //numero di blocchi in griglia 
     sf::Vector2f Grid_size;
 
-    Grid (sf::Vector2i block_num); //metodo per creazione della griglia con impostato il numero di blocchi 
+    Grid (sf::Vector2i cell_num); //metodo per creazione della griglia con impostato il numero di blocchi 
     void draw (sf::RenderWindow& window);
 };
 
@@ -61,32 +61,40 @@ struct State //stato generale della finestra
 
 Grid::Grid (sf::Vector2i bs){
     //imposto il numero di blocchi 
-    block_num = bs; 
+    cell_num = bs; 
 
     //ho deciso di usare solo la y poichè è la parte della finestra più corta e di ridurli leggeremnet (del 15%)
-    float block_size = ((window_height - (wall_vertical_displacement * 2)) / block_num.y) * 0.85f;
+    float cell_size = ((window_height - (wall_vertical_displacement * 2)) / cell_num.y) * 0.85f;
 
     //calcolo della grandezza della griglia 
-    Grid_size = {block_size * block_num.x, block_size * block_num.y};
+    Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
 
+    //salvo la posizione iniziale della griglia (destra e centrata verticalmente) così da doverla calcolare solo una volta e non ad ogni fase del ciclo 
+    sf::Vector2f start_pos = {
+        window_width - Grid_size.x - wall_horizontal_displacement,
+        (window_height - Grid_size.y) / 2.0f
+    };
+    //dichiaro una variabile vettore pos in modo da non dover dichiarare una nuova variabile ad ogni fase del ciclo 
+    sf::Vector2f pos; 
+    
     //per ogni colonna della griglia 
-    for (unsigned hb = 0; hb < block_num.x; hb++) {
+    for (unsigned hb = 0; hb < cell_num.x; hb++) {
         //per ogni blocco in detta colonna considerata (per ogni riga della griglia)
-        for (unsigned vb = 0; vb < block_num.y; vb++) {
+        for (unsigned vb = 0; vb < cell_num.y; vb++) {
             //calcolo la posizione del blocco considerato 
-            sf::Vector2f pos = {
-                hb * block_size + (window_width - Grid_size.x - wall_horizontal_displacement),
-                vb * block_size + ((window_height - Grid_size.y) / 2.0f)
+            pos = {
+                start_pos.x + hb * cell_size,
+                start_pos.y + vb * cell_size
             };
 
             //inserisco il blocco nel vettore rappresentante la griglia 
-            blocks.push_back(Block(pos, block_size)); 
+            cells.push_back(cell(pos, cell_size)); 
         }
     }
 }
 ////////////////DRAW////////////////
 
-void Block::draw (sf::RenderWindow& window)
+void cell::draw (sf::RenderWindow& window)
 {
     sf::RectangleShape b ({size,size}); //il blocco è un quadrato (quindi in rettangolo con altezza=larghezza)
     b.setTexture(&texture); //imposta la texture del blocco 
@@ -97,8 +105,8 @@ void Block::draw (sf::RenderWindow& window)
 
 void Grid::draw (sf::RenderWindow& window)
 {
-    for (auto& block : blocks) //disegna ogni blocco (uno alla volta)
-        block.draw (window);
+    for (auto& cell : cells) //disegna ogni blocco (uno alla volta)
+        cell.draw (window);
 }
 
 void State::draw (sf::RenderWindow& window)
