@@ -3,7 +3,7 @@
 #include <string>
 
 ////////////////FINESTRA////////////////
-const char* window_title = "01_cell_starting_texture";
+const char* window_title = "Cell starting texture";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
@@ -19,7 +19,7 @@ const float wall_vertical_displacement = 100; //distanza dall'alto e dal basso
 
 enum class Block_type{Mine,Empty, Number}; //stati nascosti possibili della cella 
 enum class Block_state{ Covered, Revealed, Flag}; //stati visibili possibili della cella 
-sf::Texture Covered_texture("risorse/pdf/cells/cellup.jpg"); //texture iniziale per ogni blocco 
+sf::Texture Covered_texture("../risorse/texture/cells/cellup.jpg"); //texture iniziale per ogni blocco 
 
 ////////////////STRUCT////////////////
 struct Block

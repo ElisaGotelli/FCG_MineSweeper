@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 //------------FINESTRA------------------
-const char* window_title = "01 - start_background";
+const char* window_title = "start background";
 const unsigned window_width = 800;
 const unsigned window_height = 600;
 const float max_frame_rate = 60;
@@ -19,7 +19,7 @@ struct Start
     sf::Texture texture;
 
     //font 
-    sf::Font font{"Resources/EpundaSlab-VariableFont_wght.ttf"};
+    sf::Font font{"risorse/EpundaSlab-VariableFont_wght.ttf"};
     sf::Text title{font};
     sf::Vector2f title_pos;
     sf::Text subtitle{font};
