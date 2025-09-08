@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 ////////////////FINESTRA////////////////
-const char* window_title = "00 - Base Window"; //titolo della finestra 
+const char* window_title = "Base Window"; //titolo della finestra 
 const unsigned window_width = 1200; //larghezza finestra 
 const unsigned window_height = 900; //altezza finestra 
 const float max_frame_rate = 60; //frame rate massimo della finestra 

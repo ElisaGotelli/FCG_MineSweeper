@@ -15,7 +15,7 @@ Per ciascuna tappa:
     * deve essere di poche righe 
     * si deve dichiarare se si sono presi pezzi di codice online 
 - devono esserci TUTTI i file necessari per la compilazione 
-- se si usano pezzi di codice presi online bisogna dichirarrlo esplicitamente della documentazione
+- se si usano pezzi di codice presi online bisogna dichirarlo esplicitamente della documentazione
 
 # STRUTTURA DEL PROGETTO: 
 
