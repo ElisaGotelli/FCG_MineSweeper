@@ -3,17 +3,28 @@
 ## OBBIETTIVO DELLA TAPPA:
 Creazione della finestra SFML e gestione dei suoi eventi di base: 
 - chiusura della finestra 
-- ridimensionamento della finestra (che va a mantenere il rapporto 4:3)
+- ridimensionamento della finestra
 - loop di interazione 
+
+## COSA È STATO IMPLEMENTATO: 
+- La finestra è stata creata con: 
+    * titolo: Base Window 
+    * dimensione 1200x900 
+    * Limite di frame: 60 
+    * sfondo nero
+- Gli eventi sono stati gestiti tramite callback tipizzate (handle events). 
+- L'handler del ridimensionamento fa in modo che la finestra mantenga sempre un rapporto 4:3
+- Viene impostata un grandezza minima della finestra equivalentemente alla dimensione iniziale della finestra (quindi 1200x900). 
+- Alla fine la finestra viene mostrata a schermo
 
 ## ISTRUZIONI PER ESEGUIRE DA TERMINALE: 
 #### Creazione della build: 
 cmake -S . -B build <br> 
 cmake --build build -j
 
-#### Esecuzione del file.cpp: 
+#### Esecuzione: 
 cd build <br> 
-./00_hello.cpp 
+./Tappa00
 
 ## VERIFICA DEL RISULTATO: 
 All'invio dell'ultimo comando per l'esecuzione dovrebbe aprirsi una finestra vuota delle dimensioni 1200x900 e con il titolo "Base Window". <br>
