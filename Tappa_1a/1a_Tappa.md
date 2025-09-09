@@ -32,8 +32,8 @@ Allego uno screenshot del risultato da me ottenuto:
 #### PROBLEMA: 
 Inserire un bordo non per una figura ma per la finestra stessa. 
 #### SOLUZIONE: 
-Non essendoci un comando diretto su SFML per inserire un bordo alla finestra ho optato per creare inizialmente un rettangolo transparente, con solo il bordo colorato, delle stesse dimensioni della finestra e con origine in (0,0).
-Ciò però ha portato ad un nuovo problema: il bordo veniva disegnato al di fuori delle dimensioni del rettangolo ed essendo il rettangolo delle stesse dimensioni e origini della finestra, il bordo veniva tagliato fuori. 
+Non essendoci un comando diretto su SFML per inserire un bordo alla finestra ho optato per creare inizialmente un rettangolo transparente, con solo il bordo colorato, delle stesse dimensioni della finestra e con origine in (0,0). <br>
+Ciò però ha portato ad un nuovo problema: il bordo veniva disegnato al di fuori delle dimensioni del rettangolo ed essendo il rettangolo delle stesse dimensioni e origini della finestra, il bordo veniva tagliato fuori. <br>  
 Per risolvere il problema ho ridimensionato il rettangolo di 40 pixel in meno in larghezza e altezza, e ho spostato la sua origine in (20,20) (pari allo spessore del bordo). In questo modo il bordo viene interamente disegnato all’interno dell’area visibile della finestra. 
 
 ## FONTI DI RIFERIMENTO UTILIZZATE:  

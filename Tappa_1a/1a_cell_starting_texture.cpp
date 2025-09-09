@@ -114,7 +114,7 @@ void State::draw (sf::RenderWindow& window)
     grid.draw (window); //disegna la griglia
 }
 
-//--------------EVENTI-----------------
+////////////////EVENTI////////////////
 
 void handle_close (sf::RenderWindow& window)
 {
@@ -132,7 +132,7 @@ void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
     window.setSize(ws);
 }
 
-//---------------------LOOP---------------------------
+////////////////LOOP////////////////
 
 int main()
 {
