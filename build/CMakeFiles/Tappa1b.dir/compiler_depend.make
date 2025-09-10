@@ -31,7 +31,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
   /usr/include/c++/13/bits/cxxabi_init_exception.h \
-  /usr/include/c++/13/bits/deque.tcc \
   /usr/include/c++/13/bits/enable_special_members.h \
   /usr/include/c++/13/bits/erase_if.h \
   /usr/include/c++/13/bits/exception.h \
@@ -91,14 +90,12 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
   /usr/include/c++/13/bits/stl_construct.h \
-  /usr/include/c++/13/bits/stl_deque.h \
   /usr/include/c++/13/bits/stl_function.h \
   /usr/include/c++/13/bits/stl_heap.h \
   /usr/include/c++/13/bits/stl_iterator.h \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
-  /usr/include/c++/13/bits/stl_queue.h \
   /usr/include/c++/13/bits/stl_raw_storage_iter.h \
   /usr/include/c++/13/bits/stl_relops.h \
   /usr/include/c++/13/bits/stl_tempbuf.h \
@@ -136,7 +133,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
   /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
   /usr/include/c++/13/debug/debug.h \
-  /usr/include/c++/13/deque \
   /usr/include/c++/13/exception \
   /usr/include/c++/13/ext/aligned_buffer.h \
   /usr/include/c++/13/ext/alloc_traits.h \
@@ -163,7 +159,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
-  /usr/include/c++/13/queue \
   /usr/include/c++/13/ratio \
   /usr/include/c++/13/span \
   /usr/include/c++/13/sstream \
@@ -476,6 +471,8 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/local/include/SFML/Graphics/Color.hpp:
 
+/usr/local/include/SFML/Graphics/CircleShape.hpp:
+
 /usr/local/include/SFML/Graphics/BlendMode.hpp:
 
 /usr/local/include/SFML/Graphics.hpp:
@@ -568,11 +565,15 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/local/include/SFML/Graphics/Sprite.hpp:
 
-/usr/local/include/SFML/Window/Keyboard.hpp:
+/usr/include/c++/13/cstdio:
 
-/usr/include/x86_64-linux-gnu/bits/syscall.h:
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
+/usr/include/c++/13/bits/charconv.h:
+
+/usr/include/c++/13/bits/fs_path.h:
 
 /usr/include/c++/13/concepts:
 
@@ -590,13 +591,15 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/c++/13/ctime:
 
-/usr/include/c++/13/deque:
-
 /usr/include/c++/13/cmath:
 
 /usr/include/x86_64-linux-gnu/sys/syscall.h:
 
 /usr/include/c++/13/clocale:
+
+/usr/include/c++/13/cstdint:
+
+/usr/include/c++/13/cstdlib:
 
 /usr/include/c++/13/cctype:
 
@@ -696,12 +699,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
-/usr/include/c++/13/bits/string_view.tcc:
-
-/usr/include/c++/13/bits/stl_deque.h:
-
 /usr/include/c++/13/bits/locale_facets.tcc:
 
 /usr/local/include/SFML/System/Angle.inl:
@@ -717,6 +714,10 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 /usr/include/c++/13/compare:
 
 /usr/include/c++/13/system_error:
+
+/usr/include/c++/13/bits/string_view.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/include/c++/13/bits/ptr_traits.h:
 
@@ -737,10 +738,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 /usr/include/c++/13/numbers:
 
 /usr/include/c++/13/bits/move.h:
-
-/usr/include/c++/13/bits/memoryfwd.h:
-
-/usr/include/c++/13/bits/fs_fwd.h:
 
 /usr/local/include/SFML/Graphics/Transformable.hpp:
 
@@ -788,21 +785,11 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/c++/13/bits/fs_ops.h:
 
-/usr/local/include/SFML/System/Utf.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/include/c++/13/bits/locale_classes.h:
-
 /usr/local/include/SFML/Graphics/Shader.hpp:
 
 /usr/include/c++/13/bits/stl_relops.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/usr/include/c++/13/bits/deque.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/c++/13/bits/locale_conv.h:
 
@@ -840,12 +827,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/alloca.h:
 
-/usr/include/c++/13/bits/stl_queue.h:
-
-/usr/include/c++/13/bits/requires_hosted.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
 /usr/include/c++/13/bits/atomic_lockfree_defines.h:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
@@ -870,16 +851,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/c++/13/bits/hashtable.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/c++/13/bits/charconv.h:
-
-/usr/include/c++/13/bits/fs_path.h:
-
-/usr/local/include/SFML/Graphics/Sprite.hpp:
-
-/usr/include/c++/13/cstdio:
-
 /usr/include/assert.h:
 
 /usr/include/c++/13/backward/auto_ptr.h:
@@ -901,6 +872,8 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 /usr/include/c++/13/bits/iterator_concepts.h:
 
 /usr/include/c++/13/bits/basic_ios.h:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
@@ -931,6 +904,10 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 /usr/include/c++/13/bits/exception.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/c++/13/bits/fs_fwd.h:
+
+/usr/include/c++/13/bits/memoryfwd.h:
 
 /usr/include/c++/13/bits/functional_hash.h:
 
@@ -977,10 +954,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 /usr/include/c++/13/bits/shared_ptr_base.h:
 
 /usr/include/wchar.h:
-
-/usr/include/c++/13/cstdint:
-
-/usr/include/c++/13/cstdlib:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
@@ -1058,22 +1031,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/c++/13/pstl/pstl_config.h:
 
-/usr/local/include/SFML/Graphics/CircleShape.hpp:
-
-/usr/include/c++/13/queue:
-
-/usr/include/c++/13/ratio:
-
-/usr/include/linux/limits.h:
-
-/usr/include/endian.h:
-
-/usr/include/stdint.h:
-
-/usr/include/c++/13/bits/enable_special_members.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
-
 /usr/include/c++/13/span:
 
 /usr/include/c++/13/stdexcept:
@@ -1140,6 +1097,18 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
+/usr/include/c++/13/ratio:
+
+/usr/include/linux/limits.h:
+
+/usr/include/endian.h:
+
+/usr/include/stdint.h:
+
+/usr/include/c++/13/bits/enable_special_members.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
 /usr/include/pthread.h:
 
 /usr/include/wctype.h:
@@ -1168,6 +1137,12 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/c++/13/bits/requires_hosted.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
 /usr/local/include/SFML/Window/Event.inl:
 
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
@@ -1192,16 +1167,26 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
-
-/usr/include/x86_64-linux-gnu/bits/select.h:
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
 /usr/include/time.h:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/local/include/SFML/Window/Keyboard.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/syscall.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/local/include/SFML/System/Utf.hpp:
+
+/usr/include/c++/13/bits/locale_classes.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:

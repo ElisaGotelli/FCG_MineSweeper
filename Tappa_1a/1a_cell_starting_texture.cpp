@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+using namespace std; 
+
 ////////////////FINESTRA////////////////
 const char* window_title = "Cell starting texture";
 const unsigned window_width = 1200;
@@ -35,6 +37,8 @@ struct cell
     cell (sf::Vector2f pos, float size) : pos (pos),
                                                   size (size),
                                                   texture (Covered_texture),
+                                                  type(cell_type::Empty), 
+                                                  bomb_number(0),
                                                   state(cell_state::Covered) {}
     void draw (sf::RenderWindow& window);
 };
