@@ -83,7 +83,7 @@ struct Grid
     int bomb_num; 
 
     Grid (sf::Vector2i cell_num, int bomb_num); 
-    void place_mines(int starting_cell); 
+    void place_mines(int starting_index_cell); 
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
 };
@@ -91,19 +91,23 @@ struct Grid
 struct State  
 {
     Grid grid; 
-    int mouse_cell; 
+    int mouse_cell;
+    int num_flag; 
 
     bool focus; //variabile che indica se la finestra di gioco ha il focus o meno 
     bool pause; //variabile che indica se il gioco è il pausa 
     bool first_move; //indica se bisogna o meno fare il primo click
 
     State () : 
-            grid({9,9}, 10), //per ora il numero di bomba sarà sempre 10 
+            grid({9,9}, 15), //per ora il numero di bomba sarà sempre 10 
+            num_flag(0),
             focus(false), 
             pause(true), 
             first_move(true),
             mouse_cell(-1) {}  
-
+    
+    void reveal(Grid& g, int starting_index_cell);
+    void flood_reveal(Grid& g, int starting_index_cell, Cell& start_c);
     void draw (sf::RenderWindow& window);
 };
 
@@ -184,6 +188,8 @@ void Grid::place_mines(int starting_cell_index){
         }
     }
 
+    for (auto& c : cells) c.bomb_number = 0;
+
     for(int j=0; j<cells.size(); j ++){
         if(cells[j].type == cell_type::Mine){
             if(cells[j].row_index > 0){
@@ -210,6 +216,52 @@ void Grid::place_numbers(){
             cells[i].type = cell_type::Empty; 
         }
         else cells[i].type = cell_type::Number; 
+    }
+}
+
+void State::flood_reveal(Grid& g, int starting_index_cell, Cell& start_c){
+    if(start_c.row_index > 0){
+        if(g.cells[starting_index_cell-g.cell_num.y].type !=  cell_type::Mine) reveal(g, starting_index_cell-g.cell_num.y); 
+
+        if((start_c.column_index > 0) && (g.cells[starting_index_cell-g.cell_num.y-1].type != cell_type::Mine) ) reveal(g, starting_index_cell-g.cell_num.y-1); 
+
+        if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell-g.cell_num.y+1].type != cell_type::Mine)) reveal(g, starting_index_cell-g.cell_num.y+1);
+    }
+
+    if(start_c.row_index < (g.cell_num.x-1)){
+        if(g.cells[starting_index_cell+g.cell_num.y].type !=  cell_type::Mine) reveal(g, starting_index_cell+g.cell_num.y);
+
+        if((start_c.column_index > 0) && (g.cells[starting_index_cell+g.cell_num.y-1].type != cell_type::Mine)) reveal(g, starting_index_cell+g.cell_num.y-1);
+
+        if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell+g.cell_num.y+1].type != cell_type::Mine)) reveal(g, starting_index_cell+g.cell_num.y+1);        
+    }
+
+    if((start_c.column_index > 0) && (g.cells[starting_index_cell-1].type != cell_type::Mine)) reveal(g, starting_index_cell-1);
+
+    if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell+1].type != cell_type::Mine)) reveal(g, starting_index_cell+1);
+}
+
+void State::reveal(Grid& g, int starting_index_cell){
+
+    Cell& c = g.cells[starting_index_cell]; 
+
+    //la cella viene rivelata quindi ne devo cambaire lo stato se non è già Revealed 
+    if(c.state == cell_state::Revealed) return; 
+    if(c.state == cell_state::Flag) num_flag --; 
+    c.state = cell_state::Revealed; 
+
+    //se la cella è una mina il gioco finisce (per ora solo return)
+    if(c.type == cell_type::Mine){
+        c.texture = Exploded_Mine_texture;
+        return; 
+    } 
+    else if(c.type == cell_type::Number){
+        c.texture = Number_textures[c.bomb_number-1]; 
+        return;
+    }
+    else{
+        c.texture = Empty_texture; 
+        flood_reveal(g,starting_index_cell, c);
     }
 }
 
@@ -251,17 +303,25 @@ void handle (const sf::Event::FocusLost&, State& state)
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
-    if(state.mouse_cell <0) return; 
+    if(state.mouse_cell <0 || state.mouse_cell >= state.grid.cells.size()) return; 
+    if(state.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
 
     if( mouse.button == sf::Mouse::Button::Left){
         if(state.first_move){
             state.first_move = false; //il primo click è stato fatto 
             state.grid.place_mines(state.mouse_cell);
             state.grid.place_numbers();
+            state.reveal(state.grid, state.mouse_cell);
         }
+        else state.reveal(state.grid, state.mouse_cell); 
     }
 
-
+    if(mouse.button == sf::Mouse::Button::Right){
+        if(state.first_move) return; 
+        state.num_flag++; 
+        state.grid.cells[state.mouse_cell].state = cell_state::Flag; 
+        state.grid.cells[state.mouse_cell].texture = Flag_texture;
+    }
 
 }
 
@@ -292,7 +352,7 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
         static_cast<float>(ev.position.y)
     };
 
-    int new_idx;
+    int new_idx =-1;
     for (int i = 0; i < static_cast<int>(state.grid.cells.size()); ++i) {
         if (state.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }
