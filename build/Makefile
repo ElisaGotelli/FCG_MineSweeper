@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named copy_risorse
+
+# Build rule for target.
+copy_risorse: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 copy_risorse
+.PHONY : copy_risorse
+
+# fast build rule for target.
+copy_risorse/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/copy_risorse.dir/build.make CMakeFiles/copy_risorse.dir/build
+.PHONY : copy_risorse/fast
+
+#=============================================================================
 # Target rules for targets named Tappa00
 
 # Build rule for target.
@@ -235,6 +248,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... copy_risorse"
 	@echo "... Tappa00"
 	@echo "... Tappa1a"
 	@echo "... Tappa1b"

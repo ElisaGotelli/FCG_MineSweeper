@@ -1,3 +1,4 @@
+/home/elisa/FCG_MineSweeper/build/CMakeFiles/copy_risorse.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa00.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa1a.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa1b.dir

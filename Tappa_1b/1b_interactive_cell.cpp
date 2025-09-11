@@ -4,6 +4,7 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <cmath>
+#include "../textures.hpp"
 
 using namespace std; 
 
@@ -22,37 +23,6 @@ const float wall_vertical_displacement = 100;
 
 enum class cell_type{Mine,Empty, Number}; 
 enum class cell_state{ Covered, Revealed, Flag}; 
-
-////////////////TEXTURE////////////////
-
-// cella coperta
-sf::Texture Covered_texture("../risorse/texture/cells/cellup.jpg");
-
-// bandierina
-sf::Texture Flag_texture("../risorse/texture/cells/cellflag.jpg");
-
-// mina scoperta 
-sf::Texture Normal_Mine_texture("../risorse/texture/cells/cellmine.jpg");
-
-//mina esplosa 
-sf::Texture Exploded_Mine_texture("../risorse/texture/cells/blast.jpg");
-
-//falsa mina 
-sf::Texture False_Mine_texture("../risorse/texture/cells/falsemine.jpg");
-
-// cella scoperta vuota 
-sf::Texture Empty_texture("../risorse/texture/cells/celldown.jpg");
-// numeri
-sf::Texture Number_textures[8] = {
-    sf::Texture("../risorse/texture/cells/cell1.jpg"),
-    sf::Texture("../risorse/texture/cells/cell2.jpg"),
-    sf::Texture("../risorse/texture/cells/cell3.jpg"),
-    sf::Texture("../risorse/texture/cells/cell4.jpg"),
-    sf::Texture("../risorse/texture/cells/cell5.jpg"),
-    sf::Texture("../risorse/texture/cells/cell6.jpg"),
-    sf::Texture("../risorse/texture/cells/cell7.jpg"),
-    sf::Texture("../risorse/texture/cells/cell8.jpg")
-};
 
 ////////////////STRUCT////////////////
 struct Cell
@@ -431,6 +401,7 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
 ////////////////LOOP////////////////
 int main()
 {
+    load_textures();
     sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title);
     window.setFramerateLimit (max_frame_rate);
     window.setMinimumSize(window.getSize()); 

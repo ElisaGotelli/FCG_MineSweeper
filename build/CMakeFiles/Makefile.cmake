@@ -48,6 +48,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/copy_risorse.dir/DependInfo.cmake"
   "CMakeFiles/Tappa00.dir/DependInfo.cmake"
   "CMakeFiles/Tappa1a.dir/DependInfo.cmake"
   "CMakeFiles/Tappa1b.dir/DependInfo.cmake"

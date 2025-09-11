@@ -63,6 +63,7 @@ CMAKE_BINARY_DIR = /home/elisa/FCG_MineSweeper/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/copy_risorse.dir/all
 all: CMakeFiles/Tappa00.dir/all
 all: CMakeFiles/Tappa1a.dir/all
 all: CMakeFiles/Tappa1b.dir/all
@@ -73,16 +74,43 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/copy_risorse.dir/clean
 clean: CMakeFiles/Tappa00.dir/clean
 clean: CMakeFiles/Tappa1a.dir/clean
 clean: CMakeFiles/Tappa1b.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/copy_risorse.dir
+
+# All Build rule for target.
+CMakeFiles/copy_risorse.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/copy_risorse.dir/build.make CMakeFiles/copy_risorse.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/copy_risorse.dir/build.make CMakeFiles/copy_risorse.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num= "Built target copy_risorse"
+.PHONY : CMakeFiles/copy_risorse.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/copy_risorse.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/copy_risorse.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
+.PHONY : CMakeFiles/copy_risorse.dir/rule
+
+# Convenience name for target.
+copy_risorse: CMakeFiles/copy_risorse.dir/rule
+.PHONY : copy_risorse
+
+# clean rule for target.
+CMakeFiles/copy_risorse.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/copy_risorse.dir/build.make CMakeFiles/copy_risorse.dir/clean
+.PHONY : CMakeFiles/copy_risorse.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/Tappa00.dir
 
 # All Build rule for target.
-CMakeFiles/Tappa00.dir/all:
+CMakeFiles/Tappa00.dir/all: CMakeFiles/copy_risorse.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa00.dir/build.make CMakeFiles/Tappa00.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa00.dir/build.make CMakeFiles/Tappa00.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=1,2 "Built target Tappa00"
@@ -108,7 +136,7 @@ CMakeFiles/Tappa00.dir/clean:
 # Target rules for target CMakeFiles/Tappa1a.dir
 
 # All Build rule for target.
-CMakeFiles/Tappa1a.dir/all:
+CMakeFiles/Tappa1a.dir/all: CMakeFiles/copy_risorse.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1a.dir/build.make CMakeFiles/Tappa1a.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1a.dir/build.make CMakeFiles/Tappa1a.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=3,4 "Built target Tappa1a"
@@ -134,7 +162,7 @@ CMakeFiles/Tappa1a.dir/clean:
 # Target rules for target CMakeFiles/Tappa1b.dir
 
 # All Build rule for target.
-CMakeFiles/Tappa1b.dir/all:
+CMakeFiles/Tappa1b.dir/all: CMakeFiles/copy_risorse.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=5,6 "Built target Tappa1b"

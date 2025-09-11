@@ -10,7 +10,7 @@ Rendere le celle inerattive, in particolare:
 
 ## COSA È STATO IMPLEMENTATO: 
 Dalla tappa precedente sono state aggiunte come nuove implementazioni: 
-- le texture per le varie celle scoperte (mine, numeri e vuota) e coperte (bandierina)
+- un file hpp a parte 'textures.hpp' per tutte le etxture che verranno utilizzate durante il progetto 
 - diverse funzioni per la gestione degl eventi: 
     * è stata gestita la possibilità di eventi non programmati tramite una funzione di gestione generica con corpo vuoto 
     * è stato gestito il passaggio del muose su una cella in modo che il bordo diventi rosso 
