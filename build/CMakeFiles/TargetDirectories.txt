@@ -2,5 +2,6 @@
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa00.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa1a.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa1b.dir
+/home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa1c.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/edit_cache.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/rebuild_cache.dir

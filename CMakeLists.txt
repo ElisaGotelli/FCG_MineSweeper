@@ -33,3 +33,8 @@ add_dependencies(Tappa1a copy_risorse)
 add_executable(Tappa1b Tappa_1b/1b_interactive_cell.cpp)
 target_link_libraries(Tappa1b PRIVATE SFML::Graphics)
 add_dependencies(Tappa1b copy_risorse)
+
+# TAPPA 1c
+add_executable(Tappa1c Tappa_1c/1c.cpp)
+target_link_libraries(Tappa1c PRIVATE SFML::Graphics)
+add_dependencies(Tappa1c copy_risorse)

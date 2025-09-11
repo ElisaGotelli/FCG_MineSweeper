@@ -4,12 +4,12 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <cmath>
-#include "../textures.hpp"
+#include "../textures_fonts.hpp"
 
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Other parameters";
+const char* window_title = "Victory and defeat";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
@@ -57,31 +57,52 @@ struct Grid
     sf::Vector2f Grid_size;
     int mine_num; 
     int num_flag; 
+    int num_revealed; //AGGIUNTA: numero di celle rivelate per capire quando la partita è finita
 
     Grid (sf::Vector2i cell_num, int mine_num); 
     void place_mines(int starting_index_cell); 
     void place_numbers(); 
-    void reveal(int starting_index_cell); 
-    void flood_reveal(int starting_index_cell, Cell& start_c); 
     void draw (sf::RenderWindow& window);
 };
 
+//AGGIUNTA: schermata per la vittoria/sconfitta
+struct Restart{ 
+    sf::Text title{font}; //scritta 'Hai vinto!' o 'Hai perso!'
+    bool visible; //indica se la schermata è visibile o meno (visibile solo a fine partita)
+    bool victory; // AGGIUNTA: indica se la partita è stata o meno una vittoria
+    
+    Restart (): 
+                visible(false), 
+                victory(false) {}
+                
+    void draw (sf::RenderWindow& window);
+}; 
+
 struct State  
 {
-    Grid grid; 
+    Grid grid;
+    Restart res; //AGGIUNTA: 
     int mouse_cell; 
-
+    int num_revealed; //AGGIUNTA: 
     bool focus; 
     bool pause; 
     bool first_move; 
+    bool game_ended; //AGGIUNTA:    
 
-    State () : 
-            grid({9,9}, 15), 
-            focus(false), 
-            pause(true), 
-            first_move(true),
-            mouse_cell(-1) {}  
+    State (): 
+                grid({9,9}, 15), 
+                res(),
+                focus(false), 
+                pause(true), 
+                first_move(true),
+                mouse_cell(-1), 
+                game_ended(false), 
+                num_revealed(0) {}
     
+    void reveal(Grid& g, int starting_index_cell); 
+    void flood_reveal(Grid& g, int starting_index_cell, Cell& start_c); 
+    void ending_reveal(Grid& g, int starting_index_cell); 
+    void reset();
     void draw (sf::RenderWindow& window);
 };
 
@@ -90,7 +111,7 @@ struct State
 Grid::Grid (sf::Vector2i bs, int bn){
     cell_num = bs; 
     mine_num = bn; 
-    num_flag = 0; 
+    num_flag = num_revealed = 0; 
 
     float cell_size = ((window_height - (wall_vertical_displacement * 2)) / cell_num.y) * 0.85f;
  
@@ -110,8 +131,9 @@ Grid::Grid (sf::Vector2i bs, int bn){
             };
             cells.push_back(Cell(pos, cell_size, hb, vb)); 
         }
-    }
+    } 
 }
+
 ////////////////DRAW////////////////
 
 void Cell::draw (sf::RenderWindow& window)
@@ -135,9 +157,47 @@ void Grid::draw (sf::RenderWindow& window)
         cell.draw (window);
 }
 
+//AGGIUNTA: 
+void Restart::draw(sf::RenderWindow& window){
+    if(!visible) return;
+
+    sf::RectangleShape s({600.f, 400.f});
+    s.setPosition({(window_width - s.getSize().x)/2.f, (window_height - s.getSize().y)/2.f});
+    s.setFillColor(sf::Color(210,180,140));
+    s.setOutlineThickness(20.f);
+    s.setOutlineColor(sf::Color(92,51,23));
+    window.draw(s);
+
+    
+    title.setString(victory ? "Hai vinto!" : "Hai perso!");
+    title.setCharacterSize(140);
+    title.setFillColor(sf::Color::Black); 
+    title.setOutlineThickness(2.f); 
+    title.setOutlineColor(sf::Color::White);
+    auto b = title.getLocalBounds();
+    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - 160.f});                  
+    window.draw(title);
+
+    title.setString("Premi ENTER");
+    title.setCharacterSize(40);
+    b = title.getLocalBounds();
+    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f,s.getPosition().y + s.getSize().y/2.f + 20.f});
+    window.draw(title);
+
+    title.setString("per cominciare una nuova partita");
+    title.setCharacterSize(40);
+    b = title.getLocalBounds();
+    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f,s.getPosition().y + s.getSize().y/2.f + 80.f});
+    window.draw(title);
+}
+
 void State::draw (sf::RenderWindow& window)
 {
     grid.draw (window);
+    res.draw(window); 
 }
 
 ////////////////ALTRE FUNZIONI////////////////
@@ -203,49 +263,87 @@ void Grid::place_numbers(){
     }
 }
 
-void Grid::flood_reveal(int starting_index_cell, Cell& start_c){
+//AGGIUNTA: funzione per l'animazione di sconfitta/vittoria 
+void State::ending_reveal(Grid& g, int starting_index_cell){
+    for(int i = 0; i < g.cells.size(); i++){
+    if(res.victory == false && i == starting_index_cell ) continue; 
 
-    if(start_c.row_index > 0){
-        if(cells[starting_index_cell-cell_num.y].type !=  cell_type::Mine) reveal(starting_index_cell-cell_num.y); 
+            if(g.cells[i].state == cell_state::Flag && g.cells[i].type != cell_type::Mine){
+                g.cells[i].state = cell_state::Revealed; 
+                g.cells[i].texture = False_Mine_texture; 
+            }
 
-        if((start_c.column_index > 0) && (cells[starting_index_cell-cell_num.y-1].type != cell_type::Mine) ) reveal(starting_index_cell-cell_num.y-1); 
-
-        if((start_c.column_index < (cell_num.y-1)) && (cells[starting_index_cell-cell_num.y+1].type != cell_type::Mine)) reveal(starting_index_cell-cell_num.y+1);
+            if(g.cells[i].type == cell_type::Mine){
+                g.cells[i].state = cell_state::Revealed; 
+                g.cells[i].texture = Normal_Mine_texture; 
+            }
     }
 
-    if(start_c.row_index < (cell_num.x-1)){
-        if(cells[starting_index_cell+cell_num.y].type !=  cell_type::Mine) reveal(starting_index_cell+cell_num.y);
-
-        if((start_c.column_index > 0) && (cells[starting_index_cell+cell_num.y-1].type != cell_type::Mine)) reveal(starting_index_cell+cell_num.y-1);
-
-        if((start_c.column_index < (cell_num.y-1)) && (cells[starting_index_cell+cell_num.y+1].type != cell_type::Mine)) reveal(starting_index_cell+cell_num.y+1);        
-    }
-
-    if((start_c.column_index > 0) && (cells[starting_index_cell-1].type != cell_type::Mine)) reveal(starting_index_cell-1);
-
-    if((start_c.column_index < (cell_num.y-1)) && (cells[starting_index_cell+1].type != cell_type::Mine)) reveal(starting_index_cell+1);
+    game_ended = true; 
+    res.visible = true; 
+    
 }
 
-void Grid::reveal(int starting_index_cell){
+void State::flood_reveal(Grid& g, int starting_index_cell, Cell& start_c){
 
-    Cell& c = cells[starting_index_cell]; 
+    if(start_c.row_index > 0){
+        if(g.cells[starting_index_cell-g.cell_num.y].type !=  cell_type::Mine) reveal(g, starting_index_cell-g.cell_num.y); 
+
+        if((start_c.column_index > 0) && (g.cells[starting_index_cell-g.cell_num.y-1].type != cell_type::Mine) ) reveal(g, starting_index_cell-g.cell_num.y-1); 
+
+        if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell-g.cell_num.y+1].type != cell_type::Mine)) reveal(g, starting_index_cell-g.cell_num.y+1);
+    }
+
+    if(start_c.row_index < (g.cell_num.x-1)){
+        if(g.cells[starting_index_cell+g.cell_num.y].type !=  cell_type::Mine) reveal(g, starting_index_cell+g.cell_num.y);
+
+        if((start_c.column_index > 0) && (g.cells[starting_index_cell+g.cell_num.y-1].type != cell_type::Mine)) reveal(g, starting_index_cell+g.cell_num.y-1);
+
+        if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell+g.cell_num.y+1].type != cell_type::Mine)) reveal(g, starting_index_cell+g.cell_num.y+1);        
+    }
+
+    if((start_c.column_index > 0) && (g.cells[starting_index_cell-1].type != cell_type::Mine)) reveal(g, starting_index_cell-1);
+
+    if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell+1].type != cell_type::Mine)) reveal(g, starting_index_cell+1);
+}
+
+void State::reveal(Grid& g, int starting_index_cell){
+
+    Cell& c = g.cells[starting_index_cell]; 
 
     if(c.state == cell_state::Revealed) return; 
-    if(c.state == cell_state::Flag) num_flag --; 
+    if(c.state == cell_state::Flag) g.num_flag --; 
     c.state = cell_state::Revealed; 
+    num_revealed++; 
 
     if(c.type == cell_type::Mine){
         c.texture = Exploded_Mine_texture;
+        res.victory = false; 
+        ending_reveal(g,starting_index_cell); 
         return; 
     } 
     else if(c.type == cell_type::Number){
         c.texture = Number_textures[c.mine_adj-1]; 
-        return;
     }
     else{
         c.texture = Empty_texture; 
-        flood_reveal(starting_index_cell, c);
+        flood_reveal(g, starting_index_cell, c);
     }
+
+    if (num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
+        res.victory = true;
+        ending_reveal(g, starting_index_cell); 
+    }
+}
+
+//AGGIUNTA
+void State::reset(){
+    res = Restart(); 
+    grid = Grid({9,9}, 15);  
+    focus = game_ended= false; 
+    pause = first_move = true; 
+    mouse_cell = -1; 
+    num_revealed = 0;
 }
 
 
@@ -283,6 +381,8 @@ void handle (const sf::Event::FocusLost&, State& state)
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
+    if(state.game_ended) return; //AGGIUNTA: quando la partita è finita non permettere nessun tipo di mossa
+
     if(state.mouse_cell <0 || state.mouse_cell >= state.grid.cells.size()) return; 
 
     if(state.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
@@ -293,9 +393,9 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
             state.first_move = false; 
             state.grid.place_mines(state.mouse_cell); 
             state.grid.place_numbers(); 
-            state.grid.reveal(state.mouse_cell); 
+            state.reveal(state.grid, state.mouse_cell); 
         }
-        else state.grid.reveal(state.mouse_cell); 
+        else state.reveal(state.grid, state.mouse_cell); 
     }
 
     if(mouse.button == sf::Mouse::Button::Right){
@@ -308,13 +408,15 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 
 }
 
-void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
-{
-    
+//AGGIUNTA
+void handle(const sf::Event::KeyPressed& key, State& state) {
+    if (state.game_ended && key.scancode == sf::Keyboard::Scancode::Space) state.reset(); 
 }
+
 
 void handle (const sf::Event::MouseMoved& ev, State& state)
 {
+    if(state.game_ended) return; //AGGIUNTA: 
     const sf::Vector2f mouse_float_pos{
         static_cast<float>(ev.position.x),
         static_cast<float>(ev.position.y)
@@ -338,7 +440,7 @@ int new_idx =-1;
 ////////////////LOOP////////////////
 int main()
 {
-    load_textures();
+    load_textures_fonts();
     sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title);
     window.setFramerateLimit (max_frame_rate);
     window.setMinimumSize(window.getSize()); 

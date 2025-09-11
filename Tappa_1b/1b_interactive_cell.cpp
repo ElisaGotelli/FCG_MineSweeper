@@ -4,7 +4,7 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <cmath>
-#include "../textures.hpp"
+#include "../textures_fonts.hpp"
 
 using namespace std; 
 
@@ -56,13 +56,12 @@ struct Grid
     sf::Vector2i cell_num;  
     sf::Vector2f Grid_size;
     int mine_num; //AGGIUNTA: numero di mine 'nascoste' nella griglia 
-    int num_flag; //AGGIUNTA: numero di bandierine piazzate nella griglia
+    //AGGIUNTA: numero di bandierine piazzate nella griglia
+    int num_flag = 0; //inizialmente il numero di badierina sarà sempre zero
 
     Grid (sf::Vector2i cell_num, int mine_num); //MODIFICA: aggiunto il numero di mine poichè anche quello varia in base alla difficoltà
     void place_mines(int starting_index_cell); //AGGIUNTA: funzione per il piazzamento casuale delle mine nella griglia post click di inizio partita
     void place_numbers(); //AGGIUNTA: funzione per dare la corretta texture alle celle vuote in base al numero di mine adiacenti 
-    void reveal(int starting_index_cell); //AGGIUNTA: funzione per la rivelazione di una cella
-    void flood_reveal(int starting_index_cell, Cell& start_c); //AGGIUNTA: rivelazione a cascata 
     void draw (sf::RenderWindow& window);
 };
 
@@ -82,6 +81,8 @@ struct State
             first_move(true),
             mouse_cell(-1) {}  
     
+    void reveal(Grid& g, int starting_index_cell); //AGGIUNTA: funzione per la rivelazione di una cella
+    void flood_reveal(Grid& g, int starting_index_cell, Cell& start_c); //AGGIUNTA: rivelazione a cascata 
     void draw (sf::RenderWindow& window);
 };
 
@@ -90,7 +91,6 @@ struct State
 Grid::Grid (sf::Vector2i bs, int bn){
     cell_num = bs; 
     mine_num = bn; //AGGIUNTA: imposto il numero di mine che saranno nella griglia 
-    num_flag = 0; //inizialmente il numero di badierina sarà sempre zero
 
     float cell_size = ((window_height - (wall_vertical_displacement * 2)) / cell_num.y) * 0.85f;
  
@@ -230,18 +230,18 @@ void Grid::place_numbers(){
 }
 
 //AGGIUNTA: funzione per il rivelamento a cascata delle celle nel caso di una cella Empty
-void Grid::flood_reveal(int starting_index_cell, Cell& start_c){
+void State::flood_reveal(Grid& g, int starting_index_cell, Cell& start_c){
 
     //se la cella considerata non è nel bordo in alto della griglia
     if(start_c.row_index > 0){
         //rivela la cella sopra a quella considerata solo nel caso detta cella non sia di tipo Mine 
-        if(cells[starting_index_cell-cell_num.y].type !=  cell_type::Mine) reveal(starting_index_cell-cell_num.y); 
+        if(g.cells[starting_index_cell-g.cell_num.y].type !=  cell_type::Mine) reveal(g, starting_index_cell-g.cell_num.y); 
 
         //se la cella considerata non è nemmeno nel bordo sinistro della griglia e la cella in alto a sinistra della cella considerata non è di tipo Mine, rivela la cella in alto a sinistra
-        if((start_c.column_index > 0) && (cells[starting_index_cell-cell_num.y-1].type != cell_type::Mine) ) reveal(starting_index_cell-cell_num.y-1); 
+        if((start_c.column_index > 0) && (g.cells[starting_index_cell-g.cell_num.y-1].type != cell_type::Mine) ) reveal(g, starting_index_cell-g.cell_num.y-1); 
 
         //se la cella considerata non è nemmeno nel bordo destro della griglia e la cella in alto a destra della cella considerata non è di tipo Mine, rivela la cella in alto a destra
-        if((start_c.column_index < (cell_num.y-1)) && (cells[starting_index_cell-cell_num.y+1].type != cell_type::Mine)) reveal(starting_index_cell-cell_num.y+1);
+        if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell-g.cell_num.y+1].type != cell_type::Mine)) reveal(g, starting_index_cell-g.cell_num.y+1);
     }
 
     /*fai lo stesso ragionamento dei bordi di prima ma per: 
@@ -249,31 +249,31 @@ void Grid::flood_reveal(int starting_index_cell, Cell& start_c){
     - bordo basso e sinistro 
     - bordo basso e destro
     */
-    if(start_c.row_index < (cell_num.x-1)){
-        if(cells[starting_index_cell+cell_num.y].type !=  cell_type::Mine) reveal(starting_index_cell+cell_num.y);
+    if(start_c.row_index < (g.cell_num.x-1)){
+        if(g.cells[starting_index_cell+g.cell_num.y].type !=  cell_type::Mine) reveal(g, starting_index_cell+g.cell_num.y);
 
-        if((start_c.column_index > 0) && (cells[starting_index_cell+cell_num.y-1].type != cell_type::Mine)) reveal(starting_index_cell+cell_num.y-1);
+        if((start_c.column_index > 0) && (g.cells[starting_index_cell+g.cell_num.y-1].type != cell_type::Mine)) reveal(g, starting_index_cell+g.cell_num.y-1);
 
-        if((start_c.column_index < (cell_num.y-1)) && (cells[starting_index_cell+cell_num.y+1].type != cell_type::Mine)) reveal(starting_index_cell+cell_num.y+1);        
+        if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell+g.cell_num.y+1].type != cell_type::Mine)) reveal(g, starting_index_cell+g.cell_num.y+1);        
     }
 
     //se la cella considerata non è nel bordo sinistro della griglia e la cella a sinistra della cella considerata non è di tipo Mine, rivela la cella a sinistra 
-    if((start_c.column_index > 0) && (cells[starting_index_cell-1].type != cell_type::Mine)) reveal(starting_index_cell-1);
+    if((start_c.column_index > 0) && (g.cells[starting_index_cell-1].type != cell_type::Mine)) reveal(g, starting_index_cell-1);
 
     //se la cella considerata non è  nel bordo destro della griglia e la cella a destra della cella considerata non è di tipo Mine, rivela la cella a destra
-    if((start_c.column_index < (cell_num.y-1)) && (cells[starting_index_cell+1].type != cell_type::Mine)) reveal(starting_index_cell+1);
+    if((start_c.column_index < (g.cell_num.y-1)) && (g.cells[starting_index_cell+1].type != cell_type::Mine)) reveal(g, starting_index_cell+1);
 }
 
 //AGGIUNTA: funzione per la rivelazione di una sola cella nella griglia
-void Grid::reveal(int starting_index_cell){
+void State::reveal(Grid& g, int starting_index_cell){
 
     //salvataggio della cella
-    Cell& c = cells[starting_index_cell]; 
+    Cell& c = g.cells[starting_index_cell]; 
 
     //se la cella aveva già lo stato Revealed non fare nulla 
     if(c.state == cell_state::Revealed) return; 
     //se la cella aveva lo stato Flag diminuisci il numero di bandierine presenti in gioco 
-    if(c.state == cell_state::Flag) num_flag --; 
+    if(c.state == cell_state::Flag) g.num_flag --; 
     //imposto la cella come Revealed essendo che viene rivelata 
     c.state = cell_state::Revealed; 
 
@@ -290,7 +290,7 @@ void Grid::reveal(int starting_index_cell){
     //se la cella è di tipo Empty imposto come sua texture quella della cella vuota e faccio una rivelazione a cascata 
     else{
         c.texture = Empty_texture; 
-        flood_reveal(starting_index_cell, c);
+        flood_reveal(g, starting_index_cell, c);
     }
 }
 
@@ -347,9 +347,9 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
             state.first_move = false; //metti che è stata fatta la prima mossa 
             state.grid.place_mines(state.mouse_cell); //piazza le mine in base alla prima cella cliccata 
             state.grid.place_numbers(); //imposta il tipo di ogni cella 
-            state.grid.reveal(state.mouse_cell); //rivela la cella cliccata 
+            state.reveal(state.grid, state.mouse_cell); //rivela la cella cliccata 
         }
-        else state.grid.reveal(state.mouse_cell); // in caso non sia la prima mossa, rivela solo la cella cliccata 
+        else state.reveal(state.grid, state.mouse_cell); // in caso non sia la prima mossa, rivela solo la cella cliccata 
     }
 
     //se è stato cliccato il tasto destro del mouse 
@@ -362,11 +362,6 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
         state.grid.cells[state.mouse_cell].texture = Flag_texture;
     }
 
-}
-
-void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
-{
-    
 }
 
 //AGGIUNTA: gestione dell'evento caratterizzato dal movimento del mouse 
@@ -401,7 +396,7 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
 ////////////////LOOP////////////////
 int main()
 {
-    load_textures();
+    load_textures_fonts();
     sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title);
     window.setFramerateLimit (max_frame_rate);
     window.setMinimumSize(window.getSize()); 

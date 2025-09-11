@@ -1,6 +1,6 @@
-CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: \
- /home/elisa/FCG_MineSweeper/Tappa_1b/1b_interactive_cell.cpp \
- /usr/include/stdc-predef.h /usr/local/include/SFML/Graphics.hpp \
+CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o: \
+ /home/elisa/FCG_MineSweeper/Tappa_1c/1c.cpp /usr/include/stdc-predef.h \
+ /usr/local/include/SFML/Graphics.hpp \
  /usr/local/include/SFML/Graphics/BlendMode.hpp \
  /usr/local/include/SFML/Graphics/Export.hpp \
  /usr/local/include/SFML/Config.hpp \
@@ -328,4 +328,4 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /home/elisa/FCG_MineSweeper/Tappa_1b/../textures_fonts.hpp
+ /home/elisa/FCG_MineSweeper/Tappa_1c/../textures_fonts.hpp

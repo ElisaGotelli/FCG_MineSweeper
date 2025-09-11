@@ -168,6 +168,19 @@ Tappa1b/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/build
 .PHONY : Tappa1b/fast
 
+#=============================================================================
+# Target rules for targets named Tappa1c
+
+# Build rule for target.
+Tappa1c: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa1c
+.PHONY : Tappa1c
+
+# fast build rule for target.
+Tappa1c/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/build
+.PHONY : Tappa1c/fast
+
 Tappa_00/00_hello.o: Tappa_00/00_hello.cpp.o
 .PHONY : Tappa_00/00_hello.o
 
@@ -240,6 +253,30 @@ Tappa_1b/1b_interactive_cell.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.s
 .PHONY : Tappa_1b/1b_interactive_cell.cpp.s
 
+Tappa_1c/1c.o: Tappa_1c/1c.cpp.o
+.PHONY : Tappa_1c/1c.o
+
+# target to build an object file
+Tappa_1c/1c.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o
+.PHONY : Tappa_1c/1c.cpp.o
+
+Tappa_1c/1c.i: Tappa_1c/1c.cpp.i
+.PHONY : Tappa_1c/1c.i
+
+# target to preprocess a source file
+Tappa_1c/1c.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.i
+.PHONY : Tappa_1c/1c.cpp.i
+
+Tappa_1c/1c.s: Tappa_1c/1c.cpp.s
+.PHONY : Tappa_1c/1c.s
+
+# target to generate assembly for a file
+Tappa_1c/1c.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.s
+.PHONY : Tappa_1c/1c.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -252,6 +289,7 @@ help:
 	@echo "... Tappa00"
 	@echo "... Tappa1a"
 	@echo "... Tappa1b"
+	@echo "... Tappa1c"
 	@echo "... Tappa_00/00_hello.o"
 	@echo "... Tappa_00/00_hello.i"
 	@echo "... Tappa_00/00_hello.s"
@@ -261,6 +299,9 @@ help:
 	@echo "... Tappa_1b/1b_interactive_cell.o"
 	@echo "... Tappa_1b/1b_interactive_cell.i"
 	@echo "... Tappa_1b/1b_interactive_cell.s"
+	@echo "... Tappa_1c/1c.o"
+	@echo "... Tappa_1c/1c.i"
+	@echo "... Tappa_1c/1c.s"
 .PHONY : help
 
 

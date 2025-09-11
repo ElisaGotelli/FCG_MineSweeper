@@ -19,8 +19,9 @@ inline sf::Texture lost_face_texture;
 inline sf::Texture smile_face_texture;
 inline sf::Texture smile_face_down_texture;
 inline sf::Texture win_face_texture;
+inline sf::Font font; 
 
-inline void load_textures() {
+inline void load_textures_fonts() {
     if (!Covered_texture.loadFromFile("risorse/texture/cells/cellup.jpg"))
         throw std::runtime_error("Impossibile caricare cellup.jpg");
 
@@ -83,6 +84,9 @@ inline void load_textures() {
         if (!Clock_textures[i].loadFromFile(clock_numbers[i]))
             throw std::runtime_error(std::string("Impossibile caricare ") + clock_numbers[i]);
     }
+
+    if (!font.openFromFile("risorse/EpundaSlab-VariableFont_wght.ttf"))
+        throw std::runtime_error("Impossibile caricare il font");
 
 }
 
