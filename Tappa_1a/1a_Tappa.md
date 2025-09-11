@@ -4,7 +4,7 @@
 Sviluppo unicamente della grafica dello sfondo di gioco e della griglia 9x9.
 
 ## COSA È STATO IMPLEMENTATO: 
-Dalla tappa precedente sono stati implementati: 
+Dalla tappa precedente sono state aggiunte come nuove implementazioni: 
 - un nuovo colore di sfondo verde chiaro 
 - un bordo alla finestra creando una Rectangle Shape trasparente leggermente più piccola della finestra e con bordo verde scuro in modo che solo il bordo del rettangolo fosse visibile 
 - Un oggetto 'griglia' tramite struct fatto di celle con uan etxture grigia. Questo sarà come apparirà la griglia di gioco all'inizio di ogni partita con modalità facile. 

@@ -18,6 +18,6 @@ add_executable(Tappa1a  Tappa_1a/1a_cell_starting_texture.cpp)
 target_link_libraries(Tappa1a  PRIVATE  SFML::Graphics)
 
 #TAPPA 1b
-add_executable(Tappa1b  Tappa_1b/1b.cpp)
+add_executable(Tappa1b  Tappa_1b/1b_interactive_cell.cpp)
 target_link_libraries(Tappa1b  PRIVATE  SFML::Graphics)
 

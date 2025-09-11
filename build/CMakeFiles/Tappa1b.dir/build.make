@@ -69,28 +69,28 @@ include CMakeFiles/Tappa1b.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Tappa1b.dir/flags.make
 
-CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: CMakeFiles/Tappa1b.dir/flags.make
-CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1b.cpp
-CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o: CMakeFiles/Tappa1b.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o -MF CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o.d -o CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o -c /home/elisa/FCG_MineSweeper/Tappa_1b/1b.cpp
+CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: CMakeFiles/Tappa1b.dir/flags.make
+CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1b/1b_interactive_cell.cpp
+CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: CMakeFiles/Tappa1b.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o -MF CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o.d -o CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o -c /home/elisa/FCG_MineSweeper/Tappa_1b/1b_interactive_cell.cpp
 
-CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/elisa/FCG_MineSweeper/Tappa_1b/1b.cpp > CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.i
+CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/elisa/FCG_MineSweeper/Tappa_1b/1b_interactive_cell.cpp > CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.i
 
-CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/elisa/FCG_MineSweeper/Tappa_1b/1b.cpp -o CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.s
+CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/elisa/FCG_MineSweeper/Tappa_1b/1b_interactive_cell.cpp -o CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.s
 
 # Object files for target Tappa1b
 Tappa1b_OBJECTS = \
-"CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o"
+"CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o"
 
 # External object files for target Tappa1b
 Tappa1b_EXTERNAL_OBJECTS =
 
-Tappa1b: CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o
+Tappa1b: CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o
 Tappa1b: CMakeFiles/Tappa1b.dir/build.make
 Tappa1b: /usr/local/lib/libsfml-graphics.so.3.0.1
 Tappa1b: /usr/local/lib/libsfml-window.so.3.0.1

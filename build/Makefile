@@ -203,29 +203,29 @@ Tappa_1a/1a_cell_starting_texture.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1a.dir/build.make CMakeFiles/Tappa1a.dir/Tappa_1a/1a_cell_starting_texture.cpp.s
 .PHONY : Tappa_1a/1a_cell_starting_texture.cpp.s
 
-Tappa_1b/1b.o: Tappa_1b/1b.cpp.o
-.PHONY : Tappa_1b/1b.o
+Tappa_1b/1b_interactive_cell.o: Tappa_1b/1b_interactive_cell.cpp.o
+.PHONY : Tappa_1b/1b_interactive_cell.o
 
 # target to build an object file
-Tappa_1b/1b.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o
-.PHONY : Tappa_1b/1b.cpp.o
+Tappa_1b/1b_interactive_cell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o
+.PHONY : Tappa_1b/1b_interactive_cell.cpp.o
 
-Tappa_1b/1b.i: Tappa_1b/1b.cpp.i
-.PHONY : Tappa_1b/1b.i
+Tappa_1b/1b_interactive_cell.i: Tappa_1b/1b_interactive_cell.cpp.i
+.PHONY : Tappa_1b/1b_interactive_cell.i
 
 # target to preprocess a source file
-Tappa_1b/1b.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.i
-.PHONY : Tappa_1b/1b.cpp.i
+Tappa_1b/1b_interactive_cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.i
+.PHONY : Tappa_1b/1b_interactive_cell.cpp.i
 
-Tappa_1b/1b.s: Tappa_1b/1b.cpp.s
-.PHONY : Tappa_1b/1b.s
+Tappa_1b/1b_interactive_cell.s: Tappa_1b/1b_interactive_cell.cpp.s
+.PHONY : Tappa_1b/1b_interactive_cell.s
 
 # target to generate assembly for a file
-Tappa_1b/1b.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.s
-.PHONY : Tappa_1b/1b.cpp.s
+Tappa_1b/1b_interactive_cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.s
+.PHONY : Tappa_1b/1b_interactive_cell.cpp.s
 
 # Help Target
 help:
@@ -244,9 +244,9 @@ help:
 	@echo "... Tappa_1a/1a_cell_starting_texture.o"
 	@echo "... Tappa_1a/1a_cell_starting_texture.i"
 	@echo "... Tappa_1a/1a_cell_starting_texture.s"
-	@echo "... Tappa_1b/1b.o"
-	@echo "... Tappa_1b/1b.i"
-	@echo "... Tappa_1b/1b.s"
+	@echo "... Tappa_1b/1b_interactive_cell.o"
+	@echo "... Tappa_1b/1b_interactive_cell.i"
+	@echo "... Tappa_1b/1b_interactive_cell.s"
 .PHONY : help
 
 

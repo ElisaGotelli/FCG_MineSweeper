@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o"
-  "CMakeFiles/Tappa1b.dir/Tappa_1b/1b.cpp.o.d"
+  "CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o"
+  "CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o.d"
   "Tappa1b"
   "Tappa1b.pdb"
 )

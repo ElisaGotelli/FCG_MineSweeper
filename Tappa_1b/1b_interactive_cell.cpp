@@ -8,7 +8,7 @@
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "mine, flag and number";
+const char* window_title = " Interactive cells";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
