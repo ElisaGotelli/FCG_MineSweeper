@@ -69,28 +69,28 @@ include CMakeFiles/Tappa1c.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Tappa1c.dir/flags.make
 
-CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o: CMakeFiles/Tappa1c.dir/flags.make
-CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1c/1c.cpp
-CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o: CMakeFiles/Tappa1c.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o -MF CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o.d -o CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o -c /home/elisa/FCG_MineSweeper/Tappa_1c/1c.cpp
+CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o: CMakeFiles/Tappa1c.dir/flags.make
+CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_1c/1c_victory_defeat_restart.cpp
+CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o: CMakeFiles/Tappa1c.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o -MF CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o.d -o CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o -c /home/elisa/FCG_MineSweeper/Tappa_1c/1c_victory_defeat_restart.cpp
 
-CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/elisa/FCG_MineSweeper/Tappa_1c/1c.cpp > CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.i
+CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/elisa/FCG_MineSweeper/Tappa_1c/1c_victory_defeat_restart.cpp > CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.i
 
-CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/elisa/FCG_MineSweeper/Tappa_1c/1c.cpp -o CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.s
+CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/elisa/FCG_MineSweeper/Tappa_1c/1c_victory_defeat_restart.cpp -o CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.s
 
 # Object files for target Tappa1c
 Tappa1c_OBJECTS = \
-"CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o"
+"CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o"
 
 # External object files for target Tappa1c
 Tappa1c_EXTERNAL_OBJECTS =
 
-Tappa1c: CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o
+Tappa1c: CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o
 Tappa1c: CMakeFiles/Tappa1c.dir/build.make
 Tappa1c: /usr/local/lib/libsfml-graphics.so.3.0.1
 Tappa1c: /usr/local/lib/libsfml-window.so.3.0.1

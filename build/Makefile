@@ -253,29 +253,29 @@ Tappa_1b/1b_interactive_cell.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1b.dir/build.make CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.s
 .PHONY : Tappa_1b/1b_interactive_cell.cpp.s
 
-Tappa_1c/1c.o: Tappa_1c/1c.cpp.o
-.PHONY : Tappa_1c/1c.o
+Tappa_1c/1c_victory_defeat_restart.o: Tappa_1c/1c_victory_defeat_restart.cpp.o
+.PHONY : Tappa_1c/1c_victory_defeat_restart.o
 
 # target to build an object file
-Tappa_1c/1c.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o
-.PHONY : Tappa_1c/1c.cpp.o
+Tappa_1c/1c_victory_defeat_restart.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o
+.PHONY : Tappa_1c/1c_victory_defeat_restart.cpp.o
 
-Tappa_1c/1c.i: Tappa_1c/1c.cpp.i
-.PHONY : Tappa_1c/1c.i
+Tappa_1c/1c_victory_defeat_restart.i: Tappa_1c/1c_victory_defeat_restart.cpp.i
+.PHONY : Tappa_1c/1c_victory_defeat_restart.i
 
 # target to preprocess a source file
-Tappa_1c/1c.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.i
-.PHONY : Tappa_1c/1c.cpp.i
+Tappa_1c/1c_victory_defeat_restart.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.i
+.PHONY : Tappa_1c/1c_victory_defeat_restart.cpp.i
 
-Tappa_1c/1c.s: Tappa_1c/1c.cpp.s
-.PHONY : Tappa_1c/1c.s
+Tappa_1c/1c_victory_defeat_restart.s: Tappa_1c/1c_victory_defeat_restart.cpp.s
+.PHONY : Tappa_1c/1c_victory_defeat_restart.s
 
 # target to generate assembly for a file
-Tappa_1c/1c.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.s
-.PHONY : Tappa_1c/1c.cpp.s
+Tappa_1c/1c_victory_defeat_restart.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.s
+.PHONY : Tappa_1c/1c_victory_defeat_restart.cpp.s
 
 # Help Target
 help:
@@ -299,9 +299,9 @@ help:
 	@echo "... Tappa_1b/1b_interactive_cell.o"
 	@echo "... Tappa_1b/1b_interactive_cell.i"
 	@echo "... Tappa_1b/1b_interactive_cell.s"
-	@echo "... Tappa_1c/1c.o"
-	@echo "... Tappa_1c/1c.i"
-	@echo "... Tappa_1c/1c.s"
+	@echo "... Tappa_1c/1c_victory_defeat_restart.o"
+	@echo "... Tappa_1c/1c_victory_defeat_restart.i"
+	@echo "... Tappa_1c/1c_victory_defeat_restart.s"
 .PHONY : help
 
 

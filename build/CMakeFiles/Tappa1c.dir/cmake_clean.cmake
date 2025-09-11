@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o"
-  "CMakeFiles/Tappa1c.dir/Tappa_1c/1c.cpp.o.d"
+  "CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o"
+  "CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.o.d"
   "Tappa1c"
   "Tappa1c.pdb"
 )
