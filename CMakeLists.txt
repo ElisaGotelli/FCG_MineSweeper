@@ -38,3 +38,8 @@ add_dependencies(Tappa1b copy_risorse)
 add_executable(Tappa1c Tappa_1c/1c_victory_defeat_restart.cpp)
 target_link_libraries(Tappa1c PRIVATE SFML::Graphics)
 add_dependencies(Tappa1c copy_risorse)
+
+# TAPPA 2a
+add_executable(Tappa2a Tappa_2a/2a.cpp)
+target_link_libraries(Tappa2a PRIVATE SFML::Graphics)
+add_dependencies(Tappa2a copy_risorse)

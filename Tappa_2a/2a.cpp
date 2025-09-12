@@ -4,20 +4,27 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <cmath>
+#include <SFML/System/Clock.hpp> //AGGIUNTO
 #include "../textures_fonts.hpp"
 
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "clock, flags, faces and borders";
+const char* window_title = "Header";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
 
+////////////////PANNELLO DI GIOCO////////////////
+
+const float panel_horizontal_displacement = 100; 
+const float panel_vertical_displacement = 100; 
+const float gap = 2.f;
+
 ////////////////GRIGLIA////////////////
 
-const float wall_horizontal_displacement = 100; 
-const float wall_vertical_displacement = 100; 
+const float grid_horizontal_displacement = 100;  
+const float grid_vertical_displacement = 100; //MODIFICA 
 
 ////////////////BLOCCO////////////////
 
@@ -55,17 +62,19 @@ struct Grid
     vector<Cell> cells;  
     sf::Vector2i cell_num;  
     sf::Vector2f Grid_size;
+    sf::Vector2f Grid_pos; //AGGIUNTA
     int mine_num; 
     int num_flag; 
     int num_revealed; 
 
-    Grid (sf::Vector2i cell_num, int mine_num); 
+    Grid (sf::Vector2i cell_num, int mine_num, float cell_size); 
     void place_mines(int starting_index_cell); 
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
 };
 
-struct Restart{ 
+struct Restart
+{ 
     sf::Text title{font}; 
     bool visible; 
     bool victory; 
@@ -77,9 +86,80 @@ struct Restart{
     void draw (sf::RenderWindow& window);
 }; 
 
+struct Number{
+    sf::Vector2f num_pos; 
+    sf::Vector2f num_size; 
+    sf::Texture num_texture; 
+    int timer_number; 
+
+    Number(sf::Vector2f pos, sf::Vector2f size): 
+                                                num_pos(pos), 
+                                                num_size(size), 
+                                                num_texture(Clock_textures[0]),
+                                                timer_number(0) {}
+
+    void draw (sf::RenderWindow& window);
+    
+};
+
+//AGGIUNTA: 
+struct Clock
+{
+    vector<Number> clock_numbers;
+    sf::Vector2f clock_pos; 
+    sf::Vector2f clock_size; 
+    int timer; 
+    float acc; 
+    bool isRunning; 
+
+    Clock(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y);
+    void draw (sf::RenderWindow& window);
+}; 
+
+struct Faces
+{
+
+};
+
+struct Flags{
+
+}; 
+
+struct Header
+{
+    sf::Vector2f h_pos; 
+    sf::Vector2f h_size;
+    float details_pos_y; 
+    Clock clock; 
+    Faces face; 
+    Flags flags; 
+
+    Header(float cell_size, Grid& grid): 
+                                        h_pos({grid.Grid_pos.x, grid.Grid_pos.y - (grid.Grid_size.y/4.f + gap)}),
+                                        h_size({grid.Grid_size.x + (gap*(grid.cell_num.x-1)), grid.Grid_size.y/4.f}),
+                                        details_pos_y(h_pos.y + (h_size.y/6.f)),
+                                        clock(h_pos, h_size, cell_size, details_pos_y), 
+                                        face(), 
+                                        flags() {}
+    void draw (sf::RenderWindow& window);
+};
+
+struct Game_Panel
+{
+    float cell_size;
+    Grid grid;  
+    Header header; 
+
+    Game_Panel(sf::Vector2i cell_num, int mine_num):
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + 2)) * 0.85f),
+                                                    grid(cell_num, mine_num, cell_size), 
+                                                    header(cell_size, grid) {}
+    void draw (sf::RenderWindow& window);
+};
+
 struct State  
 {
-    Grid grid;
+    Game_Panel game_panel;
     Restart res; 
     int mouse_cell; 
     bool focus; 
@@ -88,7 +168,7 @@ struct State
     bool game_ended;  
 
     State (): 
-                grid({9,9}, 15), 
+                game_panel({9,9}, 15), 
                 res(),
                 focus(false), 
                 pause(true), 
@@ -105,34 +185,53 @@ struct State
 
 ////////////////CREAZIONE////////////////
 
-Grid::Grid (sf::Vector2i bs, int bn){
+Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
     cell_num = bs; 
     mine_num = bn; 
     num_flag = num_revealed = 0; 
-
-    float cell_size = ((window_height - (wall_vertical_displacement * 2)) / cell_num.y) * 0.85f;
+    //MODIFICA 
  
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
  
-    sf::Vector2f start_pos = {
-        window_width - Grid_size.x - wall_horizontal_displacement,
-        (window_height - Grid_size.y) / 2.0f
+    //MODIFICA: griglia spostata in modo da farci stare il bordo 
+    Grid_pos = { 
+        window_width - Grid_size.x - panel_horizontal_displacement - (gap * cell_num.x),
+        (window_height - Grid_size.y - (gap * cell_num.y) + (2*cell_size)) / 2.0f
     };
     sf::Vector2f pos; 
     
     for (unsigned hb = 0; hb < cell_num.x; hb++) {
         for (unsigned vb = 0; vb < cell_num.y; vb++) {
             pos = {
-                start_pos.x + hb * (cell_size + 2.f), 
-                start_pos.y + vb * (cell_size + 2.f)
+                Grid_pos.x + hb * (cell_size + gap), 
+                Grid_pos.y + vb * (cell_size + gap)
             };
             cells.push_back(Cell(pos, cell_size, hb, vb)); 
         }
     } 
 }
 
-////////////////DRAW////////////////
+Clock::Clock(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y){
+    timer = 0; 
+    acc = 0.f; 
+    isRunning = false; 
 
+    clock_pos= {header_pos.x + (cell_size/2), pos_y};
+    clock_size = {(header_size.x - (cell_size * 4.5f))/2, header_size.y - (header_size.y/3.f)};
+
+    sf::Vector2f pos;
+    for(int i = 0; i<3;i++){
+        pos = {
+            clock_pos.x+((clock_size.x/3)*i), 
+            clock_pos.y
+        }; 
+
+        clock_numbers.push_back(Number(pos, {clock_size.x/3, clock_size.y})); 
+    }
+
+}
+
+////////////////DRAW/////////////////
 void Cell::draw (sf::RenderWindow& window)
 {
     sf::RectangleShape c ({size,size});
@@ -191,9 +290,38 @@ void Restart::draw(sf::RenderWindow& window){
     window.draw(title);
 }
 
+void Header::draw(sf::RenderWindow& window)
+{
+    sf::RectangleShape h(h_size); 
+    h.setPosition(h_pos); 
+    h.setFillColor(sf::Color(192, 192, 192)); 
+    window.draw(h); 
+    clock.draw(window);
+}
+
+void Number::draw(sf::RenderWindow& window)
+{
+    sf::RectangleShape n (num_size);
+    n.setPosition(num_pos); 
+    n.setTexture(&num_texture);
+    window.draw(n);
+}
+
+void Clock::draw(sf::RenderWindow& window)
+{
+    for (auto& number : clock_numbers)
+        number.draw (window);
+}
+
+void Game_Panel::draw(sf::RenderWindow& window)
+{
+    grid.draw(window); 
+    header.draw(window); 
+}
+
 void State::draw (sf::RenderWindow& window)
 {
-    grid.draw (window);
+    game_panel.draw (window);
     res.draw(window); 
 }
 
@@ -313,7 +441,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     if(c.state == cell_state::Revealed) return; 
     if(c.state == cell_state::Flag) g.num_flag --; 
     c.state = cell_state::Revealed; 
-    grid.num_revealed++; 
+    game_panel.grid.num_revealed++; 
 
     if(c.type == cell_type::Mine){
         c.texture = Exploded_Mine_texture;
@@ -329,7 +457,7 @@ void State::reveal(Grid& g, int starting_index_cell){
         flood_reveal(g, starting_index_cell, c);
     }
 
-    if (grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
+    if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
         res.victory = true;
         ending_reveal(g, starting_index_cell); 
     }
@@ -337,7 +465,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
 void State::reset(){
     res = Restart(); 
-    grid = Grid({9,9}, 15);  
+    game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
     focus = game_ended= false; 
     pause = first_move = true; 
     mouse_cell = -1; 
@@ -380,27 +508,27 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
     if(state.game_ended) return; 
 
-    if(state.mouse_cell <0 || state.mouse_cell >= state.grid.cells.size()) return; 
+    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
 
-    if(state.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
+    if(state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
 
     if( mouse.button == sf::Mouse::Button::Left){
 
         if(state.first_move){
             state.first_move = false; 
-            state.grid.place_mines(state.mouse_cell); 
-            state.grid.place_numbers(); 
-            state.reveal(state.grid, state.mouse_cell); 
+            state.game_panel.grid.place_mines(state.mouse_cell); 
+            state.game_panel.grid.place_numbers(); 
+            state.reveal(state.game_panel.grid, state.mouse_cell); 
         }
-        else state.reveal(state.grid, state.mouse_cell); 
+        else state.reveal(state.game_panel.grid, state.mouse_cell); 
     }
 
     if(mouse.button == sf::Mouse::Button::Right){
         if(state.first_move) return; 
-        state.grid.num_flag++;
+        state.game_panel.grid.num_flag++;
 
-        state.grid.cells[state.mouse_cell].state = cell_state::Flag; 
-        state.grid.cells[state.mouse_cell].texture = Flag_texture;
+        state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Flag; 
+        state.game_panel.grid.cells[state.mouse_cell].texture = Flag_texture;
     }
 
 }
@@ -420,18 +548,18 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
     };
 
 int new_idx =-1;
-    for (int i = 0; i < state.grid.cells.size(); ++i) {
-        if (state.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
+    for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
+        if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }
 
     if (new_idx == state.mouse_cell) return;
  
     if (state.mouse_cell >= 0)
-        state.grid.cells[state.mouse_cell].mouse_focus = false;
+        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = false;
 
     state.mouse_cell = new_idx;
     if (state.mouse_cell >= 0)
-        state.grid.cells[state.mouse_cell].mouse_focus = true;
+        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = true;
 }
 
 ////////////////LOOP////////////////

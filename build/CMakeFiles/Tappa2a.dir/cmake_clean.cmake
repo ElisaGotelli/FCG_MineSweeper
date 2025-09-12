@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o"
+  "CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o.d"
+  "Tappa2a"
+  "Tappa2a.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Tappa2a.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

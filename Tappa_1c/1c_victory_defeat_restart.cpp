@@ -16,8 +16,8 @@ const float max_frame_rate = 60;
 
 ////////////////GRIGLIA////////////////
 
-const float wall_horizontal_displacement = 100; 
-const float wall_vertical_displacement = 100; 
+const float grid_horizontal_displacement = 100; 
+const float grid_vertical_displacement = 100; 
 
 ////////////////BLOCCO////////////////
 
@@ -111,12 +111,12 @@ Grid::Grid (sf::Vector2i bs, int bn){
     mine_num = bn; 
     num_flag = num_revealed = 0; //inizialmente il numero di celle rivelate è zero prima della prima mossa 
 
-    float cell_size = ((window_height - (wall_vertical_displacement * 2)) / cell_num.y) * 0.85f;
+    float cell_size = ((window_height - (grid_vertical_displacement * 2)) / cell_num.y) * 0.85f;
  
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
  
     sf::Vector2f start_pos = {
-        window_width - Grid_size.x - wall_horizontal_displacement,
+        window_width - Grid_size.x - grid_horizontal_displacement,
         (window_height - Grid_size.y) / 2.0f
     };
     sf::Vector2f pos; 

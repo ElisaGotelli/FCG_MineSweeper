@@ -9,5 +9,8 @@
 ## VERIFICA DEL RISULTATO: 
 
 ## PROBLEMI RISCONTRATI E SOLUZIONI: 
+avere stessa larghezza per header e celle
+
+problema: posizione dell'orologio 
 
 ## FONTI DI RIFERIMENTO UTILIZZATE: 

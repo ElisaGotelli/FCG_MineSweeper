@@ -13,8 +13,8 @@ const float max_frame_rate = 60;
 ////////////////GRIGLIA////////////////
 
 //distanza minima dai bordi della finestra 
-const float wall_horizontal_displacement = 100; //distanza dal bordo destro 
-const float wall_vertical_displacement = 100; //distanza dall'alto e dal basso 
+const float grid_horizontal_displacement = 100; //distanza dal bordo destro 
+const float grid_vertical_displacement = 100; //distanza dall'alto e dal basso 
 
 
 ////////////////BLOCCO////////////////
@@ -68,14 +68,14 @@ Grid::Grid (sf::Vector2i bs){
     cell_num = bs; 
 
     //ho deciso di usare solo la y poichè è la parte della finestra più corta e di ridurli leggeremnet (del 15%)
-    float cell_size = ((window_height - (wall_vertical_displacement * 2)) / cell_num.y) * 0.85f;
+    float cell_size = ((window_height - (grid_vertical_displacement * 2)) / cell_num.y) * 0.85f;
 
     //calcolo della grandezza della griglia 
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
 
     //salvo la posizione iniziale della griglia (destra e centrata verticalmente) così da doverla calcolare solo una volta e non ad ogni fase del ciclo 
     sf::Vector2f start_pos = {
-        window_width - Grid_size.x - wall_horizontal_displacement,
+        window_width - Grid_size.x - grid_horizontal_displacement,
         (window_height - Grid_size.y) / 2.0f
     };
     //dichiaro una variabile vettore pos in modo da non dover dichiarare una nuova variabile ad ogni fase del ciclo 
