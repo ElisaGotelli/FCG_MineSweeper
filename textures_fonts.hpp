@@ -85,6 +85,21 @@ inline void load_textures_fonts() {
             throw std::runtime_error(std::string("Impossibile caricare ") + clock_numbers[i]);
     }
 
+    if (!Click_face_texture.loadFromFile("risorse/texture/faces/clickface.jpg"))
+        throw std::runtime_error("Impossibile caricare clickface.jpg");
+
+    if (!lost_face_texture.loadFromFile("risorse/texture/faces/lostface.jpg"))
+        throw std::runtime_error("Impossibile caricare lostface.jpg");
+
+    if (!smile_face_texture.loadFromFile("risorse/texture/faces/smileface.jpg"))
+        throw std::runtime_error("Impossibile caricare smileface.jpg");
+
+    if (!smile_face_down_texture.loadFromFile("risorse/texture/faces/smilefacedown.jpg"))
+        throw std::runtime_error("Impossibile caricare smilefacedown.jpg");
+
+    if (!win_face_texture.loadFromFile("risorse/texture/faces/winface.jpg"))
+        throw std::runtime_error("Impossibile caricare winface.jpg");
+
     if (!font.openFromFile("risorse/EpundaSlab-VariableFont_wght.ttf"))
         throw std::runtime_error("Impossibile caricare il font");
 

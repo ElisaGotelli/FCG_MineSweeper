@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
+#include "../textures_fonts.hpp" //file per le varie texture 
 
 using namespace std; 
 
@@ -10,25 +11,24 @@ const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
 
-////////////////GRIGLIA////////////////
+////////////////PANNELLO DI GIOCO////////////////
 
 //distanza minima dai bordi della finestra 
-const float grid_horizontal_displacement = 100; //distanza dal bordo destro 
-const float grid_vertical_displacement = 100; //distanza dall'alto e dal basso 
+const float panel_horizontal_displacement = 100; //distanza dal bordo destro 
+const float panel_vertical_displacement = 100; //distanza dall'alto e dal basso 
 
 
 ////////////////BLOCCO////////////////
 
 enum class cell_type{Mine,Empty, Number}; //stati nascosti possibili della cella 
 enum class cell_state{ Covered, Revealed, Flag}; //stati visibili possibili della cella 
-sf::Texture Covered_texture("../risorse/texture/cells/cellup.jpg"); //texture iniziale per ogni blocco 
 
 ////////////////STRUCT////////////////
 struct cell
 {
     sf::Vector2f pos; //posizione del blocco nella finestra 
     float size; //dimensione del blocco (diversa in base al numero di blocchi)
-    sf::Texture texture;//texture del blocco (per ora sara' solo Covered)
+    sf::Texture* texture;//texture del blocco (per ora sara' solo Covered)
     cell_type type; //texture nascosta del blocco
     int bomb_number; //numero di bombe intorno alla cella
     cell_state state; //stato iniziale della cella (sempre covered)
@@ -36,7 +36,7 @@ struct cell
     //creazione del blocco di default (quindi con la texture e stato Covered)
     cell (sf::Vector2f pos, float size) : pos (pos),
                                                   size (size),
-                                                  texture (Covered_texture),
+                                                  texture (&Covered_texture),
                                                   type(cell_type::Empty), 
                                                   bomb_number(0),
                                                   state(cell_state::Covered) {}
@@ -47,36 +47,46 @@ struct Grid
 {
     std::vector<cell> cells; //vettore dei vari blocchi che comporranno la griglia 
     sf::Vector2i cell_num; //numero di blocchi in griglia 
-    sf::Vector2f Grid_size;
+    sf::Vector2f Grid_pos; //posizione della griglia nella finestra basata sul pannello 
+    sf::Vector2f Grid_size; //dimensione della griglia basata sul pannello 
 
-    Grid (sf::Vector2i cell_num); //metodo per creazione della griglia con impostato il numero di blocchi 
+    Grid (sf::Vector2i cell_num, float cell_size); //metodo per creazione della griglia con impostato il numero di celle e la dimensione di una singola cella
+    void draw (sf::RenderWindow& window);
+};
+
+//pannello di gioco (che per ora conterrà solo la griglia)
+struct Game_Panel
+{
+    float cell_size; //dimensione per le celle della griglia 
+    Grid grid;  //griglia di gioco 
+    
+    //la dimensione delle celle per ora terrà solo conto dello spazio per la griglia 
+    Game_Panel(sf::Vector2i cell_num):
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / cell_num.y) * 0.85f),
+                                                    grid(cell_num, cell_size) {} 
     void draw (sf::RenderWindow& window);
 };
 
 struct State //stato generale della finestra 
 {
-    Grid grid; 
+    Game_Panel game_panel; 
 
-    State () : grid({9,9}) {} //per ora vi potrà solo essere disponibile una griglia 9x9 
+    State () : game_panel({9,9}) {} //per ora vi potrà solo essere disponibile il pannello di gioco con una griglia 9x9
     void draw (sf::RenderWindow& window);
 };
 
 ////////////////CREAZIONE////////////////
 
-Grid::Grid (sf::Vector2i bs){
+Grid::Grid (sf::Vector2i bs, float cell_size){
     //imposto il numero di blocchi 
     cell_num = bs; 
-
-    //ho deciso di usare solo la y poichè è la parte della finestra più corta e di ridurli leggeremnet (del 15%)
-    float cell_size = ((window_height - (grid_vertical_displacement * 2)) / cell_num.y) * 0.85f;
 
     //calcolo della grandezza della griglia 
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
 
-    //salvo la posizione iniziale della griglia (destra e centrata verticalmente) così da doverla calcolare solo una volta e non ad ogni fase del ciclo 
-    sf::Vector2f start_pos = {
-        window_width - Grid_size.x - grid_horizontal_displacement,
-        (window_height - Grid_size.y) / 2.0f
+    Grid_pos = { 
+        (window_width - Grid_size.x) - panel_horizontal_displacement,
+        (window_height - Grid_size.y - cell_num.y) / 2.0f
     };
     //dichiaro una variabile vettore pos in modo da non dover dichiarare una nuova variabile ad ogni fase del ciclo 
     sf::Vector2f pos; 
@@ -87,8 +97,8 @@ Grid::Grid (sf::Vector2i bs){
         for (unsigned vb = 0; vb < cell_num.y; vb++) {
             //calcolo la posizione del blocco considerato 
             pos = {
-                start_pos.x + hb * cell_size,
-                start_pos.y + vb * cell_size
+                Grid_pos.x + hb * cell_size,
+                Grid_pos.y + vb * cell_size
             };
 
             //inserisco il blocco nel vettore rappresentante la griglia 
@@ -101,7 +111,7 @@ Grid::Grid (sf::Vector2i bs){
 void cell::draw (sf::RenderWindow& window)
 {
     sf::RectangleShape b ({size,size}); //il blocco è un quadrato (quindi in rettangolo con altezza=larghezza)
-    b.setTexture(&texture); //imposta la texture del blocco 
+    b.setTexture(texture); //imposta la texture del blocco 
     b.setPosition(pos); //metti il blocco nella posizione corretta 
     window.draw(b); //disegna il blocco nella finestra 
 
@@ -113,9 +123,13 @@ void Grid::draw (sf::RenderWindow& window)
         cell.draw (window);
 }
 
-void State::draw (sf::RenderWindow& window)
+void Game_Panel::draw(sf::RenderWindow& window)
 {
-    grid.draw (window); //disegna la griglia
+    grid.draw(window); //disegna la griglia 
+}
+
+void State::draw (sf::RenderWindow& window){
+    game_panel.draw (window); //disegna il pannello di gioco
 }
 
 ////////////////EVENTI////////////////
@@ -155,6 +169,7 @@ int main()
 
     while (window.isOpen())
     {
+        load_textures_fonts(); //loading del file delle etxture 
         // events
         window.handleEvents (
                              [&window](const sf::Event::Closed&) { handle_close (window); },

@@ -14,10 +14,11 @@ const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
 
-////////////////GRIGLIA////////////////
+////////////////PANNELLO DI GIOCO////////////////
 
-const float grid_horizontal_displacement = 100; 
-const float grid_vertical_displacement = 100; 
+const float panel_horizontal_displacement = 100; 
+const float panel_vertical_displacement = 100; 
+const float gap = 2.f; 
 
 ////////////////BLOCCO////////////////
 
@@ -32,7 +33,7 @@ struct Cell
     int row_index, column_index; 
     sf::FloatRect bounds; 
     bool mouse_focus; 
-    sf::Texture texture;
+    sf::Texture*  texture;
     cell_type type; 
     int mine_adj;
     cell_state state;
@@ -43,7 +44,7 @@ struct Cell
                                                   column_index(column_index),
                                                   bounds (pos, {size, size}),
                                                   mouse_focus(false),
-                                                  texture (Covered_texture),
+                                                  texture (&Covered_texture),
                                                   type(cell_type::Empty), 
                                                   mine_adj(0),
                                                   state(cell_state::Covered) {}
@@ -55,33 +56,44 @@ struct Grid
     vector<Cell> cells;  
     sf::Vector2i cell_num;  
     sf::Vector2f Grid_size;
+    sf::Vector2f Grid_pos;
     int mine_num; 
-    int num_flag; 
     int num_revealed; //AGGIUNTA: numero di celle rivelate per avere un modo per capire quando si ha vinto 
 
-    Grid (sf::Vector2i cell_num, int mine_num); 
+    Grid (sf::Vector2i cell_num, int mine_num, float cell_size); 
     void place_mines(int starting_index_cell); 
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
 };
 
 //AGGIUNTA: schermata di vittoria/sconfitta 
-struct Restart{ 
+struct Game_End{ 
     sf::Text title{font}; //scritta 'Hai vinto!' o 'Hai perso!' e di premere ENTER 
     bool visible; //indica se la schermata è visibile o meno (visibile solo a partita finita)
     bool victory; // AGGIUNTA: indica se la partita è stata o meno una vittoria
     
-    Restart (): //la schermata non sarà visibile inizialmente 
+    Game_End (): //la schermata non sarà visibile inizialmente 
                 visible(false), 
                 victory(false) {}
                 
     void draw (sf::RenderWindow& window);
 }; 
 
+struct Game_Panel
+{
+    float cell_size;
+    Grid grid;  
+    
+    Game_Panel(sf::Vector2i cell_num, int mine_num):
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / cell_num.y) * 0.85f),
+                                                    grid(cell_num, mine_num, cell_size) {} 
+    void draw (sf::RenderWindow& window);
+};
+
 struct State  
 {
-    Grid grid;
-    Restart res; //AGGIUNTA: creazione della schermata 
+    Game_Panel game_panel;
+    Game_End ge; //AGGIUNTA: creazione della schermata 
     int mouse_cell; 
     bool focus; 
     bool pause; 
@@ -89,8 +101,8 @@ struct State
     bool game_ended; //AGGIUNTA: indice se la partita è o meno finita    
 
     State (): 
-                grid({9,9}, 15), 
-                res(),
+                game_panel({9,9}, 15), 
+                ge(),
                 focus(false), 
                 pause(true), 
                 first_move(true),
@@ -106,26 +118,24 @@ struct State
 
 ////////////////CREAZIONE////////////////
 
-Grid::Grid (sf::Vector2i bs, int bn){
+Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
     cell_num = bs; 
     mine_num = bn; 
-    num_flag = num_revealed = 0; //inizialmente il numero di celle rivelate è zero prima della prima mossa 
+num_revealed = 0; //inizialmente il numero di celle rivelate è zero prima della prima mossa 
 
-    float cell_size = ((window_height - (grid_vertical_displacement * 2)) / cell_num.y) * 0.85f;
- 
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
  
-    sf::Vector2f start_pos = {
-        window_width - Grid_size.x - grid_horizontal_displacement,
-        (window_height - Grid_size.y) / 2.0f
+    Grid_pos = { 
+        (window_width - Grid_size.x) - panel_horizontal_displacement - (gap * cell_num.x),
+        (window_height - Grid_size.y - (gap * cell_num.y)) / 2.0f
     };
-    sf::Vector2f pos; 
+    sf::Vector2f pos;  
     
     for (unsigned hb = 0; hb < cell_num.x; hb++) {
         for (unsigned vb = 0; vb < cell_num.y; vb++) {
             pos = {
-                start_pos.x + hb * (cell_size + 2.f), 
-                start_pos.y + vb * (cell_size + 2.f)
+                Grid_pos.x + hb * (cell_size + gap), 
+                Grid_pos.y + vb * (cell_size + gap)
             };
             cells.push_back(Cell(pos, cell_size, hb, vb)); 
         }
@@ -137,7 +147,7 @@ Grid::Grid (sf::Vector2i bs, int bn){
 void Cell::draw (sf::RenderWindow& window)
 {
     sf::RectangleShape c ({size,size});
-    c.setTexture(&texture);
+    c.setTexture(texture);
     c.setPosition(pos);
 
     if(mouse_focus){
@@ -156,7 +166,7 @@ void Grid::draw (sf::RenderWindow& window)
 }
 
 //AGGIUNTA: rappresentazione della schermata di vittoria/sconfitta 
-void Restart::draw(sf::RenderWindow& window){
+void Game_End::draw(sf::RenderWindow& window){
     if(!visible) return; //la schermata viene rappresentata solo a fine partita
 
     sf::RectangleShape s({600.f, 400.f}); //la schermata è un rettangolo 
@@ -166,7 +176,6 @@ void Restart::draw(sf::RenderWindow& window){
     s.setOutlineColor(sf::Color(92,51,23)); // il bordo della schermata sarà di colore scuro 
     window.draw(s); 
 
-    
     title.setString(victory ? "Hai vinto!" : "Hai perso!"); //il testo della schermata varia in base al risultato della partita 
     title.setCharacterSize(140); //dimensione della scritta 
     title.setFillColor(sf::Color::Black); //la scritta è di colore nero 
@@ -195,10 +204,15 @@ void Restart::draw(sf::RenderWindow& window){
     window.draw(title);
 }
 
+void Game_Panel::draw(sf::RenderWindow& window)
+{
+    grid.draw(window); 
+}
+
 void State::draw (sf::RenderWindow& window)
 {
-    grid.draw (window);
-    res.draw(window); //disegno la schermata 
+    game_panel.draw (window);
+    ge.draw(window); 
 }
 
 ////////////////ALTRE FUNZIONI////////////////
@@ -271,18 +285,18 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     for(int i = 0; i < g.cells.size(); i++){
 
     //caso sconfitta e mina esplosa
-    if(res.victory == false && i == starting_index_cell ) continue; 
+    if(ge.victory == false && i == starting_index_cell ) continue; 
 
             //rivelazione mine 
             if(g.cells[i].state == cell_state::Flag && g.cells[i].type != cell_type::Mine){
                 g.cells[i].state = cell_state::Revealed; 
-                g.cells[i].texture = False_Mine_texture; 
+                g.cells[i].texture = &False_Mine_texture; 
             }
 
             //false mine
             if(g.cells[i].type == cell_type::Mine){
                 g.cells[i].state = cell_state::Revealed; 
-                g.cells[i].texture = Normal_Mine_texture; 
+                g.cells[i].texture = &Normal_Mine_texture; 
             }
     }
 
@@ -290,7 +304,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     game_ended = true; 
 
     //viene resa visibile la schermata di fine partita 
-    res.visible = true; 
+    ge.visible = true; 
     
 }
 
@@ -321,36 +335,35 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     Cell& c = g.cells[starting_index_cell]; 
 
-    if(c.state == cell_state::Revealed) return; 
-    if(c.state == cell_state::Flag) g.num_flag --; 
+    if(c.state == cell_state::Revealed) return;  
     c.state = cell_state::Revealed; 
-    grid.num_revealed++; //AGGIUNTA: per ogni cella rivelata si incrementa il contatore 
+    game_panel.grid.num_revealed++; //AGGIUNTA: per ogni cella rivelata si incrementa il contatore 
 
     if(c.type == cell_type::Mine){
-        c.texture = Exploded_Mine_texture;
-        res.victory = false;  //AGGIUNTA: si imposta che la partita è stata una sconfitta 
+        c.texture = &Exploded_Mine_texture;
+        ge.victory = false;  //AGGIUNTA: si imposta che la partita è stata una sconfitta 
         ending_reveal(g,starting_index_cell); //AGGIUNTA: si fa aprtire l'animazione di fine partita 
         return; 
     } 
     else if(c.type == cell_type::Number){
-        c.texture = Number_textures[c.mine_adj-1]; 
+        c.texture = &Number_textures[c.mine_adj-1]; 
     }
     else{
-        c.texture = Empty_texture; 
+        c.texture = &Empty_texture; 
         flood_reveal(g, starting_index_cell, c);
     }
 
     //AGGIUNTA: nel caso si siano rivelate tutte le celle a parte quelle con sotto una mina si ha vinto la partita quindi
-    if (grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
-        res.victory = true; //si imposta che la aprtita è stata una sconfitta 
+    if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
+        ge.victory = true; //si imposta che la aprtita è stata una sconfitta 
         ending_reveal(g, starting_index_cell); //si fa aprtire l'animazione di fine partita 
     }
 }
 
-//AGGIUNTA: si resetta lo stato della finestra in modo da poter iniziare una nuova aprtita 
+//AGGIUNTA: si resetta lo stato della finestra in modo da poter iniziare una nuova partita 
 void State::reset(){
-    res = Restart(); 
-    grid = Grid({9,9}, 15);  
+    ge = Game_End(); 
+    game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num); 
     focus = game_ended= false; 
     pause = first_move = true; 
     mouse_cell = -1; 
@@ -391,29 +404,34 @@ void handle (const sf::Event::FocusLost&, State& state)
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
-    if(state.game_ended) return; //AGGIUNTA: quando la partita è finita non è permesso nessun tipo di mossa a parte enter 
+    if(state.game_ended) return; 
 
-    if(state.mouse_cell <0 || state.mouse_cell >= state.grid.cells.size()) return; 
+    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
 
-    if(state.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
+    if(state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
 
     if( mouse.button == sf::Mouse::Button::Left){
 
         if(state.first_move){
             state.first_move = false; 
-            state.grid.place_mines(state.mouse_cell); 
-            state.grid.place_numbers(); 
-            state.reveal(state.grid, state.mouse_cell); 
+            state.game_panel.grid.place_mines(state.mouse_cell); 
+            state.game_panel.grid.place_numbers(); 
+            state.reveal(state.game_panel.grid, state.mouse_cell); 
         }
-        else state.reveal(state.grid, state.mouse_cell); 
+        else state.reveal(state.game_panel.grid, state.mouse_cell); 
     }
 
     if(mouse.button == sf::Mouse::Button::Right){
         if(state.first_move) return; 
-        state.grid.num_flag++;
 
-        state.grid.cells[state.mouse_cell].state = cell_state::Flag; 
-        state.grid.cells[state.mouse_cell].texture = Flag_texture;
+        if(state.game_panel.grid.cells[state.mouse_cell].state != cell_state::Flag){
+            state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Flag; 
+            state.game_panel.grid.cells[state.mouse_cell].texture = &Flag_texture;
+        }
+        else{
+            state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Covered; 
+            state.game_panel.grid.cells[state.mouse_cell].texture = &Covered_texture;
+        }   
     }
 
 }
@@ -433,18 +451,18 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
     };
 
 int new_idx =-1;
-    for (int i = 0; i < state.grid.cells.size(); ++i) {
-        if (state.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
+    for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
+        if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }
 
     if (new_idx == state.mouse_cell) return;
  
     if (state.mouse_cell >= 0)
-        state.grid.cells[state.mouse_cell].mouse_focus = false;
+        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = false;
 
     state.mouse_cell = new_idx;
     if (state.mouse_cell >= 0)
-        state.grid.cells[state.mouse_cell].mouse_focus = true;
+        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = true;
 }
 
 ////////////////LOOP////////////////
