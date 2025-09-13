@@ -40,6 +40,6 @@ target_link_libraries(Tappa1c PRIVATE SFML::Graphics)
 add_dependencies(Tappa1c copy_risorse)
 
 # TAPPA 2a
-add_executable(Tappa2a Tappa_2a/2a.cpp)
+add_executable(Tappa2a Tappa_2a/2a_header.cpp)
 target_link_libraries(Tappa2a PRIVATE SFML::Graphics)
 add_dependencies(Tappa2a copy_risorse)

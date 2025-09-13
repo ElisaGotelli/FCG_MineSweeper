@@ -290,29 +290,29 @@ Tappa_1c/1c_victory_defeat_restart.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa1c.dir/build.make CMakeFiles/Tappa1c.dir/Tappa_1c/1c_victory_defeat_restart.cpp.s
 .PHONY : Tappa_1c/1c_victory_defeat_restart.cpp.s
 
-Tappa_2a/2a.o: Tappa_2a/2a.cpp.o
-.PHONY : Tappa_2a/2a.o
+Tappa_2a/2a_header.o: Tappa_2a/2a_header.cpp.o
+.PHONY : Tappa_2a/2a_header.o
 
 # target to build an object file
-Tappa_2a/2a.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o
-.PHONY : Tappa_2a/2a.cpp.o
+Tappa_2a/2a_header.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o
+.PHONY : Tappa_2a/2a_header.cpp.o
 
-Tappa_2a/2a.i: Tappa_2a/2a.cpp.i
-.PHONY : Tappa_2a/2a.i
+Tappa_2a/2a_header.i: Tappa_2a/2a_header.cpp.i
+.PHONY : Tappa_2a/2a_header.i
 
 # target to preprocess a source file
-Tappa_2a/2a.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.i
-.PHONY : Tappa_2a/2a.cpp.i
+Tappa_2a/2a_header.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.i
+.PHONY : Tappa_2a/2a_header.cpp.i
 
-Tappa_2a/2a.s: Tappa_2a/2a.cpp.s
-.PHONY : Tappa_2a/2a.s
+Tappa_2a/2a_header.s: Tappa_2a/2a_header.cpp.s
+.PHONY : Tappa_2a/2a_header.s
 
 # target to generate assembly for a file
-Tappa_2a/2a.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.s
-.PHONY : Tappa_2a/2a.cpp.s
+Tappa_2a/2a_header.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.s
+.PHONY : Tappa_2a/2a_header.cpp.s
 
 # Help Target
 help:
@@ -340,9 +340,9 @@ help:
 	@echo "... Tappa_1c/1c_victory_defeat_restart.o"
 	@echo "... Tappa_1c/1c_victory_defeat_restart.i"
 	@echo "... Tappa_1c/1c_victory_defeat_restart.s"
-	@echo "... Tappa_2a/2a.o"
-	@echo "... Tappa_2a/2a.i"
-	@echo "... Tappa_2a/2a.s"
+	@echo "... Tappa_2a/2a_header.o"
+	@echo "... Tappa_2a/2a_header.i"
+	@echo "... Tappa_2a/2a_header.s"
 .PHONY : help
 
 

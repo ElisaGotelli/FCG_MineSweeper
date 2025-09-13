@@ -116,7 +116,7 @@ struct Timer
     void draw (sf::RenderWindow& window);
 }; 
 
-//struttura della faccina centro header 
+//AGGIUNTA: struttura della faccina centro header 
 struct Faces
 {
     sf::Vector2f faces_pos; //posizione della faccina 
@@ -132,7 +132,7 @@ struct Faces
     void draw (sf::RenderWindow& window);
 };
 
-//struttura per il contatore delle bandierine nella griglia 
+//AGGIUNTA: struttura per il contatore delle bandierine nella griglia 
 struct Flag_Counter
 {
     vector<Number> flags_numbers; //i conteggio del bandierine sarà fatto con tre numeri come per il timer 
@@ -144,7 +144,7 @@ struct Flag_Counter
     void draw (sf::RenderWindow& window);
 }; 
 
-//struttura contenente tutti i parametri di gioco (l'orologio, il contatore di bandierine e la faccina)
+//AGGIUNTA: struttura contenente tutti i parametri di gioco (l'orologio, il contatore di bandierine e la faccina)
 struct Header
 {
     sf::Vector2f h_size; //dimensione dell'header 
@@ -238,6 +238,7 @@ Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
     } 
 }
 
+//AGGIUNTA: 
 Timer::Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f size){
     real_timer = 0; //inizialmente il timer è a zero 
     acc = 0.f; //inizialmente la velocità del clock è a zero 
@@ -258,6 +259,7 @@ Timer::Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f
 
 }
 
+//AGGIUNTA:
 Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size){
     num_flag = 0; //inizialmente il numero di bandierine nella griglia è zero 
     flags_size ={size}; 
@@ -357,6 +359,7 @@ void Number::draw(sf::RenderWindow& window)
     window.draw(n);
 }
 
+//AGGIUNTA: disegno del timer
 void Timer::draw(sf::RenderWindow& window)
 {
     //disegno nella finestra dei vari numeri che rappresentano il timer 
@@ -364,12 +367,14 @@ void Timer::draw(sf::RenderWindow& window)
         number.draw (window);
 }
 
+//AGGIUNTA: disegno del contatore di bandierine 
 void Flag_Counter::draw(sf::RenderWindow& window){
     //disegno nella finestra dei vari numeri che rappresentano il contatore 
     for(auto& number : flags_numbers)
         number.draw(window);
 }
 
+//AGGIUNTA: disegno della faccina
 void Faces::draw(sf::RenderWindow& window){
     sf::RectangleShape f (faces_size); //la faccina è un rettangolo 
     f.setPosition(faces_pos); 
@@ -380,7 +385,7 @@ void Faces::draw(sf::RenderWindow& window){
 void Game_Panel::draw(sf::RenderWindow& window)
 {
     grid.draw(window); 
-    header.draw(window); //disegno dell'header nel pannello di gioco 
+    header.draw(window); //AGGIUNTA: disegno dell'header nel pannello di gioco 
 }
 
 void State::draw (sf::RenderWindow& window){

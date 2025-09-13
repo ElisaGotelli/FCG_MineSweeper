@@ -22,8 +22,9 @@ Dalla tappa precedente sono state aggiunte come nuove implementazioni:
             * nel caso la cella sia di tipo Empty faccia partire una flood_reveal 
         * nel caso la cella sia di tipo Revealed non faccia nulla 
     * è stato gestito l'evento di click destro su una cella che: 
-        * nel caso non sia stata fatta la prima mossa oppure la cella sia di tipo Revealed non faccia nulla 
-        * negli altri casi metta una bandierina sulla cella (texture Flag e stato Flag) e incrementi il contatore per il numero di bandierine in gioco 
+        * nel caso non sia stata fatta la prima mossa oppure la cella sia nello stato Revealed non faccia nulla 
+        * nel caso la cella sia già nello stato Flag verrà tolta la bandierina dalla cella (texture e stato Covered)
+        * negli altri casi metta una bandierina sulla cella (texture e stato Flag) 
 
 - CASO PARTICOLARE PRIMA MOSSA: 
     * è stato fatto in modo che la prima cella cliccata e le 8 celle a lei adiacenti non siano mine
@@ -32,21 +33,31 @@ Dalla tappa precedente sono state aggiunte come nuove implementazioni:
     * a causa del fatto che la prima cella e le sue adiacenti sono senza mine (quindi la prima cella non ha nessuna bomba adiacente ed è quindi di tipo Empty) essa farà sempre partire una rivelaziona cascata 
 
 ## ISTRUZIONI PER ESEGUIRE DA TERMINALE: 
-cmake -S . -B build <br> 
 cmake --build build -j
 
 #### Esecuzione: 
 cd build <br> 
 ./Tappa1b
 
-## VERIFICA DEL RISULTATO: 
-- Al passaggio del mouse su una cella essa dovrebbe aver il bordo illuminato di rosso: 
+## VERIFICA DEL RISULTATO:
+#### N.B: Le frecce nelle foto sono per indicare un particolare del risultato (tipo la cella considerata per quella verifica di risultato). Non devono comparire nel risultato
+- Al passaggio del mouse su una cella essa dovrebbe avere il bordo illuminato di rosso: 
+Allego uno screenshot del risultato da me ottenuto:  
+![risultato_1b_uno](../risorse/risultati/tappa1b_1.png)
 
 - Al primo click sinistro su un cella coperta dovrebbe partire sempre una rivelazione a catena: 
+Allego uno screenshot del risultato da me ottenuto:  
+![risultato_1b_due](../risorse/risultati/tappa1b_2.png)
+    
 
 - Al click sinistro dopo il primo su una cella sinistra dovrebbe rivelare la cella (mina, vuota, numero). Il numero rivelato da un cella dovrebbe corrispondere al numero di mine a lei adiacenti:  
+Allego uno screenshot del risultato da me ottenuto:  
+![risultato_1b_tre](../risorse/risultati/tappa1b_3.png)
 
 - Al click destro su una cella coperta dovrebbe apparire una bandierina su detta cella: 
+- Al click destro su una cella con bandierina la cella dovrebbe tornare coperta facendo sparire la bandierina: 
+Allego uno screenshot del risultato da me ottenuto:  
+![risultato_1b_quattro](../risorse/risultati/tappa1b_4.png)
 
 ## PROBLEMI RISCONTRATI E SOLUZIONI:
 #### PROBLEMA:  

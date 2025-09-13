@@ -7,7 +7,8 @@ Sviluppo unicamente della grafica dello sfondo di gioco e della griglia 9x9.
 Dalla tappa precedente sono state aggiunte come nuove implementazioni: 
 - un nuovo colore di sfondo verde chiaro 
 - un bordo alla finestra creando una Rectangle Shape trasparente leggermente più piccola della finestra e con bordo verde scuro in modo che solo il bordo del rettangolo fosse visibile 
-- Un oggetto 'griglia' tramite struct fatto di celle con uan etxture grigia. Questo sarà come apparirà la griglia di gioco all'inizio di ogni partita con modalità facile. 
+- un oggetto 'pannello di gioco' struct che per ora conterrà solo la griglia.
+- Un oggetto 'griglia' tramite struct fatto di celle con una texture grigia. Questo sarà come apparirà la griglia di gioco all'inizio di ogni partita con modalità facile. 
 - Un oggetto 'cell' tramite struct che corrisponderà alle varie celle di gioco. Per ora detto oggetto ha solo una texture possibile 'Covered' 
 - Un oggetto 'state' tremite struct che corrisponde allo stato di gioco 
 
@@ -15,7 +16,6 @@ Tutto ciò che è stato elecanto fino ad ora viene messo su display tramite funz
 
 
 ## ISTRUZIONI PER ESEGUIRE DA TERMINALE: 
-cmake -S . -B build <br> 
 cmake --build build -j
 
 #### Esecuzione: 

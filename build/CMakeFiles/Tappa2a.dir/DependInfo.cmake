@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/elisa/FCG_MineSweeper/Tappa_2a/2a.cpp" "CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o" "gcc" "CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o.d"
+  "/home/elisa/FCG_MineSweeper/Tappa_2a/2a_header.cpp" "CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o" "gcc" "CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

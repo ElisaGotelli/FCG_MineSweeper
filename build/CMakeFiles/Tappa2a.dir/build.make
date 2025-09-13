@@ -69,28 +69,28 @@ include CMakeFiles/Tappa2a.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Tappa2a.dir/flags.make
 
-CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o: CMakeFiles/Tappa2a.dir/flags.make
-CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_2a/2a.cpp
-CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o: CMakeFiles/Tappa2a.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o -MF CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o.d -o CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o -c /home/elisa/FCG_MineSweeper/Tappa_2a/2a.cpp
+CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o: CMakeFiles/Tappa2a.dir/flags.make
+CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o: /home/elisa/FCG_MineSweeper/Tappa_2a/2a_header.cpp
+CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o: CMakeFiles/Tappa2a.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o -MF CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o.d -o CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o -c /home/elisa/FCG_MineSweeper/Tappa_2a/2a_header.cpp
 
-CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/elisa/FCG_MineSweeper/Tappa_2a/2a.cpp > CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.i
+CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/elisa/FCG_MineSweeper/Tappa_2a/2a_header.cpp > CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.i
 
-CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/elisa/FCG_MineSweeper/Tappa_2a/2a.cpp -o CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.s
+CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/elisa/FCG_MineSweeper/Tappa_2a/2a_header.cpp -o CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.s
 
 # Object files for target Tappa2a
 Tappa2a_OBJECTS = \
-"CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o"
+"CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o"
 
 # External object files for target Tappa2a
 Tappa2a_EXTERNAL_OBJECTS =
 
-Tappa2a: CMakeFiles/Tappa2a.dir/Tappa_2a/2a.cpp.o
+Tappa2a: CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.o
 Tappa2a: CMakeFiles/Tappa2a.dir/build.make
 Tappa2a: /usr/local/lib/libsfml-graphics.so.3.0.1
 Tappa2a: /usr/local/lib/libsfml-window.so.3.0.1

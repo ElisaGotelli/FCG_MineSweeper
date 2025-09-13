@@ -17,7 +17,6 @@ const float max_frame_rate = 60;
 const float panel_horizontal_displacement = 100; //distanza dal bordo destro 
 const float panel_vertical_displacement = 100; //distanza dall'alto e dal basso 
 
-
 ////////////////BLOCCO////////////////
 
 enum class cell_type{Mine,Empty, Number}; //stati nascosti possibili della cella 
