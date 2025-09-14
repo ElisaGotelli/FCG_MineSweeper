@@ -20,6 +20,9 @@ const float panel_horizontal_displacement = 100;
 const float panel_vertical_displacement = 100; 
 const float gap = 2.f; 
 
+////////////////GAME END////////////////
+const float title_gap = 10.f; //AGGIUNTA: gap tra le scritte del fine gioco
+
 ////////////////BLOCCO////////////////
 
 enum class cell_type{Mine,Empty, Number}; 
@@ -184,7 +187,7 @@ void Game_End::draw(sf::RenderWindow& window){
     auto b = title.getLocalBounds(); 
     //prendo prima la posizione della schermata nella finestra in modo da poi centrare la scritta correttamente per larghezza. Per altezza invece la scritta viene leggermente spostata dal centro in modo da farci stare anche le altre scritte 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - 160.f});                  
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                
     window.draw(title);
 
     //stesso ragionamento fatto per la scritta precedente 
@@ -192,7 +195,7 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f,s.getPosition().y + s.getSize().y/2.f + 20.f});
+    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
     window.draw(title);
 
     //stesso ragionamento fatto per la prima scritta 
@@ -200,7 +203,7 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f,s.getPosition().y + s.getSize().y/2.f + 80.f});
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap});
     window.draw(title);
 }
 
@@ -394,6 +397,7 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
+    state.pause = false;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)

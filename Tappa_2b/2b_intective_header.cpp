@@ -10,7 +10,7 @@
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Header";
+const char* window_title = "Interactive Header";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
@@ -20,6 +20,9 @@ const float max_frame_rate = 60;
 const float panel_horizontal_displacement = 100; 
 const float panel_vertical_displacement = 100; 
 const float gap = 2.f;
+
+////////////////GAME END////////////////
+const float title_gap = 10.f;
 
 ////////////////HEADER////////////////
 
@@ -77,10 +80,12 @@ struct Game_End
     sf::Text title{font}; 
     bool visible; 
     bool victory; 
+    int time; //AGGIUNTA: durata della partita
     
-    Game_End (): 
+    Game_End ():
                 visible(false), 
-                victory(false) {}
+                victory(false),
+                time(0) {} //AGGIUNTA: all'inizio la durata della partita sarà sempre zero
                 
     void draw (sf::RenderWindow& window);
 }; 
@@ -111,32 +116,34 @@ struct Timer
     bool isRunning; 
 
     Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f size);
+    void update(float elapsed); 
     void draw (sf::RenderWindow& window);
 }; 
 
 
-struct Faces
+struct Face
 {
-    sf::Vector2f faces_pos; 
-    sf::Vector2f faces_size; 
-    sf::Texture* faces_texture; 
+    sf::Vector2f face_pos; 
+    sf::Vector2f face_size; 
+    sf::Texture* face_texture; 
 
-    Faces(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, float size): 
-                                                                                                        faces_pos({(header_pos.x+ (header_size.x/2.f))- (size/2), pos_y}),
-                                                                                                        faces_size({size,size}), 
-                                                                                                        faces_texture(&smile_face_texture) {} 
+    Face(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, float size): 
+                                                                                                        face_pos({(header_pos.x+ (header_size.x/2.f))- (size/2), pos_y}),
+                                                                                                        face_size({size,size}), 
+                                                                                                        face_texture(&smile_face_texture) {} 
 
     void draw (sf::RenderWindow& window);
 };
 
 struct Flag_Counter
 {
-    vector<Number> flags_numbers; 
-    sf::Vector2f flags_pos; 
-    sf::Vector2f flags_size; 
+    vector<Number> flag_numbers; 
+    sf::Vector2f flag_pos; 
+    sf::Vector2f flag_size; 
     int num_flag; 
 
     Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size);
+    void set_number(bool adding); //AGGIUNTA: reso visibile e interattivo (si aggiorna in automatico al click destro) il contatore di bandierine 
     void draw (sf::RenderWindow& window);
 }; 
 
@@ -147,7 +154,7 @@ struct Header
     float details_pos_y; 
     sf::Vector2f details_size;
     Timer timer; 
-    Faces face;
+    Face face;
     Flag_Counter f_counter; 
 
     Header(float cell_size, Grid& grid): 
@@ -168,7 +175,7 @@ struct Game_Panel
     Header header;
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f))) * 0.85f), //aggiunto lo spazio per l'header 
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f))) * 0.85f), 
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid) {} 
     void draw (sf::RenderWindow& window);
@@ -188,7 +195,7 @@ struct State
                 game_panel({9,9}, 15), 
                 ge(),
                 focus(false), 
-                pause(true), 
+                pause(false), 
                 first_move(true),
                 mouse_cell(-1), 
                 game_ended(false) {} 
@@ -247,17 +254,17 @@ Timer::Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f
 
 Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size){
     num_flag = 0; 
-    flags_size ={size}; 
-    flags_pos =  {header_pos.x + header_size.x - (flags_size.x + header_parameter_gap), pos_y}; 
+    flag_size ={size}; 
+    flag_pos =  {header_pos.x + header_size.x - (flag_size.x + header_parameter_gap), pos_y}; 
 
     sf::Vector2f pos;
     for(int i = 0; i<3;i++){
         pos = {
-            flags_pos.x+((flags_size.x/3)*i), 
-            flags_pos.y
+            flag_pos.x+((flag_size.x/3)*i), 
+            flag_pos.y
         }; 
 
-        flags_numbers.push_back(Number(pos, {flags_size.x/3, flags_size.y})); 
+        flag_numbers.push_back(Number(pos, {flag_size.x/3, flag_size.y})); 
     }
 }
 
@@ -301,21 +308,31 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setOutlineColor(sf::Color::White); 
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - 160.f});                  
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                  
+    window.draw(title);
+
+    //AGGIUNTA: sotto 'Hai vinto/perso' ora verrà scritta la durata della partita
+    title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); //la scritta indicherà le ore, minuti e secondi di gioco 
+    title.setCharacterSize(20);
+    title.setFillColor(sf::Color::Red); //sarà di colore rosso rispetto alle altre scritte
+    b = title.getLocalBounds();
+    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
     window.draw(title);
 
     title.setString("Premere SPACE");
     title.setCharacterSize(40);
+    title.setFillColor(sf::Color::Black);  //AGGIUNTA: ritorno al colore nero per tutte le scritte a parte la durata della partita
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f,s.getPosition().y + s.getSize().y/2.f + 20.f});
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
     window.draw(title);
 
     title.setString("per cominciare una nuova partita");
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f,s.getPosition().y + s.getSize().y/2.f + 80.f});
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
     window.draw(title);
 }
 
@@ -349,15 +366,15 @@ void Timer::draw(sf::RenderWindow& window)
 
 void Flag_Counter::draw(sf::RenderWindow& window)
 {
-    for(auto& number : flags_numbers)
+    for(auto& number : flag_numbers)
         number.draw(window);
 }
 
-void Faces::draw(sf::RenderWindow& window)
+void Face::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape f (faces_size); 
-    f.setPosition(faces_pos); 
-    f.setTexture(faces_texture);
+    sf::RectangleShape f (face_size); 
+    f.setPosition(face_pos); 
+    f.setTexture(face_texture);
     window.draw(f);
 }
 
@@ -373,6 +390,30 @@ void State::draw (sf::RenderWindow& window){
 }
 
 ////////////////ALTRE FUNZIONI////////////////
+
+//AGGIUNTA: reso visibile e interattivo (si aggiorna in automatico al click destro) il contatore di bandierine 
+void Flag_Counter::set_number(bool adding){ 
+    if(num_flag = 999) return; //dopo 999 non vi sono abbastanza cifre per rappresentare il contatore correttamente quindi non fare nulla
+    if(adding? num_flag++ : num_flag--);  //viene utilizzato un valore booleano per capire se vi è stata un'aggiunta o sottrazione 
+    flag_numbers[2].num_texture = &Clock_textures[num_flag%10]; //aggiornamento della texture del numero che corrisponde alle unità
+    flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10]; //aggiornamento della texture del numero che corrisponde alle decine
+    flag_numbers[0].num_texture = &Clock_textures[(num_flag/100)%10]; //aggiornamento della texture del numero che corrisponde alle centinaia 
+}
+
+//AGGIUNTA: aggiornamento del timer della partita in corso 
+void Timer::update(float elapsed){
+    if(!isRunning) return; //se la partita è finita o non è ancora iniziata il timer non è attivo e quindi non fare nulla
+    acc += elapsed; //accumulo il tempo trascorso dall’ultimo frame
+    while(acc >= 1.f){ //quando è trascorso almeno un secondo
+        acc -= 1.f; //tolgo un secondo dall’accumulatore
+        real_timer ++; //incremento il vero timer
+        if(real_timer >= 999) return; //dopo 999 non vi sono abbastanza cifre per rappresentare il contatore correttamente quindi non fare nulla nella grafica 
+        timer_numbers[2].num_texture = &Clock_textures[real_timer%10]; //aggiornamento della texture del numero che corrisponde alle unità
+        timer_numbers[1].num_texture = &Clock_textures[(real_timer/10)%10]; //aggiornamento della texture del numero che corrisponde alle decine
+        timer_numbers[0].num_texture = &Clock_textures[(real_timer/100)%10]; //aggiornamento della texture del numero che corrisponde alle centinaia 
+    }
+
+}
 
 void Grid::place_mines(int starting_cell_index){
 
@@ -453,7 +494,9 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     }
 
     game_ended = true; 
-
+    pause = true; 
+    game_panel.header.timer.isRunning = false; //AGGIUNTA: la partita è finita quindi stoppo il timer
+    ge.time = game_panel.header.timer.real_timer; //AGGIUNTA:imposta il tempo di fine partita come quello corrente del timer 
     ge.visible = true; 
     
 }
@@ -486,7 +529,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     Cell& c = g.cells[starting_index_cell]; 
 
     if(c.state == cell_state::Revealed) return; 
-    if(c.state == cell_state::Flag) game_panel.header.f_counter.num_flag --; //AGGIUNTA: aggiunta per il calcolo del numero di bandierine in partita
+    if(c.state == cell_state::Flag) game_panel.header.f_counter.set_number(false); //MODIFICA: utilizzo della funzione per rendere possibili la visualizzazione in partita del numero di bandierine 
     c.state = cell_state::Revealed; 
     game_panel.grid.num_revealed++; 
 
@@ -494,6 +537,7 @@ void State::reveal(Grid& g, int starting_index_cell){
         c.texture = &Exploded_Mine_texture;
         ge.victory = false;  
         ending_reveal(g,starting_index_cell); 
+        game_panel.header.face.face_texture = &lost_face_texture; //AGGIUNTA: modifica della texture della faccina per mostrare quella della sconfitta
         return; 
     } 
     else if(c.type == cell_type::Number){
@@ -507,14 +551,15 @@ void State::reveal(Grid& g, int starting_index_cell){
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
         ge.victory = true;
         ending_reveal(g, starting_index_cell); 
+        game_panel.header.face.face_texture = &win_face_texture; //AGGIUNTA: modifica della texture della faccina per mostrare quella della vittoria 
     }
 }
 
 void State::reset(){
-    ge = Game_End(); 
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
-    focus = game_ended= false; 
-    pause = first_move = true; 
+    ge = Game_End();
+    pause = focus = game_ended= false; 
+    first_move = true; 
     mouse_cell = -1; 
 }
 
@@ -543,12 +588,17 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
+    state.pause = false;
+    if(state.first_move == false && state.game_ended == false) //quando la partita è in corso
+        state.game_panel.header.timer.isRunning = true; //il timer riparte
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause = true; 
+    state.pause = true;
     state.focus = false; 
+    if(state.first_move == false && state.game_ended == false) //AGGIUNTA: quando la partita è in corso
+        state.game_panel.header.timer.isRunning = false; //il timer si ferma 
 }
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
@@ -566,26 +616,37 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
             state.game_panel.grid.place_mines(state.mouse_cell); 
             state.game_panel.grid.place_numbers(); 
             state.reveal(state.game_panel.grid, state.mouse_cell); 
+            state.game_panel.header.timer.isRunning = true; //AGGIUNTA: faccio aprtire il timer solo dopo che è stata fatta la prima mossa
         }
-        else state.reveal(state.game_panel.grid, state.mouse_cell); 
+        else{
+            state.game_panel.header.face.face_texture = &Click_face_texture; //AGGIUNTA: ad ogni click destro la faccina in gioco diventerà sorpresa 
+            state.reveal(state.game_panel.grid, state.mouse_cell); 
+        }
     }
 
     if(mouse.button == sf::Mouse::Button::Right){
         if(state.first_move) return; 
 
         if(state.game_panel.grid.cells[state.mouse_cell].state != cell_state::Flag){
-            state.game_panel.header.f_counter.num_flag ++;
+            state.game_panel.header.f_counter.set_number(true); //MODIFICA: utilizzo della funzione per rendere possibili la visualizzazione in aprtita del numero di bandierine 
             state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Flag; 
             state.game_panel.grid.cells[state.mouse_cell].texture = &Flag_texture;
         }
         else{
-            state.game_panel.header.f_counter.num_flag --; 
+            state.game_panel.header.f_counter.set_number(false); //MODIFICA: utilizzo della funzione per rendere possibili la visualizzazione in aprtita del numero di bandierine 
             state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Covered; 
             state.game_panel.grid.cells[state.mouse_cell].texture = &Covered_texture;
         }
         
     }
 
+}
+
+//AGGIUNTA: gestione dell'evento caratterizzato dal rilascio del click del mouse per rimettere la faccina con la texture base 
+void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
+{
+    if(state.game_ended || state.game_panel.header.face.face_texture != &Click_face_texture) return; //se la partita è terminata o la faccina non è di tipo Click non fare nulla
+    state.game_panel.header.face.face_texture = &smile_face_texture; //imposta la texture della faccina a quella base 
 }
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
@@ -632,6 +693,8 @@ int main()
     border.setOutlineColor(sf::Color(0, 100, 0));
 
     State state;
+    sf::Clock Clock; //AGGIUNTA: clock interno a SFML che misura il tempo trascorso tra un frame e l'altro
+    float elapsed;
 
     while (window.isOpen())
     {
@@ -640,6 +703,10 @@ int main()
                              [&window](const sf::Event::Resized& event) { handle_resize (event, window); }, 
                              [&state] (const auto& event) { handle (event, state); } 
         );
+
+
+        elapsed = Clock.restart().asSeconds(); //AGGIUNTA: calcola i secondi trascorsi dall'ultimo frame
+        state.game_panel.header.timer.update(elapsed); //AGGIUNTA: aggiornamento del timer
 
         window.clear(sf::Color(144, 238, 144));
         state.draw(window); 

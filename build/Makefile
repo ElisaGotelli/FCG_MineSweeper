@@ -194,6 +194,19 @@ Tappa2a/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/build
 .PHONY : Tappa2a/fast
 
+#=============================================================================
+# Target rules for targets named Tappa2b
+
+# Build rule for target.
+Tappa2b: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa2b
+.PHONY : Tappa2b
+
+# fast build rule for target.
+Tappa2b/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/build
+.PHONY : Tappa2b/fast
+
 Tappa_00/00_hello.o: Tappa_00/00_hello.cpp.o
 .PHONY : Tappa_00/00_hello.o
 
@@ -314,6 +327,30 @@ Tappa_2a/2a_header.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/Tappa_2a/2a_header.cpp.s
 .PHONY : Tappa_2a/2a_header.cpp.s
 
+Tappa_2b/2b_intective_header.o: Tappa_2b/2b_intective_header.cpp.o
+.PHONY : Tappa_2b/2b_intective_header.o
+
+# target to build an object file
+Tappa_2b/2b_intective_header.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/Tappa_2b/2b_intective_header.cpp.o
+.PHONY : Tappa_2b/2b_intective_header.cpp.o
+
+Tappa_2b/2b_intective_header.i: Tappa_2b/2b_intective_header.cpp.i
+.PHONY : Tappa_2b/2b_intective_header.i
+
+# target to preprocess a source file
+Tappa_2b/2b_intective_header.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/Tappa_2b/2b_intective_header.cpp.i
+.PHONY : Tappa_2b/2b_intective_header.cpp.i
+
+Tappa_2b/2b_intective_header.s: Tappa_2b/2b_intective_header.cpp.s
+.PHONY : Tappa_2b/2b_intective_header.s
+
+# target to generate assembly for a file
+Tappa_2b/2b_intective_header.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/Tappa_2b/2b_intective_header.cpp.s
+.PHONY : Tappa_2b/2b_intective_header.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -328,6 +365,7 @@ help:
 	@echo "... Tappa1b"
 	@echo "... Tappa1c"
 	@echo "... Tappa2a"
+	@echo "... Tappa2b"
 	@echo "... Tappa_00/00_hello.o"
 	@echo "... Tappa_00/00_hello.i"
 	@echo "... Tappa_00/00_hello.s"
@@ -343,6 +381,9 @@ help:
 	@echo "... Tappa_2a/2a_header.o"
 	@echo "... Tappa_2a/2a_header.i"
 	@echo "... Tappa_2a/2a_header.s"
+	@echo "... Tappa_2b/2b_intective_header.o"
+	@echo "... Tappa_2b/2b_intective_header.i"
+	@echo "... Tappa_2b/2b_intective_header.s"
 .PHONY : help
 
 

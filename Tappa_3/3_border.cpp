@@ -4,13 +4,13 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <cmath>
-#include <SFML/System/Clock.hpp> //AGGIUNTO
+#include <SFML/System/Clock.hpp>
 #include "../textures_fonts.hpp"
 
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Header";
+const char* window_title = "Interactive Header";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
@@ -26,8 +26,8 @@ const float title_gap = 10.f;
 
 ////////////////HEADER////////////////
 
-const float header_parameter_gap = 30.f; //AGGIUNTA: gap tra il bordo dell'header e i parametri
-const float header_border_gap = 5.f; //AGGIUNTA: bordo dell'header 
+const float header_parameter_gap = 30.f; 
+const float header_border_gap = 5.f; 
 
 ////////////////BLOCCO////////////////
 
@@ -80,20 +80,21 @@ struct Game_End
     sf::Text title{font}; 
     bool visible; 
     bool victory; 
+    int time;
     
-    Game_End (): 
+    Game_End ():
                 visible(false), 
-                victory(false) {}
+                victory(false),
+                time(0) {} 
                 
     void draw (sf::RenderWindow& window);
 }; 
 
-//AGGIUNTA: struttura per i numeri dell'orologio e in contatore delle bandierine 
 struct Number{
-    sf::Vector2f num_pos; //posizione di ogni numero
-    sf::Vector2f num_size; //grandezza di ogni numero 
-    sf::Texture* num_texture; //texture che inizialmente sarà sempre 0 
-    int timer_number; //vero timer che viene incremetato ogni secondo 
+    sf::Vector2f num_pos; 
+    sf::Vector2f num_size;
+    sf::Texture* num_texture;
+    int timer_number; 
 
     Number(sf::Vector2f pos, sf::Vector2f size): 
                                                 num_pos(pos), 
@@ -105,28 +106,27 @@ struct Number{
     
 };
 
-//AGGIUNTA: struttura del timer di gioco 
 struct Timer
 {
-    vector<Number> timer_numbers; //il timer sarà formato da tre numeri 
-    sf::Vector2f timer_pos; //posizione del timer nell'header 
-    sf::Vector2f timer_size; //dimensione del timer nell'header 
-    int real_timer; //il vero timer che verrà incrementato al secondo 
-    float acc; //velocità di incremento del timer 
-    bool isRunning; //se il timer è bloccato meno 
+    vector<Number> timer_numbers;
+    sf::Vector2f timer_pos; 
+    sf::Vector2f timer_size; 
+    int real_timer; 
+    float acc; 
+    bool isRunning; 
 
     Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f size);
+    void update(float elapsed); 
     void draw (sf::RenderWindow& window);
 }; 
 
-//AGGIUNTA: struttura della faccina centro header 
+
 struct Face
 {
-    sf::Vector2f face_pos; //posizione della faccina 
-    sf::Vector2f face_size; //dimensione della faccina 
-    sf::Texture* face_texture; //la texture iniziale sarà sempre la faccina sorridente e in base alle mosse fatte in gioco 
+    sf::Vector2f face_pos; 
+    sf::Vector2f face_size; 
+    sf::Texture* face_texture; 
 
-    //la faccina viene messa al centro dell'header e sarà un quadrato con lato lungo quanto l'altezza dei numeri dell'orologio e delle bandierine
     Face(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, float size): 
                                                                                                         face_pos({(header_pos.x+ (header_size.x/2.f))- (size/2), pos_y}),
                                                                                                         face_size({size,size}), 
@@ -135,35 +135,28 @@ struct Face
     void draw (sf::RenderWindow& window);
 };
 
-//AGGIUNTA: struttura per il contatore delle bandierine nella griglia 
 struct Flag_Counter
 {
-    vector<Number> flag_numbers; //i conteggio del bandierine sarà fatto con tre numeri come per il timer 
-    sf::Vector2f flag_pos; //posizione del contatore 
-    sf::Vector2f flag_size; //dimensione del contatore 
-    int num_flag; //vero contatore 
+    vector<Number> flag_numbers; 
+    sf::Vector2f flag_pos; 
+    sf::Vector2f flag_size; 
+    int num_flag; 
 
     Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size);
+    void set_number(bool adding); 
     void draw (sf::RenderWindow& window);
 }; 
 
-//AGGIUNTA: struttura contenente tutti i parametri di gioco (l'orologio, il contatore di bandierine e la faccina)
 struct Header
 {
-    sf::Vector2f h_size; //dimensione dell'header 
-    sf::Vector2f h_pos; //posizione dell'header 
-    float details_pos_y; //coordinata  y della posizione dei parametri all'interno dell'header 
-    sf::Vector2f details_size; //dimensione (o parte della dimensione come nel caso della faccina) dei parametri all'interno dell'header
-    Timer timer; //timer della partita 
-    Face face; //faccina 
-    Flag_Counter f_counter; //contatore delle bandierine nella griglia
+    sf::Vector2f h_size; 
+    sf::Vector2f h_pos; 
+    float details_pos_y; 
+    sf::Vector2f details_size;
+    Timer timer; 
+    Face face;
+    Flag_Counter f_counter; 
 
-    /*nel costruttore dell'header: 
-        - la posizione dell'header viene impostata come esattamente sopra la griglia 
-        - la dimensione dell'header corrisponde per larghezza a quella della griglia mentre per altezza ad un quatro della griglia 
-        - tutti i parametri all'interno della griglia hanno la stessa coordinata y di posizione (a distanza 1/6 dal bordo dell'header) e la stessa altezza (uguale a 2/3 della griglia)
-        - l'orologio e il contatore di faccine hanno anche la stessa dimensione di larghezza 
-    */
     Header(float cell_size, Grid& grid): 
                                         h_size({grid.Grid_size.x + (gap*(grid.cell_num.x-1)) - (2*header_border_gap), grid.Grid_size.y/4.f - (2*header_border_gap)}),
                                         h_pos({grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - (grid.Grid_size.y/4.f + gap)+ header_border_gap}),
@@ -179,11 +172,10 @@ struct Game_Panel
 {
     float cell_size;
     Grid grid;  
-    Header header; //AGGIUNTA: aggiunta dell'header al pannello di gioco 
+    Header header;
 
-    //all'header viene passato il grid e la dimensione delle celle in modo da poterne usare i parametri per il calcolo della dimensione e posizione dell'header 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f))) * 0.85f), //aggiunto lo spazio per l'header 
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f))) * 0.85f), 
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid) {} 
     void draw (sf::RenderWindow& window);
@@ -226,7 +218,7 @@ Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
  
     Grid_pos = { 
         window_width - Grid_size.x - panel_horizontal_displacement - (gap * cell_num.x),
-        (window_height - Grid_size.y - (gap * cell_num.y) + (Grid_size.y/4.f)) / 2.0f //MODIFICA: aggiunto lo spazio per l'header
+        (window_height - Grid_size.y - (gap * cell_num.y) + (Grid_size.y/4.f)) / 2.0f 
     };
     sf::Vector2f pos; 
     
@@ -241,15 +233,13 @@ Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
     } 
 }
 
-//AGGIUNTA: 
 Timer::Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f size){
-    real_timer = 0; //inizialmente il timer è a zero 
-    acc = 0.f; //inizialmente la velocità del clock è a zero 
-    isRunning = false; //il timer partirà solo alla prima mossa in partita 
+    real_timer = 0; 
+    acc = 0.f; 
+    isRunning = false; 
     timer_size = {size}; 
-    timer_pos= {header_pos.x + header_parameter_gap, pos_y}; //la posizione x corrisponde a quella dell'header più il gap 
+    timer_pos= {header_pos.x + header_parameter_gap, pos_y}; 
 
-    //creazione dei vari numeri con posizione y impostata mentre x che dipende da che numero si sta considerando. Per la dimensione di larghezza invece viene divisa la larghezza del timer per 3 
     sf::Vector2f pos;
     for(int i = 0; i<3;i++){
         pos = {
@@ -262,13 +252,11 @@ Timer::Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f
 
 }
 
-//AGGIUNTA:
 Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size){
-    num_flag = 0; //inizialmente il numero di bandierine nella griglia è zero 
+    num_flag = 0; 
     flag_size ={size}; 
     flag_pos =  {header_pos.x + header_size.x - (flag_size.x + header_parameter_gap), pos_y}; 
 
-    //creazione dei vari numeri con posizione y impostata mentre x che dipende da che numero si sta considerando. Per la dimensione di larghezza invece viene divisa la larghezza del timer per 3 
     sf::Vector2f pos;
     for(int i = 0; i<3;i++){
         pos = {
@@ -320,66 +308,70 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setOutlineColor(sf::Color::White); 
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                   
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                  
+    window.draw(title);
+
+    title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
+    title.setCharacterSize(20);
+    title.setFillColor(sf::Color::Red);
+    b = title.getLocalBounds();
+    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
     window.draw(title);
 
     title.setString("Premere SPACE");
     title.setCharacterSize(40);
+    title.setFillColor(sf::Color::Black);  
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
     window.draw(title);
 
     title.setString("per cominciare una nuova partita");
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap});
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
     window.draw(title);
 }
 
-//AGGIUNTA: disegno dell'header 
+
 void Header::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape h(h_size); //l'header è un rettangolo 
+    sf::RectangleShape h(h_size); 
     h.setPosition(h_pos); 
-    h.setFillColor(sf::Color(192, 192, 192)); //il colore di sfondo deve essere grigio chiaro 
-    h.setOutlineThickness(header_border_gap); //ha un borso di spessore 5.f
-    h.setOutlineColor(sf::Color::Black); //il colore del bordo è nero 
-    window.draw(h); //disegno dell'header sulla finestra 
-    //successivamente al disegno dell'header ci verranno disegnati sopra tutti i parametri
+    h.setFillColor(sf::Color(192, 192, 192)); 
+    h.setOutlineThickness(header_border_gap); 
+    h.setOutlineColor(sf::Color::Black); 
+    window.draw(h);
     timer.draw(window);
     f_counter.draw(window);
     face.draw(window); 
 }
 
-//AGGIUNTA: disegno dei numeri 
 void Number::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape n (num_size); //i numeri sono un rettangolo 
+    sf::RectangleShape n (num_size); 
     n.setPosition(num_pos); 
     n.setTexture(num_texture); 
     window.draw(n);
 }
 
-//AGGIUNTA: disegno del timer
 void Timer::draw(sf::RenderWindow& window)
 {
-    //disegno nella finestra dei vari numeri che rappresentano il timer 
     for (auto& number : timer_numbers)
         number.draw (window);
 }
 
-//AGGIUNTA: disegno del contatore di bandierine 
-void Flag_Counter::draw(sf::RenderWindow& window){
-    //disegno nella finestra dei vari numeri che rappresentano il contatore 
+void Flag_Counter::draw(sf::RenderWindow& window)
+{
     for(auto& number : flag_numbers)
         number.draw(window);
 }
 
-//AGGIUNTA: disegno della faccina
-void Face::draw(sf::RenderWindow& window){
-    sf::RectangleShape f (face_size); //la faccina è un rettangolo 
+void Face::draw(sf::RenderWindow& window)
+{
+    sf::RectangleShape f (face_size); 
     f.setPosition(face_pos); 
     f.setTexture(face_texture);
     window.draw(f);
@@ -388,7 +380,7 @@ void Face::draw(sf::RenderWindow& window){
 void Game_Panel::draw(sf::RenderWindow& window)
 {
     grid.draw(window); 
-    header.draw(window); //AGGIUNTA: disegno dell'header nel pannello di gioco 
+    header.draw(window);
 }
 
 void State::draw (sf::RenderWindow& window){
@@ -397,6 +389,28 @@ void State::draw (sf::RenderWindow& window){
 }
 
 ////////////////ALTRE FUNZIONI////////////////
+
+void Flag_Counter::set_number(bool adding){ 
+    if(num_flag = 999) return; 
+    if(adding? num_flag++ : num_flag--);  
+    flag_numbers[2].num_texture = &Clock_textures[num_flag%10];
+    flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10];
+    flag_numbers[0].num_texture = &Clock_textures[(num_flag/100)%10];
+}
+
+void Timer::update(float elapsed){
+    if(!isRunning) return; 
+    acc += elapsed; 
+    while(acc >= 1.f){ 
+        acc -= 1.f; 
+        real_timer ++;
+        if(real_timer >= 999) return; 
+        timer_numbers[2].num_texture = &Clock_textures[real_timer%10];
+        timer_numbers[1].num_texture = &Clock_textures[(real_timer/10)%10];
+        timer_numbers[0].num_texture = &Clock_textures[(real_timer/100)%10];  
+    }
+
+}
 
 void Grid::place_mines(int starting_cell_index){
 
@@ -477,7 +491,9 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     }
 
     game_ended = true; 
-
+    pause = true; 
+    game_panel.header.timer.isRunning = false; 
+    ge.time = game_panel.header.timer.real_timer; 
     ge.visible = true; 
     
 }
@@ -510,7 +526,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     Cell& c = g.cells[starting_index_cell]; 
 
     if(c.state == cell_state::Revealed) return; 
-    if(c.state == cell_state::Flag) game_panel.header.f_counter.num_flag --; //AGGIUNTA: aggiunta per il calcolo del numero di bandierine in partita
+    if(c.state == cell_state::Flag) game_panel.header.f_counter.set_number(false);
     c.state = cell_state::Revealed; 
     game_panel.grid.num_revealed++; 
 
@@ -518,6 +534,7 @@ void State::reveal(Grid& g, int starting_index_cell){
         c.texture = &Exploded_Mine_texture;
         ge.victory = false;  
         ending_reveal(g,starting_index_cell); 
+        game_panel.header.face.face_texture = &lost_face_texture; 
         return; 
     } 
     else if(c.type == cell_type::Number){
@@ -531,12 +548,13 @@ void State::reveal(Grid& g, int starting_index_cell){
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
         ge.victory = true;
         ending_reveal(g, starting_index_cell); 
+        game_panel.header.face.face_texture = &win_face_texture; 
     }
 }
 
 void State::reset(){
-    ge = Game_End(); 
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
+    ge = Game_End();
     focus = game_ended= false; 
     pause = first_move = true; 
     mouse_cell = -1; 
@@ -568,12 +586,16 @@ void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
     state.pause = false;
+    if(state.first_move == false && state.game_ended == false) 
+        state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause = true; 
+    state.pause = true;
     state.focus = false; 
+    if(state.first_move == false && state.game_ended == false)
+        state.game_panel.header.timer.isRunning = false; 
 }
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
@@ -588,29 +610,41 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 
         if(state.first_move){
             state.first_move = false; 
+            state.pause = false; 
             state.game_panel.grid.place_mines(state.mouse_cell); 
             state.game_panel.grid.place_numbers(); 
             state.reveal(state.game_panel.grid, state.mouse_cell); 
+            state.game_panel.header.timer.isRunning = true; 
         }
-        else state.reveal(state.game_panel.grid, state.mouse_cell); 
+        else{
+            state.game_panel.header.face.face_texture = &Click_face_texture;  
+            state.reveal(state.game_panel.grid, state.mouse_cell); 
+        }
     }
 
     if(mouse.button == sf::Mouse::Button::Right){
         if(state.first_move) return; 
 
         if(state.game_panel.grid.cells[state.mouse_cell].state != cell_state::Flag){
-            state.game_panel.header.f_counter.num_flag ++; //AGGIUNTA: aggiunta per il calcolo del numero di bandierine in partita
+            state.game_panel.header.f_counter.set_number(true); 
             state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Flag; 
             state.game_panel.grid.cells[state.mouse_cell].texture = &Flag_texture;
         }
         else{
-            state.game_panel.header.f_counter.num_flag --; //AGGIUNTA: aggiunta per il calcolo del numero di bandierine in partita
+            state.game_panel.header.f_counter.set_number(false); 
             state.game_panel.grid.cells[state.mouse_cell].state = cell_state::Covered; 
             state.game_panel.grid.cells[state.mouse_cell].texture = &Covered_texture;
         }
         
     }
 
+}
+
+
+void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
+{
+    if(state.game_ended || state.game_panel.header.face.face_texture != &Click_face_texture) return; 
+    state.game_panel.header.face.face_texture = &smile_face_texture; 
 }
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
@@ -657,6 +691,8 @@ int main()
     border.setOutlineColor(sf::Color(0, 100, 0));
 
     State state;
+    sf::Clock Clock; 
+    float elapsed;
 
     while (window.isOpen())
     {
@@ -665,6 +701,10 @@ int main()
                              [&window](const sf::Event::Resized& event) { handle_resize (event, window); }, 
                              [&state] (const auto& event) { handle (event, state); } 
         );
+
+
+        elapsed = Clock.restart().asSeconds(); 
+        state.game_panel.header.timer.update(elapsed); 
 
         window.clear(sf::Color(144, 238, 144));
         state.draw(window); 

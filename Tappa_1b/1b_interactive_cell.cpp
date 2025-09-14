@@ -334,6 +334,7 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
+    state.pause = false;
 }
 
 //AGGIUNTA: gestione dell'evento caratterizzato dalla finestra di gioco che perde il focus

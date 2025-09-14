@@ -69,6 +69,7 @@ all: CMakeFiles/Tappa1a.dir/all
 all: CMakeFiles/Tappa1b.dir/all
 all: CMakeFiles/Tappa1c.dir/all
 all: CMakeFiles/Tappa2a.dir/all
+all: CMakeFiles/Tappa2b.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -82,6 +83,7 @@ clean: CMakeFiles/Tappa1a.dir/clean
 clean: CMakeFiles/Tappa1b.dir/clean
 clean: CMakeFiles/Tappa1c.dir/clean
 clean: CMakeFiles/Tappa2a.dir/clean
+clean: CMakeFiles/Tappa2b.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -239,6 +241,32 @@ Tappa2a: CMakeFiles/Tappa2a.dir/rule
 CMakeFiles/Tappa2a.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2a.dir/build.make CMakeFiles/Tappa2a.dir/clean
 .PHONY : CMakeFiles/Tappa2a.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Tappa2b.dir
+
+# All Build rule for target.
+CMakeFiles/Tappa2b.dir/all: CMakeFiles/copy_risorse.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=11,12 "Built target Tappa2b"
+.PHONY : CMakeFiles/Tappa2b.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Tappa2b.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa2b.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
+.PHONY : CMakeFiles/Tappa2b.dir/rule
+
+# Convenience name for target.
+Tappa2b: CMakeFiles/Tappa2b.dir/rule
+.PHONY : Tappa2b
+
+# clean rule for target.
+CMakeFiles/Tappa2b.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/clean
+.PHONY : CMakeFiles/Tappa2b.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
