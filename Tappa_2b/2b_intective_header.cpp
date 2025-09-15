@@ -22,6 +22,7 @@ const float panel_vertical_displacement = 100;
 const float gap = 2.f;
 
 ////////////////GAME END////////////////
+
 const float title_gap = 10.f;
 
 ////////////////HEADER////////////////
@@ -393,7 +394,7 @@ void State::draw (sf::RenderWindow& window){
 
 //AGGIUNTA: reso visibile e interattivo (si aggiorna in automatico al click destro) il contatore di bandierine 
 void Flag_Counter::set_number(bool adding){ 
-    if(num_flag = 999) return; //dopo 999 non vi sono abbastanza cifre per rappresentare il contatore correttamente quindi non fare nulla
+    if(num_flag == 999) return; //dopo 999 non vi sono abbastanza cifre per rappresentare il contatore correttamente quindi non fare nulla
     if(adding? num_flag++ : num_flag--);  //viene utilizzato un valore booleano per capire se vi è stata un'aggiunta o sottrazione 
     flag_numbers[2].num_texture = &Clock_textures[num_flag%10]; //aggiornamento della texture del numero che corrisponde alle unità
     flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10]; //aggiornamento della texture del numero che corrisponde alle decine

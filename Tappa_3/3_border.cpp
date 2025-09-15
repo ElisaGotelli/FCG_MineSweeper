@@ -22,12 +22,13 @@ const float panel_vertical_displacement = 100;
 const float gap = 2.f;
 
 ////////////////GAME END////////////////
+
 const float title_gap = 10.f;
 
 ////////////////HEADER////////////////
 
 const float header_parameter_gap = 30.f; 
-const float header_border_gap = 5.f; 
+const float header_border_gap = 5.f;
 
 ////////////////BLOCCO////////////////
 
@@ -168,16 +169,46 @@ struct Header
     void draw (sf::RenderWindow& window);
 };
 
+//AGGIUNTA: 
+struct Border_Cell
+{
+    sf::Vector2f border_cell_pos; 
+    sf::Vector2f border_cell_size; 
+    sf::Texture* border_cell_texture; 
+
+    Border_Cell(sf::Vector2f pos, sf::Vector2f size, sf::Texture* texture): 
+                                                                            border_cell_pos(pos),
+                                                                            border_cell_size(size), 
+                                                                            border_cell_texture(texture) {}
+    void draw (sf::RenderWindow& window);
+};
+
+//AGGIUNTA: 
+struct Border
+{ 
+    vector<Border_Cell> angle_cells;
+    vector<Border_Cell> side_cells;
+
+    sf::Vector2f b_size; 
+    sf::Vector2f b_pos; 
+    float thickness; 
+
+    Border(float cell_size, Grid& grid, Header& header); 
+    void draw (sf::RenderWindow& window);
+}; 
+
 struct Game_Panel
 {
     float cell_size;
     Grid grid;  
     Header header;
+    Border border;  //AGGIUNTA
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f))) * 0.85f), 
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), //MODIFICA 
                                                     grid(cell_num, mine_num, cell_size), 
-                                                    header(cell_size, grid) {} 
+                                                    header(cell_size, grid), 
+                                                    border(cell_size, grid, header) {} //AGGIUNTA
     void draw (sf::RenderWindow& window);
 };
 
@@ -268,6 +299,33 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
     }
 }
 
+//AGGIUNTA:
+Border::Border(float cell_size, Grid& grid, Header& header){
+
+    thickness = cell_size/2;
+
+    b_pos = {   header.h_pos.x - header_border_gap - thickness, 
+                header.h_pos.y - header_border_gap - thickness
+            }; 
+    b_size = {  header.h_size.x + (header_border_gap*2) + (thickness * 2), 
+                header.h_size.y + (header_border_gap*2) + (thickness*2) + grid.Grid_size.y + (gap * grid.cell_num.y)
+            }; 
+    
+    angle_cells.push_back(Border_Cell({b_pos}, {thickness, thickness}, &border_textures[2]));
+    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y}, {thickness, thickness}, &border_textures[3]));
+    angle_cells.push_back(Border_Cell({b_pos.x, b_pos.y + b_size.y - thickness}, {thickness, thickness}, &border_textures[4]));
+    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - cell_size/2, b_pos.y + b_size.y - cell_size/2}, {thickness, thickness}, &border_textures[5]));
+
+    sf::Vector2f up_down_cell_size = {b_size.x -(thickness*2), thickness}; 
+    sf::Vector2f left_right_cell_size = {thickness, b_size.y -(thickness*2)}; 
+
+    side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y}, up_down_cell_size, &border_textures[0])); 
+    side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y + b_size.y - thickness}, up_down_cell_size, &border_textures[0])); 
+    side_cells.push_back(Border_Cell({b_pos.x, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //sinistra 
+    side_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //destra 
+
+}
+
 ////////////////DRAW/////////////////
 void Cell::draw (sf::RenderWindow& window)
 {
@@ -335,7 +393,6 @@ void Game_End::draw(sf::RenderWindow& window){
     window.draw(title);
 }
 
-
 void Header::draw(sf::RenderWindow& window)
 {
     sf::RectangleShape h(h_size); 
@@ -377,8 +434,33 @@ void Face::draw(sf::RenderWindow& window)
     window.draw(f);
 }
 
+//AGGIUNTA: 
+void Border_Cell::draw(sf::RenderWindow& window)
+{
+    sf::RectangleShape b (border_cell_size); 
+    b.setPosition(border_cell_pos); 
+    b.setTexture(border_cell_texture);
+    window.draw(b);
+}
+
+//AGGIUNTA 
+void Border::draw(sf::RenderWindow& window)
+{
+    for(auto& angle : angle_cells)
+        angle.draw(window);
+    for(auto& up : side_cells)
+        up.draw(window);
+    /*
+    for(auto& left : left_cells)
+        left.draw(window);
+    for(auto& right : right_cells)
+        right.draw(window);
+    */
+}
+
 void Game_Panel::draw(sf::RenderWindow& window)
 {
+    border.draw(window); //AGGIUNTA
     grid.draw(window); 
     header.draw(window);
 }
@@ -391,7 +473,7 @@ void State::draw (sf::RenderWindow& window){
 ////////////////ALTRE FUNZIONI////////////////
 
 void Flag_Counter::set_number(bool adding){ 
-    if(num_flag = 999) return; 
+    if(num_flag == 999) return; 
     if(adding? num_flag++ : num_flag--);  
     flag_numbers[2].num_texture = &Clock_textures[num_flag%10];
     flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10];

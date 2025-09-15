@@ -207,6 +207,19 @@ Tappa2b/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/build
 .PHONY : Tappa2b/fast
 
+#=============================================================================
+# Target rules for targets named Tappa3
+
+# Build rule for target.
+Tappa3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa3
+.PHONY : Tappa3
+
+# fast build rule for target.
+Tappa3/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/build
+.PHONY : Tappa3/fast
+
 Tappa_00/00_hello.o: Tappa_00/00_hello.cpp.o
 .PHONY : Tappa_00/00_hello.o
 
@@ -351,6 +364,30 @@ Tappa_2b/2b_intective_header.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa2b.dir/build.make CMakeFiles/Tappa2b.dir/Tappa_2b/2b_intective_header.cpp.s
 .PHONY : Tappa_2b/2b_intective_header.cpp.s
 
+Tappa_3/3_border.o: Tappa_3/3_border.cpp.o
+.PHONY : Tappa_3/3_border.o
+
+# target to build an object file
+Tappa_3/3_border.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/Tappa_3/3_border.cpp.o
+.PHONY : Tappa_3/3_border.cpp.o
+
+Tappa_3/3_border.i: Tappa_3/3_border.cpp.i
+.PHONY : Tappa_3/3_border.i
+
+# target to preprocess a source file
+Tappa_3/3_border.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/Tappa_3/3_border.cpp.i
+.PHONY : Tappa_3/3_border.cpp.i
+
+Tappa_3/3_border.s: Tappa_3/3_border.cpp.s
+.PHONY : Tappa_3/3_border.s
+
+# target to generate assembly for a file
+Tappa_3/3_border.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/Tappa_3/3_border.cpp.s
+.PHONY : Tappa_3/3_border.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -366,6 +403,7 @@ help:
 	@echo "... Tappa1c"
 	@echo "... Tappa2a"
 	@echo "... Tappa2b"
+	@echo "... Tappa3"
 	@echo "... Tappa_00/00_hello.o"
 	@echo "... Tappa_00/00_hello.i"
 	@echo "... Tappa_00/00_hello.s"
@@ -384,6 +422,9 @@ help:
 	@echo "... Tappa_2b/2b_intective_header.o"
 	@echo "... Tappa_2b/2b_intective_header.i"
 	@echo "... Tappa_2b/2b_intective_header.s"
+	@echo "... Tappa_3/3_border.o"
+	@echo "... Tappa_3/3_border.i"
+	@echo "... Tappa_3/3_border.s"
 .PHONY : help
 
 

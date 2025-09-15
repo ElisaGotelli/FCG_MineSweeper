@@ -22,6 +22,7 @@ const float panel_vertical_displacement = 100;
 const float gap = 2.f;
 
 ////////////////GAME END////////////////
+
 const float title_gap = 10.f;
 
 ////////////////HEADER////////////////

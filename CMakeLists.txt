@@ -49,3 +49,7 @@ add_executable(Tappa2b Tappa_2b/2b_intective_header.cpp)
 target_link_libraries(Tappa2b PRIVATE SFML::Graphics)
 add_dependencies(Tappa2b copy_risorse)
 
+# TAPPA 3
+add_executable(Tappa3 Tappa_3/3_border.cpp)
+target_link_libraries(Tappa3 PRIVATE SFML::Graphics)
+add_dependencies(Tappa3 copy_risorse)
