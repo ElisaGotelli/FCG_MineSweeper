@@ -121,7 +121,6 @@ struct Timer
     void draw (sf::RenderWindow& window);
 }; 
 
-
 struct Face
 {
     sf::Vector2f face_pos; 
@@ -169,12 +168,12 @@ struct Header
     void draw (sf::RenderWindow& window);
 };
 
-//AGGIUNTA: 
+//AGGIUNTA: struct per le celle del bordo 
 struct Border_Cell
 {
-    sf::Vector2f border_cell_pos; 
-    sf::Vector2f border_cell_size; 
-    sf::Texture* border_cell_texture; 
+    sf::Vector2f border_cell_pos; //posizione della cella
+    sf::Vector2f border_cell_size;  //grandezza della cella 
+    sf::Texture* border_cell_texture; //texture della cella 
 
     Border_Cell(sf::Vector2f pos, sf::Vector2f size, sf::Texture* texture): 
                                                                             border_cell_pos(pos),
@@ -183,15 +182,15 @@ struct Border_Cell
     void draw (sf::RenderWindow& window);
 };
 
-//AGGIUNTA: 
+//AGGIUNTA: struct dell'oggetto bordo 
 struct Border
 { 
-    vector<Border_Cell> angle_cells;
-    vector<Border_Cell> side_cells;
+    vector<Border_Cell> angle_cells; //vettore delle celle angolo del bordo
+    vector<Border_Cell> side_cells; //struct per le celle lato del bordo 
 
-    sf::Vector2f b_size; 
-    sf::Vector2f b_pos; 
-    float thickness; 
+    sf::Vector2f b_size; //dimensione del bordo 
+    sf::Vector2f b_pos; //posizione del bordo 
+    float thickness;  //spessore del bordo 
 
     Border(float cell_size, Grid& grid, Header& header); 
     void draw (sf::RenderWindow& window);
@@ -202,13 +201,13 @@ struct Game_Panel
     float cell_size;
     Grid grid;  
     Header header;
-    Border border;  //AGGIUNTA
+    Border border;  //AGGIUNTA: nel pannello di gioco è stato anche aggiunto il bordo 
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
                                                     cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), //MODIFICA 
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid), 
-                                                    border(cell_size, grid, header) {} //AGGIUNTA
+                                                    border(cell_size, grid, header) {} //AGGIUNTA: richiamo al costruttore del bordo 
     void draw (sf::RenderWindow& window);
 };
 
@@ -299,18 +298,20 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
     }
 }
 
-//AGGIUNTA:
-Border::Border(float cell_size, Grid& grid, Header& header){
+//AGGIUNTA: costruttore del bordo 
+Border::Border(float cell_size, Grid& grid, Header& header){ //vengono passati header e griglia poichè ne serrviranno i parametri per il calcolo della posizione e della dimensione del bordo e delle sue celle 
 
-    thickness = cell_size/2;
+    thickness = cell_size/2; //lo spessore del bordo sarà dato da la grandezza di una cella diviso 2 
 
+    //il bordo dovrà circondare sia l'header che la griglia 
     b_pos = {   header.h_pos.x - header_border_gap - thickness, 
                 header.h_pos.y - header_border_gap - thickness
             }; 
     b_size = {  header.h_size.x + (header_border_gap*2) + (thickness * 2), 
                 header.h_size.y + (header_border_gap*2) + (thickness*2) + grid.Grid_size.y + (gap * grid.cell_num.y)
             }; 
-    
+
+       
     angle_cells.push_back(Border_Cell({b_pos}, {thickness, thickness}, &border_textures[2]));
     angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y}, {thickness, thickness}, &border_textures[3]));
     angle_cells.push_back(Border_Cell({b_pos.x, b_pos.y + b_size.y - thickness}, {thickness, thickness}, &border_textures[4]));
