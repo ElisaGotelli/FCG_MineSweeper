@@ -10,7 +10,7 @@
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Interactive Header";
+const char* window_title = "Control Panel Graphic";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
@@ -168,12 +168,12 @@ struct Header
     void draw (sf::RenderWindow& window);
 };
 
-//AGGIUNTA: struct per le celle del bordo 
+
 struct Border_Cell
 {
-    sf::Vector2f border_cell_pos; //posizione della cella
-    sf::Vector2f border_cell_size;  //grandezza della cella 
-    sf::Texture* border_cell_texture; //texture della cella 
+    sf::Vector2f border_cell_pos; 
+    sf::Vector2f border_cell_size;  
+    sf::Texture* border_cell_texture; 
 
     Border_Cell(sf::Vector2f pos, sf::Vector2f size, sf::Texture* texture): 
                                                                             border_cell_pos(pos),
@@ -182,15 +182,15 @@ struct Border_Cell
     void draw (sf::RenderWindow& window);
 };
 
-//AGGIUNTA: struct dell'oggetto bordo 
+
 struct Border
 { 
-    vector<Border_Cell> angle_cells; //vettore delle celle angolo del bordo
-    vector<Border_Cell> side_cells; //struct per le celle lato del bordo 
+    vector<Border_Cell> angle_cells;
+    vector<Border_Cell> side_cells; 
 
-    sf::Vector2f b_size; //dimensione del bordo 
-    sf::Vector2f b_pos; //posizione del bordo 
-    float thickness;  //spessore del bordo 
+    sf::Vector2f b_size;
+    sf::Vector2f b_pos;
+    float thickness; 
 
     Border(float cell_size, Grid& grid, Header& header); 
     void draw (sf::RenderWindow& window);
@@ -201,14 +201,33 @@ struct Game_Panel
     float cell_size;
     Grid grid;  
     Header header;
-    Border border;  //AGGIUNTA: nel pannello di gioco è stato anche aggiunto il bordo 
+    Border border;  
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
                                                     cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), //MODIFICA 
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid), 
-                                                    border(cell_size, grid, header) {} //AGGIUNTA: richiamo al costruttore del bordo 
+                                                    border(cell_size, grid, header) {} 
     void draw (sf::RenderWindow& window);
+};
+
+//AGGIUNTA: 
+struct New_Game
+{
+
+}; 
+
+//AGGIUNTA: 
+struct Pause
+{
+    sf::Vector2f p_pos; 
+    sf::Vector2f p_size;
+}; 
+
+//AGGIUNTA: 
+struct Control_Panel 
+{
+
 };
 
 struct State  
@@ -298,12 +317,12 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
     }
 }
 
-//AGGIUNTA: costruttore del bordo 
-Border::Border(float cell_size, Grid& grid, Header& header){ //vengono passati header e griglia poichè ne serrviranno i parametri per il calcolo della posizione e della dimensione del bordo e delle sue celle 
 
-    thickness = cell_size/2; //lo spessore del bordo sarà dato da la grandezza di una cella diviso 2 
+Border::Border(float cell_size, Grid& grid, Header& header){ 
 
-    //il bordo dovrà circondare sia l'header che la griglia 
+    thickness = cell_size/2; 
+
+    
     b_pos = {   header.h_pos.x - header_border_gap - thickness, 
                 header.h_pos.y - header_border_gap - thickness
             }; 
@@ -312,18 +331,18 @@ Border::Border(float cell_size, Grid& grid, Header& header){ //vengono passati h
             }; 
 
        
-    angle_cells.push_back(Border_Cell({b_pos}, {thickness, thickness}, &border_textures[2]));
+    angle_cells.push_back(Border_Cell({b_pos}, {thickness, thickness}, &border_textures[2])); 
     angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y}, {thickness, thickness}, &border_textures[3]));
-    angle_cells.push_back(Border_Cell({b_pos.x, b_pos.y + b_size.y - thickness}, {thickness, thickness}, &border_textures[4]));
-    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - cell_size/2, b_pos.y + b_size.y - cell_size/2}, {thickness, thickness}, &border_textures[5]));
+    angle_cells.push_back(Border_Cell({b_pos.x, b_pos.y + b_size.y - thickness}, {thickness, thickness}, &border_textures[4])); 
+    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - cell_size/2, b_pos.y + b_size.y - cell_size/2}, {thickness, thickness}, &border_textures[5])); 
 
     sf::Vector2f up_down_cell_size = {b_size.x -(thickness*2), thickness}; 
-    sf::Vector2f left_right_cell_size = {thickness, b_size.y -(thickness*2)}; 
+    sf::Vector2f left_right_cell_size = {thickness, b_size.y -(thickness*2)};  
 
     side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y}, up_down_cell_size, &border_textures[0])); 
     side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y + b_size.y - thickness}, up_down_cell_size, &border_textures[0])); 
-    side_cells.push_back(Border_Cell({b_pos.x, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //sinistra 
-    side_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //destra 
+    side_cells.push_back(Border_Cell({b_pos.x, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); 
+    side_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); 
 
 }
 
@@ -435,33 +454,27 @@ void Face::draw(sf::RenderWindow& window)
     window.draw(f);
 }
 
-//AGGIUNTA: 
+
 void Border_Cell::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape b (border_cell_size); 
-    b.setPosition(border_cell_pos); 
+    sf::RectangleShape b (border_cell_size);
+    b.setPosition(border_cell_pos);
     b.setTexture(border_cell_texture);
     window.draw(b);
 }
 
-//AGGIUNTA 
 void Border::draw(sf::RenderWindow& window)
 {
     for(auto& angle : angle_cells)
         angle.draw(window);
-    for(auto& up : side_cells)
-        up.draw(window);
-    /*
-    for(auto& left : left_cells)
-        left.draw(window);
-    for(auto& right : right_cells)
-        right.draw(window);
-    */
+    
+    for(auto& side : side_cells)
+        side.draw(window);
 }
 
 void Game_Panel::draw(sf::RenderWindow& window)
 {
-    border.draw(window); //AGGIUNTA
+    border.draw(window); 
     grid.draw(window); 
     header.draw(window);
 }
