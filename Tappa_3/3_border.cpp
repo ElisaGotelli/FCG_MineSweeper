@@ -311,19 +311,20 @@ Border::Border(float cell_size, Grid& grid, Header& header){ //vengono passati h
                 header.h_size.y + (header_border_gap*2) + (thickness*2) + grid.Grid_size.y + (gap * grid.cell_num.y)
             }; 
 
-       
-    angle_cells.push_back(Border_Cell({b_pos}, {thickness, thickness}, &border_textures[2]));
-    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y}, {thickness, thickness}, &border_textures[3]));
-    angle_cells.push_back(Border_Cell({b_pos.x, b_pos.y + b_size.y - thickness}, {thickness, thickness}, &border_textures[4]));
-    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - cell_size/2, b_pos.y + b_size.y - cell_size/2}, {thickness, thickness}, &border_textures[5]));
+     //creazione delle 4 celle per gli angoli che saranno dei quadrati con dimensione uguale allo spesso del bordo e etxture in base alla loro posizione    
+    angle_cells.push_back(Border_Cell({b_pos}, {thickness, thickness}, &border_textures[2])); //alto sinistra 
+    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y}, {thickness, thickness}, &border_textures[3])); //alto a destra 
+    angle_cells.push_back(Border_Cell({b_pos.x, b_pos.y + b_size.y - thickness}, {thickness, thickness}, &border_textures[4])); //basso a sinistra 
+    angle_cells.push_back(Border_Cell({b_pos.x + b_size.x - cell_size/2, b_pos.y + b_size.y - cell_size/2}, {thickness, thickness}, &border_textures[5])); //basso a destra 
 
-    sf::Vector2f up_down_cell_size = {b_size.x -(thickness*2), thickness}; 
-    sf::Vector2f left_right_cell_size = {thickness, b_size.y -(thickness*2)}; 
+    sf::Vector2f up_down_cell_size = {b_size.x -(thickness*2), thickness}; //dimensione delle celle superiore e inferiore 
+    sf::Vector2f left_right_cell_size = {thickness, b_size.y -(thickness*2)};  //dimensione delle celle laterali 
 
-    side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y}, up_down_cell_size, &border_textures[0])); 
-    side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y + b_size.y - thickness}, up_down_cell_size, &border_textures[0])); 
-    side_cells.push_back(Border_Cell({b_pos.x, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //sinistra 
-    side_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //destra 
+    //per il resto del bordo vengono create solo 4 celle che vanno a coprire tutto il bordo vistp che intano il bordo non sarà interagibile 
+    side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y}, up_down_cell_size, &border_textures[0])); //cella bordo superiore 
+    side_cells.push_back(Border_Cell({b_pos.x + thickness, b_pos.y + b_size.y - thickness}, up_down_cell_size, &border_textures[0])); //cella bordo inferiore
+    side_cells.push_back(Border_Cell({b_pos.x, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //cella bordo laterale sinistro 
+    side_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); //cella bordo laterale destro 
 
 }
 
@@ -435,33 +436,29 @@ void Face::draw(sf::RenderWindow& window)
     window.draw(f);
 }
 
-//AGGIUNTA: 
+//AGGIUNTA: disegno delle celle del bordo 
 void Border_Cell::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape b (border_cell_size); 
-    b.setPosition(border_cell_pos); 
-    b.setTexture(border_cell_texture);
+    sf::RectangleShape b (border_cell_size); //saranno dei rettangoli (o quadrati in base alla loro posizione)
+    b.setPosition(border_cell_pos); //imposto posizione 
+    b.setTexture(border_cell_texture);//imposto la texture indicata 
     window.draw(b);
 }
 
-//AGGIUNTA 
+//AGGIUNTA: disegno del bordo  
 void Border::draw(sf::RenderWindow& window)
 {
+    //disegno delle celle angolo
     for(auto& angle : angle_cells)
         angle.draw(window);
-    for(auto& up : side_cells)
-        up.draw(window);
-    /*
-    for(auto& left : left_cells)
-        left.draw(window);
-    for(auto& right : right_cells)
-        right.draw(window);
-    */
+    //disegno delle celle superiore, inferiore e laterali 
+    for(auto& side : side_cells)
+        side.draw(window);
 }
 
 void Game_Panel::draw(sf::RenderWindow& window)
 {
-    border.draw(window); //AGGIUNTA
+    border.draw(window); //AGGIUNTA: disegno del bordo prima della griglia ed header in modo che non vada a coprire il gap e che quindi le celle della griglia continuino ad illuminarsi correttamente 
     grid.draw(window); 
     header.draw(window);
 }
