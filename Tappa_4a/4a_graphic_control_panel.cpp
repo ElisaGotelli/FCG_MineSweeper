@@ -35,6 +35,15 @@ const float header_border_gap = 5.f;
 enum class cell_type{Mine,Empty, Number}; 
 enum class cell_state{ Covered, Revealed, Flag}; 
 
+////////////////BOTTONE DI CONTROLLO////////////////
+
+enum class button_type{new_game, pause}; //AGGIUNTA: 
+
+////////////////PANNELLO DI CONTROLLO////////////////
+
+const float control_horizontal_displacement = 30; 
+const float control_vertical_displacement = 30; 
+
 ////////////////STRUCT////////////////
 struct Cell
 {
@@ -63,7 +72,7 @@ struct Cell
 
 struct Grid
 {
-    vector<Cell> cells;  
+    vector<Cell> cells;    
     sf::Vector2i cell_num;  
     sf::Vector2f Grid_size;
     sf::Vector2f Grid_pos;
@@ -209,31 +218,52 @@ struct Game_Panel
                                                     header(cell_size, grid), 
                                                     border(cell_size, grid, header) {} 
     void draw (sf::RenderWindow& window);
-};
-
-//AGGIUNTA: 
-struct New_Game
-{
-
 }; 
 
 //AGGIUNTA: 
-struct Pause
+struct Control_Button
 {
-    sf::Vector2f p_pos; 
-    sf::Vector2f p_size;
+    sf::Vector2f cb_pos; 
+    sf::Vector2f cb_size;
+    sf::Text cb_text; 
+    sf::FloatRect cb_bounds; 
+    button_type cb_type; 
+    bool clicked; 
+
+    Control_Button(button_type type, sf::Vector2f pos, sf::Vector2f size) : 
+                                                                            cb_pos(pos), 
+                                                                            cb_size(size), 
+                                                                            cb_text{font},
+                                                                            cb_bounds(cb_pos, cb_size), 
+                                                                            cb_type(type), 
+                                                                            clicked(false) {}
+    void draw (sf::RenderWindow& window);
 }; 
 
 //AGGIUNTA: 
 struct Control_Panel 
 {
+    sf::Vector2f cp_pos; 
+    sf::Vector2f cp_size; 
+    sf::Text rules; 
+    Control_Button pause;
+    Control_Button new_game; 
 
+    Control_Panel(Border border): 
+                                    cp_pos(panel_horizontal_displacement, panel_vertical_displacement), 
+                                    cp_size(border.b_size),
+                                    rules{font}, 
+                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_horizontal_displacement, cp_pos.y + control_vertical_displacement}, {(cp_size.x-(control_vertical_displacement*2))/3, (cp_size.x-(control_vertical_displacement*2))/6}), 
+                                    new_game(button_type::new_game, {cp_pos.x + control_horizontal_displacement, cp_pos.y + control_vertical_displacement}, pause.cb_size) {}
+
+    void draw (sf::RenderWindow& window);
 };
 
 struct State  
 {
     Game_Panel game_panel;
     Game_End ge; 
+    Control_Panel cp; //AGGIUNTA: 
     int mouse_cell; 
     bool focus; 
     bool pause; 
@@ -243,6 +273,7 @@ struct State
     State (): 
                 game_panel({9,9}, 15), 
                 ge(),
+                cp(game_panel.border), //AGGIUNTA:  
                 focus(false), 
                 pause(true), 
                 first_move(true),
@@ -477,6 +508,47 @@ void Game_Panel::draw(sf::RenderWindow& window)
     border.draw(window); 
     grid.draw(window); 
     header.draw(window);
+}
+
+//AGGIUNTA: 
+void Control_Button::draw (sf::RenderWindow& window){
+    sf::RectangleShape cb (cb_size); 
+    cb.setPosition(cb_pos); 
+    cb.setFillColor(sf::Color(192, 192, 192)); //grigio chiaro 
+    cb.setOutlineThickness(header_border_gap); 
+    cb.setOutlineColor(sf::Color::Black); 
+    window.draw(cb);
+
+    switch(cb_type){
+        case button_type::pause : 
+            cb_text.setString("PAUSE"); 
+            break; 
+         
+        case button_type::new_game : 
+            cb_text.setString("NUOVA PARTITA"); 
+            break; 
+    }
+
+    cb_text.setCharacterSize(20); 
+    cb_text.setFillColor(sf::Color::Black); 
+    cb_text.setOutlineThickness(2.f); 
+    cb_text.setOutlineColor(sf::Color::White); 
+    auto b = cb_text.getLocalBounds(); 
+    cb_text.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    cb_text.setPosition({cb.getPosition().x + cb.getSize().x/2.f,cb.getPosition().x + cb.getSize().x/2.f});                  
+    window.draw(cb_text);
+}
+
+//AGGIUNTA: 
+void Control_Panel::draw (sf::RenderWindow& window){
+    sf::RectangleShape cp(cp_size); 
+    cp.setPosition(cp_pos); 
+    cp.setFillColor(sf::Color(210,180,140)); 
+    cp.setOutlineThickness(20.f); 
+    cp.setOutlineColor(sf::Color(92,51,23));
+    window.draw(cp); 
+
+    //DA FINIRE 
 }
 
 void State::draw (sf::RenderWindow& window){
