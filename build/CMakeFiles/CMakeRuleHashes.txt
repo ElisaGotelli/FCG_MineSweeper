@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-6b39a054114923fd0933c408022ea88f CMakeFiles/copy_risorse

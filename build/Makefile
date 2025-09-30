@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\" \"devel\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles /home/elisa/FCG_MineSweeper/build//CMakeFiles/progress.marks
@@ -115,19 +160,6 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-#=============================================================================
-# Target rules for targets named copy_risorse
-
-# Build rule for target.
-copy_risorse: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 copy_risorse
-.PHONY : copy_risorse
-
-# fast build rule for target.
-copy_risorse/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/copy_risorse.dir/build.make CMakeFiles/copy_risorse.dir/build
-.PHONY : copy_risorse/fast
 
 #=============================================================================
 # Target rules for targets named Tappa00
@@ -219,6 +251,84 @@ Tappa3: cmake_check_build_system
 Tappa3/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/build
 .PHONY : Tappa3/fast
+
+#=============================================================================
+# Target rules for targets named Tappa4a
+
+# Build rule for target.
+Tappa4a: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa4a
+.PHONY : Tappa4a
+
+# fast build rule for target.
+Tappa4a/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/build
+.PHONY : Tappa4a/fast
+
+#=============================================================================
+# Target rules for targets named sfml-system
+
+# Build rule for target.
+sfml-system: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sfml-system
+.PHONY : sfml-system
+
+# fast build rule for target.
+sfml-system/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/build.make _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/build
+.PHONY : sfml-system/fast
+
+#=============================================================================
+# Target rules for targets named sfml-window
+
+# Build rule for target.
+sfml-window: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sfml-window
+.PHONY : sfml-window
+
+# fast build rule for target.
+sfml-window/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/build.make _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/build
+.PHONY : sfml-window/fast
+
+#=============================================================================
+# Target rules for targets named sfml-network
+
+# Build rule for target.
+sfml-network: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sfml-network
+.PHONY : sfml-network
+
+# fast build rule for target.
+sfml-network/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/build.make _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/build
+.PHONY : sfml-network/fast
+
+#=============================================================================
+# Target rules for targets named sfml-graphics
+
+# Build rule for target.
+sfml-graphics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sfml-graphics
+.PHONY : sfml-graphics
+
+# fast build rule for target.
+sfml-graphics/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build.make _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build
+.PHONY : sfml-graphics/fast
+
+#=============================================================================
+# Target rules for targets named sfml-audio
+
+# Build rule for target.
+sfml-audio: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sfml-audio
+.PHONY : sfml-audio
+
+# fast build rule for target.
+sfml-audio/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build
+.PHONY : sfml-audio/fast
 
 Tappa_00/00_hello.o: Tappa_00/00_hello.cpp.o
 .PHONY : Tappa_00/00_hello.o
@@ -388,6 +498,30 @@ Tappa_3/3_border.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/Tappa_3/3_border.cpp.s
 .PHONY : Tappa_3/3_border.cpp.s
 
+Tappa_4a/4a_graphic_control_panel.o: Tappa_4a/4a_graphic_control_panel.cpp.o
+.PHONY : Tappa_4a/4a_graphic_control_panel.o
+
+# target to build an object file
+Tappa_4a/4a_graphic_control_panel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/Tappa_4a/4a_graphic_control_panel.cpp.o
+.PHONY : Tappa_4a/4a_graphic_control_panel.cpp.o
+
+Tappa_4a/4a_graphic_control_panel.i: Tappa_4a/4a_graphic_control_panel.cpp.i
+.PHONY : Tappa_4a/4a_graphic_control_panel.i
+
+# target to preprocess a source file
+Tappa_4a/4a_graphic_control_panel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/Tappa_4a/4a_graphic_control_panel.cpp.i
+.PHONY : Tappa_4a/4a_graphic_control_panel.cpp.i
+
+Tappa_4a/4a_graphic_control_panel.s: Tappa_4a/4a_graphic_control_panel.cpp.s
+.PHONY : Tappa_4a/4a_graphic_control_panel.s
+
+# target to generate assembly for a file
+Tappa_4a/4a_graphic_control_panel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/Tappa_4a/4a_graphic_control_panel.cpp.s
+.PHONY : Tappa_4a/4a_graphic_control_panel.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -395,8 +529,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... copy_risorse"
 	@echo "... Tappa00"
 	@echo "... Tappa1a"
 	@echo "... Tappa1b"
@@ -404,6 +541,12 @@ help:
 	@echo "... Tappa2a"
 	@echo "... Tappa2b"
 	@echo "... Tappa3"
+	@echo "... Tappa4a"
+	@echo "... sfml-audio"
+	@echo "... sfml-graphics"
+	@echo "... sfml-network"
+	@echo "... sfml-system"
+	@echo "... sfml-window"
 	@echo "... Tappa_00/00_hello.o"
 	@echo "... Tappa_00/00_hello.i"
 	@echo "... Tappa_00/00_hello.s"
@@ -425,6 +568,9 @@ help:
 	@echo "... Tappa_3/3_border.o"
 	@echo "... Tappa_3/3_border.i"
 	@echo "... Tappa_3/3_border.s"
+	@echo "... Tappa_4a/4a_graphic_control_panel.o"
+	@echo "... Tappa_4a/4a_graphic_control_panel.i"
+	@echo "... Tappa_4a/4a_graphic_control_panel.s"
 .PHONY : help
 
 

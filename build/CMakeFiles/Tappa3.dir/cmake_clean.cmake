@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Tappa3.dir/Tappa_3/3_border.cpp.o"
   "CMakeFiles/Tappa3.dir/Tappa_3/3_border.cpp.o.d"
-  "Tappa3"
-  "Tappa3.pdb"
+  "bin/Tappa3"
+  "bin/Tappa3.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
