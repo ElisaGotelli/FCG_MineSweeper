@@ -17,92 +17,91 @@ inline sf::Texture Clock_textures[10];
 inline sf::Texture Click_face_texture;
 inline sf::Texture lost_face_texture;
 inline sf::Texture smile_face_texture;
-inline sf::Texture smile_face_down_texture;
 inline sf::Texture win_face_texture;
 inline sf::Font font; 
 
-inline void load_textures_fonts() {
-    if (!Covered_texture.loadFromFile("risorse/texture/cells/cellup.jpg"))
-        throw std::runtime_error("Impossibile caricare cellup.jpg");
+// ...existing code...
+inline void load_textures_fonts(const std::string& res_base = "../risorse/") {
+    auto path = [&](const std::string& rel){ return res_base + rel; };
 
-    if (!Flag_texture.loadFromFile("risorse/texture/cells/cellflag.jpg"))
-        throw std::runtime_error("Impossibile caricare cellflag.jpg");
+    if (!Covered_texture.loadFromFile(path("texture/cells/cellup.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/cells/cellup.jpg"));
 
-    if (!Normal_Mine_texture.loadFromFile("risorse/texture/cells/cellmine.jpg"))
-        throw std::runtime_error("Impossibile caricare cellmine.jpg");
+    if (!Flag_texture.loadFromFile(path("texture/cells/cellflag.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/cells/cellflag.jpg"));
 
-    if (!Exploded_Mine_texture.loadFromFile("risorse/texture/cells/blast.jpg"))
-        throw std::runtime_error("Impossibile caricare blast.jpg");
+    if (!Normal_Mine_texture.loadFromFile(path("texture/cells/cellmine.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/cells/cellmine.jpg"));
 
-    if (!False_Mine_texture.loadFromFile("risorse/texture/cells/falsemine.jpg"))
-        throw std::runtime_error("Impossibile caricare falsemine.jpg");
+    if (!Exploded_Mine_texture.loadFromFile(path("texture/cells/blast.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/cells/blast.jpg"));
 
-    if (!Empty_texture.loadFromFile("risorse/texture/cells/celldown.jpg"))
-        throw std::runtime_error("Impossibile caricare celldown.jpg");
+    if (!False_Mine_texture.loadFromFile(path("texture/cells/falsemine.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/cells/falsemine.jpg"));
+
+    if (!Empty_texture.loadFromFile(path("texture/cells/celldown.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/cells/celldown.jpg"));
 
     const char* borders[6] = {
-        "risorse/texture/border/topbottom.jpg",
-        "risorse/texture/border/leftright.jpg",
-        "risorse/texture/border/topleft.jpg",
-        "risorse/texture/border/topright.jpg",
-        "risorse/texture/border/bottomleft.jpg",
-        "risorse/texture/border/bottomright.jpg"
+        "texture/border/topbottom.jpg",
+        "texture/border/leftright.jpg",
+        "texture/border/topleft.jpg",
+        "texture/border/topright.jpg",
+        "texture/border/bottomleft.jpg",
+        "texture/border/bottomright.jpg"
     };
     for (int i = 0; i < 6; i++) {
-        if (!border_textures[i].loadFromFile(borders[i]))
-            throw std::runtime_error(std::string("Impossibile caricare ") + borders[i]);
+        if (!border_textures[i].loadFromFile(path(borders[i])))
+            throw std::runtime_error(std::string("Impossibile caricare ") + path(borders[i]));
     }
 
     const char* numbers[8] = {
-        "risorse/texture/cells/cell1.jpg",
-        "risorse/texture/cells/cell2.jpg",
-        "risorse/texture/cells/cell3.jpg",
-        "risorse/texture/cells/cell4.jpg",
-        "risorse/texture/cells/cell5.jpg",
-        "risorse/texture/cells/cell6.jpg",
-        "risorse/texture/cells/cell7.jpg",
-        "risorse/texture/cells/cell8.jpg"
+        "texture/cells/cell1.jpg",
+        "texture/cells/cell2.jpg",
+        "texture/cells/cell3.jpg",
+        "texture/cells/cell4.jpg",
+        "texture/cells/cell5.jpg",
+        "texture/cells/cell6.jpg",
+        "texture/cells/cell7.jpg",
+        "texture/cells/cell8.jpg"
     };
     for (int i = 0; i < 8; i++) {
-        if (!Number_textures[i].loadFromFile(numbers[i]))
-            throw std::runtime_error(std::string("Impossibile caricare ") + numbers[i]);
+        if (!Number_textures[i].loadFromFile(path(numbers[i])))
+            throw std::runtime_error(std::string("Impossibile caricare ") + path(numbers[i]));
     }
 
     const char* clock_numbers[10] = {
-        "risorse/texture/clock/clock0.jpg",
-        "risorse/texture/clock/clock1.jpg",
-        "risorse/texture/clock/clock2.jpg",
-        "risorse/texture/clock/clock3.jpg",
-        "risorse/texture/clock/clock4.jpg",
-        "risorse/texture/clock/clock5.jpg",
-        "risorse/texture/clock/clock6.jpg",
-        "risorse/texture/clock/clock7.jpg",
-        "risorse/texture/clock/clock8.jpg",
-        "risorse/texture/clock/clock9.jpg"
+        "texture/clock/clock0.jpg",
+        "texture/clock/clock1.jpg",
+        "texture/clock/clock2.jpg",
+        "texture/clock/clock3.jpg",
+        "texture/clock/clock4.jpg",
+        "texture/clock/clock5.jpg",
+        "texture/clock/clock6.jpg",
+        "texture/clock/clock7.jpg",
+        "texture/clock/clock8.jpg",
+        "texture/clock/clock9.jpg"
     };
     for (int i = 0; i < 10; i++) {
-        if (!Clock_textures[i].loadFromFile(clock_numbers[i]))
-            throw std::runtime_error(std::string("Impossibile caricare ") + clock_numbers[i]);
+        if (!Clock_textures[i].loadFromFile(path(clock_numbers[i])))
+            throw std::runtime_error(std::string("Impossibile caricare ") + path(clock_numbers[i]));
     }
 
-    if (!Click_face_texture.loadFromFile("risorse/texture/faces/clickface.jpg"))
-        throw std::runtime_error("Impossibile caricare clickface.jpg");
+    if (!Click_face_texture.loadFromFile(path("texture/faces/clickface.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/faces/clickface.jpg"));
 
-    if (!lost_face_texture.loadFromFile("risorse/texture/faces/lostface.jpg"))
-        throw std::runtime_error("Impossibile caricare lostface.jpg");
+    if (!lost_face_texture.loadFromFile(path("texture/faces/lostface.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/faces/lostface.jpg"));
 
-    if (!smile_face_texture.loadFromFile("risorse/texture/faces/smileface.jpg"))
-        throw std::runtime_error("Impossibile caricare smileface.jpg");
+    if (!smile_face_texture.loadFromFile(path("texture/faces/smileface.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/faces/smileface.jpg"));
 
-    if (!smile_face_down_texture.loadFromFile("risorse/texture/faces/smilefacedown.jpg"))
-        throw std::runtime_error("Impossibile caricare smilefacedown.jpg");
+    if (!win_face_texture.loadFromFile(path("texture/faces/winface.jpg")))
+        throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/faces/winface.jpg"));
 
-    if (!win_face_texture.loadFromFile("risorse/texture/faces/winface.jpg"))
-        throw std::runtime_error("Impossibile caricare winface.jpg");
-
-    if (!font.openFromFile("risorse/EpundaSlab-VariableFont_wght.ttf"))
-        throw std::runtime_error("Impossibile caricare il font");
-
+    if (!font.openFromFile(res_base + "EpundaSlab-VariableFont_wght.ttf"))
+        throw std::runtime_error(std::string("Impossibile caricare il font: ") + res_base + "EpundaSlab-VariableFont_wght.ttf");
 }
+// ...existing code...
 
 #endif // TEXTURES_HPP
