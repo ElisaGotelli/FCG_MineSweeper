@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/Tappa2b.dir/Tappa_2b/2b_intective_header.cpp.o -o Tappa2b  -Wl,-rpath,/usr/local/lib /usr/local/lib/libsfml-graphics.so.3.0.1 /usr/local/lib/libsfml-window.so.3.0.1 /usr/local/lib/libsfml-system.so.3.0.1 
