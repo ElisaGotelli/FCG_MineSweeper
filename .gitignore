@@ -1,1 +1,21 @@
+# Build artifacts
 build/
+
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+install_manifest.txt
+
+.vscode/
+.idea/
+*.swp
+
+.DS_Store
+Thumbs.db
+
+bin/
+*.exe
+*.out
+*.o
+*.obj
