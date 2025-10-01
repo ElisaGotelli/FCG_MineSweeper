@@ -16,6 +16,15 @@
 - Tappa 9:
 - Tappa 10: 
 
+# dalla root del progetto dopo il clone
+mkdir build
+cd build
+cmake ..
+make -j
+
+# esegui dall'interno di build così i path relativi funzionano
+./bin/Tappa1a
+
 # SCHEMA PER LE TAPPE: 
 
 # TITOLO: 

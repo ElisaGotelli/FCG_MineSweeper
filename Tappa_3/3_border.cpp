@@ -204,7 +204,7 @@ struct Game_Panel
     Border border;  //AGGIUNTA: nel pannello di gioco è stato anche aggiunto il bordo 
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), //MODIFICA 
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), 
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid), 
                                                     border(cell_size, grid, header) {} //AGGIUNTA: richiamo al costruttore del bordo 

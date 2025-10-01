@@ -35,14 +35,14 @@ const float header_border_gap = 5.f;
 enum class cell_type{Mine,Empty, Number}; 
 enum class cell_state{ Covered, Revealed, Flag}; 
 
-////////////////BOTTONE DI CONTROLLO////////////////
+////////////////PULSANTE DI CONTROLLO////////////////
 
-enum class button_type{new_game, pause}; //AGGIUNTA: 
+enum class button_type{new_game, pause}; //AGGIUNTA: Per indicare il tipo di pulsante considerato nel control panel 
 
 ////////////////PANNELLO DI CONTROLLO////////////////
 
-const float control_horizontal_displacement = 30; 
-const float control_vertical_displacement = 30; 
+const float control_horizontal_displacement = 30; //AGGIUNTA: per la distanza dai bordo del pannello dei pulsanti 
+const float control_vertical_displacement = 30; //AGGIUNTA: sempre per la distanza 
 
 ////////////////STRUCT////////////////
 struct Cell
@@ -213,23 +213,24 @@ struct Game_Panel
     Border border;  
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), //MODIFICA 
+                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), 
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid), 
                                                     border(cell_size, grid, header) {} 
     void draw (sf::RenderWindow& window);
 }; 
 
-//AGGIUNTA: 
+//AGGIUNTA: pulsante per pausa e nuovo gioco
 struct Control_Button
 {
-    sf::Vector2f cb_pos; 
-    sf::Vector2f cb_size;
-    sf::Text cb_text; 
-    sf::FloatRect cb_bounds; 
-    button_type cb_type; 
-    bool clicked; 
+    sf::Vector2f cb_pos; //posizione 
+    sf::Vector2f cb_size; //dimensione 
+    sf::Text cb_text; //testo per rendere visibile all'utente il tipo del pulsante (pausa o nuovo gioco)
+    sf::FloatRect cb_bounds; //limiti del pulsante (per capire successivamente se è stato o meno cliccato)
+    button_type cb_type; //tipo 
+    bool clicked; //se il pulsante è stato cliccato o meno (ora sarà inutile ma servirà nella tappa successiva)
 
+    //per la creazione del pulsante. Il tipo serve a sapere che scritta e quale funzionalità avrà il pulsante mentre il resto è la posizione nel pannello di controllo 
     Control_Button(button_type type, sf::Vector2f pos, sf::Vector2f size) : 
                                                                             cb_pos(pos), 
                                                                             cb_size(size), 
@@ -240,21 +241,23 @@ struct Control_Button
     void draw (sf::RenderWindow& window);
 }; 
 
-//AGGIUNTA: 
+//AGGIUNTA: pannello di controllo che per ora conterrà solo i pulsanti per una nuova partita e per la pausa 
 struct Control_Panel 
 {
-    sf::Vector2f cp_pos; 
-    sf::Vector2f cp_size; 
-    sf::Text rules; 
-    Control_Button pause;
-    Control_Button new_game; 
+    sf::Vector2f cp_pos; //posizione del pannello 
+    sf::Vector2f cp_size;  //dimension del pannello 
+    sf::Vector2f button_size; //dimensione dei pulsanti all'interno del pannello 
+    Control_Button pause; //pulsante di pausa 
+    Control_Button new_game; //pulsante di nuova partita 
 
+    //abbiamo bisogno del bordo 
     Control_Panel(Border border): 
-                                    cp_pos(panel_horizontal_displacement, panel_vertical_displacement), 
-                                    cp_size(border.b_size),
-                                    rules{font}, 
-                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_horizontal_displacement, cp_pos.y + control_vertical_displacement}, {(cp_size.x-(control_vertical_displacement*2))/3, (cp_size.x-(control_vertical_displacement*2))/6}), 
-                                    new_game(button_type::new_game, {cp_pos.x + control_horizontal_displacement, cp_pos.y + control_vertical_displacement}, pause.cb_size) {}
+                                    cp_pos(panel_horizontal_displacement, border.b_pos.y + border.thickness), //il pannello saraà posizionato alla sinistra del pannello di gioco e i due pannelli avranno uguale distanziamento dal bordo della finestra 
+                                    cp_size({border.b_size.x -(border.thickness *2.f), border.b_size.y -(border.thickness *2.f)}), //il pannello avrà la stessa dimensione del pannello di gioco 
+                                    button_size({(cp_size.x-(control_vertical_displacement*2))/3.f, (cp_size.x-(control_vertical_displacement*2.f))/6.f}),  //dimensione del pulsante che sarà un terzo della larghezza del pannello e un sesto della lunghezza 
+                                    new_game(button_type::new_game, {cp_pos.x + control_horizontal_displacement, cp_pos.y + control_vertical_displacement}, button_size) , //creazione del pulsante di una nuova aprtita 
+                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_horizontal_displacement - button_size.x, cp_pos.y + control_vertical_displacement}, button_size) //creazione del pulsante di pausa 
+                                    {}
 
     void draw (sf::RenderWindow& window);
 };
@@ -263,7 +266,7 @@ struct State
 {
     Game_Panel game_panel;
     Game_End ge; 
-    Control_Panel cp; //AGGIUNTA: 
+    Control_Panel cp; //AGGIUNTA: aggiunta nello stato di gioco del pannello di controllo 
     int mouse_cell; 
     bool focus; 
     bool pause; 
@@ -273,7 +276,7 @@ struct State
     State (): 
                 game_panel({9,9}, 15), 
                 ge(),
-                cp(game_panel.border), //AGGIUNTA:  
+                cp(game_panel.border), //AGGIUNTA: aggiunta del pannello tramite bordo 
                 focus(false), 
                 pause(true), 
                 first_move(true),
@@ -510,49 +513,60 @@ void Game_Panel::draw(sf::RenderWindow& window)
     header.draw(window);
 }
 
-//AGGIUNTA: 
+//AGGIUNTA: disegno dei pultanti di controllo
 void Control_Button::draw (sf::RenderWindow& window){
-    sf::RectangleShape cb (cb_size); 
-    cb.setPosition(cb_pos); 
-    cb.setFillColor(sf::Color(192, 192, 192)); //grigio chiaro 
-    cb.setOutlineThickness(header_border_gap); 
-    cb.setOutlineColor(sf::Color::Black); 
+    sf::RectangleShape cb (cb_size); //il pulsante sarà un rettangolo con la dimensione indicata precedentemente 
+    cb.setPosition(cb_pos); //imposto la posizione
+    cb.setFillColor(sf::Color(192, 192, 192)); //avrà colore grigio chiaro 
+    cb.setOutlineThickness(header_border_gap); //avrà un bordo 
+    cb.setOutlineColor(sf::Color::Black); //il colore del bordo sarà nero 
     window.draw(cb);
 
+    //indicazione del tipo di pulsante 
     switch(cb_type){
         case button_type::pause : 
-            cb_text.setString("PAUSE"); 
+            cb_text.setString("PAUSA"); 
             break; 
          
         case button_type::new_game : 
-            cb_text.setString("NUOVA PARTITA"); 
+            cb_text.setString("NUOVA\nPARTITA"); 
             break; 
     }
 
-    cb_text.setCharacterSize(20); 
-    cb_text.setFillColor(sf::Color::Black); 
-    cb_text.setOutlineThickness(2.f); 
-    cb_text.setOutlineColor(sf::Color::White); 
-    auto b = cb_text.getLocalBounds(); 
-    cb_text.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    cb_text.setPosition({cb.getPosition().x + cb.getSize().x/2.f,cb.getPosition().x + cb.getSize().x/2.f});                  
+    //creazione della scritta nel pulsante 
+    cb_text.setFont(font);
+    cb_text.setCharacterSize(25); //avrà dimensione 25 
+    cb_text.setFillColor(sf::Color::Black); //colore nero 
+    cb_text.setOutlineThickness(2.f); //avrà un bordo/spessore 
+    cb_text.setOutlineColor(sf::Color::White); // il bordo sarà di colore bianco 
+    cb_text.setString(cb_type == button_type::pause ? "PAUSA" : "NUOVA\nPARTITA"); //impostazione del tipo 
+    sf::FloatRect b = cb_text.getLocalBounds(); //limite del testo 
+    //centralizzazione del testo 
+    cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2.f,
+                                   b.position.y + b.size.y/ 2.f));
+    cb_text.setPosition(sf::Vector2f(cb.getPosition().x + cb.getSize().x * 0.5f,
+                                     cb.getPosition().y + cb.getSize().y * 0.5f));
+
     window.draw(cb_text);
 }
 
-//AGGIUNTA: 
+//AGGIUNTA: disegno del pannello di controllo 
 void Control_Panel::draw (sf::RenderWindow& window){
-    sf::RectangleShape cp(cp_size); 
-    cp.setPosition(cp_pos); 
+    sf::RectangleShape cp(cp_size); //sarà un rettangolo della dimensione indicata precedentemente
+    cp.setPosition(cp_pos); //imposto la posizione 
+    //avrà colore e spessore come il pannello di fine gioco
     cp.setFillColor(sf::Color(210,180,140)); 
     cp.setOutlineThickness(20.f); 
     cp.setOutlineColor(sf::Color(92,51,23));
     window.draw(cp); 
-
-    //DA FINIRE 
+    //disegno dei due pulsanti 
+    new_game.draw(window); 
+    pause.draw(window); 
 }
 
 void State::draw (sf::RenderWindow& window){
     game_panel.draw (window);
+    cp.draw(window); //AGGIUNTA: aggiunti il disegno del pannello di controllo
     ge.draw(window); 
 }
 
