@@ -266,6 +266,19 @@ Tappa4a/fast:
 .PHONY : Tappa4a/fast
 
 #=============================================================================
+# Target rules for targets named Tappa4b
+
+# Build rule for target.
+Tappa4b: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa4b
+.PHONY : Tappa4b
+
+# fast build rule for target.
+Tappa4b/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/build
+.PHONY : Tappa4b/fast
+
+#=============================================================================
 # Target rules for targets named sfml-system
 
 # Build rule for target.
@@ -522,6 +535,30 @@ Tappa_4a/4a_graphic_control_panel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/Tappa_4a/4a_graphic_control_panel.cpp.s
 .PHONY : Tappa_4a/4a_graphic_control_panel.cpp.s
 
+Tappa_4b/4b_interactive_control_panel.o: Tappa_4b/4b_interactive_control_panel.cpp.o
+.PHONY : Tappa_4b/4b_interactive_control_panel.o
+
+# target to build an object file
+Tappa_4b/4b_interactive_control_panel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/Tappa_4b/4b_interactive_control_panel.cpp.o
+.PHONY : Tappa_4b/4b_interactive_control_panel.cpp.o
+
+Tappa_4b/4b_interactive_control_panel.i: Tappa_4b/4b_interactive_control_panel.cpp.i
+.PHONY : Tappa_4b/4b_interactive_control_panel.i
+
+# target to preprocess a source file
+Tappa_4b/4b_interactive_control_panel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/Tappa_4b/4b_interactive_control_panel.cpp.i
+.PHONY : Tappa_4b/4b_interactive_control_panel.cpp.i
+
+Tappa_4b/4b_interactive_control_panel.s: Tappa_4b/4b_interactive_control_panel.cpp.s
+.PHONY : Tappa_4b/4b_interactive_control_panel.s
+
+# target to generate assembly for a file
+Tappa_4b/4b_interactive_control_panel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/Tappa_4b/4b_interactive_control_panel.cpp.s
+.PHONY : Tappa_4b/4b_interactive_control_panel.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -542,6 +579,7 @@ help:
 	@echo "... Tappa2b"
 	@echo "... Tappa3"
 	@echo "... Tappa4a"
+	@echo "... Tappa4b"
 	@echo "... sfml-audio"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
@@ -571,6 +609,9 @@ help:
 	@echo "... Tappa_4a/4a_graphic_control_panel.o"
 	@echo "... Tappa_4a/4a_graphic_control_panel.i"
 	@echo "... Tappa_4a/4a_graphic_control_panel.s"
+	@echo "... Tappa_4b/4b_interactive_control_panel.o"
+	@echo "... Tappa_4b/4b_interactive_control_panel.i"
+	@echo "... Tappa_4b/4b_interactive_control_panel.s"
 .PHONY : help
 
 

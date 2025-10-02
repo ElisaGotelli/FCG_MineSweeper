@@ -54,4 +54,7 @@ add_executable(Tappa4a Tappa_4a/4a_graphic_control_panel.cpp)
 target_compile_features(Tappa4a PRIVATE cxx_std_17)
 target_link_libraries(Tappa4a PRIVATE SFML::Graphics)
 
-
+# TAPPA 4b
+add_executable(Tappa4b Tappa_4b/4b_interactive_control_panel.cpp)
+target_compile_features(Tappa4b PRIVATE cxx_std_17)
+target_link_libraries(Tappa4b PRIVATE SFML::Graphics)

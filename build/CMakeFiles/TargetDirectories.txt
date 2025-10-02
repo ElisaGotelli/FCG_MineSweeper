@@ -6,6 +6,7 @@
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa2b.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa3.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa4a.dir
+/home/elisa/FCG_MineSweeper/build/CMakeFiles/Tappa4b.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/edit_cache.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/rebuild_cache.dir
 /home/elisa/FCG_MineSweeper/build/CMakeFiles/list_install_components.dir

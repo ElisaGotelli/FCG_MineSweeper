@@ -21,9 +21,14 @@ const float panel_horizontal_displacement = 100;
 const float panel_vertical_displacement = 100; 
 const float gap = 2.f;
 
-////////////////GAME END////////////////
+////////////////GAME STOP////////////////
 
-const float title_gap = 10.f;
+const float stop_gap = 20.f; //EX MODIFICA 
+enum class stop_type{None, Win, Lose, Pause}; //MODIFICA: 
+const unsigned stop_height = window_height/2.f; //EX MODIFICA 
+const unsigned stop_width = window_width/2.f; //EX MODIFICA 
+const unsigned stop_button_width = stop_width/5.f; //EX MODIFICA 
+const unsigned stop_button_heigth = stop_height/7.5f; //EX MODIFICA 
 
 ////////////////HEADER////////////////
 
@@ -84,21 +89,6 @@ struct Grid
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
 };
-
-struct Game_End
-{ 
-    sf::Text title{font}; 
-    bool visible; 
-    bool victory; 
-    int time;
-    
-    Game_End ():
-                visible(false), 
-                victory(false),
-                time(0) {} 
-                
-    void draw (sf::RenderWindow& window);
-}; 
 
 struct Number{
     sf::Vector2f num_pos; 
@@ -228,6 +218,7 @@ struct Control_Button
     sf::FloatRect cb_bounds; 
     button_type cb_type;
     bool clicked;
+    bool mouse_focus; //AGGIUNTA
 
    Control_Button(button_type type, sf::Vector2f pos, sf::Vector2f size) : 
                                                                             cb_pos(pos), 
@@ -235,7 +226,8 @@ struct Control_Button
                                                                             cb_text{font},
                                                                             cb_bounds(cb_pos, cb_size), 
                                                                             cb_type(type), 
-                                                                            clicked(false) {}
+                                                                            clicked(false), 
+                                                                            mouse_focus(false) {} //AGGIUNTA
     void draw (sf::RenderWindow& window);
 }; 
 
@@ -258,10 +250,31 @@ struct Control_Panel
     void draw (sf::RenderWindow& window);
 };
 
+struct Game_Stop //EX MODIFICA 
+{ 
+    sf::Text title{font}; 
+    stop_type type; //EX MODIFICA 
+    sf::Vector2f gs_size; //EX MODIFICA
+    sf::Vector2f gs_pos; //EX MODIFICA
+    bool visible; 
+    int time;
+    Control_Button stop_cb; 
+    
+    Game_Stop ():
+                visible(false), 
+                type(stop_type::None), //EX MODIFICA 
+                gs_size({stop_width, stop_height}), //EX MODIFICA 
+                gs_pos({(window_width - stop_width)/2.f, (window_height - stop_height)/2.f}), //EX MODIFICA 
+                time(0), 
+                stop_cb(button_type::new_game,{gs_pos.x+ gs_size.x/2.f - stop_button_width/2.f, gs_pos.y + stop_gap}, {stop_button_width, stop_button_heigth}) {} 
+                
+    void draw (sf::RenderWindow& window);
+}; 
+
 struct State  
 {
     Game_Panel game_panel;
-    Game_End ge; 
+    Game_Stop gs; 
     Control_Panel cp; 
     int mouse_cell; 
     bool focus; 
@@ -271,7 +284,7 @@ struct State
 
     State (): 
                 game_panel({9,9}, 15), 
-                ge(),
+                gs(),
                 cp(game_panel.border),
                 focus(false), 
                 pause(true), 
@@ -399,32 +412,57 @@ void Grid::draw (sf::RenderWindow& window)
 }
 
 
-void Game_End::draw(sf::RenderWindow& window){
+void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
     if(!visible) return; 
 
-    sf::RectangleShape s({600.f, 400.f}); 
-    s.setPosition({(window_width - s.getSize().x)/2.f, (window_height - s.getSize().y)/2.f}); 
+    sf::RectangleShape s(gs_size); //EX MODIFICA 
+    s.setPosition(gs_pos); //EX MODIFICA 
     s.setFillColor(sf::Color(210,180,140)); 
     s.setOutlineThickness(20.f); 
-    s.setOutlineColor(sf::Color(92,51,23));
+    s.setOutlineColor(sf::Color(92,51,23)); 
     window.draw(s); 
+    stop_cb.draw(window); //EX AGGIUNTA 
 
-    title.setString(victory ? "Hai vinto!" : "Hai perso!"); 
+    switch(type) //EX MODIFICA 
+    {
+        case stop_type::Pause: //AGGIUNTA: 
+            title.setString("Pausa!"); 
+            break; 
+        
+        case stop_type::Win: 
+            title.setString("Hai vinto!"); 
+            break; 
+
+        case stop_type::Lose: 
+            title.setString("Hai perso!"); 
+            break; 
+
+        default: 
+            return; 
+    } 
+
     title.setCharacterSize(140); 
     title.setFillColor(sf::Color::Black); 
     title.setOutlineThickness(2.f); 
     title.setOutlineColor(sf::Color::White); 
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                  
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, stop_cb.cb_pos.y + stop_cb.cb_size.y + stop_gap}); //EX MODIFICA              
     window.draw(title);
 
-    title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
+    if(type == stop_type::Pause) //MODIFICA 
+    {
+        title.setString("Tempo impiegato fino ad ora: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
+    }
+    else
+    {
+        title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
+    }
     title.setCharacterSize(20);
     title.setFillColor(sf::Color::Red);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
+    title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); //EX MODIFICA 
     window.draw(title);
 
     title.setString("Premere SPACE");
@@ -432,14 +470,14 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setFillColor(sf::Color::Black);  
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //ex modifica
     window.draw(title);
 
-    title.setString("per cominciare una nuova partita");
+    title.setString(type==stop_type::Pause? "per riprendere la partita" : "per cominciare una nuova partita"); //MODIFICA 
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //EX MODIFICA 
     window.draw(title);
 }
 
@@ -529,7 +567,7 @@ void Control_Button::draw (sf::RenderWindow& window){
     }
 
     cb_text.setFont(font);
-    cb_text.setCharacterSize(25); 
+    cb_text.setCharacterSize(cb.getSize().y/3.f); //EX MODIFICA 
     cb_text.setFillColor(sf::Color::Black); 
     cb_text.setOutlineThickness(2.f); 
     cb_text.setOutlineColor(sf::Color::White); 
@@ -537,8 +575,14 @@ void Control_Button::draw (sf::RenderWindow& window){
     sf::FloatRect b = cb_text.getLocalBounds(); 
     cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2.f,
                                    b.position.y + b.size.y/ 2.f));
-    cb_text.setPosition(sf::Vector2f(cb.getPosition().x + cb.getSize().x * 0.5f,
-                                     cb.getPosition().y + cb.getSize().y * 0.5f));
+    cb_text.setPosition(sf::Vector2f(cb_pos.x + cb_size.x/2.f,
+                                     cb_pos.y + cb_size.y /2.f));
+
+    //AGGIUNTA
+    if(mouse_focus){
+        cb.setOutlineThickness(2.0f); 
+        cb.setOutlineColor(sf::Color::Red);
+    }
 
     window.draw(cb_text);
 }
@@ -557,7 +601,7 @@ void Control_Panel::draw (sf::RenderWindow& window){
 void State::draw (sf::RenderWindow& window){
     game_panel.draw (window);
     cp.draw(window); 
-    ge.draw(window); 
+    gs.draw(window); 
 }
 
 ////////////////ALTRE FUNZIONI////////////////
@@ -649,7 +693,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
 
     for(int i = 0; i < g.cells.size(); i++){
 
-    if(ge.victory == false && i == starting_index_cell ) continue; 
+    if(gs.type == stop_type::None && i == starting_index_cell ) continue; //EX MODIFICA 
 
             if(g.cells[i].state == cell_state::Flag && g.cells[i].type != cell_type::Mine){
                 g.cells[i].state = cell_state::Revealed; 
@@ -665,8 +709,8 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     game_ended = true; 
     pause = true; 
     game_panel.header.timer.isRunning = false; 
-    ge.time = game_panel.header.timer.real_timer; 
-    ge.visible = true; 
+    gs.time = game_panel.header.timer.real_timer; 
+    gs.visible = true; 
     
 }
 
@@ -704,7 +748,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     if(c.type == cell_type::Mine){
         c.texture = &Exploded_Mine_texture;
-        ge.victory = false;  
+        gs.type = stop_type::Lose;  //EX MODIFICA
         ending_reveal(g,starting_index_cell); 
         game_panel.header.face.face_texture = &lost_face_texture; 
         return; 
@@ -718,7 +762,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     }
 
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
-        ge.victory = true;
+        gs.type = stop_type::Win; //EX MODIFICA
         ending_reveal(g, starting_index_cell); 
         game_panel.header.face.face_texture = &win_face_texture; 
     }
@@ -726,7 +770,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
 void State::reset(){
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
-    ge = Game_End();
+    gs = Game_Stop();
     focus = game_ended= false; 
     pause = first_move = true; 
     mouse_cell = -1; 
