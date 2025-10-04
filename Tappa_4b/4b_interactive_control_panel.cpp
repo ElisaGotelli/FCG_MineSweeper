@@ -27,8 +27,8 @@ const float stop_gap = 20.f; //EX MODIFICA
 enum class stop_type{None, Win, Lose, Pause}; //MODIFICA: 
 const unsigned stop_height = window_height/2.f; //EX MODIFICA 
 const unsigned stop_width = window_width/2.f; //EX MODIFICA 
-const unsigned stop_button_width = stop_width/5.f; //EX MODIFICA 
-const unsigned stop_button_heigth = stop_height/7.5f; //EX MODIFICA 
+const unsigned std_stop_button_width = stop_width/5.f; //EX MODIFICA 
+const unsigned std_stop_button_heigth = stop_height/7.5f; //EX MODIFICA 
 
 ////////////////HEADER////////////////
 
@@ -266,7 +266,7 @@ struct Game_Stop //EX MODIFICA
                 gs_size({stop_width, stop_height}), //EX MODIFICA 
                 gs_pos({(window_width - stop_width)/2.f, (window_height - stop_height)/2.f}), //EX MODIFICA 
                 time(0), 
-                stop_cb(button_type::new_game,{gs_pos.x+ gs_size.x/2.f - stop_button_width/2.f, gs_pos.y + stop_gap}, {stop_button_width, stop_button_heigth}) {} 
+                stop_cb(button_type::new_game,{gs_pos.x+ gs_size.x/2.f - std_stop_button_width/2.f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth}, {std_stop_button_width, std_stop_button_heigth}) {} 
                 
     void draw (sf::RenderWindow& window);
 }; 
@@ -278,7 +278,7 @@ struct State
     Control_Panel cp; 
     int mouse_cell; 
     bool focus; 
-    bool pause; 
+    bool game_paused; //EX MODIFICA
     bool first_move; 
     bool game_ended;  
 
@@ -287,7 +287,7 @@ struct State
                 gs(),
                 cp(game_panel.border),
                 focus(false), 
-                pause(true), 
+                game_paused(false), //EX MODIFICA
                 first_move(true),
                 mouse_cell(-1), 
                 game_ended(false) {} 
@@ -296,6 +296,8 @@ struct State
     void flood_reveal(Grid& g, int starting_index_cell, Cell& start_c); 
     void ending_reveal(Grid& g, int starting_index_cell); 
     void reset(); 
+    void pause(); //AGGIUNTA
+    void restart(); //AGGIUNTA
     void draw (sf::RenderWindow& window);
 };
 
@@ -421,7 +423,6 @@ void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
     s.setOutlineThickness(20.f); 
     s.setOutlineColor(sf::Color(92,51,23)); 
     window.draw(s); 
-    stop_cb.draw(window); //EX AGGIUNTA 
 
     switch(type) //EX MODIFICA 
     {
@@ -447,7 +448,7 @@ void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
     title.setOutlineColor(sf::Color::White); 
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, stop_cb.cb_pos.y + stop_cb.cb_size.y + stop_gap}); //EX MODIFICA              
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, gs_pos.y + stop_gap}); //EX MODIFICA              
     window.draw(title);
 
     if(type == stop_type::Pause) //MODIFICA 
@@ -465,7 +466,7 @@ void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
     title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); //EX MODIFICA 
     window.draw(title);
 
-    title.setString("Premere SPACE");
+    title.setString(type==stop_type::Pause? "Premere SPACE" : "Scegliere un pulsante qua sotto:"); //MODIFICA 
     title.setCharacterSize(40);
     title.setFillColor(sf::Color::Black);  
     b = title.getLocalBounds();
@@ -473,12 +474,23 @@ void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
     title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //ex modifica
     window.draw(title);
 
-    title.setString(type==stop_type::Pause? "per riprendere la partita" : "per cominciare una nuova partita"); //MODIFICA 
-    title.setCharacterSize(40);
-    b = title.getLocalBounds();
-    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //EX MODIFICA 
-    window.draw(title);
+    if(type == stop_type::Pause){ //MODIFICA
+        title.setString("per riprendere la partita"); 
+        title.setCharacterSize(40);
+        b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //EX MODIFICA 
+        window.draw(title);
+        stop_cb.draw(window); //EX AGGIUNTA 
+    }
+    else { //EX MODIFICA
+        //CAMBIO DELLA DIMENSIONE DEL PULSANTE PER RENDERLO MAGGIORMENTE VISIBILE 
+        stop_cb.cb_size = {std_stop_button_width*1.5f, std_stop_button_heigth*1.5f};  
+        stop_cb.cb_pos = {gs_pos.x+ gs_size.x/2.f - std_stop_button_width* 0.75f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth*1.5f};
+        stop_cb.cb_bounds = {stop_cb.cb_pos, stop_cb.cb_size};
+        stop_cb.draw(window); 
+    }
+    
 }
 
 void Header::draw(sf::RenderWindow& window)
@@ -553,7 +565,11 @@ void Control_Button::draw (sf::RenderWindow& window){
     cb.setPosition(cb_pos); 
     cb.setFillColor(sf::Color(192, 192, 192)); 
     cb.setOutlineThickness(header_border_gap);  
-    cb.setOutlineColor(sf::Color::Black); 
+    if(mouse_focus)
+        cb.setOutlineColor(sf::Color::Red);
+    else 
+        cb.setOutlineColor(sf::Color::Black); 
+    //AGGIUNTA
     window.draw(cb);
 
     switch(cb_type){
@@ -577,12 +593,6 @@ void Control_Button::draw (sf::RenderWindow& window){
                                    b.position.y + b.size.y/ 2.f));
     cb_text.setPosition(sf::Vector2f(cb_pos.x + cb_size.x/2.f,
                                      cb_pos.y + cb_size.y /2.f));
-
-    //AGGIUNTA
-    if(mouse_focus){
-        cb.setOutlineThickness(2.0f); 
-        cb.setOutlineColor(sf::Color::Red);
-    }
 
     window.draw(cb_text);
 }
@@ -707,7 +717,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     }
 
     game_ended = true; 
-    pause = true; 
+    game_paused = false; //EX MODIFICA 
     game_panel.header.timer.isRunning = false; 
     gs.time = game_panel.header.timer.real_timer; 
     gs.visible = true; 
@@ -771,10 +781,28 @@ void State::reveal(Grid& g, int starting_index_cell){
 void State::reset(){
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
     gs = Game_Stop();
-    focus = game_ended= false; 
-    pause = first_move = true; 
+    game_paused = focus = game_ended= false; //EX MODIFICA
+    first_move = true; //EX MODIFICA
     mouse_cell = -1; 
 }
+
+//AGGIUNTA: viene stoppato il gioco
+void State::pause(){
+    game_panel.header.timer.isRunning = false; //il timer deve essere stoppato perchè il gioco è in pausa 
+     gs.time = game_panel.header.timer.real_timer; 
+    game_paused = true; //il gioco viene stoppato 
+    gs.type = stop_type::Pause; //metto il tipo della schermata di game stop cpme quella di pausa 
+    gs.visible = true; //rendo visibile la schermata di stop game 
+}
+
+//AGGIUNTA: viene fatto riaprtire il gioco
+void State::restart(){
+    gs.visible = false; //rimuovo la schermata di stop game
+    gs.type = stop_type::None; //metto il tipo della schermata di game stop come quello di default (nessuno)
+    game_paused = false; //il gioco riparte
+    game_panel.header.timer.isRunning = true; //il timer deve essere fatto ripartire dal punto in cui era stato stoppato 
+}
+
 
 
 ////////////////EVENTI////////////////
@@ -801,14 +829,16 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    state.pause = false;
-    if(state.first_move == false && state.game_ended == false) 
+    //DA TOGLIERE state.pause = false;
+    //MODIFICA:
+    if (state.first_move == false && state.game_ended == false && state.game_paused == false)
         state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause = true;
+    //TOLTO: state.game_paused = true;
+    state.pause(); //AGGIUNTA: quando la finestra perde il focus il gioco viene stoppato e viene messa la schermata di pausa 
     state.focus = false; 
     if(state.first_move == false && state.game_ended == false)
         state.game_panel.header.timer.isRunning = false; 
@@ -816,7 +846,26 @@ void handle (const sf::Event::FocusLost&, State& state)
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
-    if(state.game_ended) return; 
+
+    //TOLTO: if(state.game_ended == true) return;
+    //AGGIUNTA
+    if((state.game_ended || state.game_paused) && state.gs.stop_cb.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
+        if(state.gs.stop_cb.cb_type == button_type::new_game && mouse.button == sf::Mouse::Button::Left)
+            state.reset(); 
+        return; 
+    } 
+
+    //AGGIUNTA 
+    if(state.cp.new_game.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position)) && mouse.button == sf::Mouse::Button::Left){
+        state.reset(); 
+        return; 
+    }
+
+    //AGGIUNTA
+    if(state.cp.pause.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position)) && mouse.button == sf::Mouse::Button::Left){
+        state.pause(); 
+        return; 
+    }
 
     if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
 
@@ -826,7 +875,7 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 
         if(state.first_move){
             state.first_move = false; 
-            state.pause = false; 
+            //DA TOGLIERE state.pause = false; 
             state.game_panel.grid.place_mines(state.mouse_cell); 
             state.game_panel.grid.place_numbers(); 
             state.reveal(state.game_panel.grid, state.mouse_cell); 
@@ -865,19 +914,42 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
 {
-    if (state.game_ended && key.scancode == sf::Keyboard::Scancode::Space) state.reset(); 
+    //MODIFICA 
+    if (state.game_paused && key.scancode == sf::Keyboard::Scancode::Space) state.restart(); 
 }
 
 
 void handle (const sf::Event::MouseMoved& ev, State& state)
 {
-    if(state.game_ended) return;
+    //TOLTO IL COMANDO: if(state.game_ended) return;
+
     const sf::Vector2f mouse_float_pos{
         static_cast<float>(ev.position.x),
         static_cast<float>(ev.position.y)
     };
 
-int new_idx =-1;
+    //MODOFICA: quando una 
+    if(state.game_ended || state.game_paused){
+        if( state.gs.stop_cb.cb_bounds.contains(mouse_float_pos))
+            state.gs.stop_cb.mouse_focus = true; 
+        else 
+            state.gs.stop_cb.mouse_focus = false;
+        return; 
+    }
+
+    //AGGIUNTA: 
+    if(state.cp.new_game.cb_bounds.contains(mouse_float_pos))
+        state.cp.new_game.mouse_focus = true; 
+    else 
+        state.cp.new_game.mouse_focus = false; 
+
+    //AGGIUNTA: 
+    if(state.cp.pause.cb_bounds.contains(mouse_float_pos))
+        state.cp.pause.mouse_focus = true; 
+    else 
+        state.cp.pause.mouse_focus = false; 
+
+    int new_idx =-1; //EX MODIFICA
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
         if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }
