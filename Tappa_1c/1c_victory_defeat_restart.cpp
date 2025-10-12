@@ -20,9 +20,12 @@ const float panel_horizontal_displacement = 100;
 const float panel_vertical_displacement = 100; 
 const float gap = 2.f; 
 
-////////////////GAME END////////////////
+////////////////GAME STOP////////////////
 
-const float title_gap = 10.f; //AGGIUNTA: gap tra le scritte del fine gioco
+const float stop_gap = 15.f; //AGGIUNTA: gap tra le scritte del fine gioco
+enum class stop_type{None, Win, Lose}; //AGGIUNTA: possibili tipi di schermate di stop (per ora solo vittoria e sconfitta)
+const unsigned stop_height = window_height/2.f; //altezza della schermata di stop uguale alla metà di quella della finestra
+const unsigned stop_width = window_width/2.f;  //larghezza della schermata di stop uguale alla metà di quella della finestra
 
 ////////////////BLOCCO////////////////
 
@@ -69,20 +72,6 @@ struct Grid
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
 };
-
-//AGGIUNTA: schermata di vittoria/sconfitta 
-struct Game_End{ 
-    sf::Text title{font}; //scritta 'Hai vinto!' o 'Hai perso!' e di premere ENTER 
-    bool visible; //indica se la schermata è visibile o meno (visibile solo a partita finita)
-    bool victory; // AGGIUNTA: indica se la partita è stata o meno una vittoria
-    
-    Game_End (): //la schermata non sarà visibile inizialmente 
-                visible(false), 
-                victory(false) {}
-                
-    void draw (sf::RenderWindow& window);
-}; 
-
 struct Game_Panel
 {
     float cell_size;
@@ -94,21 +83,37 @@ struct Game_Panel
     void draw (sf::RenderWindow& window);
 };
 
+//AGGIUNTA: schermata di vittoria/sconfitta 
+struct Game_Stop{ 
+    sf::Text title{font}; //scritta 'Hai vinto!' o 'Hai perso!' e di premere ENTER 
+    stop_type type; //indica il tipo di schermata che dovrà apparire (vittoria e sconfitta)
+    sf::Vector2f gs_size; //dimensione della schermata
+    sf::Vector2f gs_pos; //posizione della schermata 
+    bool visible; //indica se la schermata è visibile o meno (visibile solo a partita finita)
+    
+    Game_Stop (): //la schermata non sarà visibile inizialmente 
+                visible(false), 
+                type(stop_type::None), 
+                gs_size({stop_width, stop_height}), 
+                gs_pos({(window_width - stop_width)/2.f, (window_height - stop_height)/2.f}) {}
+                
+    void draw (sf::RenderWindow& window);
+}; 
 struct State  
 {
     Game_Panel game_panel;
-    Game_End ge; //AGGIUNTA: creazione della schermata 
+    Game_Stop gs; //AGGIUNTA: creazione della schermata 
     int mouse_cell; 
     bool focus; 
-    bool pause; 
+    bool game_paused; 
     bool first_move; 
     bool game_ended; //AGGIUNTA: indice se la partita è o meno finita    
 
     State (): 
                 game_panel({9,9}, 15), 
-                ge(),
+                gs(),
                 focus(false), 
-                pause(true), 
+                game_paused(true), 
                 first_move(true),
                 mouse_cell(-1), 
                 game_ended(false) {} //game_ended a false visto che la partita sta appena iniziando 
@@ -125,7 +130,7 @@ struct State
 Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
     cell_num = bs; 
     mine_num = bn; 
-num_revealed = 0; //inizialmente il numero di celle rivelate è zero prima della prima mossa 
+    num_revealed = 0; //inizialmente il numero di celle rivelate è zero prima della prima mossa 
 
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
  
@@ -170,25 +175,37 @@ void Grid::draw (sf::RenderWindow& window)
 }
 
 //AGGIUNTA: rappresentazione della schermata di vittoria/sconfitta 
-void Game_End::draw(sf::RenderWindow& window){
+void Game_Stop::draw(sf::RenderWindow& window){
     if(!visible) return; //la schermata viene rappresentata solo a fine partita
 
-    sf::RectangleShape s({600.f, 400.f}); //la schermata è un rettangolo 
-    s.setPosition({(window_width - s.getSize().x)/2.f, (window_height - s.getSize().y)/2.f}); //la schermata sarà al centro della finestra 
+    sf::RectangleShape s(gs_size); //la schermata è un rettangolo di dimensione metà della finestra 
+    s.setPosition(gs_pos);//la schermata sarà al centro della finestra 
     s.setFillColor(sf::Color(210,180,140)); //la schermata avrà colore marrone chiaro 
     s.setOutlineThickness(20.f); //la schermata avrà un bordo
     s.setOutlineColor(sf::Color(92,51,23)); // il bordo della schermata sarà di colore scuro 
     window.draw(s); 
 
-    title.setString(victory ? "Hai vinto!" : "Hai perso!"); //il testo della schermata varia in base al risultato della partita 
+    switch(type)//il testo della schermata varia in base al risultato della partita 
+    {      
+        case stop_type::Win: 
+            title.setString("Hai vinto!"); 
+            break; 
+
+        case stop_type::Lose: 
+            title.setString("Hai perso!"); 
+            break; 
+
+        default: 
+            return; 
+    } 
     title.setCharacterSize(140); //dimensione della scritta 
     title.setFillColor(sf::Color::Black); //la scritta è di colore nero 
     title.setOutlineThickness(2.f); //la scritta avrà un bordo
     title.setOutlineColor(sf::Color::White); //il bordo sarà bianco della scritta 
     auto b = title.getLocalBounds(); 
-    //prendo prima la posizione della schermata nella finestra in modo da poi centrare la scritta correttamente per larghezza. Per altezza invece la scritta viene leggermente spostata dal centro in modo da farci stare anche le altre scritte 
+    //prendo prima la posizione della schermata nella finestra in modo da poi centrare la scritta correttamente per larghezza. Per altezza invece la scritta viene leggermente spostata ogni volta partendo dalla parte alta
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, gs_pos.y + stop_gap});               
     window.draw(title);
 
     //stesso ragionamento fatto per la scritta precedente 
@@ -196,7 +213,7 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
+    title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); 
     window.draw(title);
 
     //stesso ragionamento fatto per la prima scritta 
@@ -204,7 +221,7 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap});
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
     window.draw(title);
 }
 
@@ -216,7 +233,7 @@ void Game_Panel::draw(sf::RenderWindow& window)
 void State::draw (sf::RenderWindow& window)
 {
     game_panel.draw (window);
-    ge.draw(window); 
+    gs.draw(window); 
 }
 
 ////////////////ALTRE FUNZIONI////////////////
@@ -289,7 +306,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     for(int i = 0; i < g.cells.size(); i++){
 
     //caso sconfitta e mina esplosa
-    if(ge.victory == false && i == starting_index_cell ) continue; 
+    if(gs.type == stop_type::None && i == starting_index_cell ) continue;
 
             //rivelazione mine 
             if(g.cells[i].state == cell_state::Flag && g.cells[i].type != cell_type::Mine){
@@ -306,9 +323,9 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
 
     //viene impostato il gioco come finito 
     game_ended = true; 
-
+    game_paused=false; //il gioco non è in pausa ma è finito
     //viene resa visibile la schermata di fine partita 
-    ge.visible = true; 
+    gs.visible = true; 
     
 }
 
@@ -345,7 +362,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     if(c.type == cell_type::Mine){
         c.texture = &Exploded_Mine_texture;
-        ge.victory = false;  //AGGIUNTA: si imposta che la partita è stata una sconfitta 
+        gs.type = stop_type::Lose;  //AGGIUNTA: si imposta che la partita è finita con una sconfitta 
         ending_reveal(g,starting_index_cell); //AGGIUNTA: si fa aprtire l'animazione di fine partita 
         return; 
     } 
@@ -359,17 +376,17 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     //AGGIUNTA: nel caso si siano rivelate tutte le celle a parte quelle con sotto una mina si ha vinto la partita quindi
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
-        ge.victory = true; //si imposta che la aprtita è stata una sconfitta 
+        gs.type = stop_type::Win; //si imposta che la aprtita è finita con una vittoria 
         ending_reveal(g, starting_index_cell); //si fa aprtire l'animazione di fine partita 
     }
 }
 
 //AGGIUNTA: si resetta lo stato della finestra in modo da poter iniziare una nuova partita 
 void State::reset(){
-    ge = Game_End(); 
+    gs = Game_Stop(); 
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num); 
-    focus = game_ended= false; 
-    pause = first_move = true; 
+    game_paused = focus = game_ended= false;
+    first_move = true;
     mouse_cell = -1; 
 }
 
@@ -398,12 +415,12 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    state.pause = false;
+    state.game_paused = false;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause = true; 
+    state.game_paused = true; 
     state.focus = false; 
 }
 
@@ -411,9 +428,7 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
     if(state.game_ended) return; 
 
-    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
-
-    if(state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
+    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size() || state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return;
 
     if( mouse.button == sf::Mouse::Button::Left){
 
@@ -455,7 +470,7 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
         static_cast<float>(ev.position.y)
     };
 
-int new_idx =-1;
+    int new_idx =-1;
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
         if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }

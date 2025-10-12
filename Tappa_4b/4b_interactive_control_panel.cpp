@@ -23,12 +23,12 @@ const float gap = 2.f;
 
 ////////////////GAME STOP////////////////
 
-const float stop_gap = 20.f; //EX MODIFICA 
-enum class stop_type{None, Win, Lose, Pause}; //MODIFICA: 
-const unsigned stop_height = window_height/2.f; //EX MODIFICA 
-const unsigned stop_width = window_width/2.f; //EX MODIFICA 
-const unsigned std_stop_button_width = stop_width/5.f; //EX MODIFICA 
-const unsigned std_stop_button_heigth = stop_height/7.5f; //EX MODIFICA 
+const float stop_gap = 15.f; 
+enum class stop_type{None, Win, Lose, Pause}; 
+const unsigned stop_height = window_height/2.f; 
+const unsigned stop_width = window_width/2.f; 
+const unsigned std_stop_button_width = stop_width/5.f; 
+const unsigned std_stop_button_heigth = stop_height/7.5f; 
 
 ////////////////HEADER////////////////
 
@@ -218,7 +218,7 @@ struct Control_Button
     sf::FloatRect cb_bounds; 
     button_type cb_type;
     bool clicked;
-    bool mouse_focus; //AGGIUNTA
+    bool mouse_focus; //AGGIUNTA: aggiunto per far illuminare le celle al passaggio del mouse 
 
    Control_Button(button_type type, sf::Vector2f pos, sf::Vector2f size) : 
                                                                             cb_pos(pos), 
@@ -227,7 +227,7 @@ struct Control_Button
                                                                             cb_bounds(cb_pos, cb_size), 
                                                                             cb_type(type), 
                                                                             clicked(false), 
-                                                                            mouse_focus(false) {} //AGGIUNTA
+                                                                            mouse_focus(false) {} //AGGIUNTA: per il motivo spiegato prima 
     void draw (sf::RenderWindow& window);
 }; 
 
@@ -250,23 +250,24 @@ struct Control_Panel
     void draw (sf::RenderWindow& window);
 };
 
-struct Game_Stop //EX MODIFICA 
+struct Game_Stop 
 { 
     sf::Text title{font}; 
-    stop_type type; //EX MODIFICA 
-    sf::Vector2f gs_size; //EX MODIFICA
-    sf::Vector2f gs_pos; //EX MODIFICA
+    stop_type type; 
+    sf::Vector2f gs_size; 
+    sf::Vector2f gs_pos;
     bool visible; 
     int time;
-    Control_Button stop_cb; 
+    Control_Button new_game_cb; //AGGIUNTA: aggiunto il nuovo pulsante di new game nella schermata di stop che per ora non farà nulla quando cliccato
     
     Game_Stop ():
                 visible(false), 
-                type(stop_type::None), //EX MODIFICA 
-                gs_size({stop_width, stop_height}), //EX MODIFICA 
-                gs_pos({(window_width - stop_width)/2.f, (window_height - stop_height)/2.f}), //EX MODIFICA 
+                type(stop_type::None), 
+                gs_size({stop_width, stop_height}), 
+                gs_pos({(window_width - stop_width)/2.f, (window_height - stop_height)/2.f}), 
                 time(0), 
-                stop_cb(button_type::new_game,{gs_pos.x+ gs_size.x/2.f - std_stop_button_width/2.f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth}, {std_stop_button_width, std_stop_button_heigth}) {} 
+                new_game_cb(button_type::new_game,{gs_pos.x+ gs_size.x/2.f - std_stop_button_width/2.f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth}, {std_stop_button_width, std_stop_button_heigth}) //AGGIUNTA: aggiunto il nuovo pulsante di new game nella schermata di stop che per ora non farà nulla quando cliccato 
+                {} 
                 
     void draw (sf::RenderWindow& window);
 }; 
@@ -278,7 +279,7 @@ struct State
     Control_Panel cp; 
     int mouse_cell; 
     bool focus; 
-    bool game_paused; //EX MODIFICA
+    bool game_paused; 
     bool first_move; 
     bool game_ended;  
 
@@ -287,7 +288,7 @@ struct State
                 gs(),
                 cp(game_panel.border),
                 focus(false), 
-                game_paused(false), //EX MODIFICA
+                game_paused(false), 
                 first_move(true),
                 mouse_cell(-1), 
                 game_ended(false) {} 
@@ -296,8 +297,8 @@ struct State
     void flood_reveal(Grid& g, int starting_index_cell, Cell& start_c); 
     void ending_reveal(Grid& g, int starting_index_cell); 
     void reset(); 
-    void pause(); //AGGIUNTA
-    void restart(); //AGGIUNTA
+    void pause(); //AGGIUNTA: funzione per stoppare il gioco quando viene cliccato il pulsante di pausa 
+    void restart(); //AGGIUNTA: funzione per riiniziare il gioco dalla pausa 
     void draw (sf::RenderWindow& window);
 };
 
@@ -414,19 +415,19 @@ void Grid::draw (sf::RenderWindow& window)
 }
 
 
-void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
+void Game_Stop::draw(sf::RenderWindow& window){ 
     if(!visible) return; 
 
-    sf::RectangleShape s(gs_size); //EX MODIFICA 
-    s.setPosition(gs_pos); //EX MODIFICA 
+    sf::RectangleShape s(gs_size);
+    s.setPosition(gs_pos); 
     s.setFillColor(sf::Color(210,180,140)); 
     s.setOutlineThickness(20.f); 
     s.setOutlineColor(sf::Color(92,51,23)); 
     window.draw(s); 
 
-    switch(type) //EX MODIFICA 
+    switch(type)
     {
-        case stop_type::Pause: //AGGIUNTA: 
+        case stop_type::Pause: //AGGIUNTA: quando si schiaccia il pulsante della pausa dovrà apparire la scritta pausa 
             title.setString("Pausa!"); 
             break; 
         
@@ -441,17 +442,16 @@ void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
         default: 
             return; 
     } 
-
     title.setCharacterSize(140); 
     title.setFillColor(sf::Color::Black); 
     title.setOutlineThickness(2.f); 
     title.setOutlineColor(sf::Color::White); 
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, gs_pos.y + stop_gap}); //EX MODIFICA              
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, gs_pos.y + stop_gap});             
     window.draw(title);
 
-    if(type == stop_type::Pause) //MODIFICA 
+    if(type == stop_type::Pause) //MODIFICA: per la pausa scrittacambierà da 'tempo impiegato' a 'tempo impiegato fino ad ora 
     {
         title.setString("Tempo impiegato fino ad ora: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
     }
@@ -463,32 +463,55 @@ void Game_Stop::draw(sf::RenderWindow& window){ //EX MODIFICA
     title.setFillColor(sf::Color::Red);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); //EX MODIFICA 
+    title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); 
     window.draw(title);
 
-    title.setString(type==stop_type::Pause? "Premere SPACE" : "Scegliere un pulsante qua sotto:"); //MODIFICA 
-    title.setCharacterSize(40);
-    title.setFillColor(sf::Color::Black);  
-    b = title.getLocalBounds();
-    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //ex modifica
-    window.draw(title);
-
-    if(type == stop_type::Pause){ //MODIFICA
-        title.setString("per riprendere la partita"); 
-        title.setCharacterSize(40);
+    if(type == stop_type::Pause){ //MODIFICA: se è il pulsante di Pausa metti le scritte indicate qua sotto e poi i pulsanti
+        title.setString("Premere SPACE per riprendere la partita"); 
+        title.setCharacterSize(30); 
+        title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); //EX MODIFICA 
+        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
         window.draw(title);
-        stop_cb.draw(window); //EX AGGIUNTA 
+
+        title.setString("oppure"); 
+        title.setCharacterSize(30); 
+        b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
+        window.draw(title);
+
+        title.setString("scegliere uno dei pulsanti qua sottostanti"); 
+        title.setCharacterSize(30); 
+        b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
+        window.draw(title);
+        new_game_cb.draw(window); 
     }
-    else { //EX MODIFICA
-        //CAMBIO DELLA DIMENSIONE DEL PULSANTE PER RENDERLO MAGGIORMENTE VISIBILE 
-        stop_cb.cb_size = {std_stop_button_width*1.5f, std_stop_button_heigth*1.5f};  
-        stop_cb.cb_pos = {gs_pos.x+ gs_size.x/2.f - std_stop_button_width* 0.75f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth*1.5f};
-        stop_cb.cb_bounds = {stop_cb.cb_pos, stop_cb.cb_size};
-        stop_cb.draw(window); 
+    else { 
+        //altrimenti metti le scritte per la schermata di fine partita 
+        title.setString("Scegliere uno dei pulsanti"); 
+        title.setCharacterSize(40);
+        title.setFillColor(sf::Color::Black);  
+        b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
+        window.draw(title);
+
+        title.setString("qua sottostanti"); 
+        title.setCharacterSize(40); 
+        b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
+        window.draw(title);
+
+        //cambia la dimensione dei pulsanti per renderli maggiormente visibili
+        new_game_cb.cb_size = {std_stop_button_width*1.5f, std_stop_button_heigth*1.5f};  
+        new_game_cb.cb_pos = {gs_pos.x+ gs_size.x/2.f - std_stop_button_width* 0.75f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth*1.5f};
+        new_game_cb.cb_bounds = {new_game_cb.cb_pos, new_game_cb.cb_size};
+        new_game_cb.draw(window); //aggiunto il pulsante anche alla schermata di fine partita 
     }
     
 }
@@ -565,11 +588,10 @@ void Control_Button::draw (sf::RenderWindow& window){
     cb.setPosition(cb_pos); 
     cb.setFillColor(sf::Color(192, 192, 192)); 
     cb.setOutlineThickness(header_border_gap);  
-    if(mouse_focus)
+    if(mouse_focus) //AGGIUNTA: il bordo del pulsante si colorerà di rosso al passaggio del mouse sul pulsante 
         cb.setOutlineColor(sf::Color::Red);
-    else 
+    else //altrimenti rimarrà nero
         cb.setOutlineColor(sf::Color::Black); 
-    //AGGIUNTA
     window.draw(cb);
 
     switch(cb_type){
@@ -583,7 +605,7 @@ void Control_Button::draw (sf::RenderWindow& window){
     }
 
     cb_text.setFont(font);
-    cb_text.setCharacterSize(cb.getSize().y/3.f); //EX MODIFICA 
+    cb_text.setCharacterSize(cb.getSize().y/3.f); 
     cb_text.setFillColor(sf::Color::Black); 
     cb_text.setOutlineThickness(2.f); 
     cb_text.setOutlineColor(sf::Color::White); 
@@ -703,7 +725,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
 
     for(int i = 0; i < g.cells.size(); i++){
 
-    if(gs.type == stop_type::None && i == starting_index_cell ) continue; //EX MODIFICA 
+    if(gs.type == stop_type::None && i == starting_index_cell ) continue; 
 
             if(g.cells[i].state == cell_state::Flag && g.cells[i].type != cell_type::Mine){
                 g.cells[i].state = cell_state::Revealed; 
@@ -717,7 +739,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     }
 
     game_ended = true; 
-    game_paused = false; //EX MODIFICA 
+    game_paused = false; 
     game_panel.header.timer.isRunning = false; 
     gs.time = game_panel.header.timer.real_timer; 
     gs.visible = true; 
@@ -758,7 +780,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     if(c.type == cell_type::Mine){
         c.texture = &Exploded_Mine_texture;
-        gs.type = stop_type::Lose;  //EX MODIFICA
+        gs.type = stop_type::Lose; 
         ending_reveal(g,starting_index_cell); 
         game_panel.header.face.face_texture = &lost_face_texture; 
         return; 
@@ -772,7 +794,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     }
 
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
-        gs.type = stop_type::Win; //EX MODIFICA
+        gs.type = stop_type::Win;
         ending_reveal(g, starting_index_cell); 
         game_panel.header.face.face_texture = &win_face_texture; 
     }
@@ -780,30 +802,30 @@ void State::reveal(Grid& g, int starting_index_cell){
 
 void State::reset(){
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
-    gs = Game_Stop();
-    game_paused = focus = game_ended= false; //EX MODIFICA
-    first_move = true; //EX MODIFICA
+    gs = Game_Stop(); 
+    game_paused = focus = game_ended= false; 
+    first_move = true; 
     mouse_cell = -1; 
 }
 
-//AGGIUNTA: viene stoppato il gioco
+//AGGIUNTA: funzione per stoppare il gioco 
 void State::pause(){
-    game_panel.header.timer.isRunning = false; //il timer deve essere stoppato perchè il gioco è in pausa 
-     gs.time = game_panel.header.timer.real_timer; 
+    if(!first_move) //se il gioco è già iniziato 
+        game_panel.header.timer.isRunning = false; //il timer deve essere stoppato perchè il gioco è in pausa 
+    gs.time = game_panel.header.timer.real_timer; //imposto il timer del game stop con quello reale calcolato nell'header 
     game_paused = true; //il gioco viene stoppato 
     gs.type = stop_type::Pause; //metto il tipo della schermata di game stop cpme quella di pausa 
     gs.visible = true; //rendo visibile la schermata di stop game 
 }
 
-//AGGIUNTA: viene fatto riaprtire il gioco
+//AGGIUNTA: viene fatto ripartire il gioco
 void State::restart(){
     gs.visible = false; //rimuovo la schermata di stop game
     gs.type = stop_type::None; //metto il tipo della schermata di game stop come quello di default (nessuno)
     game_paused = false; //il gioco riparte
-    game_panel.header.timer.isRunning = true; //il timer deve essere fatto ripartire dal punto in cui era stato stoppato 
+    if(!first_move) //solo se la prima mossa è già stata fatta il timer deve ripartire 
+        game_panel.header.timer.isRunning = true; //il timer deve essere fatto ripartire dal punto in cui era stato stoppato 
 }
-
-
 
 ////////////////EVENTI////////////////
 
@@ -829,49 +851,47 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    //DA TOGLIERE state.pause = false;
-    //MODIFICA:
-    if (state.first_move == false && state.game_ended == false && state.game_paused == false)
+    //MODIFICA: se è già stata fatta la prima mossa, il gioco non è finito o non è in pausa fai ripartire il timer 
+    if (!state.first_move && !state.game_ended && !state.game_paused) 
         state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    //TOLTO: state.game_paused = true;
-    state.pause(); //AGGIUNTA: quando la finestra perde il focus il gioco viene stoppato e viene messa la schermata di pausa 
+    //TOLTO: state.game_paused = true; poichè si andrà ad utilizzare la nuova funzione creata 
+    state.pause(); //AGGIUNTA: quando la finestra perde il focus il gioco viene stoppato in automatico e viene messa la schermata di pausa come se si fosse cliccato il pulsante PAUSA 
     state.focus = false; 
-    if(state.first_move == false && state.game_ended == false)
+    if(!state.first_move && !state.game_ended) 
         state.game_panel.header.timer.isRunning = false; 
 }
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
 
-    //TOLTO: if(state.game_ended == true) return;
-    //AGGIUNTA
-    if((state.game_ended || state.game_paused) && state.gs.stop_cb.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
-        if(state.gs.stop_cb.cb_type == button_type::new_game && mouse.button == sf::Mouse::Button::Left)
+    //TOLTO: if(state.game_ended == true) return; 
+    //MODIFICA: se il gioco è finito o in pausa e viene cliccato uno dei pulsanti presenti nelle schermata di pausa o fine gioco
+    if((state.game_ended || state.game_paused) && state.gs.new_game_cb.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
+        if(state.gs.new_game_cb.cb_type == button_type::new_game && mouse.button == sf::Mouse::Button::Left) //se è stato cliccato il pulsante di nuova partita si fa il reset del gioco 
             state.reset(); 
-        return; 
+        return; //sennò non fare nulla 
     } 
 
-    //AGGIUNTA 
-    if(state.cp.new_game.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position)) && mouse.button == sf::Mouse::Button::Left){
-        state.reset(); 
-        return; 
-    }
-
-    //AGGIUNTA
-    if(state.cp.pause.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position)) && mouse.button == sf::Mouse::Button::Left){
-        state.pause(); 
-        return; 
-    }
-
-    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
-
-    if(state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
-
     if( mouse.button == sf::Mouse::Button::Left){
+
+        //AGGIUNTA: se viene premuto il pulsante di new all'interno del control panel 
+        if(state.cp.new_game.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
+            state.reset(); //fai il reset della partita
+            return; 
+        }
+
+        //AGGIUNTA: se viene premuto il pulsante di pausa del control panel 
+        if(state.cp.pause.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
+            state.pause(); //stoppa il gioco 
+            return; 
+        }
+
+        //MODIFICA: messo all'interno in quanto se il mouse non si trova nella schermata di stop gioco o nel pannello di controllo, dovrà succedere qualcosa solo se si trova nella griglia di gioco 
+        if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size() || state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
 
         if(state.first_move){
             state.first_move = false; 
@@ -889,6 +909,9 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 
     if(mouse.button == sf::Mouse::Button::Right){
         if(state.first_move) return; 
+
+        //MODIFICA: messo all'interno in quanto se il mouse non si trova nella schermata di stop gioco o nel pannello di controllo, dovrà succedere qualcosa solo se si trova nella griglia di gioco 
+        if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size() || state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
 
         if(state.game_panel.grid.cells[state.mouse_cell].state != cell_state::Flag){
             state.game_panel.header.f_counter.set_number(true); 
@@ -914,42 +937,42 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
 {
-    //MODIFICA 
+    //MODIFICA: aggiunto che il gioco deve essere in pausa per far riiniziare la partita tramite SPACE 
     if (state.game_paused && key.scancode == sf::Keyboard::Scancode::Space) state.restart(); 
 }
 
 
 void handle (const sf::Event::MouseMoved& ev, State& state)
 {
-    //TOLTO IL COMANDO: if(state.game_ended) return;
+    //TOLTO IL COMANDO: if(state.game_ended) return; poichè modificato sotto per comprendere la pausa 
 
     const sf::Vector2f mouse_float_pos{
         static_cast<float>(ev.position.x),
         static_cast<float>(ev.position.y)
     };
 
-    //MODOFICA: quando una 
+    //MODIFICA: se il gioco è finito oppure in pausa (quindi ci si trova nella schermata di stop)
     if(state.game_ended || state.game_paused){
-        if( state.gs.stop_cb.cb_bounds.contains(mouse_float_pos))
-            state.gs.stop_cb.mouse_focus = true; 
+        if( state.gs.new_game_cb.cb_bounds.contains(mouse_float_pos)) //se il mouse è sopra ad un pulsante metti che il pulsante ha il focus 
+            state.gs.new_game_cb.mouse_focus = true; 
         else 
-            state.gs.stop_cb.mouse_focus = false;
+            state.gs.new_game_cb.mouse_focus = false;
         return; 
     }
 
-    //AGGIUNTA: 
+    //AGGIUNTA: se il mouse si trova sopra il pulsante di nuova partita del pannello di controllo metti che detto pulsante ha il focus 
     if(state.cp.new_game.cb_bounds.contains(mouse_float_pos))
         state.cp.new_game.mouse_focus = true; 
     else 
         state.cp.new_game.mouse_focus = false; 
 
-    //AGGIUNTA: 
+    //AGGIUNTA: se il mouse si trova sopra il pulsante di pausa del pannello di controllo metti che detto pulsante ha il focus 
     if(state.cp.pause.cb_bounds.contains(mouse_float_pos))
         state.cp.pause.mouse_focus = true; 
     else 
         state.cp.pause.mouse_focus = false; 
 
-    int new_idx =-1; //EX MODIFICA
+    int new_idx =-1; 
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
         if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }

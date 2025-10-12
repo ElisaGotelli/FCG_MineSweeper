@@ -83,13 +83,13 @@ struct State
     int mouse_cell; //AGGIUNTA: posizione del mouse nella 
 
     bool focus; //AGGIUNTA: indica se la finestra di gioco ha il focus o meno 
-    bool pause; //AGGIUNTA: variabile che indica se il gioco è in pausa 
+    bool game_paused; //AGGIUNTA: variabile che indica se il gioco è in pausa 
     bool first_move; //AGGIUNTA: indica se è stata o meno fatta la prima mossa di gioco 
 
     State () : 
             game_panel({9,9}, 15), //per ora il numero di minea sarà sempre 15 e di celle 9x9  
             focus(false), 
-            pause(true), 
+            game_paused(true), 
             first_move(true),
             mouse_cell(-1) {}  
     
@@ -334,13 +334,13 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    state.pause = false;
+    state.game_paused = false;
 }
 
 //AGGIUNTA: gestione dell'evento caratterizzato dalla finestra di gioco che perde il focus
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause = true; 
+    state.game_paused = true; 
     state.focus = false; 
 }
 

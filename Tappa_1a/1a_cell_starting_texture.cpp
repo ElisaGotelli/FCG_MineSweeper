@@ -61,8 +61,8 @@ struct Game_Panel
     
     //la dimensione delle celle per ora terrà solo conto dello spazio per la griglia 
     Game_Panel(sf::Vector2i cell_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / cell_num.y) * 0.85f),
-                                                    grid(cell_num, cell_size) {} 
+                                        cell_size(((window_height - (panel_vertical_displacement * 2)) / cell_num.y) * 0.85f),
+                                        grid(cell_num, cell_size) {} 
     void draw (sf::RenderWindow& window);
 };
 

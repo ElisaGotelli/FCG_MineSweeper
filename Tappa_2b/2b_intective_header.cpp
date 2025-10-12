@@ -21,9 +21,12 @@ const float panel_horizontal_displacement = 100;
 const float panel_vertical_displacement = 100; 
 const float gap = 2.f;
 
-////////////////GAME END////////////////
+////////////////GAME STOP////////////////
 
-const float title_gap = 10.f;
+const float stop_gap = 15.f; 
+enum class stop_type{None, Win, Lose}; 
+const unsigned stop_height = window_height/2.f; 
+const unsigned stop_width = window_width/2.f; 
 
 ////////////////HEADER////////////////
 
@@ -75,22 +78,6 @@ struct Grid
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
 };
-
-struct Game_End
-{ 
-    sf::Text title{font}; 
-    bool visible; 
-    bool victory; 
-    int time; //AGGIUNTA: durata della partita
-    
-    Game_End ():
-                visible(false), 
-                victory(false),
-                time(0) {} //AGGIUNTA: all'inizio la durata della partita sarà sempre zero
-                
-    void draw (sf::RenderWindow& window);
-}; 
-
 struct Number{
     sf::Vector2f num_pos; 
     sf::Vector2f num_size;
@@ -182,21 +169,39 @@ struct Game_Panel
     void draw (sf::RenderWindow& window);
 };
 
+struct Game_Stop
+{ 
+    sf::Text title{font}; 
+    stop_type type;
+    sf::Vector2f gs_size; 
+    sf::Vector2f gs_pos; 
+    bool visible; 
+    int time; //AGGIUNTA: durata della partita
+    
+    Game_Stop ():
+                visible(false), 
+                type(stop_type::None), 
+                gs_size({stop_width, stop_height}), 
+                gs_pos({(window_width - stop_width)/2.f, (window_height - stop_height)/2.f}), 
+                time(0) {} //AGGIUNTA: all'inizio la durata della partita sarà sempre zero
+                
+    void draw (sf::RenderWindow& window);
+};
 struct State  
 {
     Game_Panel game_panel;
-    Game_End ge; 
+    Game_Stop gs; 
     int mouse_cell; 
     bool focus; 
-    bool pause; 
+    bool game_paused; 
     bool first_move; 
     bool game_ended;  
 
     State (): 
                 game_panel({9,9}, 15), 
-                ge(),
+                gs(),
                 focus(false), 
-                pause(false), 
+                game_paused(false), 
                 first_move(true),
                 mouse_cell(-1), 
                 game_ended(false) {} 
@@ -292,24 +297,36 @@ void Grid::draw (sf::RenderWindow& window)
 }
 
 
-void Game_End::draw(sf::RenderWindow& window){
+void Game_Stop::draw(sf::RenderWindow& window){
     if(!visible) return; 
 
-    sf::RectangleShape s({600.f, 400.f}); 
-    s.setPosition({(window_width - s.getSize().x)/2.f, (window_height - s.getSize().y)/2.f}); 
+    sf::RectangleShape s(gs_size);
+    s.setPosition(gs_pos);
     s.setFillColor(sf::Color(210,180,140)); 
     s.setOutlineThickness(20.f); 
     s.setOutlineColor(sf::Color(92,51,23));
     window.draw(s); 
 
-    title.setString(victory ? "Hai vinto!" : "Hai perso!"); 
+    switch(type) 
+    {   
+        case stop_type::Win: 
+            title.setString("Hai vinto!"); 
+            break; 
+
+        case stop_type::Lose: 
+            title.setString("Hai perso!"); 
+            break; 
+
+        default: 
+            return; 
+    } 
     title.setCharacterSize(140); 
     title.setFillColor(sf::Color::Black); 
     title.setOutlineThickness(2.f); 
     title.setOutlineColor(sf::Color::White); 
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    title.setPosition({s.getPosition().x + s.getSize().x/2.f, s.getPosition().y + s.getSize().y/2.f - title.getCharacterSize() - (title_gap/2.f)});                  
+    title.setPosition({s.getPosition().x + s.getSize().x/2.f, gs_pos.y + stop_gap});                 
     window.draw(title);
 
     //AGGIUNTA: sotto 'Hai vinto/perso' ora verrà scritta la durata della partita
@@ -318,7 +335,7 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setFillColor(sf::Color::Red); //sarà di colore rosso rispetto alle altre scritte
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,  s.getPosition().y + s.getSize().y/2.f + title_gap});
+    title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap});
     window.draw(title);
 
     title.setString("Premere SPACE");
@@ -326,14 +343,14 @@ void Game_End::draw(sf::RenderWindow& window){
     title.setFillColor(sf::Color::Black);  //AGGIUNTA: ritorno al colore nero per tutte le scritte a parte la durata della partita
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
     window.draw(title);
 
     title.setString("per cominciare una nuova partita");
     title.setCharacterSize(40);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + title_gap}); 
+    title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
     window.draw(title);
 }
 
@@ -387,7 +404,7 @@ void Game_Panel::draw(sf::RenderWindow& window)
 
 void State::draw (sf::RenderWindow& window){
     game_panel.draw (window);
-    ge.draw(window); 
+    gs.draw(window); 
 }
 
 ////////////////ALTRE FUNZIONI////////////////
@@ -481,7 +498,7 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
 
     for(int i = 0; i < g.cells.size(); i++){
 
-    if(ge.victory == false && i == starting_index_cell ) continue; 
+    if(gs.type == stop_type::None && i == starting_index_cell ) continue;
 
             if(g.cells[i].state == cell_state::Flag && g.cells[i].type != cell_type::Mine){
                 g.cells[i].state = cell_state::Revealed; 
@@ -495,10 +512,10 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     }
 
     game_ended = true; 
-    pause = true; 
+    game_paused = false;
     game_panel.header.timer.isRunning = false; //AGGIUNTA: la partita è finita quindi stoppo il timer
-    ge.time = game_panel.header.timer.real_timer; //AGGIUNTA:imposta il tempo di fine partita come quello corrente del timer 
-    ge.visible = true; 
+    gs.time = game_panel.header.timer.real_timer; //AGGIUNTA:imposta il tempo di fine partita come quello corrente del timer 
+    gs.visible = true; 
     
 }
 
@@ -536,7 +553,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     if(c.type == cell_type::Mine){
         c.texture = &Exploded_Mine_texture;
-        ge.victory = false;  
+        gs.type = stop_type::Lose;
         ending_reveal(g,starting_index_cell); 
         game_panel.header.face.face_texture = &lost_face_texture; //AGGIUNTA: modifica della texture della faccina per mostrare quella della sconfitta
         return; 
@@ -550,7 +567,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     }
 
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
-        ge.victory = true;
+        gs.type = stop_type::Win;
         ending_reveal(g, starting_index_cell); 
         game_panel.header.face.face_texture = &win_face_texture; //AGGIUNTA: modifica della texture della faccina per mostrare quella della vittoria 
     }
@@ -558,8 +575,8 @@ void State::reveal(Grid& g, int starting_index_cell){
 
 void State::reset(){
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
-    ge = Game_End();
-    pause = focus = game_ended= false; 
+    gs = Game_Stop();
+    game_paused = focus = game_ended= false; 
     first_move = true; 
     mouse_cell = -1; 
 }
@@ -589,14 +606,14 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    state.pause = false;
+    state.game_paused = false;
     if(state.first_move == false && state.game_ended == false) //quando la partita è in corso
         state.game_panel.header.timer.isRunning = true; //il timer riparte
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause = true;
+    state.game_paused = true;
     state.focus = false; 
     if(state.first_move == false && state.game_ended == false) //AGGIUNTA: quando la partita è in corso
         state.game_panel.header.timer.isRunning = false; //il timer si ferma 
@@ -606,9 +623,7 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
     if(state.game_ended) return; 
 
-    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
-
-    if(state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return; 
+    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size() || state.game_panel.grid.cells[state.mouse_cell].state == cell_state::Revealed) return;
 
     if( mouse.button == sf::Mouse::Button::Left){
 
@@ -664,7 +679,7 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
         static_cast<float>(ev.position.y)
     };
 
-int new_idx =-1;
+    int new_idx =-1;
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
         if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) { new_idx = i; break; }
     }
