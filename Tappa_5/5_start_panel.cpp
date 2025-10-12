@@ -490,13 +490,15 @@ void Game_Stop::draw(sf::RenderWindow& window){
     title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); 
     window.draw(title);
 
-    if(type == stop_type::Pause){ 
+
+    if(type == stop_type::Pause)
+    { 
         title.setString("Premere SPACE per riprendere la partita"); 
         title.setCharacterSize(30); 
         title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
+        title.setPosition({title.getPosition().x,title.getPosition().y + 20.f + stop_gap}); 
         window.draw(title);
 
         title.setString("oppure"); 
@@ -514,13 +516,14 @@ void Game_Stop::draw(sf::RenderWindow& window){
         window.draw(title);
         new_game_cb.draw(window); 
     }
-    else { 
+    else 
+    { 
         title.setString("Scegliere uno dei pulsanti"); 
         title.setCharacterSize(40);
         title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
+        title.setPosition({title.getPosition().x,title.getPosition().y + 20.f + stop_gap}); 
         window.draw(title);
 
         title.setString("qua sottostanti"); 
@@ -530,13 +533,11 @@ void Game_Stop::draw(sf::RenderWindow& window){
         title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
         window.draw(title);
 
-       
         new_game_cb.cb_size = {std_stop_button_width*1.5f, std_stop_button_heigth*1.5f};  
         new_game_cb.cb_pos = {gs_pos.x+ gs_size.x/2.f - std_stop_button_width* 0.75f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth*1.5f};
         new_game_cb.cb_bounds = {new_game_cb.cb_pos, new_game_cb.cb_size};
         new_game_cb.draw(window); 
-    }
-    
+    }  
 }
 
 void Header::draw(sf::RenderWindow& window)
@@ -663,17 +664,18 @@ void Start_Panel::draw(sf::RenderWindow& window){
     window.draw (s); //disegno lo sfondo della schermata
 
     //aggiunta della prima parte del titolo "Benvenuto su"
-    start_title.setString("Benvenuto su");
-    start_title.setCharacterSize(60); 
-    start_title.setFillColor(sf::Color::Black); 
-    start_title.setOutlineThickness(2.f); 
-    start_title.setOutlineColor(sf::Color::White); 
+    start_title.setString("Benvenuto su"); //impostazione della scritta che apparirà a schermata 
+    start_title.setCharacterSize(60); //dimensione del titolo
+    start_title.setFillColor(sf::Color::Black); //la scritta sarà di colore nero
+    start_title.setOutlineThickness(2.f); //la scritta avrà un bordo
+    start_title.setOutlineColor(sf::Color::White);  //il bordo sarà bianco
     auto b = start_title.getLocalBounds(); 
+    //prendo prima la posizione della schermata nella finestra in modo da poi centrare la scritta correttamente per larghezza. Per altezza invece la scritta viene leggermente spostata ogni volta partendo dalla parte alta della finestra
     start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
     start_title.setPosition({start_pos.x + start_size.x/2.f, start_pos.y + start_gap});             
     window.draw(start_title);
 
-    //parte principale del titolo
+    //parte principale del titolo in cui si usa lo stesso ragionamento della scritta precedente
     start_title.setString("MINESWEEPER"); 
     start_title.setCharacterSize(120);
     b = start_title.getLocalBounds(); 
@@ -681,6 +683,7 @@ void Start_Panel::draw(sf::RenderWindow& window){
     start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 60.f + start_gap});           
     window.draw(start_title);
 
+    //stesso ragionamento fatto per la scritta precedente 
     start_title.setString("Versione E.0"); 
     start_title.setCharacterSize(40);
     start_title.setFillColor(sf::Color::Red);
@@ -689,6 +692,7 @@ void Start_Panel::draw(sf::RenderWindow& window){
     start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 120.f + start_gap});            
     window.draw(start_title);
 
+    //stesso ragionamento fatto per la scritta precedente 
     start_title.setString("Premere SPACE per iniziare"); 
     start_title.setFillColor(sf::Color::Black);
     start_title.setCharacterSize(60);
@@ -697,14 +701,13 @@ void Start_Panel::draw(sf::RenderWindow& window){
     start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 40.f + start_gap});            
     window.draw(start_title);
 
+    //stesso ragionamento fatto per la scritta precedente 
     start_title.setString("una nuova partita!"); 
     start_title.setCharacterSize(60);
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
     start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + start_title.getCharacterSize() + start_gap});            
     window.draw(start_title);
-    
-
 }
 
 void State::draw (sf::RenderWindow& window){
@@ -1006,6 +1009,7 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
 {
+    if(state.sp.visible) state.sp.visible = false; //AGGIUNTA: mostro la schermata di inizio gioco
     if (state.game_paused && key.scancode == sf::Keyboard::Scancode::Space) state.restart(); 
 }
 

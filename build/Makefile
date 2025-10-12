@@ -279,17 +279,17 @@ Tappa4b/fast:
 .PHONY : Tappa4b/fast
 
 #=============================================================================
-# Target rules for targets named Tappa5a
+# Target rules for targets named Tappa5
 
 # Build rule for target.
-Tappa5a: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa5a
-.PHONY : Tappa5a
+Tappa5: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa5
+.PHONY : Tappa5
 
 # fast build rule for target.
-Tappa5a/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5a.dir/build.make CMakeFiles/Tappa5a.dir/build
-.PHONY : Tappa5a/fast
+Tappa5/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/build
+.PHONY : Tappa5/fast
 
 #=============================================================================
 # Target rules for targets named sfml-system
@@ -572,29 +572,29 @@ Tappa_4b/4b_interactive_control_panel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/Tappa_4b/4b_interactive_control_panel.cpp.s
 .PHONY : Tappa_4b/4b_interactive_control_panel.cpp.s
 
-Tappa_5a/5a_graphic_start.o: Tappa_5a/5a_graphic_start.cpp.o
-.PHONY : Tappa_5a/5a_graphic_start.o
+Tappa_5/5_start_panel.o: Tappa_5/5_start_panel.cpp.o
+.PHONY : Tappa_5/5_start_panel.o
 
 # target to build an object file
-Tappa_5a/5a_graphic_start.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5a.dir/build.make CMakeFiles/Tappa5a.dir/Tappa_5a/5a_graphic_start.cpp.o
-.PHONY : Tappa_5a/5a_graphic_start.cpp.o
+Tappa_5/5_start_panel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/Tappa_5/5_start_panel.cpp.o
+.PHONY : Tappa_5/5_start_panel.cpp.o
 
-Tappa_5a/5a_graphic_start.i: Tappa_5a/5a_graphic_start.cpp.i
-.PHONY : Tappa_5a/5a_graphic_start.i
+Tappa_5/5_start_panel.i: Tappa_5/5_start_panel.cpp.i
+.PHONY : Tappa_5/5_start_panel.i
 
 # target to preprocess a source file
-Tappa_5a/5a_graphic_start.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5a.dir/build.make CMakeFiles/Tappa5a.dir/Tappa_5a/5a_graphic_start.cpp.i
-.PHONY : Tappa_5a/5a_graphic_start.cpp.i
+Tappa_5/5_start_panel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/Tappa_5/5_start_panel.cpp.i
+.PHONY : Tappa_5/5_start_panel.cpp.i
 
-Tappa_5a/5a_graphic_start.s: Tappa_5a/5a_graphic_start.cpp.s
-.PHONY : Tappa_5a/5a_graphic_start.s
+Tappa_5/5_start_panel.s: Tappa_5/5_start_panel.cpp.s
+.PHONY : Tappa_5/5_start_panel.s
 
 # target to generate assembly for a file
-Tappa_5a/5a_graphic_start.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5a.dir/build.make CMakeFiles/Tappa5a.dir/Tappa_5a/5a_graphic_start.cpp.s
-.PHONY : Tappa_5a/5a_graphic_start.cpp.s
+Tappa_5/5_start_panel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/Tappa_5/5_start_panel.cpp.s
+.PHONY : Tappa_5/5_start_panel.cpp.s
 
 # Help Target
 help:
@@ -617,7 +617,7 @@ help:
 	@echo "... Tappa3"
 	@echo "... Tappa4a"
 	@echo "... Tappa4b"
-	@echo "... Tappa5a"
+	@echo "... Tappa5"
 	@echo "... sfml-audio"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
@@ -650,9 +650,9 @@ help:
 	@echo "... Tappa_4b/4b_interactive_control_panel.o"
 	@echo "... Tappa_4b/4b_interactive_control_panel.i"
 	@echo "... Tappa_4b/4b_interactive_control_panel.s"
-	@echo "... Tappa_5a/5a_graphic_start.o"
-	@echo "... Tappa_5a/5a_graphic_start.i"
-	@echo "... Tappa_5a/5a_graphic_start.s"
+	@echo "... Tappa_5/5_start_panel.o"
+	@echo "... Tappa_5/5_start_panel.i"
+	@echo "... Tappa_5/5_start_panel.s"
 .PHONY : help
 
 

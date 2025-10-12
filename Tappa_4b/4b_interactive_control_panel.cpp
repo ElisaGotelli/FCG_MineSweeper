@@ -472,7 +472,7 @@ void Game_Stop::draw(sf::RenderWindow& window){
         title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
+        title.setPosition({title.getPosition().x,title.getPosition().y + 20.f + stop_gap}); 
         window.draw(title);
 
         title.setString("oppure"); 
@@ -497,7 +497,7 @@ void Game_Stop::draw(sf::RenderWindow& window){
         title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
+        title.setPosition({title.getPosition().x,title.getPosition().y + 20.f + stop_gap}); 
         window.draw(title);
 
         title.setString("qua sottostanti"); 

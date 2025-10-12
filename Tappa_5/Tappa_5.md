@@ -1,6 +1,7 @@
 # TITOLO: 
 
 ## OBBIETTIVO DELLA TAPPA: 
+Creare sia la parte grafica che interattiva della schermata iniziale senza la parte della scelta del livello
 
 ## COSA È STATO IMPLEMENTATO: 
 
@@ -10,9 +11,6 @@
 #### N.B: Le frecce nelle foto sono per indicare un particolare del risultato (tipo la cella considerata per quella verifica di risultato). Non devono comparire nel risultato
 
 ## PROBLEMI RISCONTRATI E SOLUZIONI: 
-#### PROBLEMA: 
-Dimensione diversa dei pulsanti nel game stop rispetto 
-#### SOLUZIONE: 
-Utilizzo della dimensione del pulsante per la pausa come standard e poi si cambia dopo le altre 
+nessuno
 
 ## FONTI DI RIFERIMENTO UTILIZZATE: 
