@@ -18,9 +18,9 @@ const float max_frame_rate = 60;
 ////////////////SCHERMATA INIZIALE////////////////
 const unsigned start_width = (window_width/3.f)*2.f; //AGGIUNTA: la schermata iniziale sarà larga due terzi rispetto alla finestra
 const unsigned start_heigth = (window_height/3.f)*2.f; //AGGIUNTA: la schermata iniziale sarà alta due terzi rispetto alla finestra
-const unsigned start_pos_x = window_width/6.f; //la schermata iniziale sarà posizionata un sesto a destra rispetto all'origine della finestra
-const unsigned start_pos_y = window_height/6.f; //la schermata iniziale sarà posizionata un sesto sotto l'origine della finestra
-const float start_gap = 20.f; //gap tra le scritte nella schermata iniziale 
+const unsigned start_pos_x = window_width/6.f; //AGGIUNTA: la schermata iniziale sarà posizionata un sesto a destra rispetto all'origine della finestra
+const unsigned start_pos_y = window_height/6.f; //AGGIUNTA: la schermata iniziale sarà posizionata un sesto sotto l'origine della finestra
+const float start_gap = 20.f; //AGGIUNTA: gap tra le scritte nella schermata iniziale 
 
 ////////////////PANNELLO DI GIOCO////////////////
 
@@ -1009,7 +1009,7 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
 {
-    if(state.sp.visible) state.sp.visible = false; //AGGIUNTA: mostro la schermata di inizio gioco
+    if(state.sp.visible) state.sp.visible = false; //AGGIUNTA: mostro la schermata di inizio gioco e non più la iniziale 
     if (state.game_paused && key.scancode == sf::Keyboard::Scancode::Space) state.restart(); 
 }
 

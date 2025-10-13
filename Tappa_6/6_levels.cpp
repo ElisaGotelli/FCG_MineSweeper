@@ -15,6 +15,13 @@ const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
 
+////////////////SCHERMATA INIZIALE////////////////
+const unsigned start_width = (window_width/3.f)*2.f;
+const unsigned start_heigth = (window_height/3.f)*2.f;
+const unsigned start_pos_x = window_width/6.f; 
+const unsigned start_pos_y = window_height/6.f;
+const float start_gap = 20.f;
+
 ////////////////PANNELLO DI GIOCO////////////////
 
 const float panel_horizontal_displacement = 100; 
@@ -272,8 +279,22 @@ struct Game_Stop
     void draw (sf::RenderWindow& window);
 }; 
 
+struct Start_Panel
+{
+    sf::Vector2f start_size; 
+    sf::Vector2f start_pos; 
+    sf::Text start_title{font}; 
+    bool visible; 
+
+    Start_Panel (): 
+                    start_size({start_width, start_heigth}), 
+                    start_pos({start_pos_x, start_pos_y}), 
+                    visible(true) {} 
+    void draw (sf::RenderWindow& window); 
+};
 struct State  
 {
+    Start_Panel sp; 
     Game_Panel game_panel;
     Game_Stop gs; 
     Control_Panel cp; 
@@ -284,6 +305,7 @@ struct State
     bool game_ended;  
 
     State (): 
+                sp(), 
                 game_panel({9,9}, 15), 
                 gs(),
                 cp(game_panel.border),
@@ -466,13 +488,15 @@ void Game_Stop::draw(sf::RenderWindow& window){
     title.setPosition({title.getPosition().x,  title.getPosition().y + 140.f + stop_gap}); 
     window.draw(title);
 
-    if(type == stop_type::Pause){ 
+
+    if(type == stop_type::Pause)
+    { 
         title.setString("Premere SPACE per riprendere la partita"); 
         title.setCharacterSize(30); 
         title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
+        title.setPosition({title.getPosition().x,title.getPosition().y + 20.f + stop_gap}); 
         window.draw(title);
 
         title.setString("oppure"); 
@@ -490,13 +514,14 @@ void Game_Stop::draw(sf::RenderWindow& window){
         window.draw(title);
         new_game_cb.draw(window); 
     }
-    else { 
+    else 
+    { 
         title.setString("Scegliere uno dei pulsanti"); 
         title.setCharacterSize(40);
         title.setFillColor(sf::Color::Black);  
         b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap});
+        title.setPosition({title.getPosition().x,title.getPosition().y + 20.f + stop_gap}); 
         window.draw(title);
 
         title.setString("qua sottostanti"); 
@@ -506,13 +531,11 @@ void Game_Stop::draw(sf::RenderWindow& window){
         title.setPosition({title.getPosition().x,title.getPosition().y + title.getCharacterSize() + stop_gap}); 
         window.draw(title);
 
-       
         new_game_cb.cb_size = {std_stop_button_width*1.5f, std_stop_button_heigth*1.5f};  
         new_game_cb.cb_pos = {gs_pos.x+ gs_size.x/2.f - std_stop_button_width* 0.75f, gs_pos.y + gs_size.y - stop_gap - std_stop_button_heigth*1.5f};
         new_game_cb.cb_bounds = {new_game_cb.cb_pos, new_game_cb.cb_size};
         new_game_cb.draw(window); 
-    }
-    
+    }  
 }
 
 void Header::draw(sf::RenderWindow& window)
@@ -629,10 +652,64 @@ void Control_Panel::draw (sf::RenderWindow& window){
     pause.draw(window); 
 }
 
+
+void Start_Panel::draw(sf::RenderWindow& window){
+    sf::RectangleShape s (start_size); 
+    s.setPosition (start_pos);
+    s.setFillColor(sf::Color(210,180,140)); 
+    s.setOutlineThickness(20.f); 
+    s.setOutlineColor(sf::Color(92,51,23)); 
+    window.draw (s); 
+
+    start_title.setString("Benvenuto su"); 
+    start_title.setCharacterSize(60);
+    start_title.setFillColor(sf::Color::Black); 
+    start_title.setOutlineThickness(2.f);
+    start_title.setOutlineColor(sf::Color::White); 
+    auto b = start_title.getLocalBounds(); 
+    start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    start_title.setPosition({start_pos.x + start_size.x/2.f, start_pos.y + start_gap});             
+    window.draw(start_title);
+
+    start_title.setString("MINESWEEPER"); 
+    start_title.setCharacterSize(120);
+    b = start_title.getLocalBounds(); 
+    start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 60.f + start_gap});           
+    window.draw(start_title);
+
+    start_title.setString("Versione E.0"); 
+    start_title.setCharacterSize(40);
+    start_title.setFillColor(sf::Color::Red);
+    b = start_title.getLocalBounds(); 
+    start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 120.f + start_gap});            
+    window.draw(start_title);
+
+    start_title.setString("Premere SPACE per iniziare"); 
+    start_title.setFillColor(sf::Color::Black);
+    start_title.setCharacterSize(60);
+    b = start_title.getLocalBounds(); 
+    start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 40.f + start_gap});            
+    window.draw(start_title);
+
+    start_title.setString("una nuova partita!"); 
+    start_title.setCharacterSize(60);
+    b = start_title.getLocalBounds(); 
+    start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + start_title.getCharacterSize() + start_gap});            
+    window.draw(start_title);
+}
+
 void State::draw (sf::RenderWindow& window){
-    game_panel.draw (window);
-    cp.draw(window); 
-    gs.draw(window); 
+    if(sp.visible) 
+        sp.draw(window); 
+    else{
+        game_panel.draw (window);
+        cp.draw(window); 
+        gs.draw(window); 
+    }
 }
 
 ////////////////ALTRE FUNZIONI////////////////
@@ -924,6 +1001,7 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
 {
+    if(state.sp.visible) state.sp.visible = false;
     if (state.game_paused && key.scancode == sf::Keyboard::Scancode::Space) state.restart(); 
 }
 
