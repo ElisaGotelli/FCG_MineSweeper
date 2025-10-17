@@ -292,6 +292,19 @@ Tappa5/fast:
 .PHONY : Tappa5/fast
 
 #=============================================================================
+# Target rules for targets named Tappa6
+
+# Build rule for target.
+Tappa6: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa6
+.PHONY : Tappa6
+
+# fast build rule for target.
+Tappa6/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/build
+.PHONY : Tappa6/fast
+
+#=============================================================================
 # Target rules for targets named sfml-system
 
 # Build rule for target.
@@ -596,6 +609,30 @@ Tappa_5/5_start_panel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/Tappa_5/5_start_panel.cpp.s
 .PHONY : Tappa_5/5_start_panel.cpp.s
 
+Tappa_6/6_levels.o: Tappa_6/6_levels.cpp.o
+.PHONY : Tappa_6/6_levels.o
+
+# target to build an object file
+Tappa_6/6_levels.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/Tappa_6/6_levels.cpp.o
+.PHONY : Tappa_6/6_levels.cpp.o
+
+Tappa_6/6_levels.i: Tappa_6/6_levels.cpp.i
+.PHONY : Tappa_6/6_levels.i
+
+# target to preprocess a source file
+Tappa_6/6_levels.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/Tappa_6/6_levels.cpp.i
+.PHONY : Tappa_6/6_levels.cpp.i
+
+Tappa_6/6_levels.s: Tappa_6/6_levels.cpp.s
+.PHONY : Tappa_6/6_levels.s
+
+# target to generate assembly for a file
+Tappa_6/6_levels.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/Tappa_6/6_levels.cpp.s
+.PHONY : Tappa_6/6_levels.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -618,6 +655,7 @@ help:
 	@echo "... Tappa4a"
 	@echo "... Tappa4b"
 	@echo "... Tappa5"
+	@echo "... Tappa6"
 	@echo "... sfml-audio"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
@@ -653,6 +691,9 @@ help:
 	@echo "... Tappa_5/5_start_panel.o"
 	@echo "... Tappa_5/5_start_panel.i"
 	@echo "... Tappa_5/5_start_panel.s"
+	@echo "... Tappa_6/6_levels.o"
+	@echo "... Tappa_6/6_levels.i"
+	@echo "... Tappa_6/6_levels.s"
 .PHONY : help
 
 

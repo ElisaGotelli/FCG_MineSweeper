@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include <vector> //AGGIUNTA: HA SENSO AVERLO??
 #include <string>
 #include <cstdlib> 
 #include <ctime> 
@@ -15,12 +15,16 @@ const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
 
+////////////////STATO////////////////
+
+enum class Difficulty{easy, medium,hard}; //AGGIUNTA 
+
 ////////////////SCHERMATA INIZIALE////////////////
 const unsigned start_width = (window_width/3.f)*2.f;
 const unsigned start_heigth = (window_height/3.f)*2.f;
 const unsigned start_pos_x = window_width/6.f; 
 const unsigned start_pos_y = window_height/6.f;
-const float start_gap = 20.f;
+const float start_gap = 30.f; //MODIFICATO
 
 ////////////////PANNELLO DI GIOCO////////////////
 
@@ -49,7 +53,7 @@ enum class cell_state{ Covered, Revealed, Flag};
 
 ////////////////PULSANTE DI CONTROLLO////////////////
 
-enum class button_type{new_game, pause};
+enum class button_type{new_game, pause, easy, medium, hard}; //MODIFICA: aggiunti i tre possibili livelli di difficoltà 
 
 ////////////////PANNELLO DI CONTROLLO////////////////
 
@@ -201,6 +205,8 @@ struct Border
     Border(float cell_size, Grid& grid, Header& header); 
     void draw (sf::RenderWindow& window);
 }; 
+//cell_size(min(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + 4.f)) * 0.85,(((window_width-(panel_horizontal_displacement*3))/2.f)/(cell_num.x+4.f))*0.85)), //MODIFICA
+
 
 struct Game_Panel
 {
@@ -210,7 +216,7 @@ struct Game_Panel
     Border border;  
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size(((window_height - (panel_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)) * 0.85f), 
+                                                    cell_size((((window_width-(panel_horizontal_displacement*2))/2.f)/(cell_num.x+1))*0.85), //MODIFICA
                                                     grid(cell_num, mine_num, cell_size), 
                                                     header(cell_size, grid), 
                                                     border(cell_size, grid, header) {} 
@@ -284,11 +290,17 @@ struct Start_Panel
     sf::Vector2f start_size; 
     sf::Vector2f start_pos; 
     sf::Text start_title{font}; 
+    sf::Vector2f start_cb_size;
+    Control_Button easy_cb, medium_cb, hard_cb; //AGGIUNTA
     bool visible; 
 
     Start_Panel (): 
                     start_size({start_width, start_heigth}), 
                     start_pos({start_pos_x, start_pos_y}), 
+                    start_cb_size({start_size.x/5.f,start_size.y/6.f}), //AGGIUNTA 
+                    easy_cb(button_type::easy, {start_pos.x+start_cb_size.x/2.f, start_pos.y+start_size.y - start_gap - start_cb_size.y}, start_cb_size), //AGGIUNTA
+                    medium_cb(button_type::medium,{easy_cb.cb_pos.x+(start_cb_size.x*1.5f), easy_cb.cb_pos.y}, start_cb_size), //AGGIUNTA
+                    hard_cb(button_type::hard,{easy_cb.cb_pos.x+(start_cb_size.x*3.f), easy_cb.cb_pos.y}, start_cb_size), //AGGIUNTA 
                     visible(true) {} 
     void draw (sf::RenderWindow& window); 
 };
@@ -298,6 +310,7 @@ struct State
     Game_Panel game_panel;
     Game_Stop gs; 
     Control_Panel cp; 
+    Difficulty diff; //AGGIUNTA 
     int mouse_cell; 
     bool focus; 
     bool game_paused; 
@@ -309,6 +322,7 @@ struct State
                 game_panel({9,9}, 15), 
                 gs(),
                 cp(game_panel.border),
+                diff(Difficulty::easy), //AGGIUNTA 
                 focus(false), 
                 game_paused(false), 
                 first_move(true),
@@ -321,6 +335,7 @@ struct State
     void reset(); 
     void pause(); 
     void restart(); 
+    void set_difficulty(Difficulty diff);
     void draw (sf::RenderWindow& window);
 };
 
@@ -631,7 +646,32 @@ void Control_Button::draw (sf::RenderWindow& window){
     cb_text.setFillColor(sf::Color::Black); 
     cb_text.setOutlineThickness(2.f); 
     cb_text.setOutlineColor(sf::Color::White); 
-    cb_text.setString(cb_type == button_type::pause ? "PAUSA" : "NUOVA\nPARTITA"); 
+    //tolto: cb_text.setString(cb_type == button_type::pause ? "PAUSA" : "NUOVA\nPARTITA"); 
+    //AGGIUNTA
+    switch(cb_type){
+        case button_type::pause: 
+            cb_text.setString("PAUSA");
+            break;
+        
+        case button_type::new_game: 
+            cb_text.setString("NUOVA\nPARTITA");
+            break;
+
+        case button_type::easy: 
+            cb_text.setString("FACILE");
+            break;
+
+        case button_type::medium: 
+            cb_text.setString("MEDIO");
+            break;
+
+        case button_type::hard: 
+            cb_text.setString("DIFFICILE");
+            break;
+
+        default: 
+            break; 
+    }
     sf::FloatRect b = cb_text.getLocalBounds(); 
     cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2.f,
                                    b.position.y + b.size.y/ 2.f));
@@ -686,7 +726,7 @@ void Start_Panel::draw(sf::RenderWindow& window){
     start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 120.f + start_gap});            
     window.draw(start_title);
 
-    start_title.setString("Premere SPACE per iniziare"); 
+    /*start_title.setString("Premere SPACE per iniziare"); 
     start_title.setFillColor(sf::Color::Black);
     start_title.setCharacterSize(60);
     b = start_title.getLocalBounds(); 
@@ -699,7 +739,21 @@ void Start_Panel::draw(sf::RenderWindow& window){
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
     start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + start_title.getCharacterSize() + start_gap});            
+    window.draw(start_title);*/
+
+    //AGGIUNTA: 
+    start_title.setString("Scegliere la difficolta' di gioco"); 
+    start_title.setFillColor(sf::Color::Black);
+    start_title.setCharacterSize(60);
+    b = start_title.getLocalBounds(); 
+    start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 40.f + start_gap});            
     window.draw(start_title);
+
+    easy_cb.draw(window); //aggiunta
+    medium_cb.draw(window); //AGGIUNTA
+    hard_cb.draw(window); //AGGIUNTA
+
 }
 
 void State::draw (sf::RenderWindow& window){
@@ -880,6 +934,7 @@ void State::reset(){
     game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
     gs = Game_Stop(); 
     game_paused = focus = game_ended= false; 
+    cp = Control_Panel(game_panel.border); //EX AGGIUNTA
     first_move = true; 
     mouse_cell = -1; 
 }
@@ -900,6 +955,39 @@ void State::restart(){
     game_paused = false; 
     if(!first_move) 
         game_panel.header.timer.isRunning = true;  
+}
+
+//AGGIUNTA
+void State::set_difficulty(Difficulty diff){
+    switch(diff){
+        case Difficulty::medium: 
+            game_panel.grid.cell_num = {16,16};
+            game_panel.grid.mine_num = 40; 
+            //game_panel.cell_size = game_panel.grid.Grid_size.x/16; 
+            //game_panel.grid = Grid({16,16}, 40, game_panel.cell_size); 
+            break;
+
+        case Difficulty::hard: 
+            game_panel.grid.cell_num = {30,20};
+            game_panel.grid.mine_num = 99; 
+            //game_panel.cell_size = game_panel.grid.Grid_size.y/20; 
+            //game_panel.grid = Grid({20,30}, 99, game_panel.cell_size); 
+            
+            break; 
+
+        default: 
+            break;
+        
+    }
+
+    reset();
+    /*
+    game_panel.header = Header(game_panel.cell_size, game_panel.grid); 
+    game_panel.border = Border(game_panel.cell_size, game_panel.grid, game_panel.header);
+    gs = Game_Stop(); 
+    cp = Control_Panel(game_panel.border);
+    */
+            
 }
 
 ////////////////EVENTI////////////////
@@ -946,7 +1034,19 @@ void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
         return;
     } 
 
+    //AGGIUNTA
     if( mouse.button == sf::Mouse::Button::Left){
+        if(state.sp.visible){
+            if(state.sp.medium_cb.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
+                state.set_difficulty(Difficulty::medium);
+            }
+            else if(state.sp.hard_cb.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
+                state.set_difficulty(Difficulty::hard);
+            }
+            state.sp.visible = false; 
+            return; 
+        }
+        
         if(state.cp.new_game.cb_bounds.contains(static_cast<sf::Vector2f>(mouse.position))){
             state.reset(); 
             return; 
@@ -1001,7 +1101,7 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 
 void handle(const sf::Event::KeyPressed& key, State& state) 
 {
-    if(state.sp.visible) state.sp.visible = false;
+    //tolto: if(state.sp.visible) state.sp.visible = false;
     if (state.game_paused && key.scancode == sf::Keyboard::Scancode::Space) state.restart(); 
 }
 
@@ -1013,23 +1113,25 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
         static_cast<float>(ev.position.y)
     };
 
+    //AGGIUNTA
+    if(state.sp.visible){
+        state.sp.easy_cb.mouse_focus = (state.sp.easy_cb.cb_bounds.contains(mouse_float_pos)? true : false); 
+        state.sp.medium_cb.mouse_focus = (state.sp.medium_cb.cb_bounds.contains(mouse_float_pos)? true : false); 
+        state.sp.hard_cb.mouse_focus = (state.sp.hard_cb.cb_bounds.contains(mouse_float_pos)? true : false); 
+        return;
+    }
+
+    //EX MODIFICA
     if(state.game_ended || state.game_paused){
-        if( state.gs.new_game_cb.cb_bounds.contains(mouse_float_pos))
-            state.gs.new_game_cb.mouse_focus = true; 
-        else 
-            state.gs.new_game_cb.mouse_focus = false;
+        state.gs.new_game_cb.mouse_focus = (state.gs.new_game_cb.cb_bounds.contains(mouse_float_pos)? true : false); 
         return; 
     }
 
-    if(state.cp.new_game.cb_bounds.contains(mouse_float_pos))
-        state.cp.new_game.mouse_focus = true; 
-    else 
-        state.cp.new_game.mouse_focus = false; 
+    //EX MODIFICA
+    state.cp.new_game.mouse_focus = (state.cp.new_game.cb_bounds.contains(mouse_float_pos)? true : false);  
 
-    if(state.cp.pause.cb_bounds.contains(mouse_float_pos))
-        state.cp.pause.mouse_focus = true; 
-    else 
-        state.cp.pause.mouse_focus = false; 
+    //EX MODIFICA
+    state.cp.pause.mouse_focus = (state.cp.pause.cb_bounds.contains(mouse_float_pos)? true : false); 
 
     int new_idx =-1; 
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
