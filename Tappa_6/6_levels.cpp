@@ -996,6 +996,9 @@ void handle_close (sf::RenderWindow& window)
 {
     window.close();
 }
+
+
+//DA MODIFICARE
 void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
 {
     float aspect = static_cast<float>(window_width)/static_cast<float>(window_height);
@@ -1149,6 +1152,7 @@ void handle (const sf::Event::MouseMoved& ev, State& state)
 }
 
 ////////////////LOOP////////////////
+//DA MODIFICARE
 int main()
 {
     load_textures_fonts();
