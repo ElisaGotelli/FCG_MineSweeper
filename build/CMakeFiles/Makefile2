@@ -74,6 +74,8 @@ all: CMakeFiles/Tappa4a.dir/all
 all: CMakeFiles/Tappa4b.dir/all
 all: CMakeFiles/Tappa5.dir/all
 all: CMakeFiles/Tappa6.dir/all
+all: CMakeFiles/Tappa7a.dir/all
+all: CMakeFiles/Tappa7b.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -92,6 +94,8 @@ clean: CMakeFiles/Tappa4a.dir/clean
 clean: CMakeFiles/Tappa4b.dir/clean
 clean: CMakeFiles/Tappa5.dir/clean
 clean: CMakeFiles/Tappa6.dir/clean
+clean: CMakeFiles/Tappa7a.dir/clean
+clean: CMakeFiles/Tappa7b.dir/clean
 clean: _deps/sfml-build/clean
 .PHONY : clean
 
@@ -226,7 +230,7 @@ CMakeFiles/Tappa00.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-g
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa00.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 57
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa00.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa00.dir/rule
@@ -254,7 +258,7 @@ CMakeFiles/Tappa1a.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-g
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa1a.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa1a.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa1a.dir/rule
@@ -282,7 +286,7 @@ CMakeFiles/Tappa1b.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-g
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa1b.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 57
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa1b.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa1b.dir/rule
@@ -310,7 +314,7 @@ CMakeFiles/Tappa1c.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-g
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa1c.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa1c.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa1c.dir/rule
@@ -338,7 +342,7 @@ CMakeFiles/Tappa2a.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-g
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa2a.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 57
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa2a.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa2a.dir/rule
@@ -366,7 +370,7 @@ CMakeFiles/Tappa2b.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-g
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa2b.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa2b.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa2b.dir/rule
@@ -389,12 +393,12 @@ CMakeFiles/Tappa3.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-wind
 CMakeFiles/Tappa3.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa3.dir/build.make CMakeFiles/Tappa3.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=10,11 "Built target Tappa3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=10 "Built target Tappa3"
 .PHONY : CMakeFiles/Tappa3.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa3.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa3.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa3.dir/rule
@@ -417,12 +421,12 @@ CMakeFiles/Tappa4a.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-win
 CMakeFiles/Tappa4a.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4a.dir/build.make CMakeFiles/Tappa4a.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=12 "Built target Tappa4a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=11,12 "Built target Tappa4a"
 .PHONY : CMakeFiles/Tappa4a.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa4a.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 57
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa4a.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa4a.dir/rule
@@ -445,12 +449,12 @@ CMakeFiles/Tappa4b.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-win
 CMakeFiles/Tappa4b.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa4b.dir/build.make CMakeFiles/Tappa4b.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=13,14 "Built target Tappa4b"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=13 "Built target Tappa4b"
 .PHONY : CMakeFiles/Tappa4b.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa4b.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa4b.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa4b.dir/rule
@@ -473,12 +477,12 @@ CMakeFiles/Tappa5.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-wind
 CMakeFiles/Tappa5.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa5.dir/build.make CMakeFiles/Tappa5.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=15 "Built target Tappa5"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=14,15 "Built target Tappa5"
 .PHONY : CMakeFiles/Tappa5.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa5.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 57
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa5.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa5.dir/rule
@@ -501,12 +505,12 @@ CMakeFiles/Tappa6.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-wind
 CMakeFiles/Tappa6.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=16,17 "Built target Tappa6"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=16 "Built target Tappa6"
 .PHONY : CMakeFiles/Tappa6.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Tappa6.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa6.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : CMakeFiles/Tappa6.dir/rule
@@ -521,13 +525,69 @@ CMakeFiles/Tappa6.dir/clean:
 .PHONY : CMakeFiles/Tappa6.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/Tappa7a.dir
+
+# All Build rule for target.
+CMakeFiles/Tappa7a.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
+CMakeFiles/Tappa7a.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
+CMakeFiles/Tappa7a.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=17,18 "Built target Tappa7a"
+.PHONY : CMakeFiles/Tappa7a.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Tappa7a.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa7a.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
+.PHONY : CMakeFiles/Tappa7a.dir/rule
+
+# Convenience name for target.
+Tappa7a: CMakeFiles/Tappa7a.dir/rule
+.PHONY : Tappa7a
+
+# clean rule for target.
+CMakeFiles/Tappa7a.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/clean
+.PHONY : CMakeFiles/Tappa7a.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Tappa7b.dir
+
+# All Build rule for target.
+CMakeFiles/Tappa7b.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
+CMakeFiles/Tappa7b.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
+CMakeFiles/Tappa7b.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=19 "Built target Tappa7b"
+.PHONY : CMakeFiles/Tappa7b.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Tappa7b.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 55
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Tappa7b.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
+.PHONY : CMakeFiles/Tappa7b.dir/rule
+
+# Convenience name for target.
+Tappa7b: CMakeFiles/Tappa7b.dir/rule
+.PHONY : Tappa7b
+
+# clean rule for target.
+CMakeFiles/Tappa7b.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/clean
+.PHONY : CMakeFiles/Tappa7b.dir/clean
+
+#=============================================================================
 # Target rules for target _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir
 
 # All Build rule for target.
 _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/build.make _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/build.make _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=67,68,69,70,71,72,73,74,75 "Built target sfml-system"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=68,69,70,71,72,73,74,75,76 "Built target sfml-system"
 .PHONY : _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
 
 # Build rule for subdir invocation for target.
@@ -553,12 +613,12 @@ _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/clean:
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/build.make _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/build.make _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100 "Built target sfml-window"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100 "Built target sfml-window"
 .PHONY : _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 33
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/rule
@@ -579,7 +639,7 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/clean:
 _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/build.make _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/build.make _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=59,60,61,62,63,64,65,66 "Built target sfml-network"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=60,61,62,63,64,65,66,67 "Built target sfml-network"
 .PHONY : _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/all
 
 # Build rule for subdir invocation for target.
@@ -606,12 +666,12 @@ _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all: _deps/sfml-
 _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build.make _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build.make _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58 "Built target sfml-graphics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59 "Built target sfml-graphics"
 .PHONY : _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 
 # Build rule for subdir invocation for target.
 _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 56
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 54
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/elisa/FCG_MineSweeper/build/CMakeFiles 0
 .PHONY : _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/rule
@@ -632,7 +692,7 @@ _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/clean:
 _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 "Built target sfml-audio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/elisa/FCG_MineSweeper/build/CMakeFiles --progress-num=20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38 "Built target sfml-audio"
 .PHONY : _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/all
 
 # Build rule for subdir invocation for target.

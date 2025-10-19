@@ -305,6 +305,32 @@ Tappa6/fast:
 .PHONY : Tappa6/fast
 
 #=============================================================================
+# Target rules for targets named Tappa7a
+
+# Build rule for target.
+Tappa7a: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa7a
+.PHONY : Tappa7a
+
+# fast build rule for target.
+Tappa7a/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/build
+.PHONY : Tappa7a/fast
+
+#=============================================================================
+# Target rules for targets named Tappa7b
+
+# Build rule for target.
+Tappa7b: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa7b
+.PHONY : Tappa7b
+
+# fast build rule for target.
+Tappa7b/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/build
+.PHONY : Tappa7b/fast
+
+#=============================================================================
 # Target rules for targets named sfml-system
 
 # Build rule for target.
@@ -633,6 +659,54 @@ Tappa_6/6_levels.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa6.dir/build.make CMakeFiles/Tappa6.dir/Tappa_6/6_levels.cpp.s
 .PHONY : Tappa_6/6_levels.cpp.s
 
+Tappa_7a/7a_graphic_exit.o: Tappa_7a/7a_graphic_exit.cpp.o
+.PHONY : Tappa_7a/7a_graphic_exit.o
+
+# target to build an object file
+Tappa_7a/7a_graphic_exit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/Tappa_7a/7a_graphic_exit.cpp.o
+.PHONY : Tappa_7a/7a_graphic_exit.cpp.o
+
+Tappa_7a/7a_graphic_exit.i: Tappa_7a/7a_graphic_exit.cpp.i
+.PHONY : Tappa_7a/7a_graphic_exit.i
+
+# target to preprocess a source file
+Tappa_7a/7a_graphic_exit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/Tappa_7a/7a_graphic_exit.cpp.i
+.PHONY : Tappa_7a/7a_graphic_exit.cpp.i
+
+Tappa_7a/7a_graphic_exit.s: Tappa_7a/7a_graphic_exit.cpp.s
+.PHONY : Tappa_7a/7a_graphic_exit.s
+
+# target to generate assembly for a file
+Tappa_7a/7a_graphic_exit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7a.dir/build.make CMakeFiles/Tappa7a.dir/Tappa_7a/7a_graphic_exit.cpp.s
+.PHONY : Tappa_7a/7a_graphic_exit.cpp.s
+
+Tappa_7b/7b_interactive_exit.o: Tappa_7b/7b_interactive_exit.cpp.o
+.PHONY : Tappa_7b/7b_interactive_exit.o
+
+# target to build an object file
+Tappa_7b/7b_interactive_exit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/Tappa_7b/7b_interactive_exit.cpp.o
+.PHONY : Tappa_7b/7b_interactive_exit.cpp.o
+
+Tappa_7b/7b_interactive_exit.i: Tappa_7b/7b_interactive_exit.cpp.i
+.PHONY : Tappa_7b/7b_interactive_exit.i
+
+# target to preprocess a source file
+Tappa_7b/7b_interactive_exit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/Tappa_7b/7b_interactive_exit.cpp.i
+.PHONY : Tappa_7b/7b_interactive_exit.cpp.i
+
+Tappa_7b/7b_interactive_exit.s: Tappa_7b/7b_interactive_exit.cpp.s
+.PHONY : Tappa_7b/7b_interactive_exit.s
+
+# target to generate assembly for a file
+Tappa_7b/7b_interactive_exit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/Tappa_7b/7b_interactive_exit.cpp.s
+.PHONY : Tappa_7b/7b_interactive_exit.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -656,6 +730,8 @@ help:
 	@echo "... Tappa4b"
 	@echo "... Tappa5"
 	@echo "... Tappa6"
+	@echo "... Tappa7a"
+	@echo "... Tappa7b"
 	@echo "... sfml-audio"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
@@ -694,6 +770,12 @@ help:
 	@echo "... Tappa_6/6_levels.o"
 	@echo "... Tappa_6/6_levels.i"
 	@echo "... Tappa_6/6_levels.s"
+	@echo "... Tappa_7a/7a_graphic_exit.o"
+	@echo "... Tappa_7a/7a_graphic_exit.i"
+	@echo "... Tappa_7a/7a_graphic_exit.s"
+	@echo "... Tappa_7b/7b_interactive_exit.o"
+	@echo "... Tappa_7b/7b_interactive_exit.i"
+	@echo "... Tappa_7b/7b_interactive_exit.s"
 .PHONY : help
 
 

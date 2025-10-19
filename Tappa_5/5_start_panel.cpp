@@ -10,7 +10,7 @@
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Control Panel Graphic";
+const char* window_title = "Start Panel";
 const unsigned window_width = 1200;
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
