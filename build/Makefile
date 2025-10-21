@@ -331,6 +331,19 @@ Tappa7b/fast:
 .PHONY : Tappa7b/fast
 
 #=============================================================================
+# Target rules for targets named Tappa8
+
+# Build rule for target.
+Tappa8: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tappa8
+.PHONY : Tappa8
+
+# fast build rule for target.
+Tappa8/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa8.dir/build.make CMakeFiles/Tappa8.dir/build
+.PHONY : Tappa8/fast
+
+#=============================================================================
 # Target rules for targets named sfml-system
 
 # Build rule for target.
@@ -707,6 +720,30 @@ Tappa_7b/7b_interactive_exit.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa7b.dir/build.make CMakeFiles/Tappa7b.dir/Tappa_7b/7b_interactive_exit.cpp.s
 .PHONY : Tappa_7b/7b_interactive_exit.cpp.s
 
+Tappa_8/8_rules_and_title.o: Tappa_8/8_rules_and_title.cpp.o
+.PHONY : Tappa_8/8_rules_and_title.o
+
+# target to build an object file
+Tappa_8/8_rules_and_title.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa8.dir/build.make CMakeFiles/Tappa8.dir/Tappa_8/8_rules_and_title.cpp.o
+.PHONY : Tappa_8/8_rules_and_title.cpp.o
+
+Tappa_8/8_rules_and_title.i: Tappa_8/8_rules_and_title.cpp.i
+.PHONY : Tappa_8/8_rules_and_title.i
+
+# target to preprocess a source file
+Tappa_8/8_rules_and_title.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa8.dir/build.make CMakeFiles/Tappa8.dir/Tappa_8/8_rules_and_title.cpp.i
+.PHONY : Tappa_8/8_rules_and_title.cpp.i
+
+Tappa_8/8_rules_and_title.s: Tappa_8/8_rules_and_title.cpp.s
+.PHONY : Tappa_8/8_rules_and_title.s
+
+# target to generate assembly for a file
+Tappa_8/8_rules_and_title.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa8.dir/build.make CMakeFiles/Tappa8.dir/Tappa_8/8_rules_and_title.cpp.s
+.PHONY : Tappa_8/8_rules_and_title.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -732,6 +769,7 @@ help:
 	@echo "... Tappa6"
 	@echo "... Tappa7a"
 	@echo "... Tappa7b"
+	@echo "... Tappa8"
 	@echo "... sfml-audio"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
@@ -776,6 +814,9 @@ help:
 	@echo "... Tappa_7b/7b_interactive_exit.o"
 	@echo "... Tappa_7b/7b_interactive_exit.i"
 	@echo "... Tappa_7b/7b_interactive_exit.s"
+	@echo "... Tappa_8/8_rules_and_title.o"
+	@echo "... Tappa_8/8_rules_and_title.i"
+	@echo "... Tappa_8/8_rules_and_title.s"
 .PHONY : help
 
 

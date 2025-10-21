@@ -79,3 +79,7 @@ add_executable(Tappa7b Tappa_7b/7b_interactive_exit.cpp)
 target_compile_features(Tappa7b PRIVATE cxx_std_17)
 target_link_libraries(Tappa7b PRIVATE SFML::Graphics)
 
+# TAPPA 8
+add_executable(Tappa8 Tappa_8/8_rules_and_title.cpp)
+target_compile_features(Tappa8 PRIVATE cxx_std_17)
+target_link_libraries(Tappa8 PRIVATE SFML::Graphics)
