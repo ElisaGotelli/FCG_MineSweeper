@@ -10,7 +10,7 @@
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Interactive Exit";
+const char* window_title = "Rules and Title";
 const unsigned window_width = 1200; 
 const unsigned window_height = 900;
 const float max_frame_rate = 60;
@@ -29,8 +29,8 @@ const float start_gap = 30.f;
 
 ////////////////PANNELLO DI GIOCO////////////////
 
-const float panel_horizontal_displacement = 100; 
-const float panel_vertical_displacement = 100; 
+const float panel_horizontal_displacement = 100;
+const float panel_vertical_displacement = 100;
 const float gap = 2.f;
 const float start_cell_size = (((window_width-(panel_horizontal_displacement*2))/2.f)/9.f)*0.85; 
 
@@ -77,16 +77,15 @@ struct Cell
     int mine_adj;
     cell_state state;
     
-    Cell (sf::Vector2f pos, float size, int row_index, int column_index) : pos (pos),
-                                                  size (size),
-                                                  row_index(row_index),
-                                                  column_index(column_index),
-                                                  bounds (pos, {size, size}),
-                                                  mouse_focus(false),
-                                                  texture (&Covered_texture),
-                                                  type(cell_type::Empty), 
-                                                  mine_adj(0),
-                                                  state(cell_state::Covered) {}
+    Cell (sf::Vector2f pos, float size, int row_index, int column_index) :  pos (pos),
+                                                                            size (size),
+                                                                            row_index(row_index),
+                                                                            column_index(column_index),
+                                                                            bounds (pos, {size, size}),mouse_focus(false),
+                                                                            texture (&Covered_texture),
+                                                                            type(cell_type::Empty),
+                                                                            mine_adj(0),
+                                                                            state(cell_state::Covered) {}
     void draw (sf::RenderWindow& window);
 };
 
@@ -703,11 +702,9 @@ void Control_Button::draw (sf::RenderWindow& window){
         default: 
             break; 
     }
-    sf::FloatRect b = cb_text.getLocalBounds(); 
-    cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2.f,
-                                   b.position.y + b.size.y/ 2.f));
-    cb_text.setPosition(sf::Vector2f(cb_pos.x + cb_size.x/2.f,
-                                     cb_pos.y + cb_size.y /2.f));
+    sf::FloatRect b = cb_text.getLocalBounds();
+    cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2.f, b.position.y + b.size.y/ 2.f));
+    cb_text.setPosition(sf::Vector2f(cb_pos.x + cb_size.x/2.f, cb_pos.y + cb_size.y /2.f));
 
     window.draw(cb_text);
 }
@@ -724,62 +721,58 @@ void Control_Panel::draw (sf::RenderWindow& window){
     exit.draw(window);
 
     //AGGIUNTA
-    info.setString("INFO GIOCO"); 
+    info.setString("INFO GIOCO");
     info.setCharacterSize(info_size);
-    info.setFillColor(sf::Color::Black); 
-    info.setOutlineThickness(2.f); 
-    info.setOutlineColor(sf::Color::White); 
-    auto b = info.getLocalBounds(); 
-    info.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    info.setPosition({cp_pos.x + cp_size.x/2.f, exit.cb_pos.y + exit.cb_size.y + control_gap*2.f});             
+    info.setFillColor(sf::Color::Black);
+    info.setOutlineThickness(2.f);
+    info.setOutlineColor(sf::Color::White);
+    auto b = info.getLocalBounds();
+    info.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+    info.setPosition({cp_pos.x + cp_size.x/2.f, exit.cb_pos.y + exit.cb_size.y + control_gap*2.f});
     window.draw(info);
 
     //AGGIUNTA
     info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info.getCharacterSize() + control_gap}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap}); 
     switch(info_diff){
         case Difficulty::easy: 
-            info.setString("Difficolta' scelta:\t");
-            window.draw(info); 
-            info.setPosition({cp_pos.x + control_gap + info , info.getPosition().y + info.getCharacterSize() + control_gap});
+            info.setString("Difficolta' scelta : \tFACILE");
             break; 
 
         case Difficulty::medium: 
-            info.setString("Difficolta' scelta: media");
+            info.setString("Difficolta' scelta : \tMEDIA");
             break; 
 
         case Difficulty::hard: 
-            info.setString("Difficolta' scelta: difficile");
+            info.setString("Difficolta' scelta : \tDIFFICILE");
             break; 
         default: 
             return; 
     }
-    info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info.getCharacterSize() + control_gap}); 
     window.draw(info);
 
     //AGGIUNTA
-    info.setString("Totale mine nella griglia: " + to_string(info_mine));
+    info.setString("Totale mine nella griglia : \t" + to_string(info_mine));
     info.setOrigin({0.f, 0.f}); 
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info.getCharacterSize() + control_gap}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap}); 
     window.draw(info);
 
     //AGGIUNTA
-    info.setString("Obbiettivo del gioco: "); 
+    info.setString("Obbiettivo del gioco : "); 
     info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info.getCharacterSize() + control_gap}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap*1.5f}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("Scoprire tutte le celle che nascondono una \nmina. \nLa partita e' persa alla prima mina scoperta."); 
     info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info.getCharacterSize() + control_gap}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap}); 
     window.draw(info);
 
     //AGGIUNTA
-    info.setString("Istruzioni:\n\t- Click Sinistro: Scopre cella\n\t- Click Destro: Mette/toglie bandiera"); 
+    info.setString("Istruzioni :\n\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
     info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info.getCharacterSize()*2.f + control_gap}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size*3.f + control_gap*1.5f}); 
     window.draw(info);
 
 }
