@@ -18,6 +18,7 @@ const float max_frame_rate = 60;
 ////////////////STATO////////////////
 
 enum class Difficulty{easy, medium,hard}; 
+const float title_gap = 50.f; //AGGIUNTA
 
 ////////////////SCHERMATA INIZIALE////////////////
 
@@ -98,7 +99,7 @@ struct Grid
     int mine_num; 
     int num_revealed; 
 
-    Grid (sf::Vector2i cell_num, int mine_num, float cell_size, float gap); //EX MODIFICA
+    Grid (sf::Vector2i cell_num, int mine_num, float& cell_size, float gap); //EX MODIFICA
     void place_mines(int starting_index_cell); 
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
@@ -219,7 +220,7 @@ struct Game_Panel
                                                     gap(cell_size*gap_ratio), //EX AGGIUNTA
                                                     grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
                                                     header(grid, gap), //EX MODIFICA
-                                                    border(cell_size, grid, header, gap) {} //EX MODIFICA 
+                                                    border(cell_size, grid, header, gap) {} //EX MODIFICA
     void draw (sf::RenderWindow& window);
 }; 
 
@@ -323,7 +324,8 @@ struct State
     bool focus; 
     bool game_paused; 
     bool first_move; 
-    bool game_ended;  
+    bool game_ended;
+    sf::Text title; //AGGIUNTA
 
     State (): 
                 sp(), 
@@ -335,7 +337,8 @@ struct State
                 game_paused(false), 
                 first_move(true),
                 mouse_cell(-1), 
-                game_ended(false) {} 
+                game_ended(false),
+                title(font) {}  //AGGIUNTA
     
     void AdjustView(sf::RenderWindow& window); 
     void reveal(Grid& g, int starting_index_cell); 
@@ -351,10 +354,12 @@ struct State
 
 ////////////////CREAZIONE////////////////
 
-Grid::Grid (sf::Vector2i bs, int bn, float cell_size, float gap){ //EX MODIFICA 
+Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){ //EX MODIFICA (sono state fatte due modifica ma la principale è che cell_size è per riferimento in modo da cambiarla ovunque nel codice in base alla difficoltà)
     cell_num = bs;
     mine_num = bn;
     num_revealed = 0;
+
+    cell_size = (mine_num==99? cell_size/0.85f : cell_size);  //ex aggiunta
 
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
 
@@ -413,7 +418,7 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
 
 Border::Border(float cell_size, Grid& grid, Header& header, float gap){//EX MODIFICA 
 
-    thickness = start_cell_size/2.f; 
+    thickness = cell_size/2.f; //EX MODIFICA
 
     
     b_pos = {   header.h_pos.x - header_border_gap - thickness, 
@@ -440,6 +445,7 @@ Border::Border(float cell_size, Grid& grid, Header& header, float gap){//EX MODI
     side_cells.push_back(Border_Cell({b_pos.x + b_size.x - thickness, b_pos.y + thickness}, left_right_cell_size, &border_textures[1])); 
 
 }
+
 
 ////////////////DRAW/////////////////
 void Cell::draw (sf::RenderWindow& window)
@@ -772,9 +778,9 @@ void Control_Panel::draw (sf::RenderWindow& window){
     window.draw(info);
 
     //AGGIUNTA
-    info.setString("Istruzioni :\n\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
+    info.setString("\nIstruzioni :\n\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
     info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size*3.f + control_gap*1.5f}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size*3.f + control_gap}); 
     window.draw(info);
 
 }
@@ -834,6 +840,18 @@ void State::draw (sf::RenderWindow& window){
         game_panel.draw (window);
         cp.draw(window); 
         gs.draw(window); 
+
+        //AGGIUNTA
+        title.setString("MINESWEEPER"); 
+        title.setCharacterSize(140);
+        title.setFillColor(sf::Color::Black); 
+        title.setOutlineThickness(2.f);
+        title.setOutlineColor(sf::Color::White); 
+        auto b = title.getLocalBounds(); 
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
+        title.setPosition({window_width/2.f, title_gap});             
+        window.draw(title);
+
     }
 }
 
