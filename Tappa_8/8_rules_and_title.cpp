@@ -31,8 +31,8 @@ const float start_gap = 30.f;
 
 const float panel_horizontal_displacement = 100;
 const float panel_vertical_displacement = 100;
-const float gap = 2.f;
-const float start_cell_size = (((window_width-(panel_horizontal_displacement*2))/2.f)/9.f)*0.85; 
+const float start_cell_size = (((window_width-(panel_horizontal_displacement*2))/2.f)/(10.f))*0.85;
+const float gap_ratio = 2.f / start_cell_size; //EX MODIFICA
 
 ////////////////GAME STOP////////////////
 
@@ -98,7 +98,7 @@ struct Grid
     int mine_num; 
     int num_revealed; 
 
-    Grid (sf::Vector2i cell_num, int mine_num, float cell_size); 
+    Grid (sf::Vector2i cell_num, int mine_num, float cell_size, float gap); //EX MODIFICA
     void place_mines(int starting_index_cell); 
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
@@ -168,7 +168,7 @@ struct Header
     Face face;
     Flag_Counter f_counter; 
 
-    Header(Grid& grid): //EX MODIFICA 
+    Header(Grid& grid, float gap): //EX MODIFICA 
                         h_size({ grid.Grid_size.x + (gap*(grid.cell_num.x-1)) - (2*header_border_gap), (start_cell_size * 9) / 4.f - (2*header_border_gap) }), h_pos({ grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - ((start_cell_size * 9) / 4.f + gap) + header_border_gap }),
                         details_size({(h_size.y - (h_size.y/3.f))*3.f/2.f, h_size.y - (h_size.y/3.f)}), 
                         details_pos_y(h_pos.y + (h_size.y/6.f)),
@@ -202,22 +202,24 @@ struct Border
     sf::Vector2f b_pos;
     float thickness; 
 
-    Border(float cell_size, Grid& grid, Header& header); 
+    Border(float cell_size, Grid& grid, Header& header, float gap); //EX MODIFICA 
     void draw (sf::RenderWindow& window);
 }; 
 
 struct Game_Panel
 {
     float cell_size;
+    float gap; //EX AGGIUNTA
     Grid grid;  
     Header header;
     Border border;  
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size((((window_width-(panel_horizontal_displacement*2))/2.f)/(cell_num.x+1))*0.85), 
-                                                    grid(cell_num, mine_num, cell_size), 
-                                                    header(grid), 
-                                                    border(cell_size, grid, header) {} 
+                                                    cell_size((((window_width-(panel_horizontal_displacement*2))/2.f)/(cell_num.x+1))*0.85),
+                                                    gap(cell_size*gap_ratio), //EX AGGIUNTA
+                                                    grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
+                                                    header(grid, gap), //EX MODIFICA
+                                                    border(cell_size, grid, header, gap) {} //EX MODIFICA 
     void draw (sf::RenderWindow& window);
 }; 
 
@@ -349,13 +351,13 @@ struct State
 
 ////////////////CREAZIONE////////////////
 
-Grid::Grid (sf::Vector2i bs, int bn, float cell_size){
-    cell_num = bs; 
-    mine_num = bn; 
-    num_revealed = 0; 
- 
+Grid::Grid (sf::Vector2i bs, int bn, float cell_size, float gap){ //EX MODIFICA 
+    cell_num = bs;
+    mine_num = bn;
+    num_revealed = 0;
+
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
- 
+
     Grid_pos = { 
         window_width - Grid_size.x - panel_horizontal_displacement - (gap * cell_num.x),
         (window_height - Grid_size.y - (gap * cell_num.y) + (Grid_size.y/4.f)) / 2.0f 
@@ -409,7 +411,7 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
 }
 
 
-Border::Border(float cell_size, Grid& grid, Header& header){ 
+Border::Border(float cell_size, Grid& grid, Header& header, float gap){//EX MODIFICA 
 
     thickness = start_cell_size/2.f; 
 
