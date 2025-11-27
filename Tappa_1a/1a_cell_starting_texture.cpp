@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
-#include "../textures_fonts.hpp" //file per le varie texture 
+#include "../risorse/textures_fonts.hpp"//file per le varie texture 
 
 using namespace std; 
 
@@ -153,6 +153,7 @@ void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
 
 int main()
 {
+    load_textures_fonts(); //loading del file delle etxture 
     sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title);
     window.setFramerateLimit (max_frame_rate);
     window.setMinimumSize(window.getSize()); 
@@ -168,8 +169,7 @@ int main()
 
     while (window.isOpen())
     {
-        load_textures_fonts(); //loading del file delle etxture 
-        // events
+        // eventi
         window.handleEvents (
                              [&window](const sf::Event::Closed&) { handle_close (window); },
                              [&window](const sf::Event::Resized& event) { handle_resize (event, window); }

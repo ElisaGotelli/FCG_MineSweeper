@@ -344,6 +344,19 @@ Tappa8/fast:
 .PHONY : Tappa8/fast
 
 #=============================================================================
+# Target rules for targets named prova
+
+# Build rule for target.
+prova: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 prova
+.PHONY : prova
+
+# fast build rule for target.
+prova/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prova.dir/build.make CMakeFiles/prova.dir/build
+.PHONY : prova/fast
+
+#=============================================================================
 # Target rules for targets named sfml-system
 
 # Build rule for target.
@@ -744,6 +757,30 @@ Tappa_8/8_rules_and_title.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tappa8.dir/build.make CMakeFiles/Tappa8.dir/Tappa_8/8_rules_and_title.cpp.s
 .PHONY : Tappa_8/8_rules_and_title.cpp.s
 
+prova.o: prova.cpp.o
+.PHONY : prova.o
+
+# target to build an object file
+prova.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prova.dir/build.make CMakeFiles/prova.dir/prova.cpp.o
+.PHONY : prova.cpp.o
+
+prova.i: prova.cpp.i
+.PHONY : prova.i
+
+# target to preprocess a source file
+prova.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prova.dir/build.make CMakeFiles/prova.dir/prova.cpp.i
+.PHONY : prova.cpp.i
+
+prova.s: prova.cpp.s
+.PHONY : prova.s
+
+# target to generate assembly for a file
+prova.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/prova.dir/build.make CMakeFiles/prova.dir/prova.cpp.s
+.PHONY : prova.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -770,6 +807,7 @@ help:
 	@echo "... Tappa7a"
 	@echo "... Tappa7b"
 	@echo "... Tappa8"
+	@echo "... prova"
 	@echo "... sfml-audio"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
@@ -817,6 +855,9 @@ help:
 	@echo "... Tappa_8/8_rules_and_title.o"
 	@echo "... Tappa_8/8_rules_and_title.i"
 	@echo "... Tappa_8/8_rules_and_title.s"
+	@echo "... prova.o"
+	@echo "... prova.i"
+	@echo "... prova.s"
 .PHONY : help
 
 

@@ -1,36 +1,47 @@
 #include <SFML/Graphics.hpp>
-#include <vector> 
+#include <vector>
 #include <string>
-#include <cstdlib> 
-#include <ctime> 
+#include <cstdlib>
+#include <ctime>
 #include <cmath>
 #include <SFML/System/Clock.hpp>
-#include "../textures_fonts.hpp"
+#include "../risorse/textures_fonts.hpp"
 
-using namespace std; 
+using namespace std;
 
 ////////////////FINESTRA////////////////
 const char* window_title = "Rules and Title";
-const unsigned window_width = 1200; 
-const unsigned window_height = 900;
+const unsigned window_width = 800; //EX MODIFICA
+const unsigned window_height = 600; //EX MODIFICA
 const float max_frame_rate = 60;
+const unsigned window_border_thickness = 15.f; //EX
+
+////////////////PANNELLI GENERALE////////////////
+sf::Color panel_background_color = sf::Color(210,180,140); //EX  
+sf::Color panel_border_color = sf::Color(92,51,23); //EX
+const float panel_thickness = 20.f; //EX
+
+////////////////DIMENSIONI TESTO////////////////
+const unsigned font_size_title = 85; //EX
+const unsigned font_size_subtitle = 27; //EX
+const unsigned font_size_text1 = 17; //EX
 
 ////////////////STATO////////////////
 
 enum class Difficulty{easy, medium,hard}; 
-const float title_gap = 50.f; //AGGIUNTA
+const float title_gap = 30.f; //AGGIUNTA
 
 ////////////////SCHERMATA INIZIALE////////////////
 
-const unsigned start_width = (window_width/3.f)*2.f;
-const unsigned start_heigth = (window_height/3.f)*2.f;
-const unsigned start_pos_x = window_width/6.f; 
-const unsigned start_pos_y = window_height/6.f;
-const float start_gap = 30.f;
+const unsigned start_width = (window_width/4.f)*3.f; //EX 
+const unsigned start_heigth = (window_height/4.f)*3.f; //EX 
+const unsigned start_pos_x = window_width/8.f; //EX 
+const unsigned start_pos_y = window_height/8.f; //EX
+const float start_gap = 25.f; //ex
 
 ////////////////PANNELLO DI GIOCO////////////////
 
-const float panel_horizontal_displacement = 100;
+const float panel_horizontal_displacement = 50; //EX MODIFICA
 const float panel_vertical_displacement = 100;
 const float start_cell_size = (((window_width-(panel_horizontal_displacement*2))/2.f)/(10.f))*0.85;
 const float gap_ratio = 2.f / start_cell_size; //EX MODIFICA
@@ -63,7 +74,7 @@ enum class button_type{new_game, pause, easy, medium, hard, exit};
 const float control_horizontal_displacement = 30; 
 const float control_vertical_displacement = 30; 
 const float control_gap = 10.f; //EX MODIFICA: gap tra le scritte e i pulsanti 
-const float info_size = 20.f; //AGGIUNTA: dimensione del testo nel control panel 
+const float info_size = 10.f; //AGGIUNTA: dimensione del testo nel control panel 
 
 ////////////////STRUCT////////////////
 struct Cell
@@ -318,8 +329,8 @@ struct State
     Start_Panel sp; 
     Game_Panel game_panel;
     Game_Stop gs; 
+    Difficulty diff; //EX MODIFICA (SCAMBIO ORDINE CON SOTTO)
     Control_Panel cp; 
-    Difficulty diff;
     int mouse_cell; 
     bool focus; 
     bool game_paused; 
@@ -475,9 +486,9 @@ void Game_Stop::draw(sf::RenderWindow& window){
 
     sf::RectangleShape s(gs_size);
     s.setPosition(gs_pos); 
-    s.setFillColor(sf::Color(210,180,140)); 
-    s.setOutlineThickness(20.f); 
-    s.setOutlineColor(sf::Color(92,51,23)); 
+    s.setFillColor(panel_background_color);//EX
+    s.setOutlineThickness(panel_thickness); //EX  
+    s.setOutlineColor(panel_border_color); //EX
     window.draw(s); 
 
     switch(type)
@@ -502,7 +513,7 @@ void Game_Stop::draw(sf::RenderWindow& window){
             return; 
     }
 
-    title.setCharacterSize((type == stop_type::New_Game)? 70.f : 140.f);
+    title.setCharacterSize((type == stop_type::New_Game)? font_size_title/2.f : font_size_title); //EX
     title.setFillColor(sf::Color::Black); 
     title.setOutlineThickness(2.f); 
     title.setOutlineColor(sf::Color::White); 
@@ -677,9 +688,9 @@ void Control_Button::draw (sf::RenderWindow& window){
     window.draw(cb);
 
     cb_text.setFont(font);
-    cb_text.setCharacterSize(cb.getSize().y/3.f); 
+    cb_text.setCharacterSize(cb.getSize().y/3.5f); //EX
     cb_text.setFillColor(sf::Color::Black); 
-    cb_text.setOutlineThickness(2.f); 
+    cb_text.setOutlineThickness(1.5f); //ex
     cb_text.setOutlineColor(sf::Color::White); 
     
     switch(cb_type){
@@ -688,7 +699,7 @@ void Control_Button::draw (sf::RenderWindow& window){
             break;
         
         case button_type::new_game: 
-            cb_text.setString("NUOVA\nPARTITA");
+            cb_text.setString(" NUOVA\nPARTITA"); //EX 
             break;
 
         case button_type::easy: 
@@ -732,7 +743,7 @@ void Control_Panel::draw (sf::RenderWindow& window){
     info.setString("INFO GIOCO");
     info.setCharacterSize(info_size);
     info.setFillColor(sf::Color::Black);
-    info.setOutlineThickness(2.f);
+    info.setOutlineThickness(1.f);
     info.setOutlineColor(sf::Color::White);
     auto b = info.getLocalBounds();
     info.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
@@ -772,15 +783,21 @@ void Control_Panel::draw (sf::RenderWindow& window){
     window.draw(info);
 
     //AGGIUNTA
-    info.setString("Scoprire tutte le celle che nascondono una \nmina. \nLa partita e' persa alla prima mina scoperta."); 
+    info.setString("\t- Scoprire tutte le celle che\n\t  nascondono una mina. \n\t- La partita e' persa alla prima\n\t  mina scoperta."); 
     info.setOrigin({0.f, 0.f});
     info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap}); 
     window.draw(info);
 
     //AGGIUNTA
-    info.setString("\nIstruzioni :\n\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
+    info.setString("Istruzioni :"); 
     info.setOrigin({0.f, 0.f});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size*3.f + control_gap}); 
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size*4.f + control_gap*1.5f}); 
+    window.draw(info);
+
+    //AGGIUNTA
+    info.setString("\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
+    info.setOrigin({0.f, 0.f});
+    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap}); 
     window.draw(info);
 
 }
@@ -795,7 +812,7 @@ void Start_Panel::draw(sf::RenderWindow& window){
     window.draw (s); 
 
     start_title.setString("Benvenuto su"); 
-    start_title.setCharacterSize(60);
+    start_title.setCharacterSize(font_size_subtitle); //EX
     start_title.setFillColor(sf::Color::Black); 
     start_title.setOutlineThickness(2.f);
     start_title.setOutlineColor(sf::Color::White); 
@@ -805,26 +822,26 @@ void Start_Panel::draw(sf::RenderWindow& window){
     window.draw(start_title);
 
     start_title.setString("MINESWEEPER"); 
-    start_title.setCharacterSize(120);
+    start_title.setCharacterSize(font_size_title); //EX 
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 60.f + start_gap});           
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + font_size_subtitle + start_gap}); //ex         
     window.draw(start_title);
 
     start_title.setString("Versione E.0"); 
-    start_title.setCharacterSize(40);
+    start_title.setCharacterSize(font_size_text1); //EX
     start_title.setFillColor(sf::Color::Red);
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 120.f + start_gap});            
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + font_size_title + start_gap}); //ex         
     window.draw(start_title);
 
     start_title.setString("Scegliere la difficolta' di gioco"); 
     start_title.setFillColor(sf::Color::Black);
-    start_title.setCharacterSize(60);
+    start_title.setCharacterSize(font_size_subtitle); //ex
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y}); 
-    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + 40.f + start_gap});            
+    start_title.setPosition({start_title.getPosition().x,start_title.getPosition().y + font_size_text1 + start_gap}); //EX
     window.draw(start_title);
 
     easy_cb.draw(window); 
@@ -843,7 +860,7 @@ void State::draw (sf::RenderWindow& window){
 
         //AGGIUNTA
         title.setString("MINESWEEPER"); 
-        title.setCharacterSize(140);
+        title.setCharacterSize(font_size_title);
         title.setFillColor(sf::Color::Black); 
         title.setOutlineThickness(2.f);
         title.setOutlineColor(sf::Color::White); 
@@ -859,7 +876,10 @@ void State::draw (sf::RenderWindow& window){
 
 void Flag_Counter::set_number(bool adding){ 
     if(num_flag == 999) return; 
-    if(adding? num_flag++ : num_flag--);  
+    if(adding)  //EX MODIFICA 
+        num_flag++; 
+    else 
+         num_flag--;  
     flag_numbers[2].num_texture = &Clock_textures[num_flag%10];
     flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10];
     flag_numbers[0].num_texture = &Clock_textures[(num_flag/100)%10];
@@ -1294,13 +1314,14 @@ int main()
 {
     srand(time(NULL));
     load_textures_fonts();
-    sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title);
+
+    sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title, sf::Style::Default, sf::State::Windowed); //EX MODIFICA 
     window.setFramerateLimit (max_frame_rate);
 
-    sf::RectangleShape border({(window_width - 40.f),(window_height-40.f)}); 
-    border.setPosition({20.f, 20.f}); 
+    sf::RectangleShape border({(window_width - window_border_thickness*2.f),(window_height- window_border_thickness*2.f)}); //EX
+    border.setPosition({window_border_thickness, window_border_thickness}); //EX 
     border.setFillColor(sf::Color::Transparent);  
-    border.setOutlineThickness(20.f);
+    border.setOutlineThickness(window_border_thickness); //EX MODIFICA
     border.setOutlineColor(sf::Color(0, 100, 0));
 
     State state;

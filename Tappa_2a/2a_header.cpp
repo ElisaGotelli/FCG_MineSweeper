@@ -5,7 +5,7 @@
 #include <ctime> 
 #include <cmath>
 #include <SFML/System/Clock.hpp> //AGGIUNTO
-#include "../textures_fonts.hpp"
+#include "../risorse/textures_fonts.hpp"
 
 using namespace std; 
 

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <stdexcept>
 #include <string>
+#include <filesystem>
 
 inline sf::Texture Covered_texture;
 inline sf::Texture Flag_texture;
@@ -22,6 +23,7 @@ inline sf::Font font;
 
 // ...existing code...
 inline void load_textures_fonts(const std::string& res_base = "../risorse/") {
+    
     auto path = [&](const std::string& rel){ return res_base + rel; };
 
     if (!Covered_texture.loadFromFile(path("texture/cells/cellup.jpg")))
@@ -99,8 +101,8 @@ inline void load_textures_fonts(const std::string& res_base = "../risorse/") {
     if (!win_face_texture.loadFromFile(path("texture/faces/winface.jpg")))
         throw std::runtime_error(std::string("Impossibile caricare ") + path("texture/faces/winface.jpg"));
 
-    if (!font.openFromFile(res_base + "EpundaSlab-VariableFont_wght.ttf"))
-        throw std::runtime_error(std::string("Impossibile caricare il font: ") + res_base + "EpundaSlab-VariableFont_wght.ttf");
+    if (!font.openFromFile(res_base + "DejavuSansMono-5m7L.ttf"))
+        throw std::runtime_error(std::string("Impossibile caricare il font: ") + res_base + "DejavuSansMono-5m7L.ttf");
 }
 // ...existing code...
 

@@ -14,13 +14,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Clipboard.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowEnums.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/ClipboardImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/ClipboardImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -132,6 +125,26 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Clipboard.cpp.o
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -211,28 +224,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Clipboard.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Context.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Context.cpp
@@ -248,10 +257,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Context.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Export.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/GlResource.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/GlContext.hpp
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -358,6 +363,21 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Context.cpp.o
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/utility
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -436,26 +456,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Context.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Cursor.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Cursor.cpp
@@ -472,14 +490,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Cursor.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowEnums.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/CursorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/CursorImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -586,6 +596,25 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Cursor.cpp.o
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -664,26 +693,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Cursor.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlContext.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/GlContext.cpp
@@ -703,17 +730,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlContext.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowEnums.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/GlContext.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/GlxContext.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/Xutil.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/algorithm
  /usr/include/c++/13/atomic
  /usr/include/c++/13/backward/auto_ptr.h
@@ -859,6 +875,30 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlContext.cpp.o
  /usr/include/c++/13/unordered_map
  /usr/include/c++/13/utility
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -941,28 +981,25 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlContext.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/inttypes.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlResource.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/GlResource.cpp
@@ -977,7 +1014,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlResource.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Export.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/GlResource.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/GlContext.hpp
- /usr/include/assert.h
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -1053,6 +1089,14 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlResource.cpp.o
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/utility
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/assert.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/pthread.h
@@ -1106,20 +1150,22 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlResource.cpp.o
  /usr/include/x86_64-linux-gnu/bits/typesizes.h
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Joystick.cpp
@@ -1135,16 +1181,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/JoystickImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/JoystickManager.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/JoystickImpl.hpp
- /usr/include/alloca.h
- /usr/include/asm-generic/bitsperlong.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/asm-generic/int-ll64.h
- /usr/include/asm-generic/ioctl.h
- /usr/include/asm-generic/ioctls.h
- /usr/include/asm-generic/posix_types.h
- /usr/include/asm-generic/types.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -1237,6 +1273,29 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.o
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/bitsperlong.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/asm-generic/int-ll64.h
+ /usr/include/asm-generic/ioctl.h
+ /usr/include/asm-generic/ioctls.h
+ /usr/include/asm-generic/posix_types.h
+ /usr/include/asm-generic/types.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -1330,19 +1389,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -1352,9 +1398,17 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.o
  /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/JoystickManager.cpp
@@ -1370,16 +1424,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/JoystickImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/JoystickManager.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/JoystickImpl.hpp
- /usr/include/alloca.h
- /usr/include/asm-generic/bitsperlong.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/asm-generic/int-ll64.h
- /usr/include/asm-generic/ioctl.h
- /usr/include/asm-generic/ioctls.h
- /usr/include/asm-generic/posix_types.h
- /usr/include/asm-generic/types.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -1472,6 +1516,29 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/bitsperlong.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/asm-generic/int-ll64.h
+ /usr/include/asm-generic/ioctl.h
+ /usr/include/asm-generic/ioctls.h
+ /usr/include/asm-generic/posix_types.h
+ /usr/include/asm-generic/types.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -1565,19 +1632,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -1587,9 +1641,17 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.
  /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Keyboard.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Keyboard.cpp
@@ -1607,10 +1669,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Keyboard.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Keyboard.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Mouse.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/InputImpl.hpp
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -1703,6 +1761,23 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Keyboard.cpp.o
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -1782,28 +1857,23 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Keyboard.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Mouse.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Mouse.cpp
@@ -1817,18 +1887,18 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Mouse.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Keyboard.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Mouse.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/InputImpl.hpp
- /usr/include/assert.h
  /usr/include/c++/13/cassert
  /usr/include/c++/13/pstl/pstl_config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/assert.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/stdc-predef.h
  /usr/include/x86_64-linux-gnu/bits/long-double.h
  /usr/include/x86_64-linux-gnu/bits/timesize.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -1845,7 +1915,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Sensor.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/SensorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/SensorManager.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/SensorImpl.hpp
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/bit
  /usr/include/c++/13/bits/concept_check.h
@@ -1872,19 +1941,27 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Sensor.cpp.o
  /usr/include/c++/13/initializer_list
  /usr/include/c++/13/pstl/pstl_config.h
  /usr/include/c++/13/type_traits
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/assert.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/stdc-predef.h
  /usr/include/x86_64-linux-gnu/bits/long-double.h
  /usr/include/x86_64-linux-gnu/bits/timesize.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/SensorManager.cpp
@@ -1899,10 +1976,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/SensorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/SensorManager.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/SensorImpl.hpp
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -1991,6 +2064,21 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.o
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -2066,25 +2154,22 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Touch.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Touch.cpp
@@ -2099,18 +2184,18 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Touch.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Mouse.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Touch.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/InputImpl.hpp
- /usr/include/assert.h
  /usr/include/c++/13/cassert
  /usr/include/c++/13/pstl/pstl_config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/assert.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/stdc-predef.h
  /usr/include/x86_64-linux-gnu/bits/long-double.h
  /usr/include/x86_64-linux-gnu/bits/timesize.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -2130,15 +2215,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/ClipboardImpl.c
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowEnums.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/ClipboardImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xatom.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -2265,6 +2341,28 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/ClipboardImpl.c
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xatom.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -2344,28 +2442,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/ClipboardImpl.c
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/CursorImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/CursorImpl.cpp
@@ -2381,19 +2475,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/CursorImpl.cpp.
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/CursorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Utils.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xcursor/Xcursor.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/Xutil.h
- /usr/include/X11/cursorfont.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -2488,6 +2569,27 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/CursorImpl.cpp.
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xcursor/Xcursor.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/cursorfont.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -2564,23 +2666,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/CursorImpl.cpp.
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/Display.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.cpp
@@ -2589,16 +2692,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/Display.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/System/Export.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowEnums.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -2718,6 +2811,27 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/Display.cpp.o
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/unordered_map
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -2796,26 +2910,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/Display.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/GlxContext.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/GlxContext.cpp
@@ -2860,22 +2972,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/GlxContext.cpp.
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Utils.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/WindowImplX11.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xdefs.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/Xutil.h
- /usr/include/X11/extensions/Xrandr.h
- /usr/include/X11/extensions/Xrender.h
- /usr/include/X11/extensions/randr.h
- /usr/include/X11/extensions/render.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -3011,6 +3107,35 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/GlxContext.cpp.
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/variant
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xdefs.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/extensions/Xrandr.h
+ /usr/include/X11/extensions/Xrender.h
+ /usr/include/X11/extensions/randr.h
+ /usr/include/X11/extensions/render.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/dlfcn.h
  /usr/include/endian.h
@@ -3096,28 +3221,25 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/GlxContext.cpp.
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/inttypes.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/InputImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/InputImpl.cpp
@@ -3150,16 +3272,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/InputImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/InputImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeyboardImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -3283,6 +3395,29 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/InputImpl.cpp.o
  /usr/include/c++/13/utility
  /usr/include/c++/13/variant
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -3362,28 +3497,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/InputImpl.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/JoystickImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/JoystickImpl.cpp
@@ -3399,16 +3530,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/JoystickImpl.cp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/System/EnumArray.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/JoystickImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/JoystickImpl.hpp
- /usr/include/alloca.h
- /usr/include/asm-generic/bitsperlong.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/asm-generic/int-ll64.h
- /usr/include/asm-generic/ioctl.h
- /usr/include/asm-generic/ioctls.h
- /usr/include/asm-generic/posix_types.h
- /usr/include/asm-generic/types.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -3528,6 +3649,29 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/JoystickImpl.cp
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/bitsperlong.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/asm-generic/int-ll64.h
+ /usr/include/asm-generic/ioctl.h
+ /usr/include/asm-generic/ioctls.h
+ /usr/include/asm-generic/posix_types.h
+ /usr/include/asm-generic/types.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -3643,19 +3787,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/JoystickImpl.cp
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -3667,9 +3798,22 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/JoystickImpl.cp
  /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___va_copy.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg_va_arg.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg_va_copy.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeySymToKeyMapping.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeySymToKeyMapping.cpp
@@ -3680,14 +3824,16 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeySymToKeyMapp
  /usr/include/X11/X.h
  /usr/include/X11/keysym.h
  /usr/include/X11/keysymdef.h
- /usr/include/stdc-predef.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeySymToUnicodeMapping.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeySymToUnicodeMapping.cpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeySymToUnicodeMapping.hpp
- /usr/include/X11/X.h
  /usr/include/c++/13/cstdint
  /usr/include/c++/13/pstl/pstl_config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/X11/X.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/stdc-predef.h
@@ -3703,13 +3849,10 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeySymToUnicode
  /usr/include/x86_64-linux-gnu/bits/typesizes.h
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeyboardImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeyboardImpl.cpp
@@ -3727,19 +3870,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeyboardImpl.cp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeySymToKeyMapping.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeySymToUnicodeMapping.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/KeyboardImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/XKBlib.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/extensions/XKB.h
- /usr/include/X11/extensions/XKBstr.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -3859,6 +3989,32 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeyboardImpl.cp
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/unordered_map
  /usr/include/c++/13/utility
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/XKBlib.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/extensions/XKB.h
+ /usr/include/X11/extensions/XKBstr.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -3940,28 +4096,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/KeyboardImpl.cp
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/SensorImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/SensorImpl.cpp
@@ -3973,18 +4125,18 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/SensorImpl.cpp.
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Sensor.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/SensorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/SensorImpl.hpp
- /usr/include/assert.h
  /usr/include/c++/13/cassert
  /usr/include/c++/13/pstl/pstl_config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/assert.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/stdc-predef.h
  /usr/include/x86_64-linux-gnu/bits/long-double.h
  /usr/include/x86_64-linux-gnu/bits/timesize.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -4004,22 +4156,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VideoModeImpl.c
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Utils.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/VideoModeImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xdefs.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/Xutil.h
- /usr/include/X11/extensions/Xrandr.h
- /usr/include/X11/extensions/Xrender.h
- /usr/include/X11/extensions/randr.h
- /usr/include/X11/extensions/render.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/algorithm
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -4133,6 +4269,33 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VideoModeImpl.c
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xdefs.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/extensions/Xrandr.h
+ /usr/include/X11/extensions/Xrender.h
+ /usr/include/X11/extensions/randr.h
+ /usr/include/X11/extensions/render.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -4211,26 +4374,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VideoModeImpl.c
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VulkanImplX11.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/VulkanImplX11.cpp
@@ -4245,13 +4406,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VulkanImplX11.c
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowHandle.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Display.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/VulkanImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -4343,6 +4497,21 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VulkanImplX11.c
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
  /usr/include/ctype.h
  /usr/include/dlfcn.h
  /usr/include/endian.h
@@ -4422,23 +4591,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/VulkanImplX11.c
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/WindowImplX11.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/WindowImplX11.cpp
@@ -4489,39 +4659,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/WindowImplX11.c
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/Utils.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/WindowImplX11.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xatom.h
- /usr/include/X11/Xdefs.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xfuncs.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/XlibConf.h
- /usr/include/X11/Xlibint.h
- /usr/include/X11/Xmd.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/Xproto.h
- /usr/include/X11/Xprotostr.h
- /usr/include/X11/Xthreads.h
- /usr/include/X11/Xutil.h
- /usr/include/X11/extensions/XI2.h
- /usr/include/X11/extensions/XInput2.h
- /usr/include/X11/extensions/Xfixes.h
- /usr/include/X11/extensions/Xge.h
- /usr/include/X11/extensions/Xrandr.h
- /usr/include/X11/extensions/Xrender.h
- /usr/include/X11/extensions/randr.h
- /usr/include/X11/extensions/render.h
- /usr/include/X11/extensions/xfixeswire.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/bitsperlong.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/asm-generic/int-ll64.h
- /usr/include/asm-generic/posix_types.h
- /usr/include/asm-generic/types.h
- /usr/include/assert.h
  /usr/include/c++/13/algorithm
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
@@ -4677,6 +4814,52 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/WindowImplX11.c
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/variant
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xatom.h
+ /usr/include/X11/Xdefs.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xfuncs.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/XlibConf.h
+ /usr/include/X11/Xlibint.h
+ /usr/include/X11/Xmd.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xproto.h
+ /usr/include/X11/Xprotostr.h
+ /usr/include/X11/Xthreads.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/extensions/XI2.h
+ /usr/include/X11/extensions/XInput2.h
+ /usr/include/X11/extensions/Xfixes.h
+ /usr/include/X11/extensions/Xge.h
+ /usr/include/X11/extensions/Xrandr.h
+ /usr/include/X11/extensions/Xrender.h
+ /usr/include/X11/extensions/randr.h
+ /usr/include/X11/extensions/render.h
+ /usr/include/X11/extensions/xfixeswire.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/bitsperlong.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/asm-generic/int-ll64.h
+ /usr/include/asm-generic/posix_types.h
+ /usr/include/asm-generic/types.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -4787,19 +4970,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/WindowImplX11.c
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -4807,9 +4977,19 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Unix/WindowImplX11.c
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/stat.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/inttypes.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/VideoMode.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/VideoMode.cpp
@@ -4822,8 +5002,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/VideoMode.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Export.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/VideoMode.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/VideoModeImpl.hpp
- /usr/include/alloca.h
- /usr/include/assert.h
  /usr/include/c++/13/algorithm
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/binders.h
@@ -4895,6 +5073,12 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/VideoMode.cpp.o
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/unordered_map
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/alloca.h
+ /usr/include/assert.h
  /usr/include/endian.h
  /usr/include/features-time64.h
  /usr/include/features.h
@@ -4934,16 +5118,19 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/VideoMode.cpp.o
  /usr/include/x86_64-linux-gnu/bits/waitflags.h
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Vulkan.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Vulkan.cpp
@@ -4952,7 +5139,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Vulkan.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/Vulkan.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/include/SFML/Window/WindowHandle.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/VulkanImpl.hpp
- /usr/include/assert.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
  /usr/include/c++/13/bits/alloc_traits.h
@@ -5001,20 +5187,28 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Vulkan.cpp.o
  /usr/include/c++/13/tuple
  /usr/include/c++/13/type_traits
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/assert.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/stdc-predef.h
  /usr/include/x86_64-linux-gnu/bits/long-double.h
  /usr/include/x86_64-linux-gnu/bits/timesize.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Window.cpp
@@ -5060,14 +5254,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/CursorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/SensorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -5202,6 +5388,27 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.o
  /usr/include/c++/13/utility
  /usr/include/c++/13/variant
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -5281,28 +5488,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowBase.cpp
@@ -5341,14 +5544,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/CursorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/SensorImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/alloca.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/assert.h
  /usr/include/c++/13/algorithm
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
@@ -5483,6 +5678,27 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.o
  /usr/include/c++/13/utility
  /usr/include/c++/13/variant
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -5562,28 +5778,24 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowImpl.cpp
@@ -5628,28 +5840,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.o
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/Unix/WindowImplX11.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/VulkanImpl.hpp
  /home/elisa/FCG_MineSweeper/build/_deps/sfml-src/src/SFML/Window/WindowImpl.hpp
- /usr/include/X11/X.h
- /usr/include/X11/Xdefs.h
- /usr/include/X11/Xfuncproto.h
- /usr/include/X11/Xlib.h
- /usr/include/X11/Xosdefs.h
- /usr/include/X11/Xutil.h
- /usr/include/X11/extensions/Xrandr.h
- /usr/include/X11/extensions/Xrender.h
- /usr/include/X11/extensions/randr.h
- /usr/include/X11/extensions/render.h
- /usr/include/X11/keysym.h
- /usr/include/X11/keysymdef.h
- /usr/include/alloca.h
- /usr/include/asm-generic/bitsperlong.h
- /usr/include/asm-generic/errno-base.h
- /usr/include/asm-generic/errno.h
- /usr/include/asm-generic/int-ll64.h
- /usr/include/asm-generic/ioctl.h
- /usr/include/asm-generic/ioctls.h
- /usr/include/asm-generic/posix_types.h
- /usr/include/asm-generic/types.h
- /usr/include/assert.h
  /usr/include/c++/13/array
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
@@ -5796,6 +5986,41 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.o
  /usr/include/c++/13/typeinfo
  /usr/include/c++/13/variant
  /usr/include/c++/13/vector
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
+ /usr/include/X11/X.h
+ /usr/include/X11/Xdefs.h
+ /usr/include/X11/Xfuncproto.h
+ /usr/include/X11/Xlib.h
+ /usr/include/X11/Xosdefs.h
+ /usr/include/X11/Xutil.h
+ /usr/include/X11/extensions/Xrandr.h
+ /usr/include/X11/extensions/Xrender.h
+ /usr/include/X11/extensions/randr.h
+ /usr/include/X11/extensions/render.h
+ /usr/include/X11/keysym.h
+ /usr/include/X11/keysymdef.h
+ /usr/include/alloca.h
+ /usr/include/asm-generic/bitsperlong.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
+ /usr/include/asm-generic/int-ll64.h
+ /usr/include/asm-generic/ioctl.h
+ /usr/include/asm-generic/ioctls.h
+ /usr/include/asm-generic/posix_types.h
+ /usr/include/asm-generic/types.h
+ /usr/include/assert.h
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -5899,19 +6124,6 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
  /usr/include/x86_64-linux-gnu/bits/wordsize.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
@@ -5921,7 +6133,16 @@ _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.o
  /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h
  /usr/include/x86_64-linux-gnu/sys/types.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_null.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_nullptr_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h
+ /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdarg.h
+ /usr/lib/llvm-18/lib/clang/18/include/stddef.h
+ /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
