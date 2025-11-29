@@ -73,6 +73,7 @@ const float stop_time_text_size = 15; //EX
 
 const float header_parameter_gap = 30; 
 const float header_border_gap = 5;
+const float header_grid_proportion = 2;
 
 ////////////////BLOCCO////////////////
 
@@ -81,13 +82,16 @@ enum class cell_state{ Covered, Revealed, Flag};
 
 ////////////////PULSANTE DI CONTROLLO////////////////
 
-enum class button_type{new_game, pause, easy, medium, hard, exit}; 
+enum class button_type{new_game, pause, easy, medium, hard, exit};
+sf::Color button_color = sf::Color(192, 192, 192); 
+const float button_text_thickness = 1.5; 
+const float button_text_proportion =3.5; 
 
 ////////////////PANNELLO DI CONTROLLO////////////////
 
-const float control_horizontal_displacement = 30; 
-const float control_vertical_displacement = 30; 
-const float control_gap = 10; //EX MODIFICA: gap tra le scritte e i pulsanti 
+const float control_button_horizontal_gap = 20; 
+const float control_button_vertical_gap = 20; 
+const float control_info_gap = 10; //EX MODIFICA: gap tra le scritte e i pulsanti 
 const float info_size = 10; //AGGIUNTA: dimensione del testo nel control panel 
 
 ////////////////STRUCT////////////////
@@ -181,7 +185,7 @@ struct Flag_Counter
     sf::Vector2f flag_size; 
     int num_flag; 
 
-    Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size);
+    Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size, int mine_num);
     void set_number(bool adding); 
     void draw (sf::RenderWindow& window);
 }; 
@@ -196,14 +200,14 @@ struct Header
     Face face;
     Flag_Counter f_counter; 
 
-    Header(Grid& grid, float gap): //EX MODIFICA 
-                        h_size({ grid.Grid_size.x + (gap*(grid.cell_num.x-1)) - (2*header_border_gap), (starting_cell_size * 9) / 4 - (2*header_border_gap) }), 
-                        h_pos({ grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - ((starting_cell_size * 9) / 4 + gap) + header_border_gap }), //ex (mandato a capo)
+    Header(Grid& grid, float gap, int mine_num): //EX MODIFICA 
+                        h_size({ grid.Grid_size.x + (gap*(grid.cell_num.x-1)) - (2*header_border_gap), (starting_cell_size*header_grid_proportion) - (2*header_border_gap) }), 
+                        h_pos({ grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion + gap) + header_border_gap }), //ex (mandato a capo)
                         details_size({(h_size.y - (h_size.y/3))*3/2, h_size.y - (h_size.y/3)}), 
                         details_pos_y(h_pos.y + (h_size.y/6)),
                         timer(h_pos, starting_cell_size, details_pos_y, details_size), 
                         face(h_pos, h_size, starting_cell_size, details_pos_y, details_size.y), 
-                        f_counter(h_pos, h_size, starting_cell_size, details_pos_y, details_size) {} 
+                        f_counter(h_pos, h_size, starting_cell_size, details_pos_y, details_size, mine_num) {} 
     void draw (sf::RenderWindow& window);
 };
 
@@ -247,7 +251,7 @@ struct Game_Panel
                                                     cell_size((((window_width-(game_horizontal_displacement*2))/2)/(cell_num.x+1))*cell_proportion),
                                                     gap(cell_size*gap_ratio), //EX AGGIUNTA
                                                     grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
-                                                    header(grid, gap), //EX MODIFICA
+                                                    header(grid, gap, mine_num), //EX MODIFICA
                                                     border(cell_size, grid, header, gap) {} //EX MODIFICA
     void draw (sf::RenderWindow& window);
 }; 
@@ -285,10 +289,10 @@ struct Control_Panel
     Control_Panel(Border border, int num_mines, Difficulty diff): 
                                     cp_pos(game_horizontal_displacement, border.b_pos.y + border.thickness), 
                                     cp_size({border.b_size.x -(border.thickness *2), border.b_size.y -(border.thickness *2)}), 
-                                    button_size({(cp_size.x-(control_horizontal_displacement*2))/3, (cp_size.x-(control_vertical_displacement*2))/6}),  
-                                    new_game(button_type::new_game, {cp_pos.x + control_horizontal_displacement, cp_pos.y + control_vertical_displacement}, button_size) ,
-                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_horizontal_displacement - button_size.x, cp_pos.y + control_vertical_displacement}, button_size), 
-                                    exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_vertical_displacement + control_gap/2}, button_size), //EX MODIFICA
+                                    button_size({(cp_size.x-(control_button_horizontal_gap*2))/3, (cp_size.y-(control_button_vertical_gap*2))/8}),  
+                                    new_game(button_type::new_game, {cp_pos.x + control_button_horizontal_gap, cp_pos.y + control_button_vertical_gap}, button_size) ,
+                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_button_horizontal_gap - button_size.x, cp_pos.y + control_button_vertical_gap}, button_size), 
+                                    exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_button_vertical_gap + control_info_gap/2}, button_size), //EX MODIFICA
                                     info_mine(num_mines), //AGGIUNTA 
                                     info_diff(diff) //AGGIUNTA
                                     {}
@@ -341,10 +345,10 @@ struct Start_Panel
 };
 struct State  
 {
+    Difficulty diff; //EX MODIFICA (SCAMBIO ORDINE CON SOTTO)
     Start_Panel sp; 
     Game_Panel game_panel;
     Stop_Panel stop_p; //EX
-    Difficulty diff; //EX MODIFICA (SCAMBIO ORDINE CON SOTTO)
     Control_Panel cp; 
     int mouse_cell; 
     bool focus; 
@@ -354,11 +358,11 @@ struct State
     sf::Text title; //AGGIUNTA
 
     State (): 
+                diff(Difficulty::easy), 
                 sp(), 
                 game_panel({9,9}, 15), 
                 stop_p(), //ex
                 cp(game_panel.border, 15, diff), //MODIFICA
-                diff(Difficulty::easy), 
                 focus(false), 
                 game_paused(false), 
                 first_move(true),
@@ -415,18 +419,15 @@ Timer::Timer(sf::Vector2f header_pos, float cell_size, float pos_y, sf::Vector2f
 
     sf::Vector2f pos;
     for(int i = 0; i<3;i++){
-        pos = {
-            timer_pos.x+((timer_size.x/3)*i), 
-            timer_pos.y
-        }; 
-
+        pos = { timer_pos.x+((timer_size.x/3)*i), timer_pos.y}; 
         timer_numbers.push_back(Number(pos, {timer_size.x/3, timer_size.y})); 
     }
 
 }
 
-Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size){
-    num_flag = 0; 
+Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, float cell_size, float pos_y, sf::Vector2f size, int mine_num){
+
+    num_flag = mine_num; 
     flag_size ={size}; 
     flag_pos =  {header_pos.x + header_size.x - (flag_size.x + header_parameter_gap), pos_y}; 
 
@@ -439,6 +440,10 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
 
         flag_numbers.push_back(Number(pos, {flag_size.x/3, flag_size.y})); 
     }
+
+    flag_numbers[2].num_texture = &Clock_textures[num_flag%10];
+    flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10];
+    flag_numbers[0].num_texture = &Clock_textures[(num_flag/100)%10];
 }
 
 
@@ -692,19 +697,19 @@ void Game_Panel::draw(sf::RenderWindow& window)
 void Control_Button::draw (sf::RenderWindow& window){
     sf::RectangleShape cb (cb_size);
     cb.setPosition(cb_pos); 
-    cb.setFillColor(sf::Color(192, 192, 192)); 
+    cb.setFillColor(button_color); 
     cb.setOutlineThickness(header_border_gap);  
     if(mouse_focus) 
-        cb.setOutlineColor(sf::Color::Red);
+        cb.setOutlineColor(focus_color);
     else 
-        cb.setOutlineColor(sf::Color::Black); 
+        cb.setOutlineColor(text_color); 
     window.draw(cb);
 
     cb_text.setFont(font);
-    cb_text.setCharacterSize(cb.getSize().y/3.5f); //EX
-    cb_text.setFillColor(sf::Color::Black); 
-    cb_text.setOutlineThickness(1.5f); //ex
-    cb_text.setOutlineColor(sf::Color::White); 
+    cb_text.setCharacterSize(cb.getSize().y/button_text_proportion); //EX
+    cb_text.setFillColor(text_color); 
+    cb_text.setOutlineThickness(button_text_thickness); //ex
+    cb_text.setOutlineColor(text_border_color); 
     
     switch(cb_type){
         case button_type::pause: 
@@ -735,8 +740,8 @@ void Control_Button::draw (sf::RenderWindow& window){
             break; 
     }
     sf::FloatRect b = cb_text.getLocalBounds();
-    cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2, b.position.y + b.size.y/ 2));
-    cb_text.setPosition(sf::Vector2f(cb_pos.x + cb_size.x/2, cb_pos.y + cb_size.y /2));
+    cb_text.setOrigin(sf::Vector2f(b.position.x + b.size.x/2, b.position.y + b.size.y/2));
+    cb_text.setPosition(sf::Vector2f(cb_pos.x + cb_size.x/2, cb_pos.y + cb_size.y/2));
 
     window.draw(cb_text);
 }
@@ -757,15 +762,15 @@ void Control_Panel::draw (sf::RenderWindow& window){
     info.setCharacterSize(info_size*2);
     info.setFillColor(focus_color); //EX
     auto b = info.getLocalBounds();
-    info.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    info.setPosition({cp_pos.x + cp_size.x/2, exit.cb_pos.y + exit.cb_size.y + control_gap*2});
+    info.setOrigin({b.position.x + b.size.x/2, b.position.y});
+    info.setPosition({cp_pos.x + cp_size.x/2, exit.cb_pos.y + exit.cb_size.y + control_info_gap*2});
     window.draw(info);
 
-    float info_text_pos_x = cp_pos.x + control_gap; //AGGIUNTA: salvo il valore della posizione x del testo successivo poichè verrà riutilizzata più volte
+    float info_text_pos_x = cp_pos.x + control_info_gap; //AGGIUNTA: salvo il valore della posizione x del testo successivo poichè verrà riutilizzata più volte
     info.setCharacterSize(info_size);
     info.setFillColor(text_color); //EX
     info.setOrigin({0, 0});
-    info.setPosition({cp_pos.x + control_gap, info.getPosition().y + info_size + control_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*2 + control_info_gap}); 
     switch(info_diff){
         case Difficulty::easy: 
             info.setString("Difficolta' scelta : \tFACILE");
@@ -786,31 +791,31 @@ void Control_Panel::draw (sf::RenderWindow& window){
     //AGGIUNTA
     info.setString("Totale mine nella griglia : \t" + to_string(info_mine));
     info.setOrigin({0, 0}); 
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("Obbiettivo del gioco : "); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_gap*1.5f}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap*1.5f}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("\t- Scoprire tutte le celle che nascondono\n\t  una mina. \n\t- La partita e' persa alla prima mina\n\t  scoperta."); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("Istruzioni :"); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*4 + control_gap*1.5f}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*4 + control_info_gap*1.5f}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap}); 
     window.draw(info);
 
 }
@@ -887,12 +892,12 @@ void State::draw (sf::RenderWindow& window){
 
 ////////////////ALTRE FUNZIONI////////////////
 
-void Flag_Counter::set_number(bool adding){ 
-    if(num_flag == 999) return; 
-    if(adding)  //EX MODIFICA 
-        num_flag++; 
+void Flag_Counter::set_number(bool flag_placed){ 
+    if(num_flag == 0) return; 
+    if(flag_placed)  //EX MODIFICA 
+        num_flag--; 
     else 
-         num_flag--;  
+         num_flag++;  
     flag_numbers[2].num_texture = &Clock_textures[num_flag%10];
     flag_numbers[1].num_texture = &Clock_textures[(num_flag/10)%10];
     flag_numbers[0].num_texture = &Clock_textures[(num_flag/100)%10];
@@ -918,7 +923,7 @@ void Grid::place_mines(int starting_cell_index){
     int y = cells[starting_cell_index].column_index;
     int casual_index; 
 
-   int i=0; 
+    int i=0; 
     while(i<mine_num){ 
         casual_index = (rand()% cells.size()+1)-1; 
 
