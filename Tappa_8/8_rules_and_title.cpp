@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <random> //EX  
 #include <vector>
 #include <string>
 #include <cstdlib>
@@ -15,8 +14,15 @@ const char* window_title = "Rules and Title";
 const unsigned window_width = 800; //EX MODIFICA
 const unsigned window_height = 600; //EX MODIFICA
 const float max_frame_rate = 60;
+//gap
+const float window_vertical_displacement = 30; //AGGIUNTA
+const float window_horizontal_displacement = 50; //EX MODIFICA
+//colore 
+sf::Color window_background_color = sf::Color(144, 238, 144);
+
+////////////////BORDO FINESTRA////////////////
 const float window_border_thickness = 15; //EX
-const float cell_proportion = 0.85; //EX
+sf::Color window_border_color = sf::Color(0, 100, 0);
 
 ////////////////PANNELLI GENERALE////////////////
 sf::Color panel_background_color = sf::Color(210,180,140); //EX
@@ -24,9 +30,8 @@ sf::Color panel_border_color = sf::Color(92,51,23); //EX
 sf::Color focus_color = sf::Color::Red; //ex
 const float panel_thickness = 15; //EX
 
-
-////////////////TESTO////////////////
-const float font_size_mine_title = 80; //EX
+////////////////TESTO GENERALE////////////////
+const unsigned font_size_mine_title = 80; //EX
 sf::Color text_color = sf::Color::Black;//EX
 sf::Color text_border_color = sf::Color::White; //EX
 const float text_thickness = 2; //ex
@@ -34,7 +39,6 @@ const float text_thickness = 2; //ex
 ////////////////STATO////////////////
 
 enum class Difficulty{easy, medium,hard}; 
-const float title_gap = 30; //AGGIUNTA
 
 ////////////////START PANEL////////////////
 const float start_width = (window_width/4)*3; //EX 
@@ -42,39 +46,41 @@ const float start_height = (window_height/4)*3;
 const float start_pos_x = window_width/8; //ex 
 const float start_pos_y = window_height/8; //EX
 const float start_gap =25; //ex
-const float start_size_subtitle = 30; //EX
-const float start_size_text = 17; //EX
+//testo: 
+const unsigned start_size_subtitle = 30; //EX
+const unsigned start_size_text = 17; //EX
 const float start_cb_width = start_width/5; 
 const float start_cb_height = start_height/6; 
 
 ////////////////GAME PANEL////////////////
 
-const float game_horizontal_displacement = 50; //EX MODIFICA
-const float game_vertical_displacement = 100; //mai usato ex
-const float starting_cell_size = (((window_width-(game_horizontal_displacement*2))/2)/(10))*cell_proportion;
-const float gap_ratio = 2.f/starting_cell_size; //EX MODIFICA
+const float cell_proportion = 0.85; //EX
+const float starting_cell_size = (((window_width-(window_horizontal_displacement*2))/2)/(10))*cell_proportion;
+const float gap_ratio = 2/starting_cell_size; //EX MODIFICA
 
 ////////////////STOP PANEL////////////////
 
-enum class stop_type{None, Win, Lose, Pause, New_Game}; 
 const float stop_width = (window_width/3)*2; //EX 
 const float stop_height = (window_height/3)*2;
 const float stop_pos_x = window_width/6; //ex 
 const float stop_pos_y = window_height/6; //EX
-const float stop_gap =20; //ex
+//pulsanti
 const float stop_cb_width = stop_width/4; 
-const float stop_cb_height = stop_height/6; 
-const float stop_title_size = 90; //EX
-const float stop_title2_size = 45; //EX
-const float stop_subtitle2_size = 30; //ex
-const float stop_subtitle_size = 20; //EX
-const float stop_time_text_size = 15; //EX
+const float stop_cb_height = stop_height/6;
+const float stop_gap =20; //ex
+enum class stop_type{None, Win, Lose, Pause, New_Game}; 
+//testo:  
+const unsigned stop_title_size = 90; //EX
+const unsigned stop_title2_size = 45; //EX
+const unsigned stop_subtitle2_size = 30; //ex
+const unsigned stop_subtitle_size = 20; //EX
+const unsigned stop_time_text_size = 15; //EX
 
 ////////////////HEADER////////////////
 
+const float header_grid_proportion = 2;
 const float header_parameter_gap = 30; 
 const float header_border_gap = 5;
-const float header_grid_proportion = 2;
 
 ////////////////BLOCCO////////////////
 
@@ -93,7 +99,8 @@ const float button_text_proportion =3.5;
 const float control_button_horizontal_gap = 20; 
 const float control_button_vertical_gap = 20; 
 const float control_info_gap = 10; //EX MODIFICA: gap tra le scritte e i pulsanti 
-const float info_size = 10; //AGGIUNTA: dimensione del testo nel control panel 
+//testo
+const unsigned info_size = 10; //AGGIUNTA: dimensione del testo nel control panel 
 
 ////////////////STRUCT////////////////
 struct Cell
@@ -203,7 +210,7 @@ struct Header
 
     Header(Grid& grid, float gap, int mine_num): //EX MODIFICA 
                         h_size({ grid.Grid_size.x + (gap*(grid.cell_num.x-1)) - (2*header_border_gap), (starting_cell_size*header_grid_proportion) - (2*header_border_gap) }), 
-                        h_pos({ grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion + gap) + header_border_gap }), //ex (mandato a capo)
+                        h_pos({ grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion) + header_border_gap }), //ex (mandato a capo)
                         details_size({(h_size.y - (h_size.y/3))*3/2, h_size.y - (h_size.y/3)}), 
                         details_pos_y(h_pos.y + (h_size.y/6)),
                         timer(h_pos, starting_cell_size, details_pos_y, details_size), 
@@ -249,7 +256,7 @@ struct Game_Panel
     Border border;  
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size((((window_width-(game_horizontal_displacement*2))/2)/(cell_num.x+1))*cell_proportion),
+                                                    cell_size((((window_width-(window_horizontal_displacement*2))/2)/(cell_num.x+1))*cell_proportion),
                                                     gap(cell_size*gap_ratio), //EX AGGIUNTA
                                                     grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
                                                     header(grid, gap, mine_num), //EX MODIFICA
@@ -288,7 +295,7 @@ struct Control_Panel
     Difficulty info_diff; //AGGIUNTA
 
     Control_Panel(Border border, int num_mines, Difficulty diff): 
-                                    cp_pos(game_horizontal_displacement, border.b_pos.y + border.thickness), 
+                                    cp_pos(window_horizontal_displacement, border.b_pos.y + border.thickness), 
                                     cp_size({border.b_size.x -(border.thickness *2), border.b_size.y -(border.thickness *2)}), 
                                     button_size({(cp_size.x-(control_button_horizontal_gap*2))/3, (cp_size.y-(control_button_vertical_gap*2))/8}),  
                                     new_game(button_type::new_game, {cp_pos.x + control_button_horizontal_gap, cp_pos.y + control_button_vertical_gap}, button_size) ,
@@ -394,9 +401,13 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){ //EX MODIFICA
 
     Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
 
+    float header_height = cell_size * header_grid_proportion; 
+    float game_height = header_height + Grid_size.y + (gap * (cell_num.y - 1));
+    float title_gap_height = font_size_mine_title + window_vertical_displacement;  
+
     Grid_pos = { 
-        window_width - Grid_size.x - game_horizontal_displacement - (gap * cell_num.x),
-        (window_height - Grid_size.y - (gap * cell_num.y) + (Grid_size.y/4.f)) / 2.f
+        window_width - Grid_size.x - window_horizontal_displacement - (gap * cell_num.x),
+        title_gap_height + ((window_height - title_gap_height - game_height- window_vertical_displacement) / 2.f) + header_height
     };
     sf::Vector2f pos; 
     
@@ -457,7 +468,7 @@ Border::Border(float cell_size, Grid& grid, Header& header, float gap){//EX MODI
                 header.h_pos.y - header_border_gap - thickness
             }; 
     b_size = {  header.h_size.x + (header_border_gap*2) + (thickness * 2), 
-                header.h_size.y + (header_border_gap*2) + (thickness*2) + grid.Grid_size.y + (gap * grid.cell_num.y)
+                header.h_size.y + (header_border_gap*2) + (thickness*2) + grid.Grid_size.y + (gap * grid.cell_num.y) - gap
             }; 
 
     angle_cells.clear();
@@ -690,8 +701,8 @@ void Border::draw(sf::RenderWindow& window)
 void Game_Panel::draw(sf::RenderWindow& window)
 {
     border.draw(window); 
-    grid.draw(window); 
     header.draw(window);
+    grid.draw(window); 
 }
 
 
@@ -884,7 +895,7 @@ void State::draw (sf::RenderWindow& window){
         title.setOutlineColor(text_border_color); 
         auto b = title.getLocalBounds(); 
         title.setOrigin({b.position.x + b.size.x/2, b.position.y}); 
-        title.setPosition({window_width/2, title_gap});
+        title.setPosition({window_width/2, window_vertical_displacement});
         window.draw(title);
 
         stop_p.draw(window); 
@@ -1322,14 +1333,14 @@ int main()
     srand(time(NULL));
     load_textures_fonts();
 
-    sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title, sf::Style::Default, sf::State::Windowed); //EX MODIFICA 
+    sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title); 
     window.setFramerateLimit (max_frame_rate);
 
     sf::RectangleShape border({(window_width - window_border_thickness*2),(window_height- window_border_thickness*2)}); //EX
     border.setPosition({window_border_thickness, window_border_thickness}); //EX 
     border.setFillColor(sf::Color::Transparent);  
     border.setOutlineThickness(window_border_thickness); //EX MODIFICA
-    border.setOutlineColor(sf::Color(0, 100, 0));
+    border.setOutlineColor(window_border_color);
 
     State state;
     sf::Clock Clock; 
@@ -1349,7 +1360,7 @@ int main()
         elapsed = Clock.restart().asSeconds(); 
         state.game_panel.header.timer.update(elapsed); 
 
-        window.clear(sf::Color(144, 238, 144));
+        window.clear(window_background_color);
         state.draw(window); 
         window.draw(border); 
         window.display();

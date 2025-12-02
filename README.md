@@ -1,4 +1,7 @@
-# FCG_MineSweeper
+# MINESWEEPER THE GAME: 
+
+## COMANDI PER COMPILAZIONE
+
 ## Possibili Tappe: 
 - Tappa 0:
   * Creazione della finestra di base (lo sfondo nero) 
