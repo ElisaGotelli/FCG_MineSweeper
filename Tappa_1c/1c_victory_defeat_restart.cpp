@@ -21,11 +21,13 @@ const float window_border_thickness = 15;
 sf::Color window_border_color = sf::Color(0, 100, 0);
 
 ////////////////TESTO GENERALE////////////////
+
 sf::Color text_color = sf::Color::Black;//AGGIUNTA: colore del testo nel gioco
 sf::Color text_border_color = sf::Color::White; //AGGIUNTA: colore del bordo del testo nel gioco
 const float text_thickness = 2; //AGGIUNTA: spessore del bordo del testo del gioco
 
 ////////////////PANNELLI GENERALE////////////////
+
 sf::Color panel_background_color = sf::Color(210,180,140); //AGGIUNTA: Colore che verrà utilizzato come background per tutti i pannelli nel gioco a parte il game_panel
 sf::Color panel_border_color = sf::Color(92,51,23); //AGGIUNTA: Colore che verrà utilizzato per il bordo di tutti i pannelli nel gioco a parte il game_panel
 sf::Color focus_color = sf::Color::Red; 
@@ -47,9 +49,7 @@ enum class stop_type{None, Win, Lose}; //AGGIUNTA: possibili tipi di schermate d
 const unsigned stop_title_size = 90; //AGGIUNTA: dimensione del titolo del pannello (per la vittoria/sconfitta)
 const unsigned stop_subtitle_size = 30; //AGGIUNTA: dimensione dei sottotitoli del pannello di stop (per la vittoria/sconfitta)
 
-
 ////////////////STRUCT////////////////
-
 
 struct Cell
 {
@@ -211,7 +211,7 @@ void Game_Panel::draw(sf::RenderWindow& window)
 void Stop_Panel::draw(sf::RenderWindow& window){
     if(!visible) return; //il pannello viene rappresentata solo a fine partita o in pausa 
 
-    sf::RectangleShape s(stop_size); //il pannello è un rettangolo
+    sf::RectangleShape s(stop_size); //il pannello è un rettangolo delle dimensioni indicate precedentemente
     s.setPosition(stop_pos);//posizionamento del pannello
     s.setFillColor(panel_background_color); //impostazione colore di background del pannelo
     s.setOutlineThickness(panel_thickness); //impostazione dello spessore del bordo del pannello
@@ -394,19 +394,19 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
     //nel caso di una sconfitta vengono rivelate tutte le celle con tipo Mine (a parte la cella della mina esplosa) e vengono anche rivelate le 'false mine'(i casi in cui è stata messa una bandierina su una cella che non nascondeva una mina)
     for(int i = 0; i < g.cells.size(); i++){
 
-    if(stop_p.stop_type == stop_type::Lose && i == starting_index_cell) continue;
+        if(stop_p.stop_type == stop_type::Lose && i == starting_index_cell) continue;
 
-            //rivelazione mine 
-            if(g.cells[i].cell_state == cell_state::Flag && g.cells[i].cell_type != cell_type::Mine){
-                g.cells[i].cell_state = cell_state::Revealed; 
-                g.cells[i].cell_texture = &False_Mine_texture; 
-            }
+        //rivelazione mine 
+        if(g.cells[i].cell_state == cell_state::Flag && g.cells[i].cell_type != cell_type::Mine){
+            g.cells[i].cell_state = cell_state::Revealed; 
+            g.cells[i].cell_texture = &False_Mine_texture; 
+        }
 
-            //false mine
-            if(g.cells[i].cell_type == cell_type::Mine){
-                g.cells[i].cell_state = cell_state::Revealed; 
-                g.cells[i].cell_texture = &Normal_Mine_texture; 
-            }
+        //false mine
+        if(g.cells[i].cell_type == cell_type::Mine){
+            g.cells[i].cell_state = cell_state::Revealed; 
+            g.cells[i].cell_texture = &Normal_Mine_texture; 
+        }
     }
 
     game_ended = true;  //viene impostato il gioco come finito 

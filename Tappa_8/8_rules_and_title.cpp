@@ -78,6 +78,8 @@ const unsigned stop_time_text_size = 15; //EX
 const float header_grid_proportion = 2;
 const float header_parameter_gap = 30; 
 const float header_border_thickness = 5;
+sf::Color header_background_color = sf::Color(192, 192, 192); 
+sf::Color header_border_color = sf::Color::Black;
 
 ////////////////BLOCCO////////////////
 
@@ -113,7 +115,7 @@ struct Cell
     cell_state cell_state; 
     float gap;
     
-    Cell (sf::Vector2f pos, float size, int row_index, int column_index, float gap) :  cell_pos (pos),
+    Cell (sf::Vector2f pos, float size, int column_index, int row_index, float gap) :  cell_pos (pos),
                                                                             cell_size (size),
                                                                             row_index(row_index),
                                                                             column_index(column_index),
@@ -207,7 +209,7 @@ struct Header
 
     Header(Grid& grid, float gap, int mine_num): //EX MODIFICA 
                         h_size({ grid.Grid_size.x - (header_border_thickness*2), (starting_cell_size*header_grid_proportion) - (header_border_thickness*2)}), 
-                        h_pos({ grid.Grid_pos.x + header_border_thickness, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion) + header_border_thickness }), //ex (mandato a capo)
+                        h_pos({ grid.Grid_pos.x + header_border_thickness, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion) + header_border_thickness }), //DA MODIFICARE NEL BORDER 
                         details_size({(h_size.y - (h_size.y/3))*3/2, h_size.y - (h_size.y/3)}), 
                         details_pos_y(h_pos.y + (h_size.y/6)),
                         timer(h_pos, starting_cell_size, details_pos_y, details_size), 
@@ -442,11 +444,7 @@ Flag_Counter::Flag_Counter(sf::Vector2f header_pos, sf::Vector2f header_size, fl
 
     sf::Vector2f pos;
     for(int i = 0; i<3;i++){
-        pos = {
-            flag_pos.x+((flag_size.x/3)*i), 
-            flag_pos.y
-        }; 
-
+        pos = { flag_pos.x+((flag_size.x/3)*i), flag_pos.y}; 
         flag_numbers.push_back(Number(pos, {flag_size.x/3, flag_size.y})); 
     }
 
@@ -515,9 +513,9 @@ void Stop_Panel::draw(sf::RenderWindow& window){
 
     sf::RectangleShape s(stop_size);
     s.setPosition(stop_pos); 
-    s.setFillColor(panel_background_color);//EX
-    s.setOutlineThickness(panel_thickness); //EX
-    s.setOutlineColor(panel_border_color); //EX
+    s.setFillColor(panel_background_color);
+    s.setOutlineThickness(panel_thickness); 
+    s.setOutlineColor(panel_border_color); 
     window.draw(s);
     float stop_text_pos_x = stop_pos.x + stop_size.x/2; 
 
@@ -634,9 +632,9 @@ void Header::draw(sf::RenderWindow& window)
 {
     sf::RectangleShape h(h_size); 
     h.setPosition(h_pos); 
-    h.setFillColor(sf::Color(192, 192, 192)); 
+    h.setFillColor(header_background_color); 
     h.setOutlineThickness(header_border_thickness); 
-    h.setOutlineColor(sf::Color::Black); 
+    h.setOutlineColor(header_border_color); 
     window.draw(h);
     timer.draw(window);
     f_counter.draw(window);

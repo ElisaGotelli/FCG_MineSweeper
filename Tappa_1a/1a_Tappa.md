@@ -10,14 +10,11 @@ Sviluppo della grafica:
 Rispetto alla tappa precedente:
 - è stato impostato un nuovo colore di sfondo per la finestra (verde chiaro)
 - è stato aggiunto un bordo alla finestra tramite la creazione di una RectangleShape  di colore trasparente, bordo verde scuro e dimensione leggermente più piccola della finestra.
-- sono state definite le struct:
+- sono state definite le struct (con le loro funzioni draw() e i loro costruttori)
     * 'Cell': rappresenta una singola cella nel gioco
     * 'Grid': rappresenta l'insieme delle celle come vettore e va a gestire il loro posizionamento nella finestra
     * 'Game_Panel': rappresenta un contenitore di tutti gli oggetti che comporanno in futuro il pannello di gioco. er ora conterrà solo la griglia con le varie celle.
-    * 'State': rappresenta lo stato complessivo della finestra
-
-Tutti gli elementi elencati verrano messi su display tramite una serie di chiamate alle funzioni draw() e display(). 
-
+    * 'State': rappresenta lo stato complessivo della finestra 
 
 ## ISTRUZIONI PER ESEGUIRE DA TERMINALE: 
 Prima di poter scrivere questo comando su terminale, bisogna aver: 
@@ -35,7 +32,7 @@ All'invio dell'ultimo comando per l'esecuzione dovrebbe aprirsi una finestra int
 - sfondo verde chiaro 
 - bordo verde scuro 
 - una griglia 9x9 di celle grigie, con texture 'Covered', posizionata nella parte destra/centrale della finestra.
-<br>
+<br><br>
 Allego uno screenshot del risultato da me ottenuto:  
 ![risultato_unoa](../risorse/risultati/tappa1a.png)
 
