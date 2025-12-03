@@ -1,43 +1,59 @@
-# TAPPA 1A - SFONDO E CELLA 9X9 
+# TAPPA 1A - SFONDO E CELLA 9X9
 
-## OBBIETTIVO DELLA TAPPA: 
-Sviluppo unicamente della grafica dello sfondo di gioco e della griglia 9x9.
+## OBIETTIVO DELLA TAPPA: 
+Sviluppo della grafica: 
+- dello sfondo della finestra
+- di un bordo per la finestra 
+-  della griglia di gioco iniziale 9x9 (che in tappe successive corrisponderà alla modalità FACILE)
 
 ## COSA È STATO IMPLEMENTATO: 
-Dalla tappa precedente sono state aggiunte come nuove implementazioni: 
-- un nuovo colore di sfondo verde chiaro 
-- un bordo alla finestra creando una Rectangle Shape trasparente leggermente più piccola della finestra e con bordo verde scuro in modo che solo il bordo del rettangolo fosse visibile 
-- un oggetto 'pannello di gioco' struct che per ora conterrà solo la griglia.
-- Un oggetto 'griglia' tramite struct fatto di celle con una texture grigia. Questo sarà come apparirà la griglia di gioco all'inizio di ogni partita con modalità facile. 
-- Un oggetto 'cell' tramite struct che corrisponderà alle varie celle di gioco. Per ora detto oggetto ha solo una texture possibile 'Covered' 
-- Un oggetto 'state' tremite struct che corrisponde allo stato di gioco 
+Rispetto alla tappa precedente:
+- è stato impostato un nuovo colore di sfondo per la finestra (verde chiaro)
+- è stato aggiunto un bordo alla finestra tramite la creazione di una RectangleShape  di colore trasparente, bordo verde scuro e dimensione leggermente più piccola della finestra.
+- sono state definite le struct:
+    * 'Cell': rappresenta una singola cella nel gioco
+    * 'Grid': rappresenta l'insieme delle celle come vettore e va a gestire il loro posizionamento nella finestra
+    * 'Game_Panel': rappresenta un contenitore di tutti gli oggetti che comporanno in futuro il pannello di gioco. er ora conterrà solo la griglia con le varie celle.
+    * 'State': rappresenta lo stato complessivo della finestra
 
-Tutto ciò che è stato elecanto fino ad ora viene messo su display tramite funzioni draw() e display(). 
+Tutti gli elementi elencati verrano messi su display tramite una serie di chiamate alle funzioni draw() e display(). 
 
 
 ## ISTRUZIONI PER ESEGUIRE DA TERMINALE: 
-cmake --build build -j
+Prima di poter scrivere questo comando su terminale, bisogna aver: 
+- creato la cartella build 
+- configurato tramite cmake 
+- compilato con make 
 
-#### Esecuzione: 
-cd build <br> 
+```bash
+cd build 
 ./Tappa1a
+```
 
 ## VERIFICA DEL RISULTATO: 
-All'invio dell'ultimo comando per l'esecuzione dovrebbe aprirsi una finestra intitolata "Cell starting texture" con sfondo verde chiaro e bordo verde scuro e in basso a destra un griglia 9x9 di celle con una texture grigia. 
+All'invio dell'ultimo comando per l'esecuzione dovrebbe aprirsi una finestra intitolata "Cell starting texture" con: 
+- sfondo verde chiaro 
+- bordo verde scuro 
+- una griglia 9x9 di celle grigie, con texture 'Covered', posizionata nella parte destra/centrale della finestra.
 <br>
 Allego uno screenshot del risultato da me ottenuto:  
 ![risultato_unoa](../risorse/risultati/tappa1a.png)
 
 ## PROBLEMI RISCONTRATI E SOLUZIONI: 
 #### PROBLEMA: 
-Inserire un bordo non per una figura ma per la finestra stessa. 
+Creare il bordo per la finestra.
 #### SOLUZIONE: 
-Non essendoci un comando diretto su SFML per inserire un bordo alla finestra ho optato per creare inizialmente un rettangolo transparente, con solo il bordo colorato, delle stesse dimensioni della finestra e con origine in (0,0). <br>
-Ciò però ha portato ad un nuovo problema: il bordo veniva disegnato al di fuori delle dimensioni del rettangolo ed essendo il rettangolo delle stesse dimensioni e origini della finestra, il bordo veniva tagliato fuori. <br>  
-Per risolvere il problema ho ridimensionato il rettangolo di 40 pixel in meno in larghezza e altezza, e ho spostato la sua origine in (20,20) (pari allo spessore del bordo). In questo modo il bordo viene interamente disegnato all’interno dell’area visibile della finestra. 
+In SFML non esiste un comando che va ad impostare un bordo interno alla finestra stessa. 
+Per poterlo creare allora, inizialmente si è deciso di creare un rettangolo delle stesse dimensioni e posizione della finestra di colore trasparente ma con un bordo colorato spesso 20. 
+Ciò però ha portato ad un nuovo problema: il bordo veniva disegnato al di fuori dell'area visibile della finestra(e quindi tagliato). <br>  
+Per risolvere il nuovo problema si è: 
+- ridotta la dimensione del rettangolo del doppio dello spessore del bordo creato sia in altezza che larghezza rispetto alla finestra. 
+- spostata l'origine del rettangolo di {20,20} (pari allo spessore del bordo). 
+
+<br> In questo modo, il bordo viene disegenato perfettamente all'interno dell'area visibile.
 
 ## FONTI DI RIFERIMENTO UTILIZZATE:  
-Nessuna
+Nessuna (oltre a quelle utilizzate nelle tappe precedenti).
 
 
 

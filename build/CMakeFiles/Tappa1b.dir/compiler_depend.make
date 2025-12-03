@@ -147,7 +147,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
-  /usr/include/c++/13/bits/specfun.h \
   /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/stl_algobase.h \
@@ -179,7 +178,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/chrono \
   /usr/include/c++/13/clocale \
-  /usr/include/c++/13/cmath \
   /usr/include/c++/13/codecvt \
   /usr/include/c++/13/compare \
   /usr/include/c++/13/cstddef \
@@ -222,18 +220,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
-  /usr/include/c++/13/tr1/bessel_function.tcc \
-  /usr/include/c++/13/tr1/beta_function.tcc \
-  /usr/include/c++/13/tr1/ell_integral.tcc \
-  /usr/include/c++/13/tr1/exp_integral.tcc \
-  /usr/include/c++/13/tr1/gamma.tcc \
-  /usr/include/c++/13/tr1/hypergeometric.tcc \
-  /usr/include/c++/13/tr1/legendre_function.tcc \
-  /usr/include/c++/13/tr1/modified_bessel_func.tcc \
-  /usr/include/c++/13/tr1/poly_hermite.tcc \
-  /usr/include/c++/13/tr1/poly_laguerre.tcc \
-  /usr/include/c++/13/tr1/riemann_zeta.tcc \
-  /usr/include/c++/13/tr1/special_function_util.h \
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
@@ -266,7 +252,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
   /usr/include/libintl.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
-  /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
@@ -285,18 +270,9 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
-  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
-  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -367,9 +343,13 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
   /usr/lib/llvm-18/lib/clang/18/include/stdint.h
 
 
+/usr/lib/llvm-18/lib/clang/18/include/stddef.h:
+
 /usr/lib/llvm-18/lib/clang/18/include/stdarg.h:
 
 /usr/lib/llvm-18/lib/clang/18/include/sanitizer/tsan_interface.h:
+
+/usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h:
 
 /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h:
 
@@ -401,6 +381,8 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
@@ -416,6 +398,8 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
@@ -441,23 +425,9 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/usr/lib/llvm-18/lib/clang/18/include/__stddef_size_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
-
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
@@ -470,32 +440,6 @@ CMakeFiles/Tappa1b.dir/Tappa_1b/1b_interactive_cell.cpp.o: /home/elisa/FCG_MineS
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
 /usr/include/time.h:
-
-/usr/include/stdlib.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/wctype.h:
-
-/usr/include/sched.h:
-
-/usr/include/pthread.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/math.h:
-
-/usr/include/locale.h:
-
-/usr/include/libintl.h:
-
-/usr/include/features-time64.h:
-
-/usr/include/stdint.h:
-
-/usr/include/endian.h:
-
-/usr/include/ctype.h:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
@@ -587,7 +531,11 @@ _deps/sfml-src/include/SFML/Window/Vulkan.hpp:
 
 /usr/include/c++/13/utility:
 
+_deps/sfml-src/include/SFML/Window/Touch.hpp:
+
 _deps/sfml-src/include/SFML/Graphics/RenderTexture.hpp:
+
+_deps/sfml-src/include/SFML/Window/Sensor.hpp:
 
 _deps/sfml-src/include/SFML/Window/Mouse.hpp:
 
@@ -614,10 +562,6 @@ _deps/sfml-src/include/SFML/Window/Event.hpp:
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 _deps/sfml-src/include/SFML/Window/Cursor.hpp:
-
-/usr/include/features.h:
-
-_deps/sfml-src/include/SFML/Window/Context.hpp:
 
 /usr/include/c++/13/bits/stl_algobase.h:
 
@@ -653,9 +597,7 @@ _deps/sfml-src/include/SFML/Graphics/RenderWindow.hpp:
 
 _deps/sfml-src/include/SFML/Graphics/StencilMode.hpp:
 
-_deps/sfml-src/include/SFML/Window/Sensor.hpp:
-
-/usr/include/c++/13/tr1/special_function_util.h:
+/usr/include/stdc-predef.h:
 
 _deps/sfml-src/include/SFML/Graphics/RectangleShape.hpp:
 
@@ -683,9 +625,9 @@ _deps/sfml-src/include/SFML/Graphics/Glyph.hpp:
 
 _deps/sfml-src/include/SFML/Window/Window.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
 /usr/include/c++/13/string_view:
+
+/usr/include/features-time64.h:
 
 /usr/include/errno.h:
 
@@ -713,8 +655,6 @@ _deps/sfml-src/include/SFML/Graphics/Shape.hpp:
 
 /home/elisa/FCG_MineSweeper/risorse/textures_fonts.hpp:
 
-/usr/include/c++/13/tr1/exp_integral.tcc:
-
 _deps/sfml-src/include/SFML/Graphics/Text.hpp:
 
 _deps/sfml-src/include/SFML/System/InputStream.hpp:
@@ -723,9 +663,9 @@ _deps/sfml-src/include/SFML/System/InputStream.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
 
-/usr/include/linux/errno.h:
-
 /usr/include/c++/13/debug/debug.h:
+
+/usr/include/linux/errno.h:
 
 _deps/sfml-src/include/SFML/System/Angle.inl:
 
@@ -745,7 +685,7 @@ _deps/sfml-src/include/SFML/System/Vector3.inl:
 
 /usr/include/c++/13/bits/basic_string.h:
 
-/usr/include/c++/13/tr1/poly_laguerre.tcc:
+/usr/include/libintl.h:
 
 _deps/sfml-src/include/SFML/Graphics/Texture.hpp:
 
@@ -764,6 +704,10 @@ _deps/sfml-src/include/SFML/System/String.inl:
 /usr/include/c++/13/bits/shared_ptr_atomic.h:
 
 _deps/sfml-src/include/SFML/System/Angle.hpp:
+
+_deps/sfml-src/include/SFML/Window/Context.hpp:
+
+/usr/include/features.h:
 
 _deps/sfml-src/include/SFML/System/Utf.hpp:
 
@@ -785,11 +729,11 @@ _deps/sfml-src/include/SFML/Graphics/VertexBuffer.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h:
 
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
-
 _deps/sfml-src/include/SFML/Graphics/Transformable.hpp:
 
 /usr/include/c++/13/ext/aligned_buffer.h:
+
+/usr/include/locale.h:
 
 _deps/sfml-src/include/SFML/Graphics/Vertex.hpp:
 
@@ -825,6 +769,8 @@ _deps/sfml-src/include/SFML/Window/Clipboard.hpp:
 
 _deps/sfml-src/include/SFML/System/String.hpp:
 
+/usr/include/stdlib.h:
+
 _deps/sfml-src/include/SFML/Graphics/Rect.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
@@ -848,8 +794,6 @@ _deps/sfml-src/include/SFML/System/Time.hpp:
 _deps/sfml-src/include/SFML/Graphics/Sprite.hpp:
 
 _deps/sfml-src/include/SFML/Window/WindowBase.hpp:
-
-/usr/include/c++/13/bits/specfun.h:
 
 _deps/sfml-src/include/SFML/System.hpp:
 
@@ -903,6 +847,8 @@ _deps/sfml-src/include/SFML/System/Sleep.hpp:
 
 /usr/include/c++/13/bits/unordered_map.h:
 
+/usr/include/c++/13/bits/range_access.h:
+
 /usr/include/c++/13/bits/refwrap.h:
 
 /usr/include/c++/13/bits/shared_ptr.h:
@@ -923,15 +869,11 @@ _deps/sfml-src/include/SFML/System/Export.hpp:
 
 /usr/include/c++/13/bits/utility.h:
 
-/usr/include/c++/13/tr1/beta_function.tcc:
-
 /usr/include/stdio.h:
 
 /usr/include/c++/13/bits/stl_iterator_base_types.h:
 
 /usr/include/c++/13/bits/stl_raw_storage_iter.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
 /usr/include/c++/13/bits/stl_relops.h:
 
@@ -943,15 +885,9 @@ _deps/sfml-src/include/SFML/System/Export.hpp:
 
 /usr/include/c++/13/locale:
 
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
 /usr/include/c++/13/ostream:
-
-_deps/sfml-src/include/SFML/Window/Touch.hpp:
-
-/usr/include/c++/13/tr1/riemann_zeta.tcc:
 
 /usr/include/c++/13/bits/stringfwd.h:
 
@@ -965,8 +901,6 @@ _deps/sfml-src/include/SFML/Window/Touch.hpp:
 
 /usr/include/c++/13/cassert:
 
-/usr/include/c++/13/tr1/poly_hermite.tcc:
-
 /usr/include/c++/13/cctype:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
@@ -975,13 +909,7 @@ _deps/sfml-src/include/SFML/Window/WindowHandle.hpp:
 
 /usr/include/c++/13/ext/atomicity.h:
 
-/usr/include/c++/13/tr1/gamma.tcc:
-
 /usr/include/c++/13/chrono:
-
-/usr/include/c++/13/cmath:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
 
 /usr/include/c++/13/codecvt:
 
@@ -1019,8 +947,6 @@ _deps/sfml-src/include/SFML/Graphics/Glsl.inl:
 
 /usr/include/c++/13/ext/type_traits.h:
 
-/usr/include/c++/13/tr1/bessel_function.tcc:
-
 /usr/include/c++/13/initializer_list:
 
 /usr/include/c++/13/ios:
@@ -1053,19 +979,7 @@ _deps/sfml-src/include/SFML/System/FileInputStream.hpp:
 
 /usr/include/c++/13/string:
 
-/usr/include/c++/13/tr1/ell_integral.tcc:
-
-/usr/include/c++/13/bits/range_access.h:
-
-/usr/include/c++/13/tr1/hypergeometric.tcc:
-
 /usr/include/c++/13/type_traits:
-
-/usr/include/c++/13/tr1/legendre_function.tcc:
-
-/usr/lib/llvm-18/lib/clang/18/include/stddef.h:
-
-/usr/include/c++/13/tr1/modified_bessel_func.tcc:
 
 /usr/include/c++/13/bits/allocator.h:
 
@@ -1079,6 +993,8 @@ _deps/sfml-src/include/SFML/System/FileInputStream.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
+/usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
@@ -1087,6 +1003,10 @@ _deps/sfml-src/include/SFML/System/FileInputStream.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h:
 
+/usr/include/wctype.h:
+
+/usr/include/sched.h:
+
 /usr/include/alloca.h:
 
 /usr/include/c++/13/bits/stl_iterator_base_funcs.h:
@@ -1094,3 +1014,11 @@ _deps/sfml-src/include/SFML/System/FileInputStream.hpp:
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/assert.h:
+
+/usr/include/ctype.h:
+
+/usr/include/pthread.h:
+
+/usr/include/endian.h:
+
+/usr/include/stdint.h:

@@ -1,6 +1,6 @@
 # TAPPA 00 - CREAZIONE BASE DELLA FINESTRA 
 
-## OBBIETTIVO DELLA TAPPA:
+## OBIETTIVO DELLA TAPPA:
 Creazione della finestra SFML e gestione, tramite un loop nel main, dei suoi eventi di base. In particolare: 
 - chiusura della finestra 
 - ridimensionamento della finestra

@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+using namespace std; 
+
 ////////////////FINESTRA////////////////
 const char* window_title = "Base Window"; //titolo della finestra 
 const unsigned window_width = 800; //larghezza finestra 

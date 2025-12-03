@@ -54,8 +54,7 @@ const float start_cb_height = start_height/6;
 
 ////////////////GAME PANEL////////////////
 
-const float cell_proportion = 0.85; //EX
-const float starting_cell_size = (((window_width-(window_horizontal_displacement*2))/2)/(10))*cell_proportion;
+const float starting_cell_size = (((window_width-(window_horizontal_displacement*3))/2)/10);
 const float gap_ratio = 2/starting_cell_size; //EX MODIFICA
 
 ////////////////STOP PANEL////////////////
@@ -80,7 +79,7 @@ const unsigned stop_time_text_size = 15; //EX
 
 const float header_grid_proportion = 2;
 const float header_parameter_gap = 30; 
-const float header_border_gap = 5;
+const float header_border_thickness = 5;
 
 ////////////////BLOCCO////////////////
 
@@ -105,22 +104,22 @@ const unsigned info_size = 10; //AGGIUNTA: dimensione del testo nel control pane
 ////////////////STRUCT////////////////
 struct Cell
 {
-    sf::Vector2f cell_pos; //ex
-    float cell_size; //ex
+    sf::Vector2f cell_pos; 
+    float cell_size; 
     int row_index, column_index;
-    sf::FloatRect cell_bounds; //ex
+    sf::FloatRect cell_bounds; 
     bool mouse_focus;
-    sf::Texture* cell_texture; //ex
-    cell_type cell_type; //ex
+    sf::Texture* cell_texture; 
+    cell_type cell_type; 
     int mine_adj;
-    cell_state cell_state; //ex
-    float gap; //ex
+    cell_state cell_state; 
+    float gap;
     
     Cell (sf::Vector2f pos, float size, int row_index, int column_index, float gap) :  cell_pos (pos),
                                                                             cell_size (size),
                                                                             row_index(row_index),
                                                                             column_index(column_index),
-                                                                            cell_bounds (pos, {size, size}),mouse_focus(false),
+                                                                            cell_bounds (cell_pos, {cell_size, cell_size}),mouse_focus(false),
                                                                             cell_texture (&Covered_texture),
                                                                             cell_type(cell_type::Empty),
                                                                             mine_adj(0),
@@ -138,7 +137,7 @@ struct Grid
     int mine_num; 
     int num_revealed; 
 
-    Grid (sf::Vector2i cell_num, int mine_num, float& cell_size, float gap); //EX MODIFICA
+    Grid (sf::Vector2i cell_num, int mine_num, float& cell_size, float gap); 
     void place_mines(int starting_index_cell); 
     void place_numbers(); 
     void draw (sf::RenderWindow& window);
@@ -209,8 +208,8 @@ struct Header
     Flag_Counter f_counter; 
 
     Header(Grid& grid, float gap, int mine_num): //EX MODIFICA 
-                        h_size({ grid.Grid_size.x + (gap*(grid.cell_num.x-1)) - (2*header_border_gap), (starting_cell_size*header_grid_proportion) - (2*header_border_gap) }), 
-                        h_pos({ grid.Grid_pos.x + header_border_gap, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion) + header_border_gap }), //ex (mandato a capo)
+                        h_size({ grid.Grid_size.x - (header_border_thickness*2), (starting_cell_size*header_grid_proportion) - (header_border_thickness*2)}), 
+                        h_pos({ grid.Grid_pos.x + header_border_thickness, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion) + header_border_thickness }), //ex (mandato a capo)
                         details_size({(h_size.y - (h_size.y/3))*3/2, h_size.y - (h_size.y/3)}), 
                         details_pos_y(h_pos.y + (h_size.y/6)),
                         timer(h_pos, starting_cell_size, details_pos_y, details_size), 
@@ -256,7 +255,7 @@ struct Game_Panel
     Border border;  
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size((((window_width-(window_horizontal_displacement*2))/2)/(cell_num.x+1))*cell_proportion),
+                                                    cell_size((((window_width-(window_horizontal_displacement*3))/2)/(cell_num.x+1))),
                                                     gap(cell_size*gap_ratio), //EX AGGIUNTA
                                                     grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
                                                     header(grid, gap, mine_num), //EX MODIFICA
@@ -286,21 +285,22 @@ struct Control_Button
 
 struct Control_Panel 
 {
-    sf::Vector2f cp_pos; 
-    sf::Vector2f cp_size;  
+    sf::Vector2f cp_size;
+    sf::Vector2f cp_pos;  
     sf::Vector2f button_size; 
     Control_Button pause, new_game, exit; 
-    sf::Text info{font}; //AGGIUNTA 
+    sf::Text info; //AGGIUNTA
     int info_mine; //AGGIUNTA
     Difficulty info_diff; //AGGIUNTA
 
     Control_Panel(Border border, int num_mines, Difficulty diff): 
-                                    cp_pos(window_horizontal_displacement, border.b_pos.y + border.thickness), 
                                     cp_size({border.b_size.x -(border.thickness *2), border.b_size.y -(border.thickness *2)}), 
+                                    cp_pos(window_horizontal_displacement, border.b_pos.y + border.thickness), 
                                     button_size({(cp_size.x-(control_button_horizontal_gap*2))/3, (cp_size.y-(control_button_vertical_gap*2))/8}),  
                                     new_game(button_type::new_game, {cp_pos.x + control_button_horizontal_gap, cp_pos.y + control_button_vertical_gap}, button_size) ,
                                     pause(button_type::pause, {cp_pos.x +cp_size.x - control_button_horizontal_gap - button_size.x, cp_pos.y + control_button_vertical_gap}, button_size), 
                                     exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_button_vertical_gap + control_info_gap/2}, button_size), //EX MODIFICA
+                                    info{font},
                                     info_mine(num_mines), //AGGIUNTA 
                                     info_diff(diff) //AGGIUNTA
                                     {}
@@ -378,7 +378,6 @@ struct State
                 game_ended(false),
                 title(font) {}  //AGGIUNTA
     
-    //void AdjustView(sf::RenderWindow& window); 
     void reveal(Grid& g, int starting_index_cell); 
     void flood_reveal(Grid& g, int starting_index_cell, Cell& start_c); 
     void ending_reveal(Grid& g, int starting_index_cell); 
@@ -397,27 +396,27 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){ //EX MODIFICA
     mine_num = bn;
     num_revealed = 0;
 
-    cell_size = (mine_num==99? cell_size/cell_proportion : cell_size);  //EX AGGIUNTA: toglio la proporzione per renderle leggermente più grandi 
+    Grid_size = {
+        (cell_size * cell_num.x) + (gap * (cell_num.x - 1)),
+        (cell_size * cell_num.y) + (gap * (cell_num.y - 1))
+    };
 
-    Grid_size = {cell_size * cell_num.x, cell_size * cell_num.y};
-
-    float header_height = cell_size * header_grid_proportion; 
-    float game_height = header_height + Grid_size.y + (gap * (cell_num.y - 1));
-    float title_gap_height = font_size_mine_title + window_vertical_displacement;  
+    float header_height = starting_cell_size * header_grid_proportion;
 
     Grid_pos = { 
-        window_width - Grid_size.x - window_horizontal_displacement - (gap * cell_num.x),
-        title_gap_height + ((window_height - title_gap_height - game_height- window_vertical_displacement) / 2.f) + header_height
+        window_width - Grid_size.x - window_horizontal_displacement,
+        (static_cast<float>(window_height) + header_height - Grid_size.y + cell_size/2 - gap)/2
     };
+
     sf::Vector2f pos; 
     
-    for (float hb = 0; hb < cell_num.x; hb++) {
-        for (float vb = 0; vb < cell_num.y; vb++) {
+    for (float col = 0; col < cell_num.x; col++) {
+        for (float row = 0; row < cell_num.y; row++) {
             pos = {
-                Grid_pos.x + hb * (cell_size + gap), 
-                Grid_pos.y + vb * (cell_size + gap)
+                Grid_pos.x + col * (cell_size + gap), 
+                Grid_pos.y + row * (cell_size + gap)
             };
-            cells.push_back(Cell(pos, cell_size, hb, vb, gap)); 
+            cells.push_back(Cell(pos, cell_size, col, row, gap)); 
         }
     } 
 }
@@ -464,11 +463,11 @@ Border::Border(float cell_size, Grid& grid, Header& header, float gap){//EX MODI
     thickness = cell_size/2; //EX MODIFICA
 
     
-    b_pos = {   header.h_pos.x - header_border_gap - thickness, 
-                header.h_pos.y - header_border_gap - thickness
+    b_pos = {   header.h_pos.x - header_border_thickness - thickness, 
+                header.h_pos.y - header_border_thickness - thickness
             }; 
-    b_size = {  header.h_size.x + (header_border_gap*2) + (thickness * 2), 
-                header.h_size.y + (header_border_gap*2) + (thickness*2) + grid.Grid_size.y + (gap * grid.cell_num.y) - gap
+    b_size = {  header.h_size.x + (header_border_thickness*2) + (thickness * 2), 
+                header.h_size.y + (header_border_thickness*2) + (thickness*2) + grid.Grid_size.y - gap
             }; 
 
     angle_cells.clear();
@@ -498,8 +497,8 @@ void Cell::draw (sf::RenderWindow& window)
     c.setPosition(cell_pos);
 
     if(mouse_focus){
-        c.setOutlineThickness(gap); //ex 
-        c.setOutlineColor(focus_color); //ex 
+        c.setOutlineThickness(gap); 
+        c.setOutlineColor(focus_color); 
     }
 
     window.draw(c);
@@ -644,7 +643,7 @@ void Header::draw(sf::RenderWindow& window)
     sf::RectangleShape h(h_size); 
     h.setPosition(h_pos); 
     h.setFillColor(sf::Color(192, 192, 192)); 
-    h.setOutlineThickness(header_border_gap); 
+    h.setOutlineThickness(header_border_thickness); 
     h.setOutlineColor(sf::Color::Black); 
     window.draw(h);
     timer.draw(window);
@@ -710,7 +709,7 @@ void Control_Button::draw (sf::RenderWindow& window){
     sf::RectangleShape cb (cb_size);
     cb.setPosition(cb_pos); 
     cb.setFillColor(button_color); 
-    cb.setOutlineThickness(header_border_gap);  
+    cb.setOutlineThickness(header_border_thickness);  
     if(mouse_focus) 
         cb.setOutlineColor(focus_color);
     else 
@@ -933,7 +932,7 @@ void Grid::place_mines(int starting_cell_index){
 
     int x = cells[starting_cell_index].row_index; 
     int y = cells[starting_cell_index].column_index;
-    int casual_index;//EX
+    int casual_index;
 
     int i=0; 
     while(i<mine_num){ 
@@ -960,7 +959,7 @@ void Grid::place_mines(int starting_cell_index){
         if(cells[j].cell_type == cell_type::Mine){
             x = cells[j].row_index; 
             y = cells[j].column_index; 
-            num_y = cell_num.y; //EX
+            num_y = cell_num.y; 
 
             if(x > 0){
                 cells[j-num_y].mine_adj++; 
@@ -1016,7 +1015,7 @@ void State::flood_reveal(Grid& g, int starting_index_cell, Cell& start_c){
 
     int cols = g.cell_num.y; 
     int rows = g.cell_num.x; 
-    int up_index = starting_index_cell - cols; //EX
+    int up_index = starting_index_cell - cols; 
     int down_index = starting_index_cell + cols; 
     int start_col = start_c.column_index; 
     int start_row = start_c.row_index; 
@@ -1034,7 +1033,7 @@ void State::flood_reveal(Grid& g, int starting_index_cell, Cell& start_c){
 
         if((start_col > 0) && (g.cells[down_index-1].cell_type != cell_type::Mine)) reveal(g, down_index-1);
 
-        if((start_col < (cols-1)) && (g.cells[down_index+1].cell_type != cell_type::Mine)) reveal(g, down_index+1);        
+        if((start_col < (cols-1)) && (g.cells[down_index+1].cell_type != cell_type::Mine)) reveal(g, down_index+1);
     }
 
     if((start_col > 0) && (g.cells[starting_index_cell-1].cell_type != cell_type::Mine)) reveal(g, starting_index_cell-1);
@@ -1098,8 +1097,8 @@ void State::restart(){
         game_panel.header.timer.isRunning = true;  
 }
 
-void State::set_difficulty(Difficulty diff){
-    switch(diff){
+void State::set_difficulty(Difficulty difficulty){
+    switch(difficulty){
         case Difficulty::easy: 
             game_panel.grid.cell_num = {9,9};
             game_panel.grid.mine_num = cp.info_mine = 15; //MODIFICA  
@@ -1107,12 +1106,14 @@ void State::set_difficulty(Difficulty diff){
             break; 
 
         case Difficulty::medium: 
+            diff = Difficulty::medium;
             game_panel.grid.cell_num = {16,16};
             game_panel.grid.mine_num = cp.info_mine = 40; //MODIFICA  
             cp.info_diff = Difficulty::medium; //AGGIUNTA  
             break;
 
         case Difficulty::hard: 
+            diff = Difficulty::hard;
             game_panel.grid.cell_num = {30,20};
             game_panel.grid.mine_num = cp.info_mine = 99; //MODIFICA  
             cp.info_diff = Difficulty::hard; //AGGIUNTA    
@@ -1137,7 +1138,7 @@ void handle_close (sf::RenderWindow& window)
     window.close();
 }
 
-void handle_resize(const sf::Event::Resized& resized, sf::RenderWindow& window, State& state)
+void handle_resize(const sf::Event::Resized& resized, sf::RenderWindow& window)
 {
     float aspect = static_cast<float>(window_width) / static_cast<float>(window_height);
     sf::Vector2u ws = resized.size;
@@ -1234,7 +1235,15 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
             return; 
         }
 
-        if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
+    }
+
+    if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return;
+        
+    Cell& cur_cell = state.game_panel.grid.cells[state.mouse_cell];
+
+    if(cur_cell.cell_state == cell_state::Revealed) return;
+
+    if( mouse.button == sf::Mouse::Button::Left){
 
         if(state.game_panel.grid.cells[state.mouse_cell].cell_state == cell_state::Revealed) return; 
 
@@ -1253,12 +1262,6 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
 
     else if(mouse.button == sf::Mouse::Button::Right){ //EX MODIFICA
         if(state.first_move) return; 
-
-        if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return;
-        
-        Cell& cur_cell = state.game_panel.grid.cells[state.mouse_cell];
-
-        if(cur_cell.cell_state == cell_state::Revealed) return;
 
         if(cur_cell.cell_state != cell_state::Flag){
             state.game_panel.header.f_counter.set_number(true); 
@@ -1285,9 +1288,9 @@ void handle (const sf::Event::KeyPressed& key, State& state)
 }
 
 
-void handle_mouse_moved (const sf::Event::MouseMoved& ev, sf::RenderWindow& window, State& state)
+void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& window, State& state)
 {
-    const sf::Vector2f mouse_float_pos = window.mapPixelToCoords(sf::Vector2i(ev.position.x, ev.position.y));
+    const sf::Vector2f mouse_float_pos = window.mapPixelToCoords(sf::Vector2i(mouse.position.x, mouse.position.y));
 
     if(state.sp.visible){
         state.sp.easy_cb.mouse_focus = state.sp.easy_cb.cb_bounds.contains(mouse_float_pos); 
@@ -1335,6 +1338,7 @@ int main()
 
     sf::RenderWindow window (sf::VideoMode ({window_width, window_height}), window_title); 
     window.setFramerateLimit (max_frame_rate);
+    window.setMinimumSize(window.getSize());
 
     sf::RectangleShape border({(window_width - window_border_thickness*2),(window_height- window_border_thickness*2)}); //EX
     border.setPosition({window_border_thickness, window_border_thickness}); //EX 
@@ -1350,7 +1354,7 @@ int main()
     {
         window.handleEvents (
                             [&window](const sf::Event::Closed&) { handle_close (window); },
-                            [&window, &state](const sf::Event::Resized& event) { handle_resize (event, window, state); }, 
+                            [&window](const sf::Event::Resized& event) { handle_resize (event, window); }, 
                             [&window, &state](const sf::Event::MouseButtonPressed& event) { handle_mouse_pressed (event, window, state); },
                             [&window, &state](const sf::Event::MouseMoved& event) {handle_mouse_moved (event, window, state); },
                             [&state] (const auto& event) { handle (event, state); } 
