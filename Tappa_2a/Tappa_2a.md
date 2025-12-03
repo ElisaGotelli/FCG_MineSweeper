@@ -1,4 +1,4 @@
-# GRAFICA HEADER 
+# TAPPA 2A - GRAFICA HEADER 
 
 ## OBBIETTIVO DELLA TAPPA: 
 Creare la grafica per un header del pannello di gioco e per i suoi parametri, cioè: 

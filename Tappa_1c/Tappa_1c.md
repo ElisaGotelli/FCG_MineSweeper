@@ -1,4 +1,4 @@
-# VITTORIA, SCONFITTA E RESET PER UNA NUOVA PARTITA 
+# TAPPA 1C - VITTORIA, SCONFITTA E RESET PER UNA NUOVA PARTITA 
 
 ## OBBIETTIVO DELLA TAPPA: 
 Rendere la versione base del gioco (quindi solo con la griglia) giocabile, cioè: 
@@ -32,14 +32,15 @@ cd build
 ```
 
 ## VERIFICA DEL RISULTATO:
-- Alla rivelazione di una mina deve comparire la schermata di fine partita con tipo sconfitta (quindi con scritto 'Hai Perso!'). <br><br>
+#### SCONFITTA: 
+Alla rivelazione di una mina deve comparire la schermata di fine partita con tipo sconfitta (quindi con scritto 'Hai Perso!'). <br><br>
 Allego uno screenshot del risultato da me ottenuto:
 ![risultato_1c_uno](../risorse/risultati/tappa1c_1.png)
 
-- Alla rivelazione di tutte le celle a parte quelle che nascondono una mina deve apparire la schermata di fine partita con tipo vittoria (quindi con scritto 'Hai Vinto!'). <br><br>
+#### VITTORIA: 
+Alla rivelazione di tutte le celle a parte quelle che nascondono una mina deve apparire la schermata di fine partita con tipo vittoria (quindi con scritto 'Hai Vinto!'). <br><br>
 Allego uno screenshot del risultato da me ottenuto:
 ![risultato_1c_due](../risorse/risultati/tappa1c_2.png)
-
 
 ## PROBLEMI RISCONTRATI E SOLUZIONI: 
 Nessuno.

@@ -459,6 +459,8 @@ void handle (const sf::Event::FocusLost&, State& state)
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
+    if(state.game_ended) return; //AGGIUNTA: quando la partita è finita non è permesso nessun tipo di mossa a parte enter 
+
     if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
 
     Cell& cur_cell = state.game_panel.grid.cells[state.mouse_cell]; 

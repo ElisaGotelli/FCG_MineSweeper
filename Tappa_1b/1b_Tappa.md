@@ -17,9 +17,9 @@ Rispetto alla tappa precedente:
     * è stato gestito l'evento di perdita e presa di focus della finestra di gioco 
     * è stato gestito l'evento di click sinistro su una cella che: 
         * nel caso la cella sia di tipo Covered o Flag riveli la cella tramite la funzione 'reveal' e: 
-            * nel caso la cella sia di tipo Mine per ora rivelo solo la mina esplosa e basta 
-            * nel caso la cella sia di tipo Number riveli il numero di mine adiacenti alla cella considerata 
-            * nel caso la cella sia di tipo Empty o sia la prima cella cliccata in partita, faccia partire una flood_reveal 
+            * nel caso la cella sia di tipo Mine per ora riveli solo la mina esplosa e basta e imposti come sua texture quella della mina esplosa (Exploded_Mine_texture)
+            * nel caso la cella sia di tipo Number riveli il numero di mine adiacenti alla cella considerata impostando la sua texture come quella del numero corrispondente (numbers[num_mine_adiacenti-1])
+            * nel caso la cella sia di tipo Empty o sia la prima cella cliccata in partita, venga impostata come sua texture quella della cella vuota (Empty_texture) e faccia partire una flood_reveal 
         * nel caso la cella sia di tipo Revealed non faccia nulla 
     * è stato gestito l'evento di click destro su una cella che: 
         * nel caso non sia stata fatta la prima mossa oppure la cella sia nello stato Revealed non faccia nulla 
@@ -46,19 +46,25 @@ cd build
 
 ## VERIFICA DEL RISULTATO:
 #### N.B: Le frecce nelle foto sono per indicare un particolare del risultato (tipo la cella con focus del mouse al momento dello screenshot). Non devono comparire nel risultato
-- Al passaggio del mouse su una cella essa dovrebbe avere il bordo illuminato di rosso <br> <br>
+#### FOCUS: 
+Al passaggio del mouse su una cella essa dovrebbe avere il bordo illuminato di rosso <br> <br>
 Allego uno screenshot del risultato da me ottenuto:
 ![risultato_1b_uno](../risorse/risultati/tappa1b_1.png)
 
-- Al primo click sinistro su un cella coperta dovrebbe partire sempre una rivelazione a catena <br> <br>
+#### PRIMA MOSSA:
+Al primo click sinistro su un cella coperta dovrebbe partire sempre una rivelazione a catena <br> <br>
 Allego uno screenshot del risultato da me ottenuto:  
 ![risultato_1b_due](../risorse/risultati/tappa1b_2.png)
-    
 
-- Al click sinistro dopo il primo su una cella sinistra non rivelata, la cella dovrebbe rivelarsi (mina, vuota, numero). Il numero rivelato da un cella dovrebbe corrispondere al numero di mine a lei adiacenti <br> <br>
+#### RIVELAZIONE CELLA:   
+Al click sinistro dopo il primo su una cella sinistra non rivelata, la cella dovrebbe rivelarsi (mina, vuota, numero). Il numero rivelato da un cella dovrebbe corrispondere al numero di mine a lei adiacenti <br> <br>
 Allego uno screenshot del risultato da me ottenuto:  
 ![risultato_1b_tre](../risorse/risultati/tappa1b_3.png)
 
+#### CELLA RIVELATA: 
+Cliccare su una cella già rivelata non dovrebbe portare ad alcuna azione.
+
+#### BANDIERINA: 
 - Al click destro su una cella coperta dovrebbe apparire una bandierina su detta cella
 - Al click destro su una cella con bandierina la cella dovrebbe tornare coperta facendo sparire la bandierina <br> <br>
 Allego uno screenshot del risultato da me ottenuto:  

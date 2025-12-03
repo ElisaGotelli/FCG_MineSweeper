@@ -629,6 +629,8 @@ void handle (const sf::Event::FocusLost&, State& state)
 
 void handle (const sf::Event::MouseButtonPressed& mouse, State& state)
 {
+    if(state.game_ended) return;
+
     if(state.mouse_cell <0 || state.mouse_cell >= state.game_panel.grid.cells.size()) return; 
 
     Cell& cur_cell = state.game_panel.grid.cells[state.mouse_cell]; 

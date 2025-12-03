@@ -11,13 +11,11 @@ using namespace std;
 
 ////////////////FINESTRA////////////////
 const char* window_title = "Rules and Title";
-const unsigned window_width = 800; //EX MODIFICA
-const unsigned window_height = 600; //EX MODIFICA
+const unsigned window_width = 800;
+const unsigned window_height = 600; 
 const float max_frame_rate = 60;
-//gap
 const float window_vertical_displacement = 30; //AGGIUNTA
 const float window_horizontal_displacement = 50; //EX MODIFICA
-//colore 
 sf::Color window_background_color = sf::Color(144, 238, 144);
 
 ////////////////BORDO FINESTRA////////////////
@@ -71,7 +69,7 @@ const unsigned stop_title_size = 90;
 const unsigned stop_title2_size = 45; //EX
 const unsigned stop_subtitle_size = 30;
 const unsigned stop_subtitle2_size = 20; //EX
-const unsigned stop_time_text_size = 15; //EX
+const unsigned stop_time_text_size = 15; 
 
 ////////////////HEADER////////////////
 
@@ -207,7 +205,7 @@ struct Header
     Face face;
     Flag_Counter f_counter; 
 
-    Header(Grid& grid, float gap, int mine_num): //EX MODIFICA 
+    Header(Grid& grid, int mine_num): //EX MODIFICA 
                         h_size({ grid.Grid_size.x - (header_border_thickness*2), (starting_cell_size*header_grid_proportion) - (header_border_thickness*2)}), 
                         h_pos({ grid.Grid_pos.x + header_border_thickness, grid.Grid_pos.y - (starting_cell_size*header_grid_proportion) + header_border_thickness }), //DA MODIFICARE NEL BORDER 
                         details_size({(h_size.y - (h_size.y/3))*3/2, h_size.y - (h_size.y/3)}), 
@@ -258,7 +256,7 @@ struct Game_Panel
                                                     cell_size((((window_width-(window_horizontal_displacement*3))/2)/(cell_num.x+1))),
                                                     gap(cell_size*gap_ratio), //EX AGGIUNTA
                                                     grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
-                                                    header(grid, gap, mine_num), //EX MODIFICA
+                                                    header(grid, mine_num), //EX MODIFICA
                                                     border(cell_size, grid, header, gap) {} //EX MODIFICA
     void draw (sf::RenderWindow& window);
 }; 
@@ -1145,7 +1143,7 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    if (!state.first_move && !state.game_ended && !state.game_paused) 
+    if (!state.first_move && !state.game_ended && !state.game_paused) //da modificare 
         state.game_panel.header.timer.isRunning = true;
 }
 
