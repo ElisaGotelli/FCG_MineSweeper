@@ -59,20 +59,18 @@ const float gap_ratio = 2/starting_cell_size; //EX MODIFICA
 
 ////////////////STOP PANEL////////////////
 
-const float stop_width = (window_width/3)*2; //EX 
+const float stop_width = (window_width/3)*2;
 const float stop_height = (window_height/3)*2;
-const float stop_pos_x = window_width/6; //ex 
-const float stop_pos_y = window_height/6; //EX
-//pulsanti
+const float stop_pos_x = window_width/6;
+const float stop_pos_y = window_height/6;
 const float stop_cb_width = stop_width/4; 
 const float stop_cb_height = stop_height/6;
-const float stop_gap =20; //ex
+const float stop_gap =20; 
 enum class stop_type{None, Win, Lose, Pause, New_Game}; 
-//testo:  
-const unsigned stop_title_size = 90; //EX
+const unsigned stop_title_size = 90; 
 const unsigned stop_title2_size = 45; //EX
-const unsigned stop_subtitle2_size = 30; //ex
-const unsigned stop_subtitle_size = 20; //EX
+const unsigned stop_subtitle_size = 30;
+const unsigned stop_subtitle2_size = 20; //EX
 const unsigned stop_time_text_size = 15; //EX
 
 ////////////////HEADER////////////////
@@ -308,21 +306,21 @@ struct Control_Panel
     void draw (sf::RenderWindow& window);
 };
 
-struct Stop_Panel //EX
+struct Stop_Panel
 { 
     sf::Text title{font}; 
-    stop_type type; 
-    sf::Vector2f stop_size; //ex
-    sf::Vector2f stop_pos; //ex
+    stop_type stop_type; 
+    sf::Vector2f stop_size; 
+    sf::Vector2f stop_pos; 
     bool visible; 
     int time;
     Control_Button new_game_cb, easy_cb, medium_cb, hard_cb, exit_cb; 
     
     Stop_Panel (): //EX
                 visible(false), 
-                type(stop_type::None), 
+                stop_type(stop_type::None), 
                 stop_size({stop_width, stop_height}), 
-                stop_pos({stop_pos_x,stop_pos_y}), //ex
+                stop_pos({stop_pos_x,stop_pos_y}), 
                 time(0), 
                 new_game_cb(button_type::new_game,{stop_pos.x + stop_size.x/3 - stop_cb_width/2, stop_pos.y + stop_size.y - stop_gap - stop_cb_height}, {stop_cb_width, stop_cb_height}), 
                 easy_cb(button_type::easy, {stop_pos.x + stop_gap*2, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}), //EX
@@ -356,7 +354,7 @@ struct State
     Difficulty diff; //EX MODIFICA (SCAMBIO ORDINE CON SOTTO)
     Start_Panel sp; 
     Game_Panel game_panel;
-    Stop_Panel stop_p; //EX
+    Stop_Panel stop_p; 
     Control_Panel cp; 
     int mouse_cell; 
     bool focus; 
@@ -369,7 +367,7 @@ struct State
                 diff(Difficulty::easy), 
                 sp(), 
                 game_panel({9,9}, 15), 
-                stop_p(), //ex
+                stop_p(),
                 cp(game_panel.border, 15, diff), //MODIFICA
                 focus(false), 
                 game_paused(false), 
@@ -405,13 +403,13 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){ //EX MODIFICA
 
     Grid_pos = { 
         window_width - Grid_size.x - window_horizontal_displacement,
-        (static_cast<float>(window_height) + header_height - Grid_size.y + cell_size/2 - gap)/2
+        (window_height + header_height - Grid_size.y + cell_size/2 - gap)/2
     };
 
     sf::Vector2f pos; 
     
-    for (float col = 0; col < cell_num.x; col++) {
-        for (float row = 0; row < cell_num.y; row++) {
+    for (int row = 0; row < cell_num.y; row++) {
+        for (int col = 0; col < cell_num.x; col++) {
             pos = {
                 Grid_pos.x + col * (cell_size + gap), 
                 Grid_pos.y + row * (cell_size + gap)
@@ -521,9 +519,9 @@ void Stop_Panel::draw(sf::RenderWindow& window){
     s.setOutlineThickness(panel_thickness); //EX
     s.setOutlineColor(panel_border_color); //EX
     window.draw(s);
-    float stop_text_pos_x = stop_pos.x + stop_size.x/2; //EX
+    float stop_text_pos_x = stop_pos.x + stop_size.x/2; 
 
-    switch(type)
+    switch(stop_type)
     {
         case stop_type::Pause:
             title.setString("Pausa!"); 
@@ -545,19 +543,19 @@ void Stop_Panel::draw(sf::RenderWindow& window){
             return; 
     }
 
-    title.setCharacterSize((type == stop_type::New_Game)? stop_title2_size : stop_title_size); //EX
+    title.setCharacterSize((stop_type == stop_type::New_Game)? stop_title2_size : stop_title_size); //EX
     title.setFillColor(text_color); //EX
     title.setOutlineThickness(text_thickness); //EX
     title.setOutlineColor(text_border_color); //EX
     auto b = title.getLocalBounds(); 
     title.setOrigin({b.position.x + b.size.x/2, b.position.y}); 
-    if(type == stop_type::New_Game)
-        title.setPosition({stop_text_pos_x, stop_pos.y + stop_size.y/2 - stop_gap*2 - title.getCharacterSize()*2}); //EX
+    if(stop_type == stop_type::New_Game)
+        title.setPosition({stop_text_pos_x, stop_pos.y + stop_size.y/2 - stop_gap*2 - title.getCharacterSize()*2});
     else 
         title.setPosition({stop_text_pos_x, stop_pos.y + stop_gap}); //EX
     window.draw(title);
 
-    switch(type){
+    switch(stop_type){
         case stop_type::New_Game: 
             title.setString("la nuova modalita'"); 
             break; 
@@ -569,11 +567,11 @@ void Stop_Panel::draw(sf::RenderWindow& window){
         default: 
             title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
     }
-    title.setCharacterSize((type == stop_type::New_Game)? stop_title2_size : stop_time_text_size); 
+    title.setCharacterSize((stop_type == stop_type::New_Game)? stop_title2_size : stop_time_text_size); 
     title.setFillColor(focus_color); //ex
     b = title.getLocalBounds();
-    title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-    if(type == stop_type::New_Game){ 
+    title.setOrigin({b.position.x + b.size.x/2, b.position.y});
+    if(stop_type == stop_type::New_Game){ 
         title.setPosition({stop_text_pos_x,  title.getPosition().y + stop_title2_size + stop_gap});
         title.setFillColor(text_color);
     }
@@ -582,57 +580,51 @@ void Stop_Panel::draw(sf::RenderWindow& window){
 
     window.draw(title);
 
-    if(type ==stop_type::New_Game){
+    if(stop_type ==stop_type::New_Game){
         easy_cb.draw(window);
         medium_cb.draw(window); 
         hard_cb.draw(window);
         return; 
     }
 
-    if(type == stop_type::Pause)
+    if(stop_type == stop_type::Pause)
     { 
         title.setString("Premere SPACE per riprendere la partita"); 
-        title.setCharacterSize(stop_subtitle_size); 
+        title.setCharacterSize(stop_subtitle2_size); 
         title.setFillColor(text_color);  
         b = title.getLocalBounds();
-        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle_size + stop_gap}); 
+        title.setOrigin({b.position.x + b.size.x/2, b.position.y});
+        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_time_text_size + stop_gap}); 
         window.draw(title);
 
         title.setString("oppure"); 
         b = title.getLocalBounds();
-        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle_size + stop_gap});
+        title.setOrigin({b.position.x + b.size.x/2, b.position.y});
+        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle2_size + stop_gap});
         window.draw(title);
 
         title.setString("scegliere uno dei pulsanti qua sottostanti"); 
         b = title.getLocalBounds();
-        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle_size + stop_gap});
+        title.setOrigin({b.position.x + b.size.x/2, b.position.y});
+        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle2_size + stop_gap});
         window.draw(title);
         //TOLTO new_game_cb.draw(window); 
     }
     else 
     { 
         title.setString("Scegliere uno dei pulsanti"); 
-        title.setCharacterSize(stop_subtitle2_size);
+        title.setCharacterSize(stop_subtitle_size);
         title.setFillColor(text_color);  
         b = title.getLocalBounds();
-        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
+        title.setOrigin({b.position.x + b.size.x/2, b.position.y});
         title.setPosition({stop_text_pos_x,title.getPosition().y + stop_time_text_size + stop_gap}); 
         window.draw(title);
 
         title.setString("qua sottostanti"); 
         b = title.getLocalBounds();
-        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y});
-        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle2_size + stop_gap}); 
+        title.setOrigin({b.position.x + b.size.x/2, b.position.y});
+        title.setPosition({stop_text_pos_x,title.getPosition().y + stop_subtitle_size + stop_gap}); 
         window.draw(title);
-        /*
-        new_game_cb.cb_size = exit_cb.cb_size =  {stop_cb_width*1.5f, stop_cb_height*1.5f};  
-        new_game_cb.cb_pos = {stop_pos.x + stop_size.x/3 - exit_cb.cb_size.x/2, stop_pos.y + stop_size.y - stop_gap - stop_cb_height*1.5f}; 
-        new_game_cb.cb_bounds = {new_game_cb.cb_pos, new_game_cb.cb_size};
-        exit_cb.cb_pos = {stop_pos.x + stop_size.x*2/3 - exit_cb.cb_size.x/2, new_game_cb.cb_pos.y};
-        exit_cb.cb_bounds = {exit_cb.cb_pos, exit_cb.cb_size}; */
     }  
     new_game_cb.draw(window);
     exit_cb.draw(window); 
@@ -952,29 +944,29 @@ void Grid::place_mines(int starting_cell_index){
 
     for (Cell& c : cells) c.mine_adj = 0;
 
-    int num_y; //EX
+    int num_cols;
 
     for(int j=0; j<cells.size(); j ++){
 
-        if(cells[j].cell_type == cell_type::Mine){
+        if(cells[j].cell_type == cell_type::Mine){ 
             x = cells[j].row_index; 
             y = cells[j].column_index; 
-            num_y = cell_num.y; 
+            num_cols = cell_num.x; 
 
             if(x > 0){
-                cells[j-num_y].mine_adj++; 
-                if(y > 0) cells[j-num_y-1].mine_adj++; 
-                if(y < (num_y-1)) cells[j-num_y+1].mine_adj++;
+                cells[j-num_cols].mine_adj++; 
+                if(y > 0) cells[j-num_cols-1].mine_adj++; 
+                if(y < (num_cols-1)) cells[j-num_cols+1].mine_adj++;
             }
 
-            if(x < (cell_num.x-1)){
-                cells[j+num_y].mine_adj++; 
-                if(y > 0) cells[j+num_y-1].mine_adj++;
-                if(y < (num_y-1)) cells[j+num_y+1].mine_adj++; 
+            if(x < (cell_num.y-1)){
+                cells[j+num_cols].mine_adj++; 
+                if(y > 0) cells[j+num_cols-1].mine_adj++; 
+                if(y < (num_cols-1)) cells[j+num_cols+1].mine_adj++; 
             }
 
             if(y > 0) cells[j-1].mine_adj++; 
-            if(y < (num_y-1)) cells[j+1].mine_adj++; 
+            if(y < (num_cols-1)) cells[j+1].mine_adj++; 
         }
     }
 }
@@ -990,7 +982,7 @@ void Grid::place_numbers(){
 void State::ending_reveal(Grid& g, int starting_index_cell){
 
     for(int i = 0; i < g.cells.size(); i++){
-        if(stop_p.type == stop_type::Lose && i == starting_index_cell) continue; 
+        if(stop_p.stop_type == stop_type::Lose && i == starting_index_cell) continue; 
 
         if(g.cells[i].cell_state == cell_state::Flag && g.cells[i].cell_type != cell_type::Mine){
             g.cells[i].cell_state = cell_state::Revealed; 
@@ -1013,27 +1005,23 @@ void State::ending_reveal(Grid& g, int starting_index_cell){
 
 void State::flood_reveal(Grid& g, int starting_index_cell, Cell& start_c){
 
-    int cols = g.cell_num.y; 
-    int rows = g.cell_num.x; 
+    int cols = g.cell_num.x; 
+    int rows = g.cell_num.y; 
     int up_index = starting_index_cell - cols; 
     int down_index = starting_index_cell + cols; 
     int start_col = start_c.column_index; 
     int start_row = start_c.row_index; 
 
     if(start_row > 0){
-        if(g.cells[up_index].cell_type != cell_type::Mine) reveal(g, up_index); 
-
+        if(g.cells[up_index].cell_type != cell_type::Mine) reveal(g,up_index); 
         if((start_col > 0) && (g.cells[up_index-1].cell_type != cell_type::Mine)) reveal(g, up_index-1); 
-
         if((start_col < (cols-1)) && (g.cells[up_index+1].cell_type != cell_type::Mine)) reveal(g, up_index+1);
     }
 
     if(start_row < (rows-1)){
         if(g.cells[down_index].cell_type !=  cell_type::Mine) reveal(g, down_index);
-
         if((start_col > 0) && (g.cells[down_index-1].cell_type != cell_type::Mine)) reveal(g, down_index-1);
-
-        if((start_col < (cols-1)) && (g.cells[down_index+1].cell_type != cell_type::Mine)) reveal(g, down_index+1);
+        if((start_col < (cols-1)) && (g.cells[down_index+1].cell_type != cell_type::Mine)) reveal(g, down_index+1);        
     }
 
     if((start_col > 0) && (g.cells[starting_index_cell-1].cell_type != cell_type::Mine)) reveal(g, starting_index_cell-1);
@@ -1052,7 +1040,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 
     if(c.cell_type == cell_type::Mine){
         c.cell_texture = &Exploded_Mine_texture;
-        stop_p.type = stop_type::Lose; 
+        stop_p.stop_type = stop_type::Lose; 
         ending_reveal(g,starting_index_cell); 
         game_panel.header.face.face_texture = &lost_face_texture; 
         return; 
@@ -1066,7 +1054,7 @@ void State::reveal(Grid& g, int starting_index_cell){
     }
 
     if (game_panel.grid.num_revealed == static_cast<int>(g.cells.size()) - g.mine_num) {
-        stop_p.type = stop_type::Win;
+        stop_p.stop_type = stop_type::Win;
         ending_reveal(g, starting_index_cell); 
         game_panel.header.face.face_texture = &win_face_texture; 
     }
@@ -1085,13 +1073,13 @@ void State::pause(){
     if(!first_move) game_panel.header.timer.isRunning = false; 
     stop_p.time = game_panel.header.timer.real_timer;
     game_paused = true; 
-    if(stop_p.type != stop_type::New_Game) stop_p.type = stop_type::Pause; 
+    if(stop_p.stop_type != stop_type::New_Game) stop_p.stop_type = stop_type::Pause; 
     stop_p.visible = true; 
 }
 
 void State::restart(){
     stop_p.visible = false;
-    stop_p.type = stop_type::None; 
+    stop_p.stop_type = stop_type::None; 
     game_paused = false; 
     if(!first_move) 
         game_panel.header.timer.isRunning = true;  
@@ -1196,7 +1184,7 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
             return;
         }
         //EX MODIFCA 
-        else if (state.stop_p.type == stop_type::New_Game){
+        else if (state.stop_p.stop_type == stop_type::New_Game){
             if (state.stop_p.easy_cb.cb_bounds.contains(mouse_pos)) 
                 state.set_difficulty(Difficulty::easy); 
 
@@ -1208,7 +1196,7 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
         }
 
         else if(state.stop_p.new_game_cb.cb_bounds.contains(mouse_pos)) 
-            state.stop_p.type = stop_type::New_Game; 
+            state.stop_p.stop_type = stop_type::New_Game; 
 
         else if(state.stop_p.exit_cb.cb_bounds.contains(mouse_pos)) 
             state.exit(); 
@@ -1220,7 +1208,7 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
     if( mouse.button == sf::Mouse::Button::Left){
         
         if(state.cp.new_game.cb_bounds.contains(mouse_pos)){
-            state.stop_p.type = stop_type::New_Game; 
+            state.stop_p.stop_type = stop_type::New_Game; 
             state.pause();
             return; 
         }

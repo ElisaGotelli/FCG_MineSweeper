@@ -47,7 +47,7 @@ cd build
 ## VERIFICA DEL RISULTATO:
 #### N.B: Le frecce nelle foto sono per indicare un particolare del risultato (tipo la cella con focus del mouse al momento dello screenshot). Non devono comparire nel risultato
 - Al passaggio del mouse su una cella essa dovrebbe avere il bordo illuminato di rosso <br> <br>
-Allego uno screenshot del risultato da me ottenuto:  
+Allego uno screenshot del risultato da me ottenuto:
 ![risultato_1b_uno](../risorse/risultati/tappa1b_1.png)
 
 - Al primo click sinistro su un cella coperta dovrebbe partire sempre una rivelazione a catena <br> <br>

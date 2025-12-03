@@ -7,7 +7,7 @@ using namespace std;
 
 ////////////////FINESTRA////////////////
 
-const char* window_title = "Cell Starting Texture"; 
+const char* window_title = "Interactive Cells"; 
 const unsigned window_width = 800; 
 const unsigned window_height = 600;  
 const float max_frame_rate = 60; 
@@ -40,7 +40,7 @@ struct Cell
     cell_type cell_type; 
     int mine_adj; 
     cell_state cell_state;
-    float gap = 2.f; //AGGIUNTA: spazio tra le varie celle per rendere ben visibile sia la texture delle celle sia il bordo che diventa rosso in caso di passaggio del mouse sulla cella
+    float gap; //AGGIUNTA: spazio tra le varie celle per rendere ben visibile sia la texture delle celle sia il bordo che diventa rosso in caso di passaggio del mouse sulla cella
 
 
     Cell (sf::Vector2f pos, float size, int column_index, int row_index, float gap) : 
@@ -66,7 +66,7 @@ struct Grid
     sf::Vector2f Grid_size; 
     int mine_num; //AGGIUNTA: numero di mine 'nascoste' nella griglia 
 
-    Grid (sf::Vector2i cell_num, int mine_num, float cell_size, float gap); //MODIFICATO: aggiunto il numero di mine poichè anche quello varia in base alla difficoltà. Viene inoltre passato il gap in modo da poterlo usare per il calcolo della size e per la funzione Draw
+    Grid (sf::Vector2i cell_num, int mine_num, float& cell_size, float gap); //MODIFICATO: aggiunto il numero di mine poichè anche quello varia in base alla difficoltà. Viene inoltre passato il gap in modo da poterlo usare per il calcolo della size e per la funzione Draw
     void place_mines(int starting_index_cell); //AGGIUNTA: funzione per il piazzamento casuale delle mine nella griglia post click di inizio partita
     void place_numbers(); //AGGIUNTA: funzione per l'impostazione dello stato della cella nascosto corretto per ogni cella 
     void draw (sf::RenderWindow& window);
@@ -108,7 +108,7 @@ struct State
 
 ////////////////CREAZIONE////////////////
 
-Grid::Grid (sf::Vector2i bs, int bn, float cell_size, float gap){
+Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){
     cell_num = bs; 
     mine_num = bn; //AGGIUNTA: imposto il numero di mine che saranno nella griglia 
 

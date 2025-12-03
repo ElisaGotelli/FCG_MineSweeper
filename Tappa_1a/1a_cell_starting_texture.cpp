@@ -116,7 +116,7 @@ Grid::Grid (sf::Vector2i bs, float cell_size){
 }
 ////////////////DRAW////////////////
 
-//AGGIUNTA: cella 
+//AGGIUNTA:
 void Cell::draw (sf::RenderWindow& window)
 {
     sf::RectangleShape c ({cell_size,cell_size}); //ogni cella è un quadrato (quindi in rettangolo con altezza uguale alla larghezza)
@@ -126,7 +126,7 @@ void Cell::draw (sf::RenderWindow& window)
 
 }
 
-//AGGIUNTA: griglia
+//AGGIUNTA:
 void Grid::draw (sf::RenderWindow& window)
 {
     //disegna ogni cella della griglia (una alla volta)
@@ -134,13 +134,13 @@ void Grid::draw (sf::RenderWindow& window)
         cell.draw (window);
 }
 
-//AGGIUNTA: pannello di gioco
+//AGGIUNTA:
 void Game_Panel::draw(sf::RenderWindow& window)
 {
     grid.draw(window); //disegna la griglia 
 }
 
-//AGGIUNTA: stato
+//AGGIUNTA: 
 void State::draw (sf::RenderWindow& window){
     game_panel.draw (window); //disegna il pannello di gioco
 }
