@@ -1,4 +1,4 @@
-# GRAFICA PANNELLO DI CONTROLLO 
+# TAPPA 4A - GRAFICA PANNELLO DI CONTROLLO 
 
 ## OBBIETTIVO DELLA TAPPA: 
 Creare il pannello di controllo e due pulsanti al suo interno: 

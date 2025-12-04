@@ -97,14 +97,14 @@ struct Grid
 
 struct Game_Panel
 {
+    float gap;
     float cell_size; 
-    float gap; 
     Grid grid;  
 
     
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                        cell_size(((window_height - (window_vertical_displacement * 2)) / cell_num.y)),
                                         gap(2),
+                                        cell_size((window_height - (window_vertical_displacement * 2) - (gap * (cell_num.x - 1))) / cell_num.y),
                                         grid(cell_num, mine_num, cell_size, gap) 
                                         {} 
     void draw (sf::RenderWindow& window);
@@ -164,7 +164,7 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){
 
     Grid_pos = { 
         window_width - Grid_size.x - window_horizontal_displacement,
-        (window_height - Grid_size.y - cell_num.y) / 2
+        (window_height - Grid_size.y) / 2
     };
 
     sf::Vector2f pos; 

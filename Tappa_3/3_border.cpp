@@ -10,7 +10,7 @@
 using namespace std; 
 
 ////////////////FINESTRA////////////////
-const char* window_title = "Interactive Header";
+const char* window_title = "Border";
 const unsigned window_width = 800; 
 const unsigned window_height = 600;  
 const float max_frame_rate = 60; 
@@ -213,15 +213,15 @@ struct Border
 
 struct Game_Panel
 {
+    float gap;
     float cell_size; 
-    float gap; 
     Grid grid;
     Header header;
     Border border;  //AGGIUNTA: aggiunta del bordo al pannello di gioco 
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                        cell_size((window_height - (window_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f) + 1)), //MODIFICATO: il bordo è spesso quanto mezza cella e deve essere contato per il calcolo della cell_size
                                         gap(2),
+                                        cell_size((window_height - (window_vertical_displacement * 2) - (cell_num.y/4.f) - (gap * (cell_num.x - 1)) - header_border_thickness*2) / (cell_num.y+1)), //MODIFICATO: il bordo è spesso quanto mezza cella e deve essere contato per il calcolo della cell_size
                                         grid(cell_num, mine_num, cell_size, gap),
                                         header(cell_size, grid, mine_num),
                                         border(cell_size, grid, header, gap)
@@ -282,9 +282,12 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){
         (cell_size * cell_num.y) + (gap * (cell_num.y - 1))
     };
 
+    float header_height = Grid_size.y/4;
+
+    //MODIFICATO: viene tenuto in considerazione il bordo nel posizionamento della griglia
     Grid_pos = { 
-        window_width - Grid_size.x - window_horizontal_displacement,
-        (window_height - Grid_size.y - cell_num.y + (Grid_size.y/4.f) -gap) / 2
+        window_width - Grid_size.x - window_horizontal_displacement - cell_size/2,
+        (window_height - cell_size - Grid_size.y - header_height)/2 + cell_size/2 + header_height 
     };
 
     sf::Vector2f pos; 

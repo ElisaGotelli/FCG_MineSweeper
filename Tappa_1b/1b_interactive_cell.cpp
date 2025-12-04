@@ -75,14 +75,14 @@ struct Grid
 
 struct Game_Panel
 {
-    float cell_size; 
     float gap; //AGGIUNTA: spazio tra le varie celle per rendere ben visibile sia la texture delle celle sia il bordo che diventa rosso in caso di passaggio del mouse sulla cella
+    float cell_size; 
     Grid grid;  
 
     //MODIFICATO: aggiunto il numero di mine poichè anche quello varia in base alla difficoltà
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                        cell_size(((window_height - (window_vertical_displacement * 2)) / cell_num.y)),
                                         gap(2), //per ora il gap tra le celle sarà sempre 2
+                                        cell_size((window_height - (window_vertical_displacement * 2) - (gap * (cell_num.x - 1))) / cell_num.y),
                                         grid(cell_num, mine_num, cell_size, gap) 
                                         {} 
     void draw (sf::RenderWindow& window);
@@ -119,8 +119,8 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){
     };
 
     Grid_pos = { 
-        (window_width - Grid_size.x) - window_horizontal_displacement,
-        (window_height - Grid_size.y - cell_num.y) / 2
+        window_width - Grid_size.x - window_horizontal_displacement,
+        (window_height - Grid_size.y) / 2
     };
 
     sf::Vector2f pos; 

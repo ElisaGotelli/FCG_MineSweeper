@@ -194,14 +194,14 @@ struct Header
 
 struct Game_Panel
 {
-    float cell_size; 
     float gap; 
+    float cell_size; 
     Grid grid;
     Header header; //AGGIUNTA: aggiunta dell'header al pannello di gioco 
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                        cell_size((window_height - (window_vertical_displacement * 2)) / (cell_num.y + (cell_num.y/4.f))), //aggiunto lo spazio per l'header 
                                         gap(2),
+                                        cell_size((window_height - (window_vertical_displacement * 2) - (cell_num.y/4.f) - (gap * (cell_num.x - 1))) / cell_num.y), //MODIFICATO: modificato per considerare anche lo spazio per l'header 
                                         grid(cell_num, mine_num, cell_size, gap),
                                         header(cell_size, grid)
                                         {} 
@@ -259,10 +259,12 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){
         (cell_size * cell_num.y) + (gap * (cell_num.y - 1))
     };
 
-    //MODIFICATO: viene contato nella posizione che la fnestra deve contenere anche l'header.
+    float header_height = Grid_size.y/4;
+
+    //MODIFICATO: modificato per considerare anche lo spazio per l'header 
     Grid_pos = { 
         window_width - Grid_size.x - window_horizontal_displacement,
-        (window_height - Grid_size.y - cell_num.y + (Grid_size.y/4.f) -gap) / 2
+        (window_height - Grid_size.y - header_height)/2 + header_height 
     };
 
     sf::Vector2f pos; 

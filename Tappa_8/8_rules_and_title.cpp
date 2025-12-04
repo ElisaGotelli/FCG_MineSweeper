@@ -23,16 +23,16 @@ const float window_border_thickness = 15; //EX
 sf::Color window_border_color = sf::Color(0, 100, 0);
 
 ////////////////PANNELLI GENERALE////////////////
-sf::Color panel_background_color = sf::Color(210,180,140); //EX
-sf::Color panel_border_color = sf::Color(92,51,23); //EX
-sf::Color focus_color = sf::Color::Red; //ex
-const float panel_thickness = 15; //EX
+sf::Color panel_background_color = sf::Color(210,180,140); 
+sf::Color panel_border_color = sf::Color(92,51,23);
+sf::Color focus_color = sf::Color::Red;
+const float panel_thickness = 15;
 
 ////////////////TESTO GENERALE////////////////
 const unsigned font_size_mine_title = 80; //EX
-sf::Color text_color = sf::Color::Black;//EX
-sf::Color text_border_color = sf::Color::White; //EX
-const float text_thickness = 2; //ex
+sf::Color text_color = sf::Color::Black;
+sf::Color text_border_color = sf::Color::White;
+const float text_thickness = 2;
 
 ////////////////STATO////////////////
 
@@ -52,7 +52,7 @@ const float start_cb_height = start_height/6;
 
 ////////////////GAME PANEL////////////////
 
-const float starting_cell_size = (((window_width-(window_horizontal_displacement*3))/2)/10);
+const float starting_cell_size = (((window_width-(window_horizontal_displacement*3))/2)/10); //EX
 const float gap_ratio = 2/starting_cell_size; //EX MODIFICA
 
 ////////////////STOP PANEL////////////////
@@ -73,7 +73,7 @@ const unsigned stop_time_text_size = 15;
 
 ////////////////HEADER////////////////
 
-const float header_grid_proportion = 2;
+const float header_grid_proportion = 2; //EX
 const float header_parameter_gap = 30; 
 const float header_border_thickness = 5;
 sf::Color header_background_color = sf::Color(192, 192, 192); 
@@ -87,14 +87,16 @@ enum class cell_state{ Covered, Revealed, Flag};
 ////////////////PULSANTE DI CONTROLLO////////////////
 
 enum class button_type{new_game, pause, easy, medium, hard, exit};
+float button_border_thickness = 5;
 sf::Color button_color = sf::Color(192, 192, 192); 
+sf::Color button_border_color = sf::Color::Black; 
 const float button_text_thickness = 1.5; 
 const float button_text_proportion =3.5; 
 
 ////////////////PANNELLO DI CONTROLLO////////////////
 
-const float control_button_horizontal_gap = 20; 
-const float control_button_vertical_gap = 20; 
+const float control_button_horizontal_displacement = 20; 
+const float control_button_vertical_displacement = 20; 
 const float control_info_gap = 10; //EX MODIFICA: gap tra le scritte e i pulsanti 
 //testo
 const unsigned info_size = 10; //AGGIUNTA: dimensione del testo nel control panel 
@@ -294,10 +296,10 @@ struct Control_Panel
     Control_Panel(Border border, int num_mines, Difficulty diff): 
                                     cp_size({border.b_size.x -(border.thickness *2), border.b_size.y -(border.thickness *2)}), 
                                     cp_pos(window_horizontal_displacement, border.b_pos.y + border.thickness), 
-                                    button_size({(cp_size.x-(control_button_horizontal_gap*2))/3, (cp_size.y-(control_button_vertical_gap*2))/8}),  
-                                    new_game(button_type::new_game, {cp_pos.x + control_button_horizontal_gap, cp_pos.y + control_button_vertical_gap}, button_size) ,
-                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_button_horizontal_gap - button_size.x, cp_pos.y + control_button_vertical_gap}, button_size), 
-                                    exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_button_vertical_gap + control_info_gap/2}, button_size), //EX MODIFICA
+                                    button_size({(cp_size.x-(control_button_horizontal_displacement*2))/3, (cp_size.y-(control_button_vertical_displacement*2))/8}),  
+                                    new_game(button_type::new_game, {cp_pos.x + control_button_horizontal_displacement, cp_pos.y + control_button_vertical_displacement}, button_size),
+                                    pause(button_type::pause, {cp_pos.x +cp_size.x - control_button_horizontal_displacement - button_size.x, cp_pos.y + control_button_vertical_displacement}, button_size), 
+                                    exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_button_vertical_displacement + control_info_gap/2}, button_size), //EX MODIFICA
                                     info{font},
                                     info_mine(num_mines), //AGGIUNTA 
                                     info_diff(diff) //AGGIUNTA
@@ -402,7 +404,7 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){ //EX MODIFICA
     float header_height = starting_cell_size * header_grid_proportion;
 
     Grid_pos = { 
-        window_width - Grid_size.x - window_horizontal_displacement,
+        window_width - Grid_size.x - window_horizontal_displacement -cell_size,
         (window_height + header_height - Grid_size.y + cell_size/2 - gap)/2
     };
 
@@ -696,12 +698,12 @@ void Game_Panel::draw(sf::RenderWindow& window)
 void Control_Button::draw (sf::RenderWindow& window){
     sf::RectangleShape cb (cb_size);
     cb.setPosition(cb_pos); 
-    cb.setFillColor(button_color); 
-    cb.setOutlineThickness(header_border_thickness);  
+    cb.setFillColor(button_border_color); 
+    cb.setOutlineThickness(button_border_thickness);  
     if(mouse_focus) 
         cb.setOutlineColor(focus_color);
     else 
-        cb.setOutlineColor(text_color); 
+        cb.setOutlineColor(button_border_color); 
     window.draw(cb);
 
     cb_text.setFont(font);
@@ -748,9 +750,9 @@ void Control_Button::draw (sf::RenderWindow& window){
 void Control_Panel::draw (sf::RenderWindow& window){
     sf::RectangleShape cp(cp_size); 
     cp.setPosition(cp_pos); 
-    cp.setFillColor(panel_background_color); //EX 
-    cp.setOutlineThickness(panel_thickness); //EX 
-    cp.setOutlineColor(panel_border_color); //EX 
+    cp.setFillColor(panel_background_color); 
+    cp.setOutlineThickness(panel_thickness); 
+    cp.setOutlineColor(panel_border_color); 
     window.draw(cp); 
     new_game.draw(window); 
     pause.draw(window); 

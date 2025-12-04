@@ -92,8 +92,8 @@ Grid::Grid (sf::Vector2i bs, float cell_size){
 
     //imposto la posizione della griglia centralmente verticalmente mentre a destra orizzontalmente
     Grid_pos = { 
-        (window_width - Grid_size.x) - window_horizontal_displacement,
-        (window_height - Grid_size.y - cell_num.y) / 2
+        window_width - Grid_size.x - window_horizontal_displacement,
+        (window_height - Grid_size.y) / 2
     };
 
     //dichiaro una variabile vettore pos in modo da non dover dichiarare una nuova variabile ad ogni fase del ciclo e poter salvare la posizione della cella così da poterla usare per la creazione della cella stessa 
