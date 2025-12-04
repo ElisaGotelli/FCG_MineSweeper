@@ -14,8 +14,8 @@ const char* window_title = "Control Panel Graphic";
 const unsigned window_width = 800; 
 const unsigned window_height = 600;  
 const float max_frame_rate = 60; 
-const float window_horizontal_displacement = 50; //MODIFICATO
-const float window_vertical_displacement = 50; //MODIFICATO
+const float window_horizontal_displacement = 50; //MODIFICATO: modificato poichè i valori precedenti, con l'aggiunta del control_panel, rendevano la griglia e il control_panel troppo piccoli
+const float window_vertical_displacement = 50; //MODIFICATO: modificato per mantenerlo identico al window_horizontal_displacement
 sf::Color window_background_color = sf::Color(144, 238, 144); 
 
 ////////////////BORDO FINESTRA////////////////
@@ -233,7 +233,7 @@ struct Game_Panel
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
                                         gap(2),
-                                        cell_size((((window_width - (window_horizontal_displacement * 3))/2) - (gap * (cell_num.x - 1))) / (cell_num.x + 1)), //MODIFICATO
+                                        cell_size((((window_width - (window_horizontal_displacement * 3))/2) - (gap * (cell_num.x - 1))) / (cell_num.x + 1)), //MODIFICATO: d'ora in poi la cell_size verrà calcolata rispetto alla larghezza della finestra 
                                         grid(cell_num, mine_num, cell_size, gap),
                                         header(cell_size, grid, mine_num),
                                         border(cell_size, grid, header, gap)
@@ -808,7 +808,8 @@ void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
         else
         ws = {static_cast<unsigned>(ws.y*aspect),ws.y}; 
 
-    window.setSize(ws); 
+    sf::View view(sf::FloatRect({0.f, 0.f}, {static_cast<float>(window_width), static_cast<float>(window_height)}));
+    window.setSize(ws);
 }
 
 template <typename T>

@@ -53,7 +53,7 @@ const float start_cb_height = start_height/6;
 ////////////////GAME PANEL////////////////
 
 const float starting_cell_size = (((window_width-(window_horizontal_displacement*3))/2)/10); //EX
-const float gap_ratio = 2/starting_cell_size; //EX MODIFICA
+const float starting_gap = 2; //EX MODIFICA
 
 ////////////////STOP PANEL////////////////
 
@@ -68,7 +68,7 @@ enum class stop_type{None, Win, Lose, Pause, New_Game};
 const unsigned stop_title_size = 90; 
 const unsigned stop_title2_size = 45; //EX
 const unsigned stop_subtitle_size = 30;
-const unsigned stop_subtitle2_size = 20; //EX
+const unsigned stop_subtitle2_size = 20; 
 const unsigned stop_time_text_size = 15; 
 
 ////////////////HEADER////////////////
@@ -248,15 +248,15 @@ struct Border
 
 struct Game_Panel
 {
+    float gap;
     float cell_size;
-    float gap; //EX AGGIUNTA
     Grid grid;  
     Header header;
     Border border;  
 
-    Game_Panel(sf::Vector2i cell_num, int mine_num):
-                                                    cell_size((((window_width-(window_horizontal_displacement*3))/2)/(cell_num.x+1))),
-                                                    gap(cell_size*gap_ratio), //EX AGGIUNTA
+    Game_Panel(sf::Vector2i cell_num, int mine_num, float gap):
+                                                    gap(gap),
+                                                    cell_size((((window_width - (window_horizontal_displacement * 3))/2) - (gap * (cell_num.x - 1))) / (cell_num.x + 1)),
                                                     grid(cell_num, mine_num, cell_size, gap), //EX MODIFICA
                                                     header(grid, mine_num), //EX MODIFICA
                                                     border(cell_size, grid, header, gap) {} //EX MODIFICA
@@ -368,7 +368,7 @@ struct State
     State (): 
                 diff(Difficulty::easy), 
                 sp(), 
-                game_panel({9,9}, 15), 
+                game_panel({9,9}, 15, starting_gap), 
                 stop_p(),
                 cp(game_panel.border, 15, diff), //MODIFICA
                 focus(false), 
@@ -404,8 +404,8 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){ //EX MODIFICA
     float header_height = starting_cell_size * header_grid_proportion;
 
     Grid_pos = { 
-        window_width - Grid_size.x - window_horizontal_displacement -cell_size,
-        (window_height + header_height - Grid_size.y + cell_size/2 - gap)/2
+        window_width - Grid_size.x - window_horizontal_displacement - cell_size/2,
+        (window_height - cell_size - Grid_size.y - header_height)/2 + cell_size/2 + header_height 
     };
 
     sf::Vector2f pos; 
@@ -1059,7 +1059,7 @@ void State::reveal(Grid& g, int starting_index_cell){
 }
 
 void State::reset(){
-    game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num);  
+    game_panel = Game_Panel(game_panel.grid.cell_num, game_panel.grid.mine_num, game_panel.gap);  
     stop_p = Stop_Panel(); 
     game_paused = focus = game_ended= false; 
     first_move = true; 
@@ -1095,6 +1095,7 @@ void State::set_difficulty(Difficulty difficulty){
             diff = Difficulty::medium;
             game_panel.grid.cell_num = {16,16};
             game_panel.grid.mine_num = cp.info_mine = 40; //MODIFICA  
+            game_panel.gap = 1.5; 
             cp.info_diff = Difficulty::medium; //AGGIUNTA  
             break;
 
@@ -1102,6 +1103,7 @@ void State::set_difficulty(Difficulty difficulty){
             diff = Difficulty::hard;
             game_panel.grid.cell_num = {30,20};
             game_panel.grid.mine_num = cp.info_mine = 99; //MODIFICA  
+            game_panel.gap = 0.5; 
             cp.info_diff = Difficulty::hard; //AGGIUNTA    
             break; 
 
@@ -1145,7 +1147,7 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    if (!state.first_move && !state.game_ended && !state.game_paused) //da modificare 
+    if (!state.first_move && !state.game_ended && !state.game_paused)
         state.game_panel.header.timer.isRunning = true;
 }
 

@@ -344,7 +344,9 @@ void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
         else
         ws = {static_cast<unsigned>(ws.y*aspect),ws.y}; 
 
-    window.setSize(ws); 
+    sf::View view(sf::FloatRect({0.f, 0.f}, {static_cast<float>(window_width), static_cast<float>(window_height)})); //AGGIUNTA: gestito l'aumento della dimensione della finestra in modo che funzionino sempre il click sulle celle e il focus al passaggio del mouse
+     window.setSize(ws); 
+
 }
 
 //AGGIUNTA: funzione per la gestione di eventi che non devono portare a nessuna azione in gioco

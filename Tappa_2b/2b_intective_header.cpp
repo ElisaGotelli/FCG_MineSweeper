@@ -638,7 +638,8 @@ void handle_resize (const sf::Event::Resized& resized, sf::RenderWindow& window)
         else
         ws = {static_cast<unsigned>(ws.y*aspect),ws.y}; 
 
-    window.setSize(ws); 
+    sf::View view(sf::FloatRect({0.f, 0.f}, {static_cast<float>(window_width), static_cast<float>(window_height)}));
+    window.setSize(ws);
 }
 
 template <typename T>
