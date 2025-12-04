@@ -10,13 +10,22 @@ Rispetto alla tappa precedente:
     * 'Border': rappresenta il bordo stesso (l'unione delle Border Cells)
 
 ## ISTRUZIONI PER ESEGUIRE DA TERMINALE: 
+Prima di poter scrivere questo comando su terminale, bisogna aver: 
+- creato la cartella build 
+- configurato tramite cmake 
+- compilato con make 
+
+```bash
+cd build 
+./Tappa3
+```
+
+## VERIFICA DEL RISULTATO: 
+#### N.B: Le frecce nelle foto sono per indicare un particolare del risultato (tipo la cella considerata per quella verifica di risultato). Non devono comparire nel risultato
 All'apertura della finestra dovrebbe vendersi un bordo grigetto intorno alla griglia di gioco e all'header. <br>
 Detto bordo non deve essere interagibile e non deve andare a coprire l'illuminazione rossa del bordo di una cella esterna nel caso in cui detta cella prenda il focus. <br><br>
 Allego uno screenshot del risultato da me ottenuto:  
 ![risultato_tre](../risorse/risultati/tappa3.png)
-
-## VERIFICA DEL RISULTATO: 
-#### N.B: Le frecce nelle foto sono per indicare un particolare del risultato (tipo la cella considerata per quella verifica di risultato). Non devono comparire nel risultato
 
 ## PROBLEMI RISCONTRATI E SOLUZIONI: 
 #### PROBLEMA: 
