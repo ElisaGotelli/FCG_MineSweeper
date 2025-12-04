@@ -51,8 +51,8 @@ const float start_cb_height = start_height/6;
 
 ////////////////GAME PANEL////////////////
 
-const float starting_cell_size = (((window_width-(window_horizontal_displacement*3))/2)/10); //EX
-const float starting_gap = 2; //EX MODIFICA
+const float starting_gap = 2;
+const float starting_cell_size =(((window_width - (window_horizontal_displacement * 3))/2) - (starting_gap * 9)) / 10; 
 
 ////////////////STOP PANEL////////////////
 
@@ -65,7 +65,7 @@ const float stop_cb_height = stop_height/6;
 const float stop_gap =20; 
 enum class stop_type{None, Win, Lose, Pause, New_Game}; 
 const unsigned stop_title_size = 90; 
-const unsigned stop_title2_size = 45; //EX
+const unsigned stop_title2_size = 45;
 const unsigned stop_subtitle_size = 30;
 const unsigned stop_subtitle2_size = 20; 
 const unsigned stop_time_text_size = 15; 
@@ -115,15 +115,15 @@ struct Cell
     float gap;
     
     Cell (sf::Vector2f pos, float size, int column_index, int row_index, float gap) :  cell_pos (pos),
-                                                                            cell_size (size),
-                                                                            row_index(row_index),
-                                                                            column_index(column_index),
-                                                                            cell_bounds (cell_pos, {cell_size, cell_size}),mouse_focus(false),
-                                                                            cell_texture (&Covered_texture),
-                                                                            cell_type(cell_type::Empty),
-                                                                            mine_adj(0),
-                                                                            cell_state(cell_state::Covered),
-                                                                            gap(gap) {}
+                                                                                        cell_size (size),
+                                                                                        row_index(row_index),
+                                                                                        column_index(column_index),
+                                                                                        cell_bounds (cell_pos, {cell_size, cell_size}),mouse_focus(false),
+                                                                                        cell_texture (&Covered_texture),
+                                                                                        cell_type(cell_type::Empty),
+                                                                                        mine_adj(0),
+                                                                                        cell_state(cell_state::Covered),
+                                                                                        gap(gap) {}
     void draw (sf::RenderWindow& window);
 };
 
@@ -324,9 +324,9 @@ struct Stop_Panel
                 stop_pos({stop_pos_x,stop_pos_y}), 
                 time(0), 
                 new_game_cb(button_type::new_game,{stop_pos.x + stop_size.x/3 - stop_cb_width/2, stop_pos.y + stop_size.y - stop_gap - stop_cb_height}, {stop_cb_width, stop_cb_height}), 
-                easy_cb(button_type::easy, {stop_pos.x + stop_gap*2, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}), //EX
-                medium_cb(button_type::medium, {stop_pos.x+ stop_size.x/2 - stop_cb_width/2, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}), //EX
-                hard_cb(button_type::hard, {stop_pos.x+ stop_size.x - stop_gap*2 - stop_cb_width, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}), //EX
+                easy_cb(button_type::easy, {stop_pos.x + stop_gap*2, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}), 
+                medium_cb(button_type::medium, {stop_pos.x+ stop_size.x/2 - stop_cb_width/2, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}),
+                hard_cb(button_type::hard, {stop_pos.x+ stop_size.x - stop_gap*2 - stop_cb_width, stop_pos.y + stop_size.y*3/4 -stop_cb_height/2}, {stop_cb_width, stop_cb_height}),
                 exit_cb(button_type::exit, {stop_pos.x + stop_size.x*2/3 - stop_cb_width/2, stop_pos.y + stop_size.y - stop_gap - stop_cb_height}, {stop_cb_width, stop_cb_height}) 
                 {} 
                 
@@ -565,7 +565,7 @@ void Stop_Panel::draw(sf::RenderWindow& window){
             title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi ")); 
     }
     title.setCharacterSize((stop_type == stop_type::New_Game)? stop_title2_size : stop_time_text_size); 
-    title.setFillColor(focus_color); //ex
+    title.setFillColor(focus_color); 
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x/2, b.position.y});
     if(stop_type == stop_type::New_Game){ 
@@ -1087,7 +1087,8 @@ void State::set_difficulty(Difficulty difficulty){
         case Difficulty::easy: 
             game_panel.grid.cell_num = {9,9};
             game_panel.grid.mine_num = cp.info_mine = 15; //MODIFICA  
-            cp.info_diff = Difficulty::easy; //AGGIUNTA   
+            cp.info_diff = Difficulty::easy; //AGGIUNTA  
+            game_panel.gap = starting_gap;  
             break; 
 
         case Difficulty::medium: 
@@ -1182,7 +1183,6 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
             }
             return;
         }
-        //EX MODIFCA 
         else if (state.stop_p.stop_type == stop_type::New_Game){
             if (state.stop_p.easy_cb.cb_bounds.contains(mouse_pos)) 
                 state.set_difficulty(Difficulty::easy); 
@@ -1203,7 +1203,6 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
         return;        
     }
 
-//PARTE ATTIVA DEL GIOCO 
     if( mouse.button == sf::Mouse::Button::Left){
         
         if(state.cp.new_game.cb_bounds.contains(mouse_pos)){
@@ -1247,7 +1246,7 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
         }
     }
 
-    else if(mouse.button == sf::Mouse::Button::Right){ //EX MODIFICA
+    else if(mouse.button == sf::Mouse::Button::Right){ 
         if(state.first_move) return; 
 
         if(cur_cell.cell_state != cell_state::Flag){

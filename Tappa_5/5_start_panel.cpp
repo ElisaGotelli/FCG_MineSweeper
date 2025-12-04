@@ -80,6 +80,7 @@ const float control_button_horizontal_displacement = 20;
 const float control_button_vertical_displacement = 20;
 
 ////////////////START PANEL////////////////
+
 const float start_width = (window_width/4)*3; //AGGIUNTA: la schermata iniziale sarà larga tre quarti rispetto alla finestra
 const float start_height = (window_height/4)*3; //AGGIUNTA: la schermata iniziale sarà alta tre quarti rispetto alla finestra
 const float start_pos_x = window_width/8; //AGGIUNTA: la schermata iniziale sarà posizionata un ottavo a destra rispetto all'origine x della finestra
@@ -87,7 +88,6 @@ const float start_pos_y = window_height/8;  //AGGIUNTA: la schermata iniziale sa
 const float start_gap =25; //AGGIUNTA: gap tra le scritte nella schermata iniziale
 const unsigned start_size_subtitle = 30; //AGGIUNTA: dimensione di parte del testo della schermata iniziale
 const unsigned start_size_text = 17; //AGGIUNTA: dimensione di parte del testo della schermata iniziale
-
 
 ////////////////STRUCT////////////////
 
