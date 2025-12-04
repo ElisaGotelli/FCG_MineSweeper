@@ -38,7 +38,7 @@ const float panel_thickness = 15; //AGGIUNTA: spessore del bordo di tutti i pann
 enum class cell_type{Mine,Empty, Number}; 
 enum class cell_state{ Covered, Revealed, Flag}; 
 
-////////////////GAME STOP////////////////
+////////////////STOP PANEL////////////////
 
 const float stop_width = (window_width/3)*2;//AGGIUNTA: larghezza del pannello di stop uguale a due terzi di quella della finestra
 const float stop_height = (window_height/3)*2;//AGGIUNTA: altezza del pannello di stop uguale a due terzi di quella della finestra

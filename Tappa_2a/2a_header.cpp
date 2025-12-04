@@ -48,7 +48,7 @@ const float header_border_thickness = 5; //AGGIUNTA: spessore dell'bordo dell'he
 sf::Color header_background_color = sf::Color(192, 192, 192); //AGGIUNTA: colore dello sfondo dell'header 
 sf::Color header_border_color = sf::Color::Black; //AGGIUNTA: colore del bordo dell'header 
 
-////////////////GAME STOP////////////////
+////////////////STOP PANEL////////////////
 
 const float stop_width = (window_width/3)*2;
 const float stop_height = (window_height/3)*2;

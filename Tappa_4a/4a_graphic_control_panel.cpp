@@ -48,6 +48,19 @@ const float header_border_thickness = 5;
 sf::Color header_background_color = sf::Color(192, 192, 192); 
 sf::Color header_border_color = sf::Color::Black;
 
+////////////////STOP PANEL////////////////
+
+const float stop_width = (window_width/3)*2;
+const float stop_height = (window_height/3)*2;
+const float stop_pos_x = window_width/6; 
+const float stop_pos_y = window_height/6; 
+const float stop_gap = 20; 
+enum class stop_type{None, Win, Lose}; 
+const unsigned stop_title_size = 90; 
+const unsigned stop_subtitle_size = 30;
+const unsigned stop_time_text_size = 15;
+sf::Color stop_time_text_color = sf::Color::Red;
+
 ////////////////CONTROL BUTTON////////////////
 
 enum class button_type{new_game, pause}; //AGGIUNTA: tipo enum implementato per poter rappresentare i vari tipi di pulsante presenti nel Control Panel
@@ -61,19 +74,6 @@ const float button_text_proportion =3.5; //AGGIUNTA: proporzione tra testo all'i
 
 const float control_button_horizontal_displacement = 20; //AGGIUNTA: distanza orizzontale dei bottoni dal bordo del control panel
 const float control_button_vertical_displacement = 20; //AGGIUNTA: distanza verticale dei bottoni dal bordo del control panel
-
-////////////////GAME STOP////////////////
-
-const float stop_width = (window_width/3)*2;
-const float stop_height = (window_height/3)*2;
-const float stop_pos_x = window_width/6; 
-const float stop_pos_y = window_height/6; 
-const float stop_gap = 20; 
-enum class stop_type{None, Win, Lose}; 
-const unsigned stop_title_size = 90; 
-const unsigned stop_subtitle_size = 30;
-const unsigned stop_time_text_size = 15;
-sf::Color stop_time_text_color = sf::Color::Red;
 
 ////////////////STRUCT////////////////
 
@@ -277,7 +277,7 @@ struct Control_Button
     void draw (sf::RenderWindow& window);
 }; 
 
-//AGGIUNTA: strttura per rappresenta il pannello di controllo di gioco.Per ora conterrà solo i pulsanti per una nuova partita e per la pausa 
+//AGGIUNTA: strttura per rappresentare il pannello di controllo di gioco.Per ora conterrà solo i pulsanti per una nuova partita e per la pausa 
 struct Control_Panel 
 {
     sf::Vector2f cp_size;  //dimensione del pannello 

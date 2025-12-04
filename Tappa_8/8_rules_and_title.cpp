@@ -29,7 +29,7 @@ sf::Color focus_color = sf::Color::Red;
 const float panel_thickness = 15;
 
 ////////////////TESTO GENERALE////////////////
-const unsigned font_size_mine_title = 80; //EX
+const unsigned font_size_mine_title = 80;
 sf::Color text_color = sf::Color::Black;
 sf::Color text_border_color = sf::Color::White;
 const float text_thickness = 2;
@@ -39,14 +39,13 @@ const float text_thickness = 2;
 enum class Difficulty{easy, medium,hard}; 
 
 ////////////////START PANEL////////////////
-const float start_width = (window_width/4)*3; //EX 
+const float start_width = (window_width/4)*3; 
 const float start_height = (window_height/4)*3;
-const float start_pos_x = window_width/8; //ex 
-const float start_pos_y = window_height/8; //EX
-const float start_gap =25; //ex
-//testo: 
-const unsigned start_size_subtitle = 30; //EX
-const unsigned start_size_text = 17; //EX
+const float start_pos_x = window_width/8;
+const float start_pos_y = window_height/8;
+const float start_gap =25;
+const unsigned start_size_subtitle = 30;
+const unsigned start_size_text = 17;
 const float start_cb_width = start_width/5; 
 const float start_cb_height = start_height/6; 
 
@@ -825,43 +824,43 @@ void Control_Panel::draw (sf::RenderWindow& window){
 void Start_Panel::draw(sf::RenderWindow& window){
     sf::RectangleShape s (start_size); 
     s.setPosition (start_pos);
-    s.setFillColor(panel_background_color); //EX
-    s.setOutlineThickness(panel_thickness); //EX
-    s.setOutlineColor(panel_border_color); //EX
+    s.setFillColor(panel_background_color); 
+    s.setOutlineThickness(panel_thickness); 
+    s.setOutlineColor(panel_border_color); 
     window.draw (s); 
-    float start_text_pos_x = start_pos.x + start_size.x/2; //EX
+    float start_text_pos_x = start_pos.x + start_size.x/2; 
 
     start_title.setString("Benvenuto su"); 
-    start_title.setCharacterSize(start_size_subtitle); //EX
-    start_title.setFillColor(text_color); //EX
-    start_title.setOutlineThickness(text_thickness); //EX
-    start_title.setOutlineColor(text_border_color); //EX
+    start_title.setCharacterSize(start_size_subtitle); 
+    start_title.setFillColor(text_color);
+    start_title.setOutlineThickness(text_thickness);
+    start_title.setOutlineColor(text_border_color);
     auto b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x/2, b.position.y}); 
-    start_title.setPosition({start_text_pos_x, start_pos.y + start_gap});             
+    start_title.setPosition({start_text_pos_x, start_pos.y + start_gap});
     window.draw(start_title);
 
     start_title.setString("MINESWEEPER"); 
-    start_title.setCharacterSize(font_size_mine_title); //EX 
+    start_title.setCharacterSize(font_size_mine_title); 
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x/2, b.position.y}); 
-    start_title.setPosition({start_text_pos_x,start_title.getPosition().y + start_size_subtitle + start_gap}); //ex         
+    start_title.setPosition({start_text_pos_x,start_title.getPosition().y + start_size_subtitle + start_gap});
     window.draw(start_title);
 
     start_title.setString("Versione E.0"); 
-    start_title.setCharacterSize(start_size_text); //EX
+    start_title.setCharacterSize(start_size_text);
     start_title.setFillColor(focus_color);
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x/2, b.position.y}); 
-    start_title.setPosition({start_text_pos_x,start_title.getPosition().y + font_size_mine_title + start_gap}); //ex         
+    start_title.setPosition({start_text_pos_x,start_title.getPosition().y + font_size_mine_title + start_gap}); 
     window.draw(start_title);
 
     start_title.setString("Scegliere la difficolta' di gioco"); 
     start_title.setFillColor(text_color);
-    start_title.setCharacterSize(start_size_subtitle); //ex
+    start_title.setCharacterSize(start_size_subtitle);
     b = start_title.getLocalBounds(); 
     start_title.setOrigin({b.position.x + b.size.x/2, b.position.y}); 
-    start_title.setPosition({start_text_pos_x,start_title.getPosition().y + start_size_text + start_gap}); //EX
+    start_title.setPosition({start_text_pos_x,start_title.getPosition().y + start_size_text + start_gap}); 
     window.draw(start_title);
 
     easy_cb.draw(window); 

@@ -48,21 +48,7 @@ const float header_border_thickness = 5;
 sf::Color header_background_color = sf::Color(192, 192, 192); 
 sf::Color header_border_color = sf::Color::Black;
 
-////////////////CONTROL BUTTON////////////////
-
-enum class button_type{new_game, pause};
-float button_border_thickness = 5; 
-sf::Color button_color = sf::Color(192, 192, 192);
-sf::Color button_border_color = sf::Color::Black;
-const float button_text_thickness = 1.5;
-const float button_text_proportion =3.5;
-
-////////////////CONTROL PANEL////////////////
-
-const float control_button_horizontal_displacement = 20;
-const float control_button_vertical_displacement = 20;
-
-////////////////GAME STOP////////////////
+////////////////STOP PANEL////////////////
 
 const float stop_width = (window_width/3)*2;
 const float stop_height = (window_height/3)*2;
@@ -77,6 +63,20 @@ const unsigned stop_subtitle_size = 30;
 const unsigned stop_subtitle2_size = 20; //AGGIUNTA: grandezza dei testo dello stop panel nel caso di una pausa
 const unsigned stop_time_text_size = 15;
 sf::Color stop_time_text_color = sf::Color::Red;
+
+////////////////CONTROL BUTTON////////////////
+
+enum class button_type{new_game, pause};
+float button_border_thickness = 5; 
+sf::Color button_color = sf::Color(192, 192, 192);
+sf::Color button_border_color = sf::Color::Black;
+const float button_text_thickness = 1.5;
+const float button_text_proportion =3.5;
+
+////////////////CONTROL PANEL////////////////
+
+const float control_button_horizontal_displacement = 20;
+const float control_button_vertical_displacement = 20;
 
 ////////////////STRUCT////////////////
 
@@ -236,7 +236,7 @@ struct Game_Panel
 
     Game_Panel(sf::Vector2i cell_num, int mine_num):
                                         gap(2),
-                                        cell_size((((window_width - (window_horizontal_displacement * 3))/2) - (gap * (cell_num.x - 1))) / (cell_num.x + 1)), //MODIFICATO
+                                        cell_size((((window_width - (window_horizontal_displacement * 3))/2) - (gap * (cell_num.x - 1))) / (cell_num.x + 1)), 
                                         grid(cell_num, mine_num, cell_size, gap),
                                         header(cell_size, grid, mine_num),
                                         border(cell_size, grid, header, gap)
@@ -562,7 +562,7 @@ void Stop_Panel::draw(sf::RenderWindow& window){
     title.setPosition({stop_text_pos_x,  title.getPosition().y + stop_title_size + stop_gap}); 
     window.draw(title);
 
-    if(stop_type == stop_type::Pause){ //MODIFICA: se è il pulsante di Pausa cambia i testi nel pannello in quelli indicati qua sottostante e inserisci il puslante di new game
+    if(stop_type == stop_type::Pause){ //MODIFICATO: se è il pulsante di Pausa cambia i testi nel pannello in quelli indicati qua sottostante e inserisci il puslante di new game
         title.setString("Premere SPACE per riprendere la partita"); 
         title.setCharacterSize(stop_subtitle2_size); 
         title.setFillColor(text_color);  
@@ -962,7 +962,7 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& window, State& state){
     const sf::Vector2f mouse_float_pos = window.mapPixelToCoords(sf::Vector2i(mouse.position.x, mouse.position.y));
 
-    //MODIFICA: se il gioco è finito oppure in pausa
+    //MODIFICATO: se il gioco è finito oppure in pausa
     if(state.game_ended || state.game_paused){
         state.stop_p.new_game_cb.mouse_focus = state.stop_p.new_game_cb.cb_bounds.contains(mouse_float_pos); //se il mouse è sopra ad un pulsante imposta che il pulsante ha il focus 
         return; 
