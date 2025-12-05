@@ -44,7 +44,7 @@ const float stop_width = (window_width/3)*2;//AGGIUNTA: larghezza del pannello d
 const float stop_height = (window_height/3)*2;//AGGIUNTA: altezza del pannello di stop uguale a due terzi di quella della finestra
 const float stop_pos_x = window_width/6; //AGGIUNTA: posizione x del pannello di stop
 const float stop_pos_y = window_height/6; //AGGIUNTA: posizione y del pannello di stop
-const float stop_gap = 20; //AGGIUNTA: gap tra le scritte del fine gioco
+const float stop_gap = 25; //AGGIUNTA: gap tra le scritte del fine gioco
 enum class stop_type{None, Win, Lose}; //AGGIUNTA: possibili tipi di schermate di stop (per ora solo vittoria e sconfitta)
 const unsigned stop_title_size = 90; //AGGIUNTA: dimensione del titolo del pannello (per la vittoria/sconfitta)
 const unsigned stop_subtitle_size = 30; //AGGIUNTA: dimensione dei sottotitoli del pannello di stop (per la vittoria/sconfitta)
@@ -56,13 +56,13 @@ struct Cell
     sf::Vector2f cell_pos; 
     float cell_size; 
     int row_index, column_index;
-    sf::FloatRect bounds; 
-    bool mouse_focus; 
+    sf::FloatRect cell_bounds; 
+    bool cell_mouse_focus; 
     sf::Texture* cell_texture;
     cell_type cell_type; 
     int mine_adj; 
     cell_state cell_state;
-    float gap;
+    float cell_gap;
 
 
     Cell (sf::Vector2f pos, float size, int column_index, int row_index, float gap) : 
@@ -70,13 +70,13 @@ struct Cell
                                             cell_size (size),
                                             row_index(row_index),
                                             column_index(column_index),
-                                            bounds (cell_pos, {cell_size, cell_size}),
-                                            mouse_focus(false),
+                                            cell_bounds (cell_pos, {cell_size, cell_size}),
+                                            cell_mouse_focus(false),
                                             cell_texture (&Covered_texture), 
                                             cell_type(cell_type::Empty), 
                                             mine_adj(0), 
                                             cell_state(cell_state::Covered),
-                                            gap(gap) {}
+                                            cell_gap(gap) {}
     void draw (sf::RenderWindow& window); 
 };
 
@@ -187,8 +187,8 @@ void Cell::draw (sf::RenderWindow& window)
     c.setTexture(cell_texture); 
     c.setPosition(cell_pos); 
 
-    if(mouse_focus){
-        c.setOutlineThickness(gap); 
+    if(cell_mouse_focus){
+        c.setOutlineThickness(cell_gap); 
         c.setOutlineColor(focus_color); 
     }
 
@@ -500,7 +500,7 @@ void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& w
 
     int new_idx =-1;
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
-        if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) {
+        if (state.game_panel.grid.cells[i].cell_bounds.contains(mouse_float_pos)) {
             new_idx = i; 
             break;
         }
@@ -509,11 +509,11 @@ void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& w
     if (new_idx == state.mouse_cell) return;
 
     if(state.mouse_cell >= 0)
-        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = false;
+        state.game_panel.grid.cells[state.mouse_cell].cell_mouse_focus = false;
 
     state.mouse_cell = new_idx;
     if (state.mouse_cell >= 0)
-        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = true;
+        state.game_panel.grid.cells[state.mouse_cell].cell_mouse_focus = true;
 }
 
 //AGGIUNTA: funzione per la gestione dell'evento caratterizzato dal click del pulsante SPACE sulla tastiera 

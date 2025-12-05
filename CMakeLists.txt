@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 project(CMakeSFMLProject LANGUAGES CXX)
 
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 include(FetchContent)
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -84,7 +82,3 @@ add_executable(Tappa8 Tappa_8/8_rules_and_title.cpp)
 target_compile_features(Tappa8 PRIVATE cxx_std_17)
 target_link_libraries(Tappa8 PRIVATE SFML::Graphics)
 
-
-add_executable(prova prova.cpp)
-target_compile_features(prova PRIVATE cxx_std_17)
-target_link_libraries(prova PRIVATE SFML::Graphics)

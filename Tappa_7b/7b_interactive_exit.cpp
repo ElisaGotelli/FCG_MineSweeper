@@ -63,7 +63,7 @@ const float stop_pos_x = window_width/6;
 const float stop_pos_y = window_height/6; 
 const float stop_cb_width = stop_width/4;
 const float stop_cb_height = stop_height/6;
-const float stop_gap = 20; 
+const float stop_gap = 25; 
 enum class stop_type{None, Win, Lose, Pause, New_Game};
 const unsigned stop_title_size = 90; 
 const unsigned stop_title2_size = 40;
@@ -111,26 +111,27 @@ struct Cell
     sf::Vector2f cell_pos; 
     float cell_size; 
     int row_index, column_index;
-    sf::FloatRect bounds; 
-    bool mouse_focus; 
+    sf::FloatRect cell_bounds; 
+    bool cell_mouse_focus; 
     sf::Texture* cell_texture;
     cell_type cell_type; 
     int mine_adj; 
     cell_state cell_state;
-    float gap;
+    float cell_gap;
+
 
     Cell (sf::Vector2f pos, float size, int column_index, int row_index, float gap) : 
-                                                                                        cell_pos (pos),
-                                                                                        cell_size (size),
-                                                                                        row_index(row_index),
-                                                                                        column_index(column_index),
-                                                                                        bounds (cell_pos, {cell_size, cell_size}),
-                                                                                        mouse_focus(false),
-                                                                                        cell_texture (&Covered_texture), 
-                                                                                        cell_type(cell_type::Empty), 
-                                                                                        mine_adj(0), 
-                                                                                        cell_state(cell_state::Covered),
-                                                                                        gap(gap) {}
+                                            cell_pos (pos),
+                                            cell_size (size),
+                                            row_index(row_index),
+                                            column_index(column_index),
+                                            cell_bounds (cell_pos, {cell_size, cell_size}),
+                                            cell_mouse_focus(false),
+                                            cell_texture (&Covered_texture), 
+                                            cell_type(cell_type::Empty), 
+                                            mine_adj(0), 
+                                            cell_state(cell_state::Covered),
+                                            cell_gap(gap) {}
     void draw (sf::RenderWindow& window); 
 };
 
@@ -398,7 +399,7 @@ Grid::Grid (sf::Vector2i bs, int bn, float& cell_size, float gap){
         (cell_size * cell_num.y) + (gap * (cell_num.y - 1))
     };
 
-    float header_height = Grid_size.y/4;
+    float header_height = starting_cell_size * header_grid_proportion;
 
     Grid_pos = { 
         window_width - Grid_size.x - window_horizontal_displacement - cell_size/2,
@@ -487,8 +488,8 @@ void Cell::draw (sf::RenderWindow& window)
     c.setTexture(cell_texture); 
     c.setPosition(cell_pos); 
 
-    if(mouse_focus){
-        c.setOutlineThickness(gap); 
+    if(cell_mouse_focus){
+        c.setOutlineThickness(cell_gap); 
         c.setOutlineColor(focus_color); 
     }
 
@@ -1002,8 +1003,8 @@ void State::exit(){
     sp.visible = true; 
 }
 
-void State::set_difficulty(Difficulty diff){
-    switch(diff){
+void State::set_difficulty(Difficulty new_diff){
+    switch(new_diff){
         case Difficulty::easy:
             diff = Difficulty::easy;
             game_panel.grid.cell_num = {9,9};
@@ -1064,7 +1065,7 @@ void handle (const sf::Event::FocusGained&, State& state)
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause();
+    if(state.sp.visible) return;
     if(!state.game_ended){
         state.pause();
         if(!state.first_move) 
@@ -1081,7 +1082,6 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
     {
         if (mouse.button != sf::Mouse::Button::Left) return;
 
-        //MODIFICALOOOO
         if(state.sp.visible){
             if (state.sp.easy_cb.cb_bounds.contains(mouse_pos)){
                 state.set_difficulty(Difficulty::easy); 
@@ -1125,12 +1125,12 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
             return; 
         }
 
-        if(state.cp.pause.cb_bounds.contains(mouse_pos)){
+        else if(state.cp.pause.cb_bounds.contains(mouse_pos)){
             state.pause(); 
             return; 
         }
 
-        if(state.cp.exit.cb_bounds.contains(mouse_pos)){ //AGGIUNTA: se è stato cliccato il pulsante ESCI neLl Control Panel chiama la funzione che gestisce l'uscita dalla schermata di gioco 
+        else if(state.cp.exit.cb_bounds.contains(mouse_pos)){ //AGGIUNTA: se è stato cliccato il pulsante ESCI neLl Control Panel chiama la funzione che gestisce l'uscita dalla schermata di gioco 
             state.exit(); 
             return; 
         }
@@ -1176,7 +1176,7 @@ void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::Rende
 
 void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 {
-    if(state.game_ended || state.game_panel.header.face.face_texture != &Click_face_texture) return;
+    if(state.game_ended || state.game_paused || state.game_panel.header.face.face_texture != &Click_face_texture) return;
     state.game_panel.header.face.face_texture = &smile_face_texture; 
 }
 
@@ -1205,7 +1205,7 @@ void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& w
 
     int new_idx =-1;
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
-        if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) {
+        if (state.game_panel.grid.cells[i].cell_bounds.contains(mouse_float_pos)) {
             new_idx = i; 
             break;
         }
@@ -1214,11 +1214,11 @@ void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& w
     if (new_idx == state.mouse_cell) return;
 
     if(state.mouse_cell >= 0)
-        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = false;
+        state.game_panel.grid.cells[state.mouse_cell].cell_mouse_focus = false;
 
     state.mouse_cell = new_idx;
     if (state.mouse_cell >= 0)
-        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = true;
+        state.game_panel.grid.cells[state.mouse_cell].cell_mouse_focus = true;
 }
 
 void handle(const sf::Event::KeyPressed& key, State& state) {

@@ -1,4 +1,5 @@
 # MINESWEEPER THE GAME: 
+Benvenuti nel gioco MINESWEEPER Versione E.0
 
 ## COMANDI PER COMPILAZIONE
 

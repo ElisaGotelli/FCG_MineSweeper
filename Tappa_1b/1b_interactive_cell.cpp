@@ -34,13 +34,13 @@ struct Cell
     sf::Vector2f cell_pos; 
     float cell_size; 
     int row_index, column_index; //AGGIUNTA: indice riga e indice colonna della cella nella griglia 
-    sf::FloatRect bounds; //AGGIUNTA: confini della cella (posizione e dimensione)
-    bool mouse_focus; //AGGIUNTA: una cella prende il focus se il mouse si trova sopra di essa (cioè dentro i suoi confini)
+    sf::FloatRect cell_bounds; //AGGIUNTA: confini della cella (posizione e dimensione)
+    bool cell_mouse_focus; //AGGIUNTA: una cella prende il focus se il mouse si trova sopra di essa (cioè dentro i suoi confini)
     sf::Texture* cell_texture;
     cell_type cell_type; 
     int mine_adj; 
     cell_state cell_state;
-    float gap; //AGGIUNTA: spazio tra le varie celle per rendere ben visibile sia la texture delle celle sia il bordo che diventa rosso in caso di passaggio del mouse sulla cella
+    float cell_gap; //AGGIUNTA: spazio tra le varie celle per rendere ben visibile sia la texture delle celle sia il bordo che diventa rosso in caso di passaggio del mouse sulla cella
 
 
     Cell (sf::Vector2f pos, float size, int column_index, int row_index, float gap) : 
@@ -48,13 +48,13 @@ struct Cell
                                             cell_size (size),
                                             row_index(row_index),
                                             column_index(column_index),
-                                            bounds (cell_pos, {cell_size, cell_size}),
-                                            mouse_focus(false), //inizialmente la cella non ha mai il focus quindi il valore di default è FALSE
+                                            cell_bounds (cell_pos, {cell_size, cell_size}),
+                                            cell_mouse_focus(false), //inizialmente la cella non ha mai il focus quindi il valore di default è FALSE
                                             cell_texture (&Covered_texture), 
                                             cell_type(cell_type::Empty), 
                                             mine_adj(0), 
                                             cell_state(cell_state::Covered),
-                                            gap(gap) {}
+                                            cell_gap(gap) {}
     void draw (sf::RenderWindow& window); 
 };
 
@@ -146,8 +146,8 @@ void Cell::draw (sf::RenderWindow& window)
     c.setPosition(cell_pos); 
 
     //AGGIUNTA: aggiunta la caratteristica del bordo della cella che diventa del colore specificato nella costante globale focus_color al passaggio del mouse 
-    if(mouse_focus){
-        c.setOutlineThickness(gap); //lo spessore del bordo sarà uguale al gap tra le celle
+    if(cell_mouse_focus){
+        c.setOutlineThickness(cell_gap); //lo spessore del bordo sarà uguale al gap tra le celle
         c.setOutlineColor(focus_color); //il colore del bordo al passaggio del mouse cambia in quello di focus color 
     }
 
@@ -414,7 +414,7 @@ void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& w
     //ricerca e salvataggio dell'indice della cella in cui si trova il mouse nella griglia (se non si trova nella griglia la posizione sarà -1, un indice impossibile per la griglia)
     int new_idx =-1;
     for (int i = 0; i < state.game_panel.grid.cells.size(); ++i) {
-        if (state.game_panel.grid.cells[i].bounds.contains(mouse_float_pos)) {
+        if (state.game_panel.grid.cells[i].cell_bounds.contains(mouse_float_pos)) {
             new_idx = i; 
             break;
         }
@@ -425,12 +425,12 @@ void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& w
 
     //se il mouse si trovava sopra una cella toglici il focus 
     if(state.mouse_cell >= 0)
-        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = false;
+        state.game_panel.grid.cells[state.mouse_cell].cell_mouse_focus = false;
 
     //metti il mouse_focus alla cella in cui si trova ora il mouse 
     state.mouse_cell = new_idx;
     if (state.mouse_cell >= 0)
-        state.game_panel.grid.cells[state.mouse_cell].mouse_focus = true;
+        state.game_panel.grid.cells[state.mouse_cell].cell_mouse_focus = true;
 }
 
 ////////////////LOOP////////////////
