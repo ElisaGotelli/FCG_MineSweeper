@@ -81,6 +81,9 @@ Nella versione precedente del codice si salvava per ogni cella solamente la sua 
 #### SOLUZIONE: 
 Sono stati aggiunti questi due parametri in modo da averli a portata di mano senza doverli ogni volta calcolare. 
 
+#### PROBLEMA: 
+la resize non funzionava 
+
 ## FONTI DI RIFERIMENTO UTILIZZATE: 
 Nessuna (oltre a quelle utilizzate nelle tappe precedenti).
 

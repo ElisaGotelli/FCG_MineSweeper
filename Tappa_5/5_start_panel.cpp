@@ -970,6 +970,8 @@ void handle (const sf::Event::FocusGained&, State& state)
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
+    if(state.sp.visible) return; //AGGIUNTA: se la schermata iniziale è ancora visibile non fare nulla in quanto il gioco non è ancora iniziato
+    
     state.pause();
     state.focus = false;
     if(!state.first_move && !state.game_ended) 

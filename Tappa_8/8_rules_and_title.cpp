@@ -72,7 +72,7 @@ const unsigned stop_time_text_size = 15;
 
 ////////////////HEADER////////////////
 
-const float header_grid_proportion = 2; //EX
+const float header_grid_proportion = 2; 
 const float header_parameter_gap = 30; 
 const float header_border_thickness = 5;
 sf::Color header_background_color = sf::Color(192, 192, 192); 
@@ -96,8 +96,7 @@ const float button_text_proportion =3.5;
 
 const float control_button_horizontal_displacement = 20; 
 const float control_button_vertical_displacement = 20; 
-const float control_info_gap = 10; //EX MODIFICA: gap tra le scritte e i pulsanti 
-//testo
+const float control_vertical_gap = 10;
 const unsigned info_size = 10; //AGGIUNTA: dimensione del testo nel control panel 
 
 ////////////////STRUCT////////////////
@@ -298,7 +297,7 @@ struct Control_Panel
                                     button_size({(cp_size.x-(control_button_horizontal_displacement*2))/3, (cp_size.y-(control_button_vertical_displacement*2))/8}),  
                                     new_game(button_type::new_game, {cp_pos.x + control_button_horizontal_displacement, cp_pos.y + control_button_vertical_displacement}, button_size),
                                     pause(button_type::pause, {cp_pos.x +cp_size.x - control_button_horizontal_displacement - button_size.x, cp_pos.y + control_button_vertical_displacement}, button_size), 
-                                    exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_button_vertical_displacement + control_info_gap/2}, button_size), //EX MODIFICA
+                                    exit(button_type::exit, {cp_pos.x +cp_size.x/2 - button_size.x/2, pause.cb_pos.y + pause.cb_size.y + control_button_vertical_displacement + control_vertical_gap/2}, button_size),
                                     info{font},
                                     info_mine(num_mines), //AGGIUNTA 
                                     info_diff(diff) //AGGIUNTA
@@ -717,7 +716,7 @@ void Control_Button::draw (sf::RenderWindow& window){
             break;
         
         case button_type::new_game: 
-            cb_text.setString(" NUOVA\nPARTITA"); //EX 
+            cb_text.setString(" NUOVA\nPARTITA"); 
             break;
 
         case button_type::easy: 
@@ -763,14 +762,14 @@ void Control_Panel::draw (sf::RenderWindow& window){
     info.setFillColor(focus_color); //EX
     auto b = info.getLocalBounds();
     info.setOrigin({b.position.x + b.size.x/2, b.position.y});
-    info.setPosition({cp_pos.x + cp_size.x/2, exit.cb_pos.y + exit.cb_size.y + control_info_gap*2});
+    info.setPosition({cp_pos.x + cp_size.x/2, exit.cb_pos.y + exit.cb_size.y + control_vertical_gap*2});
     window.draw(info);
 
-    float info_text_pos_x = cp_pos.x + control_info_gap; //AGGIUNTA: salvo il valore della posizione x del testo successivo poichè verrà riutilizzata più volte
+    float info_text_pos_x = cp_pos.x + control_vertical_gap; //AGGIUNTA: salvo il valore della posizione x del testo successivo poichè verrà riutilizzata più volte
     info.setCharacterSize(info_size);
     info.setFillColor(text_color); //EX
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*2 + control_info_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*2 + control_vertical_gap}); 
     switch(info_diff){
         case Difficulty::easy: 
             info.setString("Difficolta' scelta :\tFACILE");
@@ -791,31 +790,31 @@ void Control_Panel::draw (sf::RenderWindow& window){
     //AGGIUNTA
     info.setString("Totale mine nella griglia :\t" + to_string(info_mine));
     info.setOrigin({0, 0}); 
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_vertical_gap}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("Obbiettivo del gioco :"); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap*1.5f}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_vertical_gap*1.5f}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("\t- Scoprire tutte le celle che nascondono\n\t  una mina. \n\t- La partita e' persa alla prima mina\n\t  scoperta."); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_vertical_gap}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("Istruzioni :"); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*4 + control_info_gap*1.5f}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size*4 + control_vertical_gap*1.5f}); 
     window.draw(info);
 
     //AGGIUNTA
     info.setString("\t- Click Sinistro : Scopre cella\n\t- Click Destro : Mette/toglie bandiera"); 
     info.setOrigin({0, 0});
-    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_info_gap}); 
+    info.setPosition({info_text_pos_x, info.getPosition().y + info_size + control_vertical_gap}); 
     window.draw(info);
 
 }

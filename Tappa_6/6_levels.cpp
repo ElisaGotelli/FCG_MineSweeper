@@ -622,7 +622,7 @@ void Stop_Panel::draw(sf::RenderWindow& window){
         default: 
             title.setString("Tempo impiegato: "+ to_string(time/3600) + (time/3600 == 1? " ora " : " ore ") + to_string((time%3600)/60) + ((time%3600)/60 == 1? " minuto " : " minuti ") + to_string((time%3600)%60) + ((time%3600)%60 == 1? " secondo " : " secondi "));
     }
-    title.setCharacterSize((stop_type == stop_type::New_Game)? stop_title2_size : stop_time_text_size); //MODIFICA: lo Stop Panel di tipo New Game deve avere un testo leggermente più piccolo essendo che non è un titolo
+    title.setCharacterSize((stop_type == stop_type::New_Game)? stop_title2_size : stop_time_text_size); //MODIFICATO: lo Stop Panel di tipo New Game deve avere un testo leggermente più piccolo essendo che non è un titolo
     title.setFillColor(stop_time_text_color);
     b = title.getLocalBounds();
     title.setOrigin({b.position.x + b.size.x/2, b.position.y});
@@ -998,29 +998,32 @@ void State::restart(){
 //AGGIUNTA: funzione per l'impostazione del schermata di gioco in base alla difficoltà scelta 
 void State::set_difficulty(Difficulty diff){
     switch(diff){
-        case Difficulty::easy: //se la difficoltà scelta è EASY imposta le caratteristiche per la cella della modalità EASY (numero celle, numero mine e valore di gap)
+        case Difficulty::easy: //se la difficoltà scelta è EASY imposta le caratteristiche per la cella della modalità EASY (numero celle, numero mine e valore di gap) e imposta correttamete il valore della variabile diff in State
+            diff = Difficulty::easy; 
             game_panel.grid.cell_num = {9,9};
             game_panel.grid.mine_num = 15;
             game_panel.gap = starting_gap; 
             break; 
 
-        case Difficulty::medium: //se la difficoltà scelta è MEDIUM imposta le caratteristiche per la cella della modalità MEDIUM (numero celle, numero mine e valore di gap)
+        case Difficulty::medium: //se la difficoltà scelta è MEDIUM imposta le caratteristiche per la cella della modalità MEDIUM (numero celle, numero mine e valore di gap) e imposta correttamete il valore della variabile diff in State
+            diff = Difficulty::medium;
             game_panel.grid.cell_num = {16,16};
             game_panel.grid.mine_num = 40; 
             game_panel.gap = 1.2;
             break;
 
-        case Difficulty::hard: //se la difficoltà scelta è HARD imposta le caratteristiche per la cella della modalità HARD (numero celle, numero mine e valore di gap)
+        case Difficulty::hard: //se la difficoltà scelta è HARD imposta le caratteristiche per la cella della modalità HARD (numero celle, numero mine e valore di gap) e imposta correttamete il valore della variabile diff in State
+            diff = Difficulty::hard; 
             game_panel.grid.cell_num = {30,20};
             game_panel.grid.mine_num = 99;
-            game_panel.gap = 1;
+            game_panel.gap = 0.8;
             break; 
 
         default: 
             break;
     }
 
-    reset(); //fai il reset della schermata di gioco con le nuove caratteristiche per la griglia impostate precedentemente
+    reset(); //reset della schermata di gioco con le nuove caratteristiche per la griglia impostate precedentemente
 }
 
 ////////////////EVENTI////////////////
@@ -1058,6 +1061,7 @@ void handle (const sf::Event::FocusGained&, State& state)
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
+    if(state.sp.visible) return;
     state.pause();
     state.focus = false;
     if(!state.first_move && !state.game_ended) 
