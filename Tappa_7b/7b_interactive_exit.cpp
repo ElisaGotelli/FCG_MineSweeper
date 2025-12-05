@@ -66,7 +66,7 @@ const float stop_cb_height = stop_height/6;
 const float stop_gap = 20; 
 enum class stop_type{None, Win, Lose, Pause, New_Game};
 const unsigned stop_title_size = 90; 
-const unsigned stop_title2_size = 45;
+const unsigned stop_title2_size = 40;
 const unsigned stop_subtitle_size = 30;
 const unsigned stop_subtitle2_size = 20;
 const unsigned stop_time_text_size = 15;
@@ -612,7 +612,7 @@ void Stop_Panel::draw(sf::RenderWindow& window){
 
     switch(stop_type){
         case stop_type::New_Game: 
-            title.setString("la nuova modalita'"); 
+            title.setString("la nuova difficolta'"); 
             break; 
 
         case stop_type::Pause: 
@@ -1060,17 +1060,17 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true;
-
-    if (!state.first_move && !state.game_ended && !state.game_paused)
-        state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
     state.pause();
-    state.focus = false;
-    if(!state.first_move && !state.game_ended) 
-        state.game_panel.header.timer.isRunning = false;
+    if(!state.game_ended){
+        state.pause();
+        if(!state.first_move) 
+            state.game_panel.header.timer.isRunning = false;
+    }
+        state.focus = false;
 }
 
 void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::RenderWindow& window, State& state)

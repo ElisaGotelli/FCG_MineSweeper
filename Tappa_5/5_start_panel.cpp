@@ -963,23 +963,25 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true;
-
-    if (!state.first_move && !state.game_ended && !state.game_paused)
-        state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
     if(state.sp.visible) return; //AGGIUNTA: se la schermata iniziale è ancora visibile non fare nulla in quanto il gioco non è ancora iniziato
     
-    state.pause();
-    state.focus = false;
-    if(!state.first_move && !state.game_ended) 
-        state.game_panel.header.timer.isRunning = false;
+    if(!state.game_ended){
+        state.pause();
+        if(!state.first_move) 
+            state.game_panel.header.timer.isRunning = false;
+    }
+        state.focus = false;
 }
 
 void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::RenderWindow& window, State& state)
 {
+    
+    if(state.sp.visible) return; //AGGIUNTA: se la schermata iniziale è visibile non fare nulla 
+
     sf::Vector2f mouse_pos = window.mapPixelToCoords(sf::Vector2i(mouse.position.x, mouse.position.y));
 
     if((state.game_ended || state.game_paused) && state.stop_p.new_game_cb.cb_bounds.contains(mouse_pos)){
@@ -1044,6 +1046,8 @@ void handle (const sf::Event::MouseButtonReleased& mouse, State& state)
 }
 
 void handle_mouse_moved (const sf::Event::MouseMoved& mouse, sf::RenderWindow& window, State& state){
+    if(state.sp.visible) return; //AGGIUNTA: se la schermata iniziale è visibile non fare nulla 
+
     const sf::Vector2f mouse_float_pos = window.mapPixelToCoords(sf::Vector2i(mouse.position.x, mouse.position.y));
 
     if(state.game_ended || state.game_paused){

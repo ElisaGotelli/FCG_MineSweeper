@@ -66,7 +66,7 @@ const float stop_cb_height = stop_height/6;
 const float stop_gap = 20; 
 enum class stop_type{None, Win, Lose, Pause, New_Game}; //MODIFICATO: aggiunto il nuovo tipo di Stop Panel per la scelta della difficoltà della prossima partita
 const unsigned stop_title_size = 90; 
-const unsigned stop_title2_size = 45; //AGGIUNTA: dimensione del testo dello Stop Panel di tipo New Game
+const unsigned stop_title2_size = 40; //AGGIUNTA: dimensione del testo dello Stop Panel di tipo New Game
 const unsigned stop_subtitle_size = 30;
 const unsigned stop_subtitle2_size = 20;
 const unsigned stop_time_text_size = 15;
@@ -95,8 +95,8 @@ const float start_pos_y = window_height/8;
 const float start_gap =25;
 const unsigned start_size_subtitle = 30;
 const unsigned start_size_text = 17;
-const float start_cb_width = start_width/5; //AGGIUNTA: larghezza dei pulsanti nella schermata iniziale
-const float start_cb_height = start_height/6; //AGGIUNTA: altezza dei pulsanti nella schermata iniziale
+const float start_cb_width = start_width/5;
+const float start_cb_height = start_height/6;
 
 
 ////////////////STATE////////////////
@@ -613,7 +613,7 @@ void Stop_Panel::draw(sf::RenderWindow& window){
     //MODIFICATO: è stato implementato uno switch al posto di un if poichè sono aumentate le possibilità di tipi che hanno caratteristiche di etsto differenti
     switch(stop_type){
         case stop_type::New_Game: 
-            title.setString("la nuova modalita'"); 
+            title.setString("la nuova difficolta'"); 
             break; 
 
         case stop_type::Pause: 
@@ -635,7 +635,7 @@ void Stop_Panel::draw(sf::RenderWindow& window){
 
     window.draw(title);
 
-    //AGGIUNTA: se si sta rappresentando lo Stop Panel di tipo New Game è necessario da ora in poi stampare solo i tre pulsanti delle varie modalità e nessun altro testo
+    //AGGIUNTA: se si sta rappresentando lo Stop Panel di tipo New Game è necessario stampare solo i tre pulsanti
     if(stop_type ==stop_type::New_Game){
         easy_cb.draw(window);
         medium_cb.draw(window); 
@@ -1054,18 +1054,17 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true;
-
-    if (!state.first_move && !state.game_ended && !state.game_paused)
-        state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
     if(state.sp.visible) return;
-    state.pause();
-    state.focus = false;
-    if(!state.first_move && !state.game_ended) 
-        state.game_panel.header.timer.isRunning = false;
+    if(!state.game_ended){
+        state.pause();
+        if(!state.first_move) 
+            state.game_panel.header.timer.isRunning = false;
+    }
+        state.focus = false;
 }
 
 void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::RenderWindow& window, State& state)

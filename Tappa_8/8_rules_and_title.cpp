@@ -1146,8 +1146,6 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true; 
-    if (!state.first_move && !state.game_ended && !state.game_paused)
-        state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)

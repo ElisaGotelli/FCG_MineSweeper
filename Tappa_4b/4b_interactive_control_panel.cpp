@@ -251,7 +251,7 @@ struct Control_Button
     sf::Text cb_text;
     sf::FloatRect cb_bounds;
     button_type cb_type;
-    bool mouse_focus; //AGGIUNTA: aggiunto per poter avere lo stesso tipo di focus al passagio del mouse che si ha per le celle di gioco 
+    bool mouse_focus; //AGGIUNTA: aggiunto per poter avere lo stesso tipo di focus al passaggio del mouse che si ha per le celle di gioco 
  
     Control_Button(button_type type, sf::Vector2f pos, sf::Vector2f size) : 
                                                                             cb_pos(pos), 
@@ -876,18 +876,18 @@ void handle (T& event, State& state) {}
 void handle (const sf::Event::FocusGained&, State& state)
 {
     state.focus = true;
-
-    //MODIFICATO: se è già stata fatta la prima mossa, il gioco non è finito o non è in pausa allora si fa ripartire il timer 
-    if (!state.first_move && !state.game_ended && !state.game_paused)
-        state.game_panel.header.timer.isRunning = true;
 }
 
 void handle (const sf::Event::FocusLost&, State& state)
 {
-    state.pause(); //AGGIUNTA: quando la finestra perde il focus il gioco viene stoppato in automatico e viene messa la schermata di pausa come se si fosse cliccato il pulsante PAUSA 
-    state.focus = false;
-    if(!state.first_move && !state.game_ended) 
-        state.game_panel.header.timer.isRunning = false;
+     //AGGIUNTA: (a parte se la aprtita è finita) quando la finestra perde il focus il gioco viene stoppato in automatico e viene messa la schermata di pausa come se si fosse cliccato il pulsante PAUSA 
+    if(!state.game_ended){
+        state.pause();
+        if(!state.first_move) 
+            state.game_panel.header.timer.isRunning = false;
+    }
+        state.focus = false;
+    
 }
 
 void handle_mouse_pressed (const sf::Event::MouseButtonPressed& mouse, sf::RenderWindow& window, State& state)
